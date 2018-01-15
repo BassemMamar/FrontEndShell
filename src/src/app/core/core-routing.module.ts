@@ -10,6 +10,8 @@ import { InternalServerErrorComponent } from './components/internal-server-error
 const routes: Routes = [
   { path: 'unauthorized', component: UnauthorizedComponent },
   { path: 'error', component: InternalServerErrorComponent },
+
+  /* Wildcard Routes */
   { path: '**', component: PageNotFoundComponent }
 ];
 

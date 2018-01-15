@@ -16,16 +16,16 @@ import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { TimingInterceptorProvider } from './interceptors/timing.interceptor';
 
-
-// imports: imports the module's exports. which is usually declarables and providers
-// in our case the spinner has no providers.
-//
 @NgModule({
   imports: [
     BrowserModule, // Which import CommonModule internally
     RouterModule,
 
+    /* Core Routings */
     CoreRoutingModule
+
+    /* 3rd Library imports goes here */
+
   ],
   declarations: [CoreRoutedComponents],
   exports: [],
