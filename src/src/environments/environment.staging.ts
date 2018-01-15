@@ -1,6 +1,6 @@
 export const environment = {
-  production: true,
-  environmentName: 'Production',
+  production: false,
+  environmentName: 'Staging',
   isDebugMode: true,
 
   authority: 'https://onboardingsuite.com:8088/AuthenticationServer',

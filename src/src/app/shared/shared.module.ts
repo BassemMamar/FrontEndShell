@@ -1,7 +1,9 @@
+/* Angular Imports */
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+/* Shared Imports */
 import { AlertComponent } from './components/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
@@ -12,10 +14,16 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
  */
 @NgModule({
     imports: [
-        BrowserModule,
+        CommonModule,
         FormsModule
     ],
-    exports: [],
+    exports: [
+        CommonModule,
+        FormsModule,
+
+        AlertComponent,
+        DateFormatPipe
+    ],
     declarations: [
         AlertComponent,
         DateFormatPipe

@@ -2,5 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class ExceptionService {
-    constructor() { }
+    constructor() {
+        /* ToDo later */
+    }
 }

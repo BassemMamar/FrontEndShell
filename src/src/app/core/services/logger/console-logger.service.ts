@@ -42,5 +42,28 @@ export class ConsoleLoggerService implements Logger {
         }
     }
 
+    get trace() {
+        if (isDebugMode) {
+            return console.trace.bind(console);
+        } else {
+            return noop;
+        }
+    }
+
+    get debug() {
+        if (isDebugMode) {
+            return console.debug.bind(console);
+        } else {
+            return noop;
+        }
+    }
+
+    get table() {
+        if (isDebugMode) {
+            return console.table.bind(console);
+        } else {
+            return noop;
+        }
+    }
 }
 

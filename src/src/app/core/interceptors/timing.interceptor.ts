@@ -1,11 +1,13 @@
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { Inject } from '@angular/core';
+
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 
-import { LoggerService } from '../services/log4ts/logger.service';
+import { LoggerService } from '../services/logger/logger.service';
 
 export class TimingInterceptor implements HttpInterceptor {
-  constructor(private loggerService: LoggerService) {
+  constructor(@Inject(LoggerService) private loggerService: LoggerService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,3 +22,5 @@ export class TimingInterceptor implements HttpInterceptor {
       });
   }
 }
+
+export const TimingInterceptorProvider = { provide: HTTP_INTERCEPTORS, useClass: TimingInterceptor, multi: true };

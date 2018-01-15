@@ -11,10 +11,5 @@ export const environment = {
       businessAccountManagement: '/BusinessAccountManagement/'
     }
   },
-  visionCortexBasePath: '',
-  exceptionConfiguration: {
-    appErrorPrefix: '[Frontend Shell Error] ',
-    showInternalServerErrors: true,
-    showAppErrors: false
-  }
+  visionCortexBasePath: ''
 };

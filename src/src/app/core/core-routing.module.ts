@@ -1,10 +1,16 @@
+/* Angular Imports */
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+/* Core Routing Components Imports */
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
+import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 
 const routes: Routes = [
-  { path: '**', component: PageNotFoundComponent },
+  { path: 'unauthorized', component: UnauthorizedComponent },
+  { path: 'error', component: InternalServerErrorComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({
@@ -13,4 +19,4 @@ const routes: Routes = [
 })
 export class CoreRoutingModule { }
 
-export const CoreRoutedComponents = [PageNotFoundComponent];
+export const CoreRoutedComponents = [PageNotFoundComponent, UnauthorizedComponent, InternalServerErrorComponent];
