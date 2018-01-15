@@ -15,6 +15,7 @@ let routes: Routes = [
 
 /* Lazy Loading Modules */
 routes = routes.concat(featureModules);
+console.log(routes);
 
 @NgModule({
   imports: [RouterModule.forRoot(

@@ -3,19 +3,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /* Investigation Imports */
-import { InvestigationRoutingModule, investigationRoutingComponents } from './investigation-routing.module';
+import { InvestigationStudioRoutingModule, InvestigationRoutingComponents } from './investigation-studio-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
 
-import { InvestigationComponent } from './investigation.component';
+import { InvestigationComponent } from './investigation-studio.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
     LayoutModule,
-    InvestigationRoutingModule
+    InvestigationStudioRoutingModule
   ],
-  declarations: [investigationRoutingComponents]
+  declarations: [InvestigationRoutingComponents]
 })
-export class InvestigationModule { }
+export class InvestigationStudioModule { }

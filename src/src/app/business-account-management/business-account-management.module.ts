@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 /* BusinessAccountManagement Imports */
 import {
   BusinessAccountManagementRoutingModule,
-  businessAccountManagementRoutingComponents
+  BusinessAccountManagementRoutingComponents
 } from './business-account-management-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
@@ -19,6 +19,6 @@ import { BusinessAccountManagementComponent } from './business-account-managemen
     LayoutModule,
     BusinessAccountManagementRoutingModule
   ],
-  declarations: [businessAccountManagementRoutingComponents]
+  declarations: [BusinessAccountManagementRoutingComponents]
 })
 export class BusinessAccountManagementModule { }

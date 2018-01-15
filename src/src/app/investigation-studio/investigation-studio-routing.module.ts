@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { InvestigationComponent } from './investigation.component';
+import { InvestigationComponent } from './investigation-studio.component';
 import { AuthGuard } from '../core/services/auth/auth-guard.service';
 
 const routes: Routes = [
@@ -21,6 +21,6 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class InvestigationRoutingModule { }
+export class InvestigationStudioRoutingModule { }
 
-export const investigationRoutingComponents = [InvestigationComponent];
+export const InvestigationRoutingComponents = [InvestigationComponent];

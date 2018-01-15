@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  templateUrl: './investigation.component.html',
-  styleUrls: ['./investigation.component.scss']
+  templateUrl: './investigation-studio.component.html',
+  styleUrls: ['./investigation-studio.component.scss']
 })
 export class InvestigationComponent implements OnInit {
 

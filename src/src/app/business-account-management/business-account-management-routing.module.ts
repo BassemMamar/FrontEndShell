@@ -24,5 +24,5 @@ const routes: Routes = [
 })
 export class BusinessAccountManagementRoutingModule { }
 
-export const businessAccountManagementRoutingComponents =
+export const BusinessAccountManagementRoutingComponents =
   [BusinessAccountManagementComponent];
