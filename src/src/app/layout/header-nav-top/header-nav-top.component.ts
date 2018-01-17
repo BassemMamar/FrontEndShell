@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@angular/core';
 
 import { ModulesSharedInfoService } from '../../core/services/modules-shared-info/modules-shared-info.service';
 
@@ -10,23 +10,14 @@ declare let mLayout: any;
     encapsulation: ViewEncapsulation.None,
 })
 export class HeaderNavTopComponent implements OnInit, AfterViewInit {
-    currentModule: string;
+    // tslint:disable-next-line:no-input-rename
+    @Input('current-module-name') currentModule: string;
 
-    // constructor(private modulesSharedInfoService: ModulesSharedInfoService) {
-    // }
     constructor() { }
     ngOnInit() {
-        this.currentModule = ''; // this.modulesSharedInfoService.CurrentModule;
-
-
     }
+
     ngAfterViewInit() {
         mLayout.initHeader();
     }
-
-    setCurrentModule(name: string): void {
-        //   this.modulesSharedInfoService.CurrentModule = name;
-
-    }
-
 }

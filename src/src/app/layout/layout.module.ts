@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { HeaderNavTopComponent } from './header-nav-top/header-nav-top.component';
 import { HeaderNavBottomComponent } from './header-nav-bottom/header-nav-bottom.component';
 import { FooterComponent } from './footer/footer.component';
+import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 
 
 
@@ -19,11 +20,13 @@ import { FooterComponent } from './footer/footer.component';
     HeaderNavTopComponent,
     HeaderNavBottomComponent,
     FooterComponent,
+    BreadcrumbsComponent,
   ],
   exports: [
     HeaderNavTopComponent,
     HeaderNavBottomComponent,
     FooterComponent,
+    BreadcrumbsComponent,
   ]
 })
 export class LayoutModule { }
