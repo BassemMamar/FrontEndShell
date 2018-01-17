@@ -8,8 +8,21 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets",
-        "favicon.ico"
+        {
+          "glob": "**/*",
+          "input": "./assets/images/",
+          "output": "./assets/images/"
+        },
+        {
+          "glob": "web.config",
+          "input": "./assets/",
+          "output": "./"
+        },
+        {
+          "glob": "favicon.ico",
+          "input": "./",
+          "output": "./"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -28,8 +41,6 @@
         "../node_modules/js-cookie/src/js.cookie.js",
         "../node_modules/moment/min/moment.min.js",
         "../node_modules/wnumb/wNumb.js",
-  
-          
         "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js",
         "../node_modules/bootstrap-daterangepicker/daterangepicker.js",
         "../node_modules/bootstrap-switch/dist/js/bootstrap-switch.js",
@@ -39,7 +50,6 @@
         "../node_modules/es6-promise-polyfill/promise.min.js",
         "../node_modules/sweetalert2/dist/sweetalert2.min.js",
         "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js",
-
         "assets/js/framework/base/app.js",
         "assets/js/framework/base/util.js",
         "assets/js/framework/components/general/datatable/datatable.js",
@@ -55,17 +65,13 @@
         "assets/js/framework/components/general/scroll-top.js",
         "assets/js/framework/components/general/toggle.js",
         "assets/js/framework/components/general/wizard.js",
- 
         "assets/js/framework/components/plugins/base/bootstrap-notify.init.js",
         "assets/js/framework/components/plugins/base/sweetalert2.init.js",
- 
         "assets/js/framework/components/plugins/forms/bootstrap-daterangepicker.init.js",
         "assets/js/framework/components/plugins/forms/bootstrap-markdown.init.js",
         "assets/js/framework/components/plugins/forms/bootstrap-switch.init.js",
         "assets/js/framework/components/plugins/forms/bootstrap-timepicker.init.js",
-
         "assets/js/demo/demo5/base/layout.js",
-
         "assets/js/app/base/main.js",
         "assets/js/snippets/base/quick-sidebar.js"
       ],

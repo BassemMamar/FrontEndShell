@@ -9,7 +9,7 @@ declare let mLayout: any;
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'body',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
