@@ -12,12 +12,14 @@ import { SharedModule } from './shared/shared.module';
 /* App Imports */
 import { AppRoutingModule, appRoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { LayoutModule } from './layout/layout.module';
 
 @NgModule({
   imports: [
     AppRoutingModule,
     CoreModule, // this will provide  RouterModule, and BrowserModule for us to use
     SharedModule,
+    LayoutModule,
 
     // later for service-worker
     //  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : []

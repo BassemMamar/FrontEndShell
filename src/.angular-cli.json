@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "project": {
-    "name": "src"
+    "name": "Frontend Shell -V2"
   },
   "apps": [
     {
@@ -21,7 +21,54 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": [],
+      "scripts": [
+        "../node_modules/jquery/dist/jquery.js",
+        "../node_modules/popper.js/dist/umd/popper.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
+        "../node_modules/js-cookie/src/js.cookie.js",
+        "../node_modules/moment/min/moment.min.js",
+        "../node_modules/wnumb/wNumb.js",
+  
+          
+        "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js",
+        "../node_modules/bootstrap-daterangepicker/daterangepicker.js",
+        "../node_modules/bootstrap-switch/dist/js/bootstrap-switch.js",
+        "../node_modules/markdown/lib/markdown.js",
+        "../node_modules/bootstrap-markdown/js/bootstrap-markdown.js",
+        "../node_modules/bootstrap-notify/bootstrap-notify.min.js",
+        "../node_modules/es6-promise-polyfill/promise.min.js",
+        "../node_modules/sweetalert2/dist/sweetalert2.min.js",
+        "../node_modules/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js",
+
+        "assets/js/framework/base/app.js",
+        "assets/js/framework/base/util.js",
+        "assets/js/framework/components/general/datatable/datatable.js",
+        "assets/js/framework/components/general/animate.js",
+        "assets/js/framework/components/general/dropdown.js",
+        "assets/js/framework/components/general/example.js",
+        "assets/js/framework/components/general/header.js",
+        "assets/js/framework/components/general/menu.js",
+        "assets/js/framework/components/general/messenger.js",
+        "assets/js/framework/components/general/offcanvas.js",
+        "assets/js/framework/components/general/portlet.js",
+        "assets/js/framework/components/general/quicksearch.js",
+        "assets/js/framework/components/general/scroll-top.js",
+        "assets/js/framework/components/general/toggle.js",
+        "assets/js/framework/components/general/wizard.js",
+ 
+        "assets/js/framework/components/plugins/base/bootstrap-notify.init.js",
+        "assets/js/framework/components/plugins/base/sweetalert2.init.js",
+ 
+        "assets/js/framework/components/plugins/forms/bootstrap-daterangepicker.init.js",
+        "assets/js/framework/components/plugins/forms/bootstrap-markdown.init.js",
+        "assets/js/framework/components/plugins/forms/bootstrap-switch.init.js",
+        "assets/js/framework/components/plugins/forms/bootstrap-timepicker.init.js",
+
+        "assets/js/demo/demo5/base/layout.js",
+
+        "assets/js/app/base/main.js",
+        "assets/js/snippets/base/quick-sidebar.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

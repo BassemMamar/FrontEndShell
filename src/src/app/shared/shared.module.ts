@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms';
 import { AlertComponent } from './components/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
+import { HrefPreventDefaultDirective } from './directives/href-prevent-default.directive';
+import { UnwrapTagDirective } from './directives/unwrap-tag.directive';
+
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
  * offers shared features that we'll expect to use in lots of places with multiple instances
@@ -22,11 +25,15 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
         FormsModule,
 
         AlertComponent,
-        DateFormatPipe
+        DateFormatPipe,
+        HrefPreventDefaultDirective,
+        UnwrapTagDirective
     ],
     declarations: [
         AlertComponent,
-        DateFormatPipe
+        DateFormatPipe,
+        HrefPreventDefaultDirective,
+        UnwrapTagDirective
     ],
     providers: [],
 })

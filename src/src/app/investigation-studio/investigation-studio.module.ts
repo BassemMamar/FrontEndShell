@@ -8,6 +8,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
 
 import { InvestigationComponent } from './investigation-studio.component';
+import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { InvestigationComponent } from './investigation-studio.component';
     LayoutModule,
     InvestigationStudioRoutingModule
   ],
-  declarations: [InvestigationRoutingComponents]
+  declarations: [InvestigationRoutingComponents, RecentJourneysComponent]
 })
 export class InvestigationStudioModule { }

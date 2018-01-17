@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { InvestigationComponent } from './investigation-studio.component';
 import { AuthGuard } from '../core/services/auth/auth-guard.service';
+import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-       { path: '', pathMatch: 'full', redirectTo: 'recentjourneys' },
-      // { path: 'recentjourneys', component: RecentJourneysComponent }
+      { path: '', pathMatch: 'full', redirectTo: 'recentjourneys' },
+      { path: 'recentjourneys', component: RecentJourneysComponent }
     ]
   }
 ];
@@ -23,4 +24,4 @@ const routes: Routes = [
 })
 export class InvestigationStudioRoutingModule { }
 
-export const InvestigationRoutingComponents = [InvestigationComponent];
+export const InvestigationRoutingComponents = [InvestigationComponent, RecentJourneysComponent];

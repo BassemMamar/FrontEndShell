@@ -1,10 +1,18 @@
-<h1 class="title">
-    Angular Router</h1>
-<nav>
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/bam" routerLinkActive="active">Business Account Management</a>
-    <a routerLink="/journeydefinition" routerLinkActive="active">Journey Definition</a>
-    <a routerLink="/investigation" routerLinkActive="active">Investigation Studio</a>
-    <a routerLink="/capture" routerLinkActive="active">Capture Studio</a>
-</nav>
+<div class="m-page-loader m-page-loader--non-block" style="margin-left: -80px; margin-top: -20px;">
+    <div class="m-blockui">
+        <span>
+            Please wait...
+        </span>
+        <span>
+            <div class="m-loader m-loader--brand"></div>
+        </span>
+    </div>
+</div>
+
+    
 <router-outlet></router-outlet>
+
+<app-scroll-top></app-scroll-top>
+<!-- <app-tooltips></app-tooltips> -->
+
+<!-- end::Page Loader -->

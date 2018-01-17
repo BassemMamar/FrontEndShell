@@ -15,6 +15,9 @@ import { SelectivePreloadingStrategy } from './services/lazy-loading/selective-p
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth-guard.service';
 import { TimingInterceptorProvider } from './interceptors/timing.interceptor';
+import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
+import { TooltipsComponent } from './components/tooltips/tooltips.component';
+import { ModulesSharedInfoService } from './services/modules-shared-info/modules-shared-info.service';
 
 @NgModule({
   imports: [
@@ -27,8 +30,16 @@ import { TimingInterceptorProvider } from './interceptors/timing.interceptor';
     /* 3rd Library imports goes here */
 
   ],
-  declarations: [CoreRoutedComponents],
-  exports: [],
+  declarations: [
+    CoreRoutedComponents,
+
+    ScrollTopComponent,
+    TooltipsComponent
+  ],
+  exports: [
+    ScrollTopComponent,
+    TooltipsComponent
+  ],
   providers: [
     CommunicationConfigService,
     SubDomainService,
@@ -38,6 +49,7 @@ import { TimingInterceptorProvider } from './interceptors/timing.interceptor';
     LowerCaseUrlSerializerProvider,
     requestOptionsProvider,
     SelectivePreloadingStrategy,
+    ModulesSharedInfoService,
     AuthService,
     AuthGuard
   ]
