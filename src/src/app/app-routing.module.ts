@@ -34,7 +34,7 @@ const routes: Routes = [
 ];
 
 /* Lazy Loading Modules */
-console.log(routes);
+// ...
 
 @NgModule({
   imports: [RouterModule.forRoot(

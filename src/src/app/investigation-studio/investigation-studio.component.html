@@ -4,13 +4,16 @@
 </header>
 <!-- begin::Body -->
 
-<div class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body m-page__container">
-  <div class="m-grid__item m-grid__item--fluid m-wrapper">
-    <app-breadcrumbs></app-breadcrumbs>
-    <div class="m-content">
-      <router-outlet></router-outlet>
+
+<div class=" m-grid__item m-grid__item--fluid m-grid m-grid--hor-desktop m-grid--desktop m-body">
+  <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver	m-container m-container--responsive m-container--xxl m-page__container">
+    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+      <app-breadcrumbs></app-breadcrumbs>
+      <div class="m-content">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>
-<!-- end::Body -->
+
 <app-footer></app-footer>

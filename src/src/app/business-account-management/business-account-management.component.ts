@@ -4,7 +4,7 @@ import { LoggerService } from '../core/services/logger/logger.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: '.m-grid.m-grid--hor.m-grid--root.m-page', 
+  selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
   templateUrl: './business-account-management.component.html',
   styleUrls: ['./business-account-management.component.scss']
 
