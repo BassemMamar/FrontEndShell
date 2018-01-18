@@ -17,7 +17,6 @@ import { AuthGuard } from './services/auth/auth-guard.service';
 import { TimingInterceptorProvider } from './interceptors/timing.interceptor';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
-import { ModulesSharedInfoService } from './services/modules-shared-info/modules-shared-info.service';
 
 @NgModule({
   imports: [
@@ -49,7 +48,6 @@ import { ModulesSharedInfoService } from './services/modules-shared-info/modules
     LowerCaseUrlSerializerProvider,
     requestOptionsProvider,
     SelectivePreloadingStrategy,
-    ModulesSharedInfoService,
     AuthService,
     AuthGuard
   ]

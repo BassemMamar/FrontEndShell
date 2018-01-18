@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BusinessAccountManagementComponent } from './business-account-management.component';
 import { AuthGuard } from '../core/services/auth/auth-guard.service';
+import { ListComponent } from './businesses/list/list.component';
 
 const routes: Routes = [
   {
@@ -12,7 +13,7 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'list' },
-      // { path: 'list', component: ListBusinessesComponent },
+        { path: 'list', component: ListComponent },
       // { path: 'add', component: AddBusinessComponent }
     ]
   }

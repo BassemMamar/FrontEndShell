@@ -337,7 +337,7 @@ var mUtil = function() {
         * @returns {boolean}  
         */
         isAngularVersion: function() {
-            return window.Zone !== undefined  ? true : false;
+            return true; // window.Zone !== undefined  ? true : false;
         }
     }
 }();

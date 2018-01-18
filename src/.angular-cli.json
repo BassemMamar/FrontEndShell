@@ -53,6 +53,7 @@
         "assets/js/framework/base/app.js",
         "assets/js/framework/base/util.js",
         "assets/js/framework/components/general/datatable/datatable.js",
+        "assets/js/framework/components/general/datatable/datatable.checkbox.js",
         "assets/js/framework/components/general/animate.js",
         "assets/js/framework/components/general/dropdown.js",
         "assets/js/framework/components/general/example.js",
@@ -73,7 +74,8 @@
         "assets/js/framework/components/plugins/forms/bootstrap-timepicker.init.js",
         "assets/js/demo/demo5/base/layout.js",
         "assets/js/app/base/main.js",
-        "assets/js/snippets/base/quick-sidebar.js"
+        "assets/js/snippets/base/quick-sidebar.js",
+        "assets/js/demo/default/custom/components/datatables/base/data-local.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

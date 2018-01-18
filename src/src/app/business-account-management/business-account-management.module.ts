@@ -11,6 +11,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LayoutModule } from '../layout/layout.module';
 
 import { BusinessAccountManagementComponent } from './business-account-management.component';
+import { ListComponent } from './businesses/list/list.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { BusinessAccountManagementComponent } from './business-account-managemen
     LayoutModule,
     BusinessAccountManagementRoutingModule
   ],
-  declarations: [BusinessAccountManagementRoutingComponents]
+  declarations: [BusinessAccountManagementRoutingComponents, ListComponent]
 })
 export class BusinessAccountManagementModule { }
