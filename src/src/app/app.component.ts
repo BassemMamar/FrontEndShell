@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
 import { Helpers } from './layout/helpers';
@@ -7,15 +7,16 @@ declare let mApp: any;
 declare let mUtil: any;
 declare let mLayout: any;
 
-@Component({ 
+@Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   title = 'app';
   constructor(private router: Router) { }
-  ngOnInit() {
+  ngOnInit() { }
+  ngAfterViewInit() {
 
     this.router.events.subscribe((route) => {
       /* Route Navigation Start */

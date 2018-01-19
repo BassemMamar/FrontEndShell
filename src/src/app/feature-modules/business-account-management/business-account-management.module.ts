@@ -7,8 +7,8 @@ import {
   BusinessAccountManagementRoutingModule,
   BusinessAccountManagementRoutingComponents
 } from './business-account-management-routing.module';
-import { SharedModule } from '../shared/shared.module';
-import { LayoutModule } from '../layout/layout.module';
+import { SharedModule } from '../../shared/shared.module';
+import { LayoutModule } from '../../layout/layout.module';
 
 import { BusinessAccountManagementComponent } from './business-account-management.component';
 import { ListComponent } from './businesses/list/list.component';

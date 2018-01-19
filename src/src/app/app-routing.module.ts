@@ -7,27 +7,32 @@ import { Routes, RouterModule } from '@angular/router';
 import { SelectivePreloadingStrategy } from './core/services/lazy-loading/selective-preloading-strategy';
 import { featureModules } from './feature-modules.provider';
 
+import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
+
 const routes: Routes = [
   {
     path: 'bam',
-    loadChildren: 'app/business-account-management/business-account-management.module#BusinessAccountManagementModule',
+    loadChildren: 'app/feature-modules/business-account-management/business-account-management.module#BusinessAccountManagementModule',
     data: { preload: false }
   },
   {
     path: 'journeydefinition',
-    loadChildren: 'app/journey-definition/journey-definition.module#JourneyDefinitionModule',
+    loadChildren: 'app/feature-modules/journey-definition/journey-definition.module#JourneyDefinitionModule',
     data: { preload: false }
   },
   {
     path: 'investigation',
-    loadChildren: 'app/investigation-studio/investigation-studio.module#InvestigationStudioModule',
+    loadChildren: 'app/feature-modules/investigation-studio/investigation-studio.module#InvestigationStudioModule',
     data: { preload: false }
   },
   {
     path: 'capture',
-    loadChildren: 'app/capture-studio/capture-studio.module#CaptureStudioModule',
+    loadChildren: 'app/feature-modules/capture-studio/capture-studio.module#CaptureStudioModule',
     data: { preload: false }
-  }
+  },
+
+  /* Wildcard Routes ,should be the last route configuration */
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 /* Lazy Loading Modules */

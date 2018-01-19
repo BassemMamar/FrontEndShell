@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { LoggerService } from '../core/services/logger/logger.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   // tslint:disable-next-line:component-selector

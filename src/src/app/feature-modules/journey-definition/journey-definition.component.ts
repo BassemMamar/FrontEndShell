@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Helpers } from '../layout/helpers';
-import { LoggerService } from '../core/services/logger/logger.service';
+import { Helpers } from '../../layout/helpers';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
     // tslint:disable-next-line:component-selector

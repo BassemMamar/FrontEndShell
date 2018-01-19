@@ -29668,7 +29668,7 @@ select.m-select2 {
 
 @media (min-width: 993px) {
   .m-header--fixed .m-body {
-    padding-top: 70px !important; }
+    padding-top: 160px !important; }
   .m-aside-left--fixed .m-body .m-wrapper {
     margin-left: 235px; }
   .m-page--fluid.m-aside-left--fixed .m-body .m-wrapper {

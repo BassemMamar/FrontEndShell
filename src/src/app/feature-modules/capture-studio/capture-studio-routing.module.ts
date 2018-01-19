@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { CaptureStudioComponent } from './capture-studio.component';
-import { AuthGuard } from '../core/services/auth/auth-guard.service';
+import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 
 const routes: Routes = [
   {

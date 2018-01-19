@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { InvestigationComponent } from './investigation-studio.component';
-import { AuthGuard } from '../core/services/auth/auth-guard.service';
+import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
 
 const routes: Routes = [

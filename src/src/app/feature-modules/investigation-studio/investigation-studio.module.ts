@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 
 /* Investigation Imports */
 import { InvestigationStudioRoutingModule, InvestigationRoutingComponents } from './investigation-studio-routing.module';
-import { SharedModule } from '../shared/shared.module';
-import { LayoutModule } from '../layout/layout.module';
+import { SharedModule } from '../../shared/shared.module';
+import { LayoutModule } from '../../layout/layout.module';
 
 import { InvestigationComponent } from './investigation-studio.component';
 import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';

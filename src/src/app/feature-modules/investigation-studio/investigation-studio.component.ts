@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoggerService } from '../core/services/logger/logger.service';
+import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -12,7 +12,7 @@ import { LoggerService } from '../core/services/logger/logger.service';
 export class InvestigationComponent implements OnInit {
 
   constructor(private logger: LoggerService) { }
-
+ 
   ngOnInit() {
     this.logger.info(`InvestigationComponent has been Initiated..`);
   }
