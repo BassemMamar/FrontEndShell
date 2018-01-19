@@ -3,14 +3,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /* App Routing Components Imports */
-import { HomeComponent } from './home/home.component';
 
 import { SelectivePreloadingStrategy } from './core/services/lazy-loading/selective-preloading-strategy';
 import { featureModules } from './feature-modules.provider';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
   {
     path: 'bam',
     loadChildren: 'app/business-account-management/business-account-management.module#BusinessAccountManagementModule',
@@ -48,4 +45,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const appRoutingComponents = [HomeComponent];
+export const appRoutingComponents = [];

@@ -1,0 +1,18 @@
+<header class="m-grid__item		m-header" data-minimize="minimize" data-minimize-offset="200" data-minimize-mobile-offset="200">
+  <app-header-nav-top [current-module-name]="'Home'"></app-header-nav-top>
+
+</header>
+<!-- begin::Body -->
+
+<div class=" m-grid__item m-grid__item--fluid m-grid m-grid--hor-desktop m-grid--desktop m-body">
+  <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver	m-container m-container--responsive m-container--xxl m-page__container">
+    <div class="m-grid__item m-grid__item--fluid m-wrapper">
+      <div class="m-content">
+       <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+

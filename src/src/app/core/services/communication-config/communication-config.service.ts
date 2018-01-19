@@ -38,7 +38,7 @@ export class CommunicationConfigService {
 
     private init(): any {
         this._businessCode = this.subDomainService.subDomain;
-        this._authority = this.injectBusinessCode(environment.authority);
+      //  this._authority = this.injectBusinessCode(environment.authority);
         this._visionCortexBasePath = this.injectBusinessCode(environment.visionCortexBasePath);
 
         this._api = environment.api;
