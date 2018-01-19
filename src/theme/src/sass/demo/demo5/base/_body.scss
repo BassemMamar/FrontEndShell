@@ -21,10 +21,11 @@
 @include desktop {
 	.m-body {	
 		// fixed header mode
-		.m-header--fixed & {			
-			padding-top: 
-			array-get($m-config-header, header, self, height, desktop, top, default) +
-			array-get($m-config-header, header, self, height, desktop, bottom)  !important;
+		.m-header--fixed & {	
+			padding-top:70px !important;
+			// padding-top: 
+			// array-get($m-config-header, header, self, height, desktop, top, default) +
+			// array-get($m-config-header, header, self, height, desktop, bottom)  !important;
 		}
 
 		// body wrapper
