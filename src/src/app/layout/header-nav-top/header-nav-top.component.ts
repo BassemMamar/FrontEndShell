@@ -15,6 +15,6 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        mLayout.initHeader();
+      mLayout.initHeader();
     }
 }

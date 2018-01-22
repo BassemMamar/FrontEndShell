@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@angular/core';
+
+import { NavMenuItem } from '../../layout/model/nav-menu-item';
 
 declare let mLayout: any;
 @Component({
@@ -8,6 +10,8 @@ declare let mLayout: any;
 })
 export class HeaderNavBottomComponent implements OnInit, AfterViewInit {
 
+    // tslint:disable-next-line:no-input-rename
+    @Input('nav-menu-items') navMenuItems: NavMenuItem[];
 
     constructor() {
 
@@ -16,7 +20,7 @@ export class HeaderNavBottomComponent implements OnInit, AfterViewInit {
 
     }
     ngAfterViewInit() {
-            mLayout.initHeader();
+        mLayout.initHeader();
     }
 
 }

@@ -1,0 +1,42 @@
+<li *ngIf="navMenuItem.subNav.length=== 0" appunwraptag="" class="m-menu__item  " routerLinkActive="m-menu__item--active"
+  [routerLinkActiveOptions]="{ exact: true }" aria-haspopup="true">
+  <a [routerLink]="[navMenuItem.link]" class="m-menu__link">
+    <span class="m-menu__item-here"></span>
+    <span class="m-menu__link-text">
+      {{navMenuItem.title}}
+    </span>
+  </a>
+</li>
+<li *ngIf="navMenuItem.subNav.length > 0" appunwraptag="" class="m-menu__item  m-menu__item--submenu m-menu__item--rel" routerLinkActive="m-menu__item--open"
+  [routerLinkActiveOptions]="{ exact: true }" data-menu-submenu-toggle="click" aria-haspopup="true">
+  <a href="#" class="m-menu__link m-menu__toggle">
+    <span class="m-menu__item-here"></span>
+    <span class="m-menu__link-text">
+      {{navMenuItem.title}}
+    </span>
+    <i class="m-menu__hor-arrow la la-angle-down"></i>
+    <i class="m-menu__ver-arrow la la-angle-right"></i>
+  </a>
+  <div class="m-menu__submenu m-menu__submenu--classic m-menu__submenu--left">
+    <span class="m-menu__arrow m-menu__arrow--adjust"></span>
+    <ul class="m-menu__subnav">
+      <li *ngFor="let subItem of navMenuItem.subNav" class="m-menu__item" routerLinkActive="m-menu__item--active" 
+      [routerLinkActiveOptions]="{ exact: true }"
+        aria-haspopup="true">
+        <a [routerLink]="[subItem.link]" class="m-menu__link">
+          <i class="m-menu__link-icon {{subItem.icon}}"></i>
+          <span class="m-menu__link-title">
+            <span class="m-menu__link-wrap">
+              <span class="m-menu__link-text">
+                {{subItem.title}}
+              </span>
+
+            </span>
+          </span>
+        </a>
+      </li>
+
+
+    </ul>
+  </div>
+</li>

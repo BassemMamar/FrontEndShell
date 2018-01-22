@@ -8,6 +8,7 @@ import { HeaderNavTopComponent } from './header-nav-top/header-nav-top.component
 import { HeaderNavBottomComponent } from './header-nav-bottom/header-nav-bottom.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { NavItemContentComponent } from './header-nav-bottom/nav-item-content/nav-item-content.component';
 
 
 
@@ -19,8 +20,9 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
   declarations: [
     HeaderNavTopComponent,
     HeaderNavBottomComponent,
+    NavItemContentComponent,
     FooterComponent,
-    BreadcrumbsComponent,
+    BreadcrumbsComponent
   ],
   exports: [
     HeaderNavTopComponent,

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../core/services/logger/logger.service';
+import { NavMenuItem } from '../../layout/model/nav-menu-item';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -11,10 +12,28 @@ import { LoggerService } from '../../core/services/logger/logger.service';
 })
 export class InvestigationComponent implements OnInit {
 
-  constructor(private logger: LoggerService) { }
- 
-  ngOnInit() {
-    this.logger.info(`InvestigationComponent has been Initiated..`);
+  navMenuItems: NavMenuItem[];
+
+  constructor(private logger: LoggerService) {
+    this.navMenuItems = [];
   }
 
+  ngOnInit() {
+    this.logger.info(`InvestigationComponent has been Initiated..`);
+    this.setupModuleNaigations();
+  }
+
+ private setupModuleNaigations() {
+    const defaultItem: NavMenuItem = new NavMenuItem();
+    defaultItem.icon = '';
+    defaultItem.link = '';
+    defaultItem.title = 'Default';
+    this.navMenuItems.push(defaultItem);
+
+    const recentJourneys: NavMenuItem = new NavMenuItem();
+    recentJourneys.icon = 'flaticon-list';
+    recentJourneys.link = 'RecentJourneys';
+    recentJourneys.title = 'Recent Journeys';
+    this.navMenuItems.push(recentJourneys);
+  }
 }
