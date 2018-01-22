@@ -6,10 +6,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { pathMatcher } from './services/url-case-insensitive/CaseInsensitiveMatcher';
 
 const routes: Routes = [
-  { path: 'unauthorized', component: UnauthorizedComponent },
-  { path: 'error', component: InternalServerErrorComponent }
+  {
+    matcher: pathMatcher('Unauthorized'),
+    // path: 'unauthorized',
+    component: UnauthorizedComponent
+  },
+  {
+    matcher: pathMatcher('Error'),
+   // path: 'error',
+    component: InternalServerErrorComponent
+  }
 ];
 
 @NgModule({

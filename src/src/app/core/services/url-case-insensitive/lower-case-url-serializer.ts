@@ -6,10 +6,11 @@ export class LowerCaseUrlSerializer extends DefaultUrlSerializer {
         // https://github.com/chsakell/angular2-features/blob/master/src/app/shared/utils/lower-case-url-serializer.ts
 
         return super.parse(url.toLowerCase());
+        //   return super.parse(url);
     }
 }
 
 export const LowerCaseUrlSerializerProvider = {
     provide: UrlSerializer,
     useClass: LowerCaseUrlSerializer
-  };
+};

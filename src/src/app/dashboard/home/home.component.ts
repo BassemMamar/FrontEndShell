@@ -5,8 +5,6 @@ import { environment } from '../../../environments/environment';
 import { CommunicationConfigService } from '../../core/services/communication-config/communication-config.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
-  selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

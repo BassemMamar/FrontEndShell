@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InvestigationComponent } from './investigation-studio.component';
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
+import { pathMatcher } from '../../core/services/url-case-insensitive/CaseInsensitiveMatcher';
 
 const routes: Routes = [
   {
@@ -12,8 +13,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'recentjourneys' },
-      { path: 'recentjourneys', component: RecentJourneysComponent }
+      { path: '', pathMatch: 'full', redirectTo: 'RecentJourneys' },
+      {
+        matcher: pathMatcher('RecentJourneys'),
+        //  path: 'recentjourneys',
+        component: RecentJourneysComponent
+      }
     ]
   }
 ];

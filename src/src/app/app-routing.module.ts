@@ -2,31 +2,38 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-/* App Routing Components Imports */
-
+/* Service to Handle Lazy Load Feature Modules */
 import { SelectivePreloadingStrategy } from './core/services/lazy-loading/selective-preloading-strategy';
+
+/* Later may isolate declare feature modules in separate file to be customized for release porpuse */
 import { featureModules } from './feature-modules.provider';
 
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
+import { pathMatcher } from './core/services/url-case-insensitive/CaseInsensitiveMatcher';
+
 const routes: Routes = [
   {
-    path: 'bam',
+    matcher: pathMatcher('BusinessAccountManagement'),
+    // path: 'bam',
     loadChildren: 'app/feature-modules/business-account-management/business-account-management.module#BusinessAccountManagementModule',
     data: { preload: false }
   },
   {
-    path: 'journeydefinition',
+    matcher: pathMatcher('JourneyDefinition'),
+    // path: 'journeydefinition',
     loadChildren: 'app/feature-modules/journey-definition/journey-definition.module#JourneyDefinitionModule',
     data: { preload: false }
   },
   {
-    path: 'investigation',
+    matcher: pathMatcher('InvestigationStudio'),
+    // path: 'investigation',
     loadChildren: 'app/feature-modules/investigation-studio/investigation-studio.module#InvestigationStudioModule',
     data: { preload: false }
   },
   {
-    path: 'capture',
+    matcher: pathMatcher('CaptureStudio'),
+    // path: 'capture',
     loadChildren: 'app/feature-modules/capture-studio/capture-studio.module#CaptureStudioModule',
     data: { preload: false }
   },
@@ -35,8 +42,6 @@ const routes: Routes = [
   { path: '**', component: PageNotFoundComponent }
 ];
 
-/* Lazy Loading Modules */
-// ...
 
 @NgModule({
   imports: [RouterModule.forRoot(

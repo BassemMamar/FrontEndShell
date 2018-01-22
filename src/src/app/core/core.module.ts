@@ -7,7 +7,6 @@ import { RouterModule, UrlSerializer } from '@angular/router';
 import { CoreRoutingModule, CoreRoutedComponents } from './core-routing.module';
 import { loggerProvider } from './services/logger/logger.service';
 import { ExceptionService } from './services/exception/exception.service';
-import { LowerCaseUrlSerializerProvider } from './services/url-serializer/lower-case-url-serializer';
 import { requestOptionsProvider } from './services/default-request-options.service';
 import { CommunicationConfigService } from './services/communication-config/communication-config.service';
 import { SubDomainService } from './services/communication-config/sub-domain.service';
@@ -45,7 +44,7 @@ import { TooltipsComponent } from './components/tooltips/tooltips.component';
     loggerProvider,
     TimingInterceptorProvider,
     ExceptionService,
-    LowerCaseUrlSerializerProvider,
+    // LowerCaseUrlSerializerProvider,
     requestOptionsProvider,
     SelectivePreloadingStrategy,
     AuthService,

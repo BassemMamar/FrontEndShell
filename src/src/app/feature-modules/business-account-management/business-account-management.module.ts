@@ -12,6 +12,7 @@ import { LayoutModule } from '../../layout/layout.module';
 
 import { BusinessAccountManagementComponent } from './business-account-management.component';
 import { ListComponent } from './businesses/list/list.component';
+import { EditComponent } from './businesses/edit/edit.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ListComponent } from './businesses/list/list.component';
     LayoutModule,
     BusinessAccountManagementRoutingModule
   ],
-  declarations: [BusinessAccountManagementRoutingComponents, ListComponent]
+  declarations: [BusinessAccountManagementRoutingComponents, ListComponent, EditComponent]
 })
 export class BusinessAccountManagementModule { }

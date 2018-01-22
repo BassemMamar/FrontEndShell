@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
 
 @NgModule({
   imports: [
-    CoreModule, // this will provide  RouterModule, and BrowserModule for us to use
+    CoreModule,
     SharedModule,
     DashboardModule,
     AppRoutingModule,
