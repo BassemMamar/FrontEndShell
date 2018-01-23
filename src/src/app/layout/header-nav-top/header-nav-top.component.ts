@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@angular/core';
 
-declare let mLayout: any;
+import { ThemeHelperService } from '../theme-helper.service';
+
 @Component({
     selector: 'app-header-nav-top',
     templateUrl: './header-nav-top.component.html',
@@ -10,11 +11,11 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line:no-input-rename
     @Input('current-module-name') currentModule: string;
 
-    constructor() { }
+    constructor(  private themeHelper: ThemeHelperService) { }
     ngOnInit() {
     }
 
     ngAfterViewInit() {
-      mLayout.initHeader();
+      this.themeHelper.mLayout.initHeader();
     }
 }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@ang
 
 import { NavMenuItem } from '../../layout/model/nav-menu-item';
 
-declare let mLayout: any;
 @Component({
     selector: 'app-header-nav-bottom',
     templateUrl: './header-nav-bottom.component.html',
@@ -20,7 +19,6 @@ export class HeaderNavBottomComponent implements OnInit, AfterViewInit {
 
     }
     ngAfterViewInit() {
-        mLayout.initHeader();
     }
 
 }

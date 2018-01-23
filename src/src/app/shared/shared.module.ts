@@ -3,12 +3,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+/* Shared Public Modules Imports */
+import { PageLoaderModule } from './public/page-loader/page-loader.module';
+import { UnwrapTagModule } from './public/unwrap-tag/unwrap-tag.module';
+
 /* Shared Imports */
-import { AlertComponent } from './components/alert/alert.component';
+import { AlertComponent } from './public/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
 import { HrefPreventDefaultDirective } from './directives/href-prevent-default.directive';
-import { UnwrapTagDirective } from './directives/unwrap-tag.directive';
+
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -18,22 +22,26 @@ import { UnwrapTagDirective } from './directives/unwrap-tag.directive';
 @NgModule({
     imports: [
         CommonModule,
-        FormsModule
+        FormsModule,
+
+        PageLoaderModule,
+        UnwrapTagModule
     ],
     exports: [
         CommonModule,
         FormsModule,
 
+        PageLoaderModule,
+        UnwrapTagModule,
+
         AlertComponent,
         DateFormatPipe,
-        HrefPreventDefaultDirective,
-        UnwrapTagDirective
+        HrefPreventDefaultDirective
     ],
     declarations: [
         AlertComponent,
         DateFormatPipe,
-        HrefPreventDefaultDirective,
-        UnwrapTagDirective
+        HrefPreventDefaultDirective
     ],
     providers: [],
 })

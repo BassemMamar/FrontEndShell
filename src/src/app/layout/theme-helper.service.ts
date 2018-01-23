@@ -1,7 +1,67 @@
 import * as $ from 'jquery';
 
-export class Helpers {
-    static loadStyles(tag, src) {
+import { Injectable } from '@angular/core';
+
+declare let mApp: any;
+declare let mUtil: any;
+declare let mLayout: any;
+@Injectable()
+export class ThemeHelperService {
+    private _mApp: any;
+    private _mUtil: any;
+    private _mLayout: any;
+
+    constructor() {
+        this._mApp = mApp;
+        this._mUtil = mUtil;
+        this._mLayout = mLayout;
+    }
+
+    public get mApp(): any {
+        return this._mApp;
+    }
+    public get mUtil(): any {
+        return this._mUtil;
+    }
+    public get mLayout(): any {
+        return this._mLayout;
+    }
+
+    handleMobileLayout() {
+        // handle mobile layout
+        (<any>this.mLayout).closeMobileAsideMenuOffcanvas();
+        (<any>this.mLayout).closeMobileHorMenuOffcanvas();
+    }
+
+    scrollTop() {
+        // register scroll top
+        (<any>mApp).scrollTop();
+    }
+
+
+    hideVisiblePopover() {
+        // hide visible popover
+        const temp = (<any>$('[data-toggle="m-popover"]'));
+        if (temp && temp.length > 0) {
+            temp.popover('hide');
+        }
+    }
+
+    initRequiredJs() {
+        // init required js
+        (<any>mApp).init();
+        (<any>mUtil).init();
+    }
+
+    animateContent() {
+        // content m-wrapper animation
+        const animation = 'fadeIn animated'; // 'm-animate-fade-in-up';
+        $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function (e) {
+            $('.m-wrapper').removeClass(animation);
+        }).removeClass(animation).addClass(animation);
+    }
+
+    loadStyles(tag, src) {
         if (Array.isArray(src)) {
             $.each(src, function (k, s) {
                 $(tag).append($('<link/>').attr('href', s).attr('rel', 'stylesheet').attr('type', 'text/css'));
@@ -11,15 +71,11 @@ export class Helpers {
         }
     }
 
-    static unwrapTag(element) {
-        $(element).removeAttr('appUnwrapTag').unwrap();
-    }
-
     /**
     * Set title markup
     * @param title
     */
-    static setTitle(title) {
+    setTitle(title) {
         $('.m-subheader__title').text(title);
     }
 
@@ -27,7 +83,7 @@ export class Helpers {
     * Breadcrumbs markup
     * @param breadcrumbs
     */
-    static setBreadcrumbs(breadcrumbs) {
+    setBreadcrumbs(breadcrumbs) {
         if (breadcrumbs) {
             $('.m-subheader__title').addClass('m-subheader__title--separator');
         }
@@ -51,16 +107,29 @@ export class Helpers {
         $('.m-subheader .m-stack__item:first-child').append(ul);
     }
 
-    static setLoading(enable) {
-        const body = $('body');
-        if (enable) {
-            $(body).addClass('m-page--loading-non-block');
-        } else {
-            $(body).removeClass('m-page--loading-non-block');
-        }
-    }
-
-    static bodyClass(strClass) {
+    bodyClass(strClass) {
         $('body').attr('class', strClass);
     }
+
 }
+
+
+
+/* mApp
+ * App is Metronic's base javascript class defined in src/js/framework/base/app.js
+ * and globally available within the theme that handles all the initializaitons of base components
+ * such as bootstrap popover and tooltips, scrollable contents(using Custom Scroll plugin), etc
+ * theme/src/js/framework/base/app.js
+ */
+
+/* mUtil
+ * Util is Metronic's base utility helper class defined in src/js/framework/base/util.js
+ * and globally available within the theme
+ * theme/src/js/framework/base/util.js
+ */
+
+ /* mLayout
+ * theme/src/js/demo/demo5/base/layout.js
+ *
+ *
+ */

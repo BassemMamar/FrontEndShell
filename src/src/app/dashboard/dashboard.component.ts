@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
-import { Helpers } from '../layout/helpers';
-
-declare let mApp: any;
-declare let mUtil: any;
-declare let mLayout: any;
 @Component({
   // tslint:disable-next-line:component-selector
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',

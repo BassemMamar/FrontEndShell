@@ -1,4 +1,4 @@
-<li *ngIf="navMenuItem.subNav.length=== 0" appUnwrapTag="" class="m-menu__item  " routerLinkActive="m-menu__item--active"
+<li *ngIf="navMenuItem.subNav.length=== 0" appUnwrapTag class="m-menu__item  " routerLinkActive="m-menu__item--active"
   [routerLinkActiveOptions]="{ exact: true }" aria-haspopup="true">
   <a [routerLink]="[navMenuItem.link]" class="m-menu__link">
     <span class="m-menu__item-here"></span>
@@ -7,7 +7,7 @@
     </span>
   </a>
 </li>
-<li *ngIf="navMenuItem.subNav.length > 0" appUnwrapTag="" class="m-menu__item  m-menu__item--submenu m-menu__item--rel" routerLinkActive="m-menu__item--open"
+<li *ngIf="navMenuItem.subNav.length > 0" appUnwrapTag class="m-menu__item  m-menu__item--submenu m-menu__item--rel" routerLinkActive="m-menu__item--open"
   [routerLinkActiveOptions]="{ exact: true }" data-menu-submenu-toggle="click" aria-haspopup="true">
   <a href="#" class="m-menu__link m-menu__toggle">
     <span class="m-menu__item-here"></span>

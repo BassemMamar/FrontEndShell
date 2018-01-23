@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 
 import { SharedModule } from '../shared/shared.module';
 
+import { ThemeHelperService } from './theme-helper.service';
 import { HeaderNavTopComponent } from './header-nav-top/header-nav-top.component';
 import { HeaderNavBottomComponent } from './header-nav-bottom/header-nav-bottom.component';
 import { FooterComponent } from './footer/footer.component';
@@ -29,6 +30,7 @@ import { NavItemContentComponent } from './header-nav-bottom/nav-item-content/na
     HeaderNavBottomComponent,
     FooterComponent,
     BreadcrumbsComponent,
-  ]
+  ],
+  providers: [ThemeHelperService]
 })
 export class LayoutModule { }

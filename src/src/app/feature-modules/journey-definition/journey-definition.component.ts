@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Helpers } from '../../layout/helpers';
 import { LoggerService } from '../../core/services/logger/logger.service';
 
 @Component({
