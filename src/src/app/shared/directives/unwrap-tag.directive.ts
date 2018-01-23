@@ -3,8 +3,7 @@ import { Helpers } from '../../layout/helpers';
 
 
 @Directive({
-    // tslint:disable-next-line:directive-selector
-    selector: '[appunwraptag]',
+    selector: '[appUnwrapTag]',
 })
 export class UnwrapTagDirective implements AfterViewInit {
 

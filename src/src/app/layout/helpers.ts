@@ -12,7 +12,7 @@ export class Helpers {
     }
 
     static unwrapTag(element) {
-        $(element).removeAttr('appunwraptag').unwrap();
+        $(element).removeAttr('appUnwrapTag').unwrap();
     }
 
     /**
