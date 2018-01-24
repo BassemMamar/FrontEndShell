@@ -4,7 +4,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { InvestigationComponent } from './investigation-studio.component';
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
-import { pathMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
+import { CaseInsensitiveMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
+
+export function RecentJourneysMatch() {
+  return CaseInsensitiveMatcher('RecentJourneys').apply(this, arguments);
+}
 
 const routes: Routes = [
   {
@@ -15,7 +19,7 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'RecentJourneys' },
       {
-        matcher: pathMatcher('RecentJourneys'),
+        matcher: RecentJourneysMatch,
         //  path: 'recentjourneys',
         component: RecentJourneysComponent
       }

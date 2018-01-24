@@ -6,17 +6,26 @@ import { Routes, RouterModule } from '@angular/router';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { pathMatcher } from './base/url-case-insensitive/case-insensitive-matcher';
+import { pathMatcher, CaseInsensitiveMatcher } from './base/url-case-insensitive/case-insensitive-matcher';
+
+// const unauthorizedMatch = () => CaseInsensitiveMatcher('Unauthorized').apply(this);
+// const errorMatch = () => CaseInsensitiveMatcher('Error');
+export function UnauthorizedMatch() {
+  return CaseInsensitiveMatcher('Unauthorized').apply(this, arguments);
+}
+export function ErrorMatch() {
+  return CaseInsensitiveMatcher('Error').apply(this, arguments);
+}
 
 const routes: Routes = [
   {
-    matcher: pathMatcher('Unauthorized'),
+    matcher:  UnauthorizedMatch,
     // path: 'unauthorized',
     component: UnauthorizedComponent
   },
   {
-    matcher: pathMatcher('Error'),
-   // path: 'error',
+    matcher: ErrorMatch,
+    // path: 'error',
     component: InternalServerErrorComponent
   }
 ];

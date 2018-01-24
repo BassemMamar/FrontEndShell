@@ -3,16 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { pathMatcher } from '../core/base/url-case-insensitive/case-insensitive-matcher';
+import { CaseInsensitiveMatcher } from '../core/base/url-case-insensitive/case-insensitive-matcher';
 
-
+export function HomeMatch() {
+  return CaseInsensitiveMatcher('Home').apply(this, arguments);
+}
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
     children: [
-      { matcher: pathMatcher('Home'), component: HomeComponent },
+      {
+        matcher: HomeMatch,
+        component: HomeComponent
+      },
       { path: '', pathMatch: 'full', redirectTo: 'Home' }
     ]
   }

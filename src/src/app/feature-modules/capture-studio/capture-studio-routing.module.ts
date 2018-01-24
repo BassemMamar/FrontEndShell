@@ -3,6 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { CaptureStudioComponent } from './capture-studio.component';
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
+import { CaseInsensitiveMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
+
+export function List1Match() {
+  return CaseInsensitiveMatcher('List1').apply(this, arguments);
+}
 
 const routes: Routes = [
   {

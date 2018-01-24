@@ -5,7 +5,14 @@ import { BusinessAccountManagementComponent } from './business-account-managemen
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { ListComponent } from './businesses/list/list.component';
 import { EditComponent } from './businesses/edit/edit.component';
-import { pathMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
+import { CaseInsensitiveMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
+
+export function ListBusinessMatch() {
+  return CaseInsensitiveMatcher('List').apply(this, arguments);
+}
+export function EditBusinessMatch() {
+  return CaseInsensitiveMatcher('Edit/:businessId').apply(this, arguments);
+}
 
 const routes: Routes = [
   {
@@ -15,8 +22,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'List' },
-      { matcher: pathMatcher('List'), component: ListComponent },
-     { matcher: pathMatcher('Edit/:businessId'), component: EditComponent }
+      { matcher: ListBusinessMatch, component: ListComponent },
+      { matcher: EditBusinessMatch, component: EditComponent }
       // {path: 'Edit/:Id', component: EditComponent }
       // { path: 'add', component: AddBusinessComponent }
     ]

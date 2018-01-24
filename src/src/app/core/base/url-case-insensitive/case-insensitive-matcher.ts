@@ -1,11 +1,7 @@
 import { RouterModule, UrlSegment, UrlSegmentGroup, Route } from '@angular/router';
 
-export function CaseInsensitiveMatcher(url: string) {
-    return function (
-        segments: UrlSegment[],
-        segmentGroup: UrlSegmentGroup,
-        route: Route
-    ) {
+ export function CaseInsensitiveMatcher(url: string) {
+    return function (segments: UrlSegment[], segmentGroup: UrlSegmentGroup, route: Route) {
         const matchSegments = url.split('/');
         if (
             matchSegments.length > segments.length ||
