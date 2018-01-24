@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoggerService } from '../../core/services/logger/logger.service';
+import { LoggerService } from '../../core/base/logger/logger.service';
 import { NavMenuItem } from '../../layout/model/nav-menu-item';
 
 @Component({

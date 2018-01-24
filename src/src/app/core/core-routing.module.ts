@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { pathMatcher } from './services/url-case-insensitive/CaseInsensitiveMatcher';
+import { pathMatcher } from './base/url-case-insensitive/case-insensitive-matcher';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { LoggerService } from '../../../../core/services/logger/logger.service';
+import { LoggerService } from '../../../../core/base/logger/logger.service';
 
 @Component({
   templateUrl: './edit.component.html',

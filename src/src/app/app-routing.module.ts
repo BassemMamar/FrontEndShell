@@ -3,14 +3,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 /* Service to Handle Lazy Load Feature Modules */
-import { SelectivePreloadingStrategy } from './core/services/lazy-loading/selective-preloading-strategy';
+import { SelectivePreloadingStrategy } from './core/base/lazy-loading/selective-preloading-strategy';
 
 /* Later may isolate declare feature modules in separate file to be customized for release porpuse */
 import { featureModules } from './feature-modules.provider';
 
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 
-import { pathMatcher } from './core/services/url-case-insensitive/CaseInsensitiveMatcher';
+import { pathMatcher } from './core/base/url-case-insensitive/case-insensitive-matcher';
 
 const routes: Routes = [
   {

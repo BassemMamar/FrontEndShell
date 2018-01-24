@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { InvestigationComponent } from './investigation-studio.component';
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { RecentJourneysComponent } from './recent-journeys/recent-journeys.component';
-import { pathMatcher } from '../../core/services/url-case-insensitive/CaseInsensitiveMatcher';
+import { pathMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
-import { PageLoaderService } from './shared/public/page-loader/page-loader.service';
+import { PageLoaderService } from './core/components/page-loader/page-loader.service';
 import { ThemeHelperService } from './layout/theme-helper.service';
 
 @Component({

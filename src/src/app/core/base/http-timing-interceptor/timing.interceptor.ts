@@ -4,7 +4,7 @@ import { Inject } from '@angular/core';
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 
-import { LoggerService } from '../services/logger/logger.service';
+import { LoggerService } from '../logger/logger.service';
 
 export class TimingInterceptor implements HttpInterceptor {
   constructor(@Inject(LoggerService) private loggerService: LoggerService) {

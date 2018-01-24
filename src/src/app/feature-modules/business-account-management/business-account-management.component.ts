@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
-import { LoggerService } from '../../core/services/logger/logger.service';
+import { LoggerService } from '../../core/base/logger/logger.service';
 import { NavMenuItem } from '../../layout/model/nav-menu-item';
 import { JSONP_ERR_WRONG_RESPONSE_TYPE } from '@angular/common/http/src/jsonp';
 

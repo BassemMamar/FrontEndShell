@@ -4,14 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 /* Shared Public Modules Imports */
-import { PageLoaderModule } from './public/page-loader/page-loader.module';
-import { UnwrapTagModule } from './public/unwrap-tag/unwrap-tag.module';
+import { UnwrapTagModule } from './directives/unwrap-tag/unwrap-tag.module';
 
 /* Shared Imports */
 import { AlertComponent } from './public/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
-import { HrefPreventDefaultDirective } from './directives/href-prevent-default.directive';
+import { HrefPreventDefaultDirective } from './directives/href-prevent-default/href-prevent-default.directive';
 
 
 // https://angular.io/guide/styleguide#shared-feature-module
@@ -24,14 +23,12 @@ import { HrefPreventDefaultDirective } from './directives/href-prevent-default.d
         CommonModule,
         FormsModule,
 
-        PageLoaderModule,
         UnwrapTagModule
     ],
     exports: [
         CommonModule,
         FormsModule,
 
-        PageLoaderModule,
         UnwrapTagModule,
 
         AlertComponent,

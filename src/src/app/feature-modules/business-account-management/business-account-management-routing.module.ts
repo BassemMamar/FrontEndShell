@@ -5,7 +5,7 @@ import { BusinessAccountManagementComponent } from './business-account-managemen
 import { AuthGuard } from '../../core/services/auth/auth-guard.service';
 import { ListComponent } from './businesses/list/list.component';
 import { EditComponent } from './businesses/edit/edit.component';
-import { pathMatcher } from '../../core/services/url-case-insensitive/CaseInsensitiveMatcher';
+import { pathMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
 
 const routes: Routes = [
   {

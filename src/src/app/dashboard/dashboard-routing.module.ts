@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
-import { pathMatcher } from '../core/services/url-case-insensitive/CaseInsensitiveMatcher';
+import { pathMatcher } from '../core/base/url-case-insensitive/case-insensitive-matcher';
 
 
 
