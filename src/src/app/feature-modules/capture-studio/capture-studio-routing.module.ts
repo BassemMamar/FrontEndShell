@@ -26,5 +26,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class CaptureStudioRoutingModule { }
-
-export const CaptureStudioRoutingComponents = [CaptureStudioComponent];

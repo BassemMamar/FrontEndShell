@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ClassProvider } from '@angular/core';
 
 import { ConsoleLoggerService } from './console-logger.service';
 
@@ -26,4 +26,4 @@ export class LoggerService implements Logger {
   table: any;
 }
 
-export const loggerProvider = { provide: LoggerService, useClass: ConsoleLoggerService };
+export const loggerProvider: ClassProvider = { provide: LoggerService, useClass: ConsoleLoggerService };

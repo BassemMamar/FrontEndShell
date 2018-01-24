@@ -5,7 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 /* Core Routing Components Imports */
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { pathMatcher, CaseInsensitiveMatcher } from './base/url-case-insensitive/case-insensitive-matcher';
 
 // const unauthorizedMatch = () => CaseInsensitiveMatcher('Unauthorized').apply(this);
@@ -35,5 +34,3 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class CoreRoutingModule { }
-
-export const CoreRoutedComponents = [PageNotFoundComponent, UnauthorizedComponent, InternalServerErrorComponent];

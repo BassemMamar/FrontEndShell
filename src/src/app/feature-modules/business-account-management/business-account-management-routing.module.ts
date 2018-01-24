@@ -35,6 +35,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class BusinessAccountManagementRoutingModule { }
-
-export const BusinessAccountManagementRoutingComponents =
-  [BusinessAccountManagementComponent];

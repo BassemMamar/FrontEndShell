@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { UnwrapTagModule } from './directives/unwrap-tag/unwrap-tag.module';
 
 /* Shared Imports */
-import { AlertComponent } from './public/alert/alert.component';
+import { AlertComponent } from './components/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
 
 import { HrefPreventDefaultDirective } from './directives/href-prevent-default/href-prevent-default.directive';

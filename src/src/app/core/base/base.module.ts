@@ -1,5 +1,5 @@
 /* Angular Imports */
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ClassProvider } from '@angular/core';
 
 /* Base Imports */
 import { CommonService } from './utils/common.service';

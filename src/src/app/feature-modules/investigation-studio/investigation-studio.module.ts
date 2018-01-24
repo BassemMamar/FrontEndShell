@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 /* Investigation Imports */
-import { InvestigationStudioRoutingModule, InvestigationRoutingComponents } from './investigation-studio-routing.module';
+import { InvestigationStudioRoutingModule } from './investigation-studio-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 
@@ -17,6 +17,6 @@ import { RecentJourneysComponent } from './recent-journeys/recent-journeys.compo
     LayoutModule,
     InvestigationStudioRoutingModule
   ],
-  declarations: [InvestigationRoutingComponents, RecentJourneysComponent]
+  declarations: [InvestigationComponent, RecentJourneysComponent]
 })
 export class InvestigationStudioModule { }

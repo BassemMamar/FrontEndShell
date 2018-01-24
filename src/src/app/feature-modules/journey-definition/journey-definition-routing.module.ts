@@ -26,5 +26,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class JourneyDefinitionRoutingModule { }
-
-export const JourneyDefinitionRoutingComponents = [JourneyDefinitionComponent];

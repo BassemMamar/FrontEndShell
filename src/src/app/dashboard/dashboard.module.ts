@@ -8,8 +8,9 @@ import { SharedModule } from '../shared/shared.module';
 /* Layout Module Imports */
 import { LayoutModule } from '../layout/layout.module';
 
-import { DashboardRoutingModule, DashboardRoutingComponents } from './dashboard-routing.module';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -18,9 +19,7 @@ import { DashboardComponent } from './dashboard.component';
     LayoutModule,
     DashboardRoutingModule
   ],
-  exports: [
- 
-  ],
-  declarations: [DashboardRoutingComponents]
+  exports: [],
+  declarations: [DashboardComponent, HomeComponent]
 })
 export class DashboardModule { }

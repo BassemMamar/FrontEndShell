@@ -32,5 +32,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class InvestigationStudioRoutingModule { }
-
-export const InvestigationRoutingComponents = [InvestigationComponent, RecentJourneysComponent];
