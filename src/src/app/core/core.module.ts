@@ -39,15 +39,13 @@ import { InternalServerErrorComponent } from './components/internal-server-error
     InternalServerErrorComponent,
 
     ScrollTopComponent,
-    TooltipsComponent,
     PageLoaderComponent
   ],
   exports: [
     BaseModule,
 
-   // PageNotFoundComponent, // ToDo think about it tomorrow
+    PageNotFoundComponent,
     ScrollTopComponent,
-    TooltipsComponent,
     PageLoaderComponent
   ],
   providers: [
