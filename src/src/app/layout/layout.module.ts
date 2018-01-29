@@ -15,7 +15,7 @@ import { NavItemContentComponent } from './header-nav-bottom/nav-item-content/na
 
 @NgModule({
   imports: [
-    SharedModule,
+    SharedModule.forChild(),
     RouterModule
   ],
   declarations: [

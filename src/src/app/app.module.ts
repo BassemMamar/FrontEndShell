@@ -19,7 +19,7 @@ import { AppComponent } from './app.component';
 @NgModule({
   imports: [
     CoreModule,
-    SharedModule,
+    SharedModule.forRoot(),
     DashboardModule,
     AppRoutingModule,
 

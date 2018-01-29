@@ -11,7 +11,7 @@ import { LayoutModule } from '../../layout/layout.module';
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.forChild(),
     LayoutModule,
     CaptureStudioRoutingModule
   ],

@@ -16,7 +16,7 @@ import { EditComponent } from './businesses/edit/edit.component';
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.forChild(),
     LayoutModule,
     BusinessAccountManagementRoutingModule
   ],

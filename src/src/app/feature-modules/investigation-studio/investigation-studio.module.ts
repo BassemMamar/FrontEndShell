@@ -13,7 +13,7 @@ import { RecentJourneysComponent } from './recent-journeys/recent-journeys.compo
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.forChild(),
     LayoutModule,
     InvestigationStudioRoutingModule
   ],

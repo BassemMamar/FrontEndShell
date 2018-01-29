@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertService } from '../../../../shared/components/alert/alert.service';
 
 declare let DatatableDataLocalDemo: any;
 @Component({
@@ -7,10 +8,12 @@ declare let DatatableDataLocalDemo: any;
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
     DatatableDataLocalDemo.init();
+    this.alertService.printCounter();
+
   }
 
 }

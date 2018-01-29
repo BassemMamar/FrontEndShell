@@ -12,7 +12,7 @@ import { JourneyDefinitionComponent } from './journey-definition.component';
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.forChild(),
     LayoutModule,
     JourneyDefinitionRoutingModule
   ],

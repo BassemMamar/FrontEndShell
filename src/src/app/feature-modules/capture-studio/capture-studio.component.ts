@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../core/base/logger/logger.service';
+import { AlertService } from '../../shared/components/alert/alert.service';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -10,10 +11,11 @@ import { LoggerService } from '../../core/base/logger/logger.service';
 })
 export class CaptureStudioComponent implements OnInit {
 
-  constructor(private logger: LoggerService) { }
+  constructor(private logger: LoggerService, private alertService: AlertService) { }
 
   ngOnInit() {
     this.logger.info(`CaptureStudioComponent has been Initiated..`);
+    this.alertService.printCounter();
   }
 
 }

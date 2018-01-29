@@ -15,7 +15,7 @@ import { HomeComponent } from './home/home.component';
 @NgModule({
   imports: [
     CommonModule,
-    SharedModule,
+    SharedModule.forChild(),
     LayoutModule,
     DashboardRoutingModule
   ],
