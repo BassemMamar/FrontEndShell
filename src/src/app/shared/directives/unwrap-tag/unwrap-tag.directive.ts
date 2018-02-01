@@ -11,8 +11,8 @@ export class UnwrapTagDirective implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const nativeElement: HTMLElement = this.el.nativeElement;
-    this.unwrapTagService.unwrapTag(nativeElement);
+      const nativeElement: HTMLElement = this.el.nativeElement;
+      this.unwrapTagService.unwrapTag(nativeElement);
   }
 
 }

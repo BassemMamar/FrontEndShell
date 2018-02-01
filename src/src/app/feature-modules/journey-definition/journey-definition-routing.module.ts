@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { JourneyDefinitionComponent } from './journey-definition.component';
-import { AuthGuard } from '../../core/services/auth/auth-guard.service';
+import { AuthGuard } from '../../core/auth/auth-guard.service';
 import { CaseInsensitiveMatcher } from '../../core/base/url-case-insensitive/case-insensitive-matcher';
 
 export function RecentJourneys1Match() {

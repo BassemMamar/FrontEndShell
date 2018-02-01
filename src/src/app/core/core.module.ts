@@ -7,12 +7,13 @@ import { RouterModule, UrlSerializer } from '@angular/router';
 import { BaseModule } from './base/base.module';
 import { throwIfAlreadyLoaded } from './base/module-import-guard/module-import-guard';
 
+/* Auth Imports */
+import { AuthModule } from './auth/auth.module';
+
 /* Core Imports */
 import { CoreRoutingModule } from './core-routing.module';
 import { CommunicationConfigService } from './services/communication-config/communication-config.service';
 import { SubDomainService } from './services/communication-config/sub-domain.service';
-import { AuthService } from './services/auth/auth.service';
-import { AuthGuard } from './services/auth/auth-guard.service';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
 import { PageLoaderService } from './components/page-loader/page-loader.service';
@@ -26,6 +27,7 @@ import { InternalServerErrorComponent } from './components/internal-server-error
     BrowserModule, // Which import CommonModule internally
     RouterModule,
     BaseModule,
+    AuthModule,
 
     /* Core Routings */
     CoreRoutingModule
@@ -51,9 +53,7 @@ import { InternalServerErrorComponent } from './components/internal-server-error
   providers: [
     CommunicationConfigService,
     SubDomainService,
-    PageLoaderService,
-    AuthService,
-    AuthGuard
+    PageLoaderService
   ]
 })
 export class CoreModule {

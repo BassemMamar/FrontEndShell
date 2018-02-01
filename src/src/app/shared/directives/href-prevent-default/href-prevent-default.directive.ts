@@ -3,7 +3,7 @@ import { AfterViewInit, Directive, ElementRef, Input, HostListener } from '@angu
 
 @Directive({
     // tslint:disable-next-line:directive-selector
-    selector: '[href]'
+    selector: '[whref1]'
 })
 export class HrefPreventDefaultDirective implements AfterViewInit {
     @Input() href: string;
