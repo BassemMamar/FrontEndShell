@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@ang
 
 import { ThemeHelperService } from '../theme-helper.service';
 import { AuthClients } from '../../core/auth/model/auth-clients';
-import { AuthService } from '../../core/auth/auth.service';
+import { AuthService } from '../../core/auth/services/auth.service';
 
 @Component({
     selector: 'app-header-nav-top',

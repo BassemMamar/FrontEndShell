@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Predicate } from './interfaces';
+import { Predicate, EnumType } from './interfaces';
 
 import * as _ from 'lodash';
 
@@ -69,5 +69,30 @@ export class CommonService {
                 return entry[key] === properties[key];
             });
         });
+    }
+
+    /**
+     * Convert typescipt enum to an array of string
+     * @param Enum typescipt enum object
+     * @param enumType enum type which could be either Numeric enum (default), or String enum
+     * @returns return an array od sreting Keys from the enum
+     */
+    convertEnumToArray(Enum: object, enumType: EnumType = EnumType.Numeric): string[] {
+        const options: string[] = Object.keys(Enum);
+        switch (enumType) {
+            case EnumType.Numeric:
+                /**
+                 * The options list has the numeric keys, followed by the string keys
+                 * So, the first half is numeric, the 2nd half is strings
+                 */
+                return options.slice(options.length / 2);
+            case EnumType.String:
+                /**
+                 * In case of String Enum
+                 * the key and it's value is the same string, so no need slice, just return the result
+                 */
+                return options;
+        }
+
     }
 }

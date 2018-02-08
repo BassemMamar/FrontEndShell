@@ -1,16 +1,3 @@
-export const UserRoles = [
-    /*Scanning User */
-    'scanninguser',
-    /* Investigator User */
-    'investigator',
-    /*Business Administrator User */
-    'businessadmin',
-    /*Business Account Manager User */
-    'businessaccountmanager'
-];
-
-
-
 export class UserProfile {
 
     displayName: string;

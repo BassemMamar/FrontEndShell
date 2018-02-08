@@ -9,10 +9,10 @@ const noop = (): any => undefined;
 
 @Injectable()
 export class ConsoleLoggerService implements Logger {
-
+    private appPrefix = 'Frontend Shell';
     get log() {
         if (isDebugMode) {
-            return console.log.bind(console);
+            return console.log.bind(console, `[${this.appPrefix} Log]`);
         } else {
             return noop;
         }
@@ -20,7 +20,7 @@ export class ConsoleLoggerService implements Logger {
 
     get info() {
         if (isDebugMode) {
-            return console.info.bind(console);
+            return console.info.bind(console, `[${this.appPrefix} Info]`);
         } else {
             return noop;
         }
@@ -28,7 +28,7 @@ export class ConsoleLoggerService implements Logger {
 
     get warn() {
         if (isDebugMode) {
-            return console.warn.bind(console);
+            return console.warn.bind(console, `[${this.appPrefix} Warn]`);
         } else {
             return noop;
         }
@@ -36,7 +36,7 @@ export class ConsoleLoggerService implements Logger {
 
     get error() {
         if (isDebugMode) {
-            return console.error.bind(console);
+            return console.error.bind(console, `[${this.appPrefix} Error]`);
         } else {
             return noop;
         }
@@ -44,7 +44,7 @@ export class ConsoleLoggerService implements Logger {
 
     get trace() {
         if (isDebugMode) {
-            return console.trace.bind(console);
+            return console.trace.bind(console, `[${this.appPrefix} Trace]`);
         } else {
             return noop;
         }
@@ -52,7 +52,7 @@ export class ConsoleLoggerService implements Logger {
 
     get debug() {
         if (isDebugMode) {
-            return console.debug.bind(console);
+            return console.debug.bind(console, `[${this.appPrefix} Debug]`);
         } else {
             return noop;
         }
@@ -60,7 +60,7 @@ export class ConsoleLoggerService implements Logger {
 
     get table() {
         if (isDebugMode) {
-            return console.table.bind(console);
+            return console.table.bind(console, `[${this.appPrefix} Table]`);
         } else {
             return noop;
         }

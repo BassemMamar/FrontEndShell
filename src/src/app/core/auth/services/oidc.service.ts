@@ -1,25 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { UserManager, User, Log, UserManagerSettings, OidcClient } from 'oidc-client';
-import { CommunicationConfigService } from '../services/communication-config/communication-config.service';
-import { LoggerService } from '../base/logger/logger.service';
-import { AuthClients } from './model/auth-clients';
+import { CommunicationConfigService } from '../../services/communication-config/communication-config.service';
+import { LoggerService } from '../../base/logger/logger.service';
+import { AuthClients } from '../model/auth-clients';
+import { LocationStrategy } from '@angular/common';
 
 @Injectable()
 export class OidcService {
 
-    private businessAccountManagementClient: UserManager = undefined;
-    private frontendShellClient: UserManager = undefined;
-    private currentClient: UserManager = undefined;
+    private businessAccountManagementClient: UserManager;
+    private frontendShellClient: UserManager;
+    private currentClient: UserManager;
     private businessAccountManagementSettings: any = {}; // UserManagerSettings
     private frontendShellSettings: any = {};
 
-    constructor(private logger: LoggerService, private communicationConfigService: CommunicationConfigService) {
+    constructor(
+        private logger: LoggerService,
+        private communicationConfigService: CommunicationConfigService,
+        private locationStrategy: LocationStrategy
+    ) {
         Log.logger = this.logger;
         Log.level = Log.WARN;
     }
 
-    login(authClient, redirectUrl) {
+    signin(authClient, redirectUrl): Promise<any> {
 
         this.createNewOidcUserManagerInstance(authClient);
         const params = {
@@ -61,43 +66,7 @@ export class OidcService {
         return this.currentClient;
     }
 
-    prepareOidcSettings() {
-
-        const protocol = location.protocol; // $location.protocol();
-        const hostname = location.hostname; // $location.host();
-        let port: any = location.port; // $location.port();
-        port = port === 80 || port === 443 ? '' : ':' + port;
-        const redirect_uri = protocol + '//' + hostname + port + '/callback';
-        const post_logout_redirect_uri = protocol + '//' + hostname + port + '/home';
-        const extraQueryParams = {
-            BusinessCode: this.communicationConfigService.businessCode
-        };
-
-        const identityResources = ' openid profile ';
-        this.businessAccountManagementSettings = {
-            authority: this.communicationConfigService.authority,
-            client_id: AuthClients.BAM,
-            redirect_uri: redirect_uri,
-            post_logout_redirect_uri: post_logout_redirect_uri,
-            response_type: 'id_token token',
-            scope: 'BusinessAccountManagementApi' + identityResources,
-            filterProtocolClaims: true,
-            extraQueryParams: extraQueryParams
-        };
-
-        this.frontendShellSettings = {
-            authority: this.communicationConfigService.authority,
-            client_id: AuthClients.FES,
-            redirect_uri: redirect_uri,
-            post_logout_redirect_uri: post_logout_redirect_uri,
-            response_type: 'id_token token',
-            scope: 'JourneyDefinitionAPI CaptureStudioAPI InvestigationStudioAPI VisionCortexAPI' + identityResources,
-            filterProtocolClaims: true,
-            extraQueryParams: extraQueryParams
-        };
-    }
-
-    signinRedirectCallback() {
+    signinRedirectCallback(): Promise<User> {
 
         return new UserManager({})
             .signinRedirectCallback()
@@ -109,19 +78,68 @@ export class OidcService {
             });
     }
 
+    signout(id_token: string): Promise<any> {
+        return this.currentClient
+            .signoutRedirect({ 'id_token_hint': id_token });
+    }
+
+
+    private prepareOidcSettings() {
+
+        const protocol = location.protocol;
+        const hostname = location.hostname;
+        let port: string = location.port;
+        port = port === '80' || port === '443' || port === '' ? '' : ':' + port;
+
+        let baseHref = this.locationStrategy.getBaseHref().replace('/', '').replace('/', '');
+        baseHref = ''; // baseHref !== '' ? '/' + baseHref : '';
+        const redirect_uri = protocol + '//' + hostname + port + baseHref + '/callback';
+        const post_logout_redirect_uri = protocol + '//' + hostname + port + baseHref + '/home';
+        const extraQueryParams = {
+            BusinessCode: this.communicationConfigService.businessCode
+        };
+
+        const identityResources = ' openid profile ';
+        this.businessAccountManagementSettings = {
+            authority: this.communicationConfigService.authority,
+            client_id: AuthClients.BAM,
+            redirect_uri: redirect_uri,
+            post_logout_redirect_uri: post_logout_redirect_uri,
+            // silent_redirect_uri: '',
+            response_type: 'id_token token',
+            scope: 'BusinessAccountManagementApi' + identityResources,
+            filterProtocolClaims: true,
+            loadUserInfo: false,
+            extraQueryParams: extraQueryParams
+        };
+
+        this.frontendShellSettings = {
+            authority: this.communicationConfigService.authority,
+            client_id: AuthClients.FES,
+            redirect_uri: redirect_uri,
+            post_logout_redirect_uri: post_logout_redirect_uri,
+            // silent_redirect_uri: '',
+            response_type: 'id_token token',
+            scope: 'JourneyDefinitionAPI CaptureStudioAPI InvestigationStudioAPI VisionCortexAPI' + identityResources,
+            filterProtocolClaims: true,
+            loadUserInfo: false,
+            extraQueryParams: extraQueryParams
+        };
+    }
+
     private registerEvents(oidcClient) {
         if (oidcClient) {
             oidcClient.events.addAccessTokenExpiring(() =>
-                this.logger.log(`token expiring`)
+                this.logger.info(`token expiring`)
             );
 
             oidcClient.events.addAccessTokenExpired(() =>
-                this.logger.log(`token expired`)
+                this.logger.error(`token expired`)
             );
 
-            oidcClient.events.addSilentRenewError(e =>
-                this.logger.log(`silent renew error`, e.message)
-            );
+            // oidcClient.events.addSilentRenewError(e =>
+            //     this.logger.log(`silent renew error`, e.message)
+            // );
 
             oidcClient.events.addUserLoaded(user =>
                 this.logger.log(`user loaded`, user)
@@ -131,9 +149,5 @@ export class OidcService {
                 this.logger.log(`user unloaded`)
             );
         }
-    }
-
-    getCurrentClient() {
-        return this.currentClient;
     }
 }

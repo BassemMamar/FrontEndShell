@@ -31,7 +31,7 @@ const routes: Routes = [
     matcher: BusinessAccountManagementMatch,
     // path: 'bam',
     loadChildren: 'app/feature-modules/business-account-management/business-account-management.module#BusinessAccountManagementModule',
-    data: { preload: false }
+    data: { preload: false, moduleName: 'BusinessAccountManagementModule' }
   },
   {
     matcher: JourneyDefinitionMatch,

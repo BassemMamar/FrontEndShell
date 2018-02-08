@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
-import { AuthService } from './core/auth/auth.service';
+import { AuthService } from './core/auth/services/auth.service';
 import { PageLoaderService } from './core/components/page-loader/page-loader.service';
 import { ThemeHelperService } from './layout/theme-helper.service';
+import { LoggerService } from './core/base/logger/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ import { ThemeHelperService } from './layout/theme-helper.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private authService: AuthService,
+  constructor(private router: Router, private authService: AuthService, private logger: LoggerService,
     private themeHelper: ThemeHelperService, private pageLoader: PageLoaderService) { }
 
   ngOnInit() { }
@@ -35,6 +36,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.themeHelper.animateContent();
 
         this.pageLoader.setLoading(false);
+
+      //  this.logger.log('NavigationEnd => route.url => ', route.url);
+
       }
 
       /* Route Navigation Error */

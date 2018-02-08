@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-
-import { AuthService } from './auth.service';
-
 import { of } from 'rxjs/observable/of';
+
+import { AuthService } from '../services/auth.service';
+import { LoggerService } from '../../base/logger/logger.service';
 
 @Injectable()
 export class AuthenticatedGuard implements CanActivate, CanActivateChild {
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private logger: LoggerService) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     return this.checkLoggedIn(next.data.authClient, state.url);

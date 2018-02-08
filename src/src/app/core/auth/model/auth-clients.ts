@@ -1,4 +1,4 @@
-export const AuthClients = {
-    BAM: 'BusinessAccountManagement',
-    FES: 'FrontendShell'
-};
+export enum AuthClients {
+    BAM = 'BusinessAccountManagement',
+    FES = 'FrontendShell'
+}

@@ -1,6 +1,7 @@
 /* Angular Imports */
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, UrlSerializer } from '@angular/router';
 
 /* Base Imports */
@@ -22,23 +23,29 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
 
+/* Third Party Imports */
+import { ThirdPartyModule } from './third-party-modules/third-party.module';
+
 @NgModule({
   imports: [
     BrowserModule, // Which import CommonModule internally
+    // import HttpClientModule after BrowserModule.
+    HttpClientModule,
     RouterModule,
     BaseModule,
     AuthModule,
 
     /* Core Routings */
-    CoreRoutingModule
+    CoreRoutingModule,
 
     /* 3rd Library imports goes here */
-
+    ThirdPartyModule
   ],
   declarations: [
     PageNotFoundComponent,
     UnauthorizedComponent,
     InternalServerErrorComponent,
+    TooltipsComponent,
 
     ScrollTopComponent,
     PageLoaderComponent

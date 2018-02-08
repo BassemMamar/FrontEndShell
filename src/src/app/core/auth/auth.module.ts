@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { CallbackComponent } from './callback/callback.component';
-import { AuthService } from './auth.service';
-import { OidcService } from './oidc.service';
-import { AuthenticatedGuard } from './authenticated.guard';
-import { AuthGuard } from './auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { OidcService } from './services/oidc.service';
+import { AuthenticatedGuard } from './guards/authenticated.guard';
+import { AuthorizedGuard } from './guards/authorized.guard';
+import { AccessLevelResolver } from './services/access-level.resolver';
+import { AuthorizationService } from './pages-access-authorization/authorization.service';
+import { TokenInterceptorProvider } from './interceptors/token.interceptor';
+import { ResponseInterceptorProvider } from './interceptors/response.interceptor';
 
 @NgModule({
   imports: [
@@ -17,8 +21,12 @@ import { AuthGuard } from './auth-guard.service';
   providers: [
     AuthService,
     OidcService,
+    AuthorizationService,
     AuthenticatedGuard,
-    AuthGuard
+    AuthorizedGuard,
+    AccessLevelResolver,
+    TokenInterceptorProvider,
+    ResponseInterceptorProvider
   ]
 })
 export class AuthModule { }
