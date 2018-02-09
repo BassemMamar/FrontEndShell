@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LoggerService } from '../../core/base/logger/logger.service';
 import { environment } from '../../../environments/environment';
-import { CommunicationConfigService } from '../../core/services/communication-config/communication-config.service';
+import { CommunicationService } from '../../core/services/communication/communication.service';
 import { CommonService } from '../../core/base/utils/common.service';
 import { HttpClient } from '@angular/common/http';
 import { DashboardService } from '../dashboard.service';
@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private logger: LoggerService,
     private dashboardService: DashboardService,
-    private communicationConfig: CommunicationConfigService,
+    private communicationService: CommunicationService,
     private commonService: CommonService) { }
 
 
@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     // this.logger.error(`environmentName is: ${environment.environmentName}`);
     // this.logger.debug(`environmentName is: ${environment.environmentName}`);
     // this.logger.table( [1, 2, 3]);
-    //  this.logger.table(this.communicationConfig);
+    //  this.logger.table(this.communicationService);
     const test: number[] = [1, 2, 3];
     //  this.commonService.setItem<number>(test, (temp => true), 5);
   }

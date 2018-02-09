@@ -4,7 +4,7 @@ import { BaseRequestOptions, RequestOptions } from '@angular/http';
 // https://github.com/dancancro/great-big-example-application/blob/
 // master/src/main/webapp/app/core/services/default-request-options.service.ts
 @Injectable()
-export class DefaultRequestOptions extends BaseRequestOptions {
+export class DefaultHttpRequestOptions extends BaseRequestOptions {
 
     constructor() {
         super();
@@ -14,4 +14,4 @@ export class DefaultRequestOptions extends BaseRequestOptions {
     }
 }
 
-export const RequestOptionsProvider = { provide: RequestOptions, useClass: DefaultRequestOptions };
+export const DefaultHttpRequestOptionsProvider = { provide: RequestOptions, useClass: DefaultHttpRequestOptions };

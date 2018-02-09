@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { CommunicationConfigService } from '../../services/communication-config/communication-config.service';
 import { OidcService } from './oidc.service';
 import { UserProfile } from '../model/user-profile';
 import { LoggerService } from '../../base/logger/logger.service';
@@ -25,7 +24,6 @@ export class AuthService {
 
     constructor(
         private router: Router,
-        private communicationConfigService: CommunicationConfigService,
         private oidcService: OidcService,
         private authorizationService: AuthorizationService,
         private logger: LoggerService,

@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 
 import { UserManager, User, Log, UserManagerSettings, OidcClient } from 'oidc-client';
-import { CommunicationConfigService } from '../../services/communication-config/communication-config.service';
+import { CommunicationService } from '../../services/communication/communication.service';
 import { LoggerService } from '../../base/logger/logger.service';
 import { AuthClients } from '../model/auth-clients';
 import { LocationStrategy } from '@angular/common';
@@ -17,7 +17,7 @@ export class OidcService {
 
     constructor(
         private logger: LoggerService,
-        private communicationConfigService: CommunicationConfigService,
+        private communicationService: CommunicationService,
         private locationStrategy: LocationStrategy
     ) {
         // ToDo later uncommet this
@@ -30,7 +30,7 @@ export class OidcService {
         this.createNewOidcUserManagerInstance(authClient);
         const params = {
             state: {
-                businessCode: this.communicationConfigService.businessCode,
+                businessCode: this.communicationService.businessCode,
                 redirectUrl: redirectUrl,
                 authClient: authClient
             }
@@ -98,12 +98,12 @@ export class OidcService {
         const redirect_uri = protocol + '//' + hostname + port + baseHref + '/callback';
         const post_logout_redirect_uri = protocol + '//' + hostname + port + baseHref + '/home';
         const extraQueryParams = {
-            BusinessCode: this.communicationConfigService.businessCode
+            BusinessCode: this.communicationService.businessCode
         };
 
         const identityResources = ' openid profile ';
         this.businessAccountManagementSettings = {
-            authority: this.communicationConfigService.authority,
+            authority: this.communicationService.authority,
             client_id: AuthClients.BAM,
             redirect_uri: redirect_uri,
             post_logout_redirect_uri: post_logout_redirect_uri,
@@ -116,7 +116,7 @@ export class OidcService {
         };
 
         this.frontendShellSettings = {
-            authority: this.communicationConfigService.authority,
+            authority: this.communicationService.authority,
             client_id: AuthClients.FES,
             redirect_uri: redirect_uri,
             post_logout_redirect_uri: post_logout_redirect_uri,

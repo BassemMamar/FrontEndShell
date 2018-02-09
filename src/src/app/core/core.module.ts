@@ -13,8 +13,8 @@ import { AuthModule } from './auth/auth.module';
 
 /* Core Imports */
 import { CoreRoutingModule } from './core-routing.module';
-import { CommunicationConfigService } from './services/communication-config/communication-config.service';
-import { SubDomainService } from './services/communication-config/sub-domain.service';
+import { CommunicationService } from './services/communication/communication.service';
+import { SubDomainService } from './services/communication/sub-domain.service';
 import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
 import { TooltipsComponent } from './components/tooltips/tooltips.component';
 import { PageLoaderService } from './components/page-loader/page-loader.service';
@@ -22,7 +22,7 @@ import { PageLoaderComponent } from './components/page-loader/page-loader.compon
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
-import { ErrorHandlingService } from './services/error-handling-service/error-handling.service';
+import { HttpErrorHandlingService } from './services/http-error-handling/http-error-handling.service';
 
 /* Third Party Imports */
 import { ThirdPartyModule } from './third-party-modules/third-party.module';
@@ -58,10 +58,10 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
     PageLoaderComponent
   ],
   providers: [
-    CommunicationConfigService,
+    CommunicationService,
     SubDomainService,
     PageLoaderService,
-    ErrorHandlingService
+    HttpErrorHandlingService
   ]
 })
 export class CoreModule {

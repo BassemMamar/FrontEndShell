@@ -5,7 +5,7 @@ import { SubDomainService } from './sub-domain.service';
 import { environment } from '../../../../environments/environment';
 
 @Injectable()
-export class CommunicationConfigService {
+export class CommunicationService {
 
     // subject: BehaviorSubject<any>;
     private _authority: string;

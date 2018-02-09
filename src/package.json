@@ -4,13 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --disable-host-check --port 3000",
+    "start": "ng serve --disable-host-check --port 3000 -o",
     "build": "ng build --target=production -bh /FrontendShellV2/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "doc:build": "compodoc -p src/tsconfig.app.json -t --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  --theme 'Stripe' ",
-    "doc:serve": "compodoc -p src/tsconfig.app.json -t --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  --theme 'Stripe' -s -o ",
+    "doc:serve": "compodoc -p src/tsconfig.app.json -t --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  --theme 'Stripe' -s  ",
     "doc": "npm run doc:serve"
   },
   "private": true,
@@ -123,6 +123,7 @@
     "gulp-util": "^3.0.8",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
+    "json5": "^0.5.1",
     "karma": "~1.7.0",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",

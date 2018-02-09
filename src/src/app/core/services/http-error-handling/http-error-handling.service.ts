@@ -5,7 +5,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 import { LoggerService } from '../../base/logger/logger.service';
 
 @Injectable()
-export class ErrorHandlingService {
+export class HttpErrorHandlingService {
     // https://angular.io/guide/http#getting-error-details
 
     constructor(private logger: LoggerService) { }
