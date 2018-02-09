@@ -36,7 +36,7 @@ export class AuthService {
 
         // If authenticated, set local profile property and update login status subject
         if (this.userProfile.authClient && this.userProfile.authClient !== '') {
-            this.oidcService.createNewOidcUserManagerInstance(this.userProfile.authClient);
+            this.oidcService.createNewOidcUserManagerInstance(this.userProfile.authClient, this.eventsCallback.bind(this));
             this.setLoggedIn(true);
         } else {
             this.setLoggedIn(false);
@@ -77,7 +77,7 @@ export class AuthService {
     }
 
     async loginRedirectCallback(): Promise<any> {
-        const oidcUserModel = await this.oidcService.signinRedirectCallback();
+        const oidcUserModel = await this.oidcService.signinRedirectCallback(this.eventsCallback.bind(this));
         this.logger.log(`signin response success: ${oidcUserModel}`);
         this.setSession(oidcUserModel);
         const accessAuthorizationretrieved = await this.authorizationService.getPagesAccessAuthorization().toPromise();
@@ -149,6 +149,13 @@ export class AuthService {
         return roleResults;
     }
 
+
+    eventsCallback(eventName: string) {
+
+        this.logger.log(`eventsCallback ${eventName}`);
+        alert(eventName);
+        this.logout();
+    }
     // private getRoles(oidcUserRoles): string[] {
     //     let roleResults = [];
     //     const UserRolesArray = this.Common.convertEnumToArray(UserRole, EnumType.String);

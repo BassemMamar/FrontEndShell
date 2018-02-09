@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { CommunicationConfigService } from '../../core/services/communication-config/communication-config.service';
 import { CommonService } from '../../core/base/utils/common.service';
 import { HttpClient } from '@angular/common/http';
+import { DashboardService } from '../dashboard.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -12,8 +13,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private logger: LoggerService, private communicationConfig: CommunicationConfigService,
-    private commonService: CommonService, private http: HttpClient) { }
+  constructor(
+    private logger: LoggerService,
+    private dashboardService: DashboardService,
+    private communicationConfig: CommunicationConfigService,
+    private commonService: CommonService) { }
 
 
   ngOnInit() {
@@ -30,10 +34,10 @@ export class HomeComponent implements OnInit {
   }
 
   TestInterseptor() {
-    this.http.get('api/heroes')
+    this.dashboardService.getHeros()
       .subscribe(
       data => console.log(data),
-      err => console.error(err)
+      err => alert(err)
       );
   }
 

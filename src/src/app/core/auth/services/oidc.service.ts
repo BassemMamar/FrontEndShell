@@ -20,7 +20,8 @@ export class OidcService {
         private communicationConfigService: CommunicationConfigService,
         private locationStrategy: LocationStrategy
     ) {
-        Log.logger = this.logger;
+        // ToDo later uncommet this
+        //  Log.logger = this.logger;
         Log.level = Log.WARN;
     }
 
@@ -38,7 +39,7 @@ export class OidcService {
         return this.currentClient.signinRedirect(params);
     }
 
-    createNewOidcUserManagerInstance(authClient): UserManager {
+    createNewOidcUserManagerInstance(authClient, eventsCallback?): UserManager {
         this.prepareOidcSettings();
 
         switch (authClient) {
@@ -46,7 +47,7 @@ export class OidcService {
                 if (this.businessAccountManagementClient === undefined) {
                     this.businessAccountManagementClient = new UserManager(this.businessAccountManagementSettings);
                     console.log('businessAccountManagementSettings ', this.businessAccountManagementSettings);
-                    this.registerEvents(this.businessAccountManagementClient);
+                    //  this.registerEvents(this.businessAccountManagementClient);
                 }
 
                 this.currentClient = this.businessAccountManagementClient;
@@ -56,23 +57,24 @@ export class OidcService {
                 if (this.frontendShellClient === undefined) {
                     this.frontendShellClient = new UserManager(this.frontendShellSettings);
                     console.log('frontendShellSettings ', this.frontendShellSettings);
-                    this.registerEvents(this.frontendShellClient);
+                    //  this.registerEvents(this.frontendShellClient);
                 }
 
                 this.currentClient = this.frontendShellClient;
                 break;
         }
+        this.registerEvents(this.currentClient, eventsCallback);
 
         return this.currentClient;
     }
 
-    signinRedirectCallback(): Promise<User> {
+    signinRedirectCallback(eventsCallback): Promise<User> {
 
         return new UserManager({})
             .signinRedirectCallback()
             .then(identityUserModel => {
                 if (identityUserModel && identityUserModel.state) {
-                    this.createNewOidcUserManagerInstance(identityUserModel.state.authClient);
+                    this.createNewOidcUserManagerInstance(identityUserModel.state.authClient, eventsCallback);
                     return identityUserModel;
                 }
             });
@@ -127,15 +129,18 @@ export class OidcService {
         };
     }
 
-    private registerEvents(oidcClient) {
+    private registerEvents(oidcClient, eventsCallback?) {
         if (oidcClient) {
             oidcClient.events.addAccessTokenExpiring(() =>
                 this.logger.info(`token expiring`)
             );
 
-            oidcClient.events.addAccessTokenExpired(() =>
-                this.logger.error(`token expired`)
-            );
+            oidcClient.events.addAccessTokenExpired(() => {
+                this.logger.error(`token expired`);
+                if (eventsCallback) {
+                    eventsCallback('token expired');
+                }
+            });
 
             // oidcClient.events.addSilentRenewError(e =>
             //     this.logger.log(`silent renew error`, e.message)

@@ -20,22 +20,12 @@ export class ResponseInterceptor implements HttpInterceptor {
 
         return next.handle(request).do((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
-                // do stuff with response if you want
-                const temp = 1;
-            }
-        }, (err: any) => {
-            if (err instanceof HttpErrorResponse) {
-                if (err.status === 401) {
-                    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-                    /**
-                     * ToDo
-                     * We have some choices to make at this point.
-                     * Do we want to redirect to a specific route that has a login form?
-                     * Do we want to show a modal?
-                     * Do we want to attempt to refresh the token?
-                     */
+                /**
+                 * Response success
+                 * do stuff with response if you want
+                 * nothing to do for now
+                 */
 
-                }
             }
         });
     }

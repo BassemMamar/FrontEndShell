@@ -22,6 +22,7 @@ import { PageLoaderComponent } from './components/page-loader/page-loader.compon
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { UnauthorizedComponent } from './components/unauthorized/unauthorized.component';
 import { InternalServerErrorComponent } from './components/internal-server-error/internal-server-error.component';
+import { ErrorHandlingService } from './services/error-handling-service/error-handling.service';
 
 /* Third Party Imports */
 import { ThirdPartyModule } from './third-party-modules/third-party.module';
@@ -51,7 +52,6 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
     PageLoaderComponent
   ],
   exports: [
-    BaseModule,
 
     PageNotFoundComponent,
     ScrollTopComponent,
@@ -60,7 +60,8 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
   providers: [
     CommunicationConfigService,
     SubDomainService,
-    PageLoaderService
+    PageLoaderService,
+    ErrorHandlingService
   ]
 })
 export class CoreModule {

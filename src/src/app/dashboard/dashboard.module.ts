@@ -11,6 +11,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { HomeComponent } from './home/home.component';
+import { DashboardService } from './dashboard.service';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import { HomeComponent } from './home/home.component';
     DashboardRoutingModule
   ],
   exports: [],
-  declarations: [DashboardComponent, HomeComponent]
+  declarations: [DashboardComponent, HomeComponent],
+  providers: [DashboardService]
 })
 export class DashboardModule { }

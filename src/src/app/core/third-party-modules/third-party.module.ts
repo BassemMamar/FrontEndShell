@@ -8,7 +8,7 @@ import { InMemHeroService } from './in-memory-db/in-mem-hero.service';
 
 @NgModule({
     imports: [
-        !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemHeroService) : [],
+      //  !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemHeroService) : [],
     ],
     exports: [],
     declarations: [],

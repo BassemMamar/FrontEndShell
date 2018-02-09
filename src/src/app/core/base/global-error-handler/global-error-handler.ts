@@ -1,4 +1,5 @@
 import { Injectable, ErrorHandler, Inject } from '@angular/core';
+
 import * as StackTrace from 'stacktrace-js';
 import { LoggerService } from '../logger/logger.service';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -17,13 +18,14 @@ export class GlobalErrorHandler implements ErrorHandler {
             ? this.location.path() : '';
         // get the stack trace, lets grab the last 10 stacks only
         StackTrace.fromError(error).then(stackframes => {
-            const stackString = stackframes
-                .splice(0, 20)
-                .map(function (sf) {
-                    return sf.toString();
-                }).join('\n');
+            const stack = stackframes[0];
+            // const stackString = stackframes
+            // .splice(0, 20)
+            // .map(function (sf) {
+            //     return sf.toString();
+            // }).join('\n');
             // log on the server, for now just logging to the console
-            this.logger.error('[GlobalErrorHandler]', { message, url, stack: stackString });
+            this.logger.error('[GlobalErrorHandler]', { message, url, stack });
         });
 
         // ToDo
