@@ -1,8 +1,10 @@
 import { Injectable, ErrorHandler, Inject } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+
+import { LoggerService } from '../logger/logger.service';
 
 import * as StackTrace from 'stacktrace-js';
-import { LoggerService } from '../logger/logger.service';
-import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 @Injectable()
 export class GlobalErrorHandler implements ErrorHandler {
@@ -13,24 +15,27 @@ export class GlobalErrorHandler implements ErrorHandler {
     ) { }
 
     handleError(error) {
-        const message = error.message ? error.message : error.toString();
-        const url = this.location instanceof PathLocationStrategy
-            ? this.location.path() : '';
-        // get the stack trace, lets grab the last 10 stacks only
-        StackTrace.fromError(error).then(stackframes => {
-            const stack = stackframes[0];
-            // const stackString = stackframes
-            // .splice(0, 20)
-            // .map(function (sf) {
-            //     return sf.toString();
-            // }).join('\n');
-            // log on the server, for now just logging to the console
-            this.logger.error('[GlobalErrorHandler]', { message, url, stack });
-        });
+        if (error instanceof HttpErrorResponse) {
+            /**
+             * Http Errors will be handled in another place...
+             * therefore just pass it here
+             */
+            throw error;
+        } else {
+            const message = error.message ? error.message : error.toString();
+            const url = this.location instanceof PathLocationStrategy
+                ? this.location.path() : '';
+            // get the stack trace, lets grab the last 10 stacks only
+            StackTrace.fromError(error).then(stackframes => {
+                const stack = stackframes[0];
 
-        // ToDo
-        // IMPORTANT: Rethrow the error otherwise it gets swallowed
-        //  throw error;
+                // log on the server, for now just logging to the console
+                this.logger.error('[GlobalErrorHandler]', { message, url, stack });
+            });
+
+            // IMPORTANT: Rethrow the error otherwise it gets swallowed
+            throw error;
+        }
     }
 }
 

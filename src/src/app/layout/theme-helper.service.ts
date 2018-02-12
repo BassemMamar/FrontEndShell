@@ -55,7 +55,7 @@ export class ThemeHelperService {
 
     animateContent() {
         // content m-wrapper animation
-        const animation = 'fadeIn animated'; // 'm-animate-fade-in-up';
+        const animation = 'fadeIn animated'; // 'm-animate-fade-in-up'; // `swing animated` for test
         $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function (e) {
             $('.m-wrapper').removeClass(animation);
         }).removeClass(animation).addClass(animation);

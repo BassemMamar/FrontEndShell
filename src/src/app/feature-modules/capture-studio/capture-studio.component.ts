@@ -15,7 +15,6 @@ export class CaptureStudioComponent implements OnInit {
 
   ngOnInit() {
     this.logger.info(`CaptureStudioComponent has been Initiated..`);
-    this.alertService.printCounter();
   }
 
 }

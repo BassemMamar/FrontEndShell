@@ -65,11 +65,13 @@ export class AuthService {
         } catch (error) {
 
             // messageHandler.show({
-            //     message: 'Login Failed.. ' + err,
+            //     message: 'Login Failed... ' + err,
             //     messageType: messageHandler.messageTypes.error
             // });
             // cfpLoadingBar.complete();
             this.logger.log(`oidcService login failed: ${error}`);
+            throw error;
+
         }
 
     }

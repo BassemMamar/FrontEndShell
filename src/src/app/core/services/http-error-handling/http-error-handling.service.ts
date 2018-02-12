@@ -3,14 +3,30 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { LoggerService } from '../../base/logger/logger.service';
+import { PageLoaderService } from '../../components/page-loader/page-loader.service';
 
 @Injectable()
 export class HttpErrorHandlingService {
     // https://angular.io/guide/http#getting-error-details
 
-    constructor(private logger: LoggerService) { }
+    constructor(private logger: LoggerService, private pageLoader: PageLoaderService) { }
 
-    handle(error: HttpErrorResponse) {
+    handleAsPromise(error: HttpErrorResponse): Promise<any> {
+        const meg = this.analyseError(error);
+        return new ErrorObservable(meg).toPromise();
+
+    }
+
+
+    handleAsObservable(error: HttpErrorResponse): ErrorObservable {
+
+        const meg = this.analyseError(error);
+        // return an ErrorObservable with a user-facing error message
+        return new ErrorObservable(meg);
+    }
+
+    private analyseError(error: HttpErrorResponse): string {
+        let userFacingMessage = 'Something bad happened; please try again later.';
 
         if (error.error instanceof ErrorEvent) {
             /**
@@ -27,26 +43,47 @@ export class HttpErrorHandlingService {
              * returning an HTTP response with a status code such as 404 or 500.
              * The response body may contain clues as to what went wrong
              */
-            if (error.status === 401) {
-                // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
-                /**
-                 * ToDo
-                 * We have some choices to make at this point.
-                 * Do we want to redirect to a specific route that has a login form?
-                 * Do we want to show a modal?
-                 * Do we want to attempt to refresh the token?
-                 */
+
+            switch (error.status) {
+                // connection refused, server not reachable
+                case undefined:
+                case 0:
+                    userFacingMessage = 'Server not reachable';
+                    this.logger.error('[ErrorHandlingService]',
+                        `Backend returned code (${error.status}), ${userFacingMessage} `);
+                    this.pageLoader.setLoading(false);
+                    break;
+
+                case 401:
+                    userFacingMessage = '...';
+                    // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+                    /**
+                     * ToDo
+                     * We have some choices to make at this point.
+                     * Do we want to redirect to a specific route that has a login form?
+                     * Do we want to show a modal?
+                     * Do we want to attempt to refresh the token?
+                     */
+                    break;
+
+
+                default:
+                    if (error.message) {
+                        this.logger.error('[ErrorHandlingService]',
+                            `Backend returned code (${error.status}), ${error.message} `);
+                    } else {
+                        this.logger.error('[ErrorHandlingService]',
+                            `status code is (${error.status}), ${error} `);
+                    }
+
+                    this.pageLoader.setLoading(false);
 
             }
-
-            this.logger.error('[ErrorHandlingService]',
-                `Backend returned code ${error.status}, body was: ${error.error ? error.error : error} `);
         }
 
-        // return an ErrorObservable with a user-facing error message
-        return new ErrorObservable(
-            'Something bad happened; please try again later.');
+        return userFacingMessage;
     }
+
 }
 
 // // Observable class extensions

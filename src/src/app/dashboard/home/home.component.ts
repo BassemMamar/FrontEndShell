@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { LoggerService } from '../../core/base/logger/logger.service';
 import { environment } from '../../../environments/environment';
 import { CommunicationService } from '../../core/services/communication/communication.service';
 import { CommonService } from '../../core/base/utils/common.service';
-import { HttpClient } from '@angular/common/http';
 import { DashboardService } from '../dashboard.service';
+import { AlertService } from '../../shared/components/alert/alert.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -17,7 +18,8 @@ export class HomeComponent implements OnInit {
     private logger: LoggerService,
     private dashboardService: DashboardService,
     private communicationService: CommunicationService,
-    private commonService: CommonService) { }
+    private commonService: CommonService,
+    private alertService: AlertService) { }
 
 
   ngOnInit() {
@@ -39,6 +41,27 @@ export class HomeComponent implements OnInit {
       data => console.log(data),
       err => alert(err)
       );
+  }
+
+
+  success(message: string) {
+    this.alertService.success('Well done!', message);
+  }
+
+  error(message: string) {
+    this.alertService.error('Opps!', message);
+  }
+
+  info(message: string) {
+    this.alertService.info('Info!', message);
+  }
+
+  warn(message: string) {
+    this.alertService.warn('Warning!', message);
+  }
+
+  clear() {
+    this.alertService.clear();
   }
 
 }

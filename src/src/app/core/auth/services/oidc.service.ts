@@ -5,6 +5,7 @@ import { CommunicationService } from '../../services/communication/communication
 import { LoggerService } from '../../base/logger/logger.service';
 import { AuthClients } from '../model/auth-clients';
 import { LocationStrategy } from '@angular/common';
+import { HttpErrorHandlingService } from '../../services/http-error-handling/http-error-handling.service';
 
 @Injectable()
 export class OidcService {
@@ -18,7 +19,8 @@ export class OidcService {
     constructor(
         private logger: LoggerService,
         private communicationService: CommunicationService,
-        private locationStrategy: LocationStrategy
+        private locationStrategy: LocationStrategy,
+        private httpErrorHandlingService: HttpErrorHandlingService
     ) {
         // ToDo later uncommet this
         //  Log.logger = this.logger;
@@ -36,7 +38,8 @@ export class OidcService {
             }
         };
 
-        return this.currentClient.signinRedirect(params);
+        return this.currentClient.signinRedirect(params)
+            .catch(error => this.httpErrorHandlingService.handleAsPromise(error));
     }
 
     createNewOidcUserManagerInstance(authClient, eventsCallback?): UserManager {
@@ -82,7 +85,8 @@ export class OidcService {
 
     signout(id_token: string): Promise<any> {
         return this.currentClient
-            .signoutRedirect({ 'id_token_hint': id_token });
+            .signoutRedirect({ 'id_token_hint': id_token })
+            .catch(error => this.httpErrorHandlingService.handleAsPromise(error));
     }
 
 

@@ -19,7 +19,6 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     DatatableDataLocalDemo.init();
-    this.alertService.printCounter();
     this.accessLevel = <AccessLevel>this.route.snapshot.data['accessLevel'];
     this.logger.info(`accessLevel ${this.accessLevel}`);
   }

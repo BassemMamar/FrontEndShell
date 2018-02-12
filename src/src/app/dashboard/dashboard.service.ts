@@ -12,7 +12,7 @@ export class DashboardService {
     getHeros() {
         return this.http.get('api/heroes')
             .pipe(
-            catchError(error => this.httpErrorHandlingService.handle(error))
+            catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
             );
     }
 

@@ -21,6 +21,9 @@ npm install
 # start the server
 npm start
 
+# build 
+npm run build
+
 ```
 The app will be automatically launched in [http://localhost:3000/home](http://localhost:3000/home).
 
@@ -79,9 +82,6 @@ Onboarding Suite v2/
 ```
 
 
-
-
-////////////
 # Key Modules
 
 ## CoreModule
@@ -140,7 +140,7 @@ What goes in `SharedModule`?
 
 SharedModule similarly contains code that will be used across your app and Feature Modules. But the difference is that you will import this SharedModule into the specific Feature Modules as needed.
 
-Common templates components should also go in the SharedModule.
+Common templates components (like `AlertComponent`, `SpinnerComponent`, `NotificationComponent` etc...) should also go in the SharedModule.
 Commonly used pipes (ie filters) and directives should go in your SharedModule, too. Prime examples would be custom string/date filters.
 
 In the SharedModule's main file (eg shared.module.ts), might also export the commonly used Angular modules, for example:
@@ -159,23 +159,100 @@ shared/
  ├──directives/                                 * Shared directives declaration. 
  ├──pipes/                                      * Shared pipes declaration. 
  |
- shared.module                                  * Shared module file.
+ └──shared.module                                  * Shared module file.
 
 ```
-
-ToDO..
 
 ### Layout Module
 
-The `HeaderComponent` independently determines the route from the URL, and the permissions set in the User Authentication token, and then appropriately displays the links in the navigation bar.
+`LayoutModule` contains common template parts which may be used in any other feature module's base view. It will be imported to any module if needed.
+
+What goes in `SharedModule`?
+
+`LayoutModule` contains components provide main html parts like Header, Footer, Shared Menu etc...
+
+* `HeaderNavTopComponent` display application logo, provide links to navigate to main app modules and popover menu for login/logout stuff.
+* `HeaderNavBottomComponent` independently read the current module navigations, then appropriately displays the links in the navigation bar.
+* `BreadcrumbsComponent` independently display current breadcrumb state for the page (for the  future).
+* `FooterComponent` html footer template.
+* `theme-helper.service` An angular service to handle our template initialization requirments code.
+
+#### `theme-helper` service details:
+`theme-helper.service` is an angular service to handle our template initialization requirments code like `handleMobileLayout`, `scrollTop`, `mApp init`, `mUtil init`, `animateContent`. also it provides main theme variables `mApp`,`mUtil` and `mLayout`. this service is being used in the main `app.component`.
+
+What is the main theme variables?
+
+ **_mApp_**:
+
+  App is Metronic's base javascript class, and globally available within the theme that handles all the initializaitons of base components such as bootstrap popover and tooltips, scrollable contents(using Custom Scroll plugin), etc...
+
+  you can see source code here `theme/src/js/framework/base/app.js`.
+ 
+
+**_mUtil_**:
+
+ Util is Metronic's base utility helper class, and globally available within the theme
+ 
+ you can see source code here  `theme/src/js/framework/base/util.js`.
 
 
-### Deployment
+ **_mLayout_**:
+ 
+ you can see source code here `theme/src/js/demo/demo5/base/layout.js`.
+
+
+Notes:
+
+> It's not part of `SharedModule` because it contain reusable components for html parts, logically `AlertComponents` not like `HeaderComponents`.
+
+> It's not part of `CoreModule` to support flexibility to acustomize base template in each feature module, for example i want to show header in one module and don't want in the other.  
+
+### Layout Module File Structure
+```
+Layout/
+ ├──header-nav-top/                                 * Header top template which contains login section.
+ ├──header-nav-bottom/                              * Header bottom template which contains dynamic navigations for each feature module.
+ ├──breadcrumbs/                                    * Breadcrumbs template /not ready for now/.
+ ├──footer/                                         * Footer template.
+ |
+ ├──theme-helper.service                            * An angular service to handle our template initialization requirments code.
+ └──Layout.module                                   * Layout module file.
 
 ```
- npm run build
+
+
+### Theme Folder
+
+Theme folder contains theme source files like javascript, scss, images etc...
+
+for more information about the template you can read there [metronic documentation](https://keenthemes.com/metronic/documentation.html).
+
+* Files under `src/` were taken from `metronic_v5.0.6.1\metronic_v5.0.6.1\theme\angular\src`.
+* Files under `tools/` were taken from `metronic_v5.0.6.1\metronic_v5.0.6.1\theme\angular\tools`.
+
+How to customize theme?
+
+First read there documentation for more understanding, then you can do the change you want in js or scss files and compile them when you finish.
+
+to compile theme files type:
+
+```javascript
+gulp build
 ```
+
+to watch js files:
+
+```javascript
+gulp watch:js
+```
+
+to watch scss files:
+
+```javascript
+gulp watch:scss
+```
+
 
 ### Useful resources
  *  https://github.com/compodoc/compodoc/issues/394
- *  temp
+ *  ToDo

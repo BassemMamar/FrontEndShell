@@ -1,7 +1,15 @@
-<!-- <div class="alerts" role="alert">
-  <div *ngFor="let alert of alerts" [ngClass]="{\'alert.position\': true, \'toast\': alert.toast}">
-      <ngb-alert *ngIf="alert && alert.type && alert.msg" [type]="alert.type" (close)="alert.close(alerts)">
-          <pre [innerHTML]="alert.msg"></pre>
-      </ngb-alert>
-  </div>
-</div> -->
+<div *ngFor="let alert of alerts" class="m-alert m-alert--icon m-alert--outline {{ cssClass(alert) }} alert-dismissible fade show"
+    role="alert">
+    <div class="m-alert__icon">
+        <i class="{{ icon(alert) }}"></i>
+    </div>
+    <div class="m-alert__text">
+        <strong>
+            {{alert.title}}
+        </strong>
+        {{alert.message}}
+    </div>
+    <div>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="removeAlert(alert)"></button>
+    </div>
+</div>
