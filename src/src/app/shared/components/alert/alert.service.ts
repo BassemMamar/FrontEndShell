@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 import { Alert } from './model/alert';
 import { AlertType } from './model/alert-type';
 import { LoggerService } from '../../../core/base/logger/logger.service';
+import { AlertOptions } from './model/alert-options';
 
 @Injectable()
 export class AlertService {
@@ -31,28 +32,32 @@ export class AlertService {
         return this.subject.asObservable();
     }
 
-    success(title: string, message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Success, title, message, keepAfterRouteChange);
+    success(message: string, title = 'Well done!', alertOptions?: AlertOptions) {
+        this.alert(AlertType.Success, title, message, alertOptions);
     }
 
-    error(title: string, message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Error, title, message, keepAfterRouteChange);
+    error(message: string, title = 'Opps!', alertOptions?: AlertOptions) {
+        this.alert(AlertType.Error, title, message, alertOptions);
     }
 
-    info(title: string, message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Info, title, message, keepAfterRouteChange);
+    info(message: string, title = 'Info!', alertOptions?: AlertOptions) {
+        this.alert(AlertType.Info, title, message, alertOptions);
     }
 
-    warn(title: string, message: string, keepAfterRouteChange = false) {
-        this.alert(AlertType.Warning, title, message, keepAfterRouteChange);
+    warn(message: string, title = 'Warning!', alertOptions?: AlertOptions) {
+        this.alert(AlertType.Warning, title, message, alertOptions);
     }
 
-    alert(type: AlertType, title: string, message: string, keepAfterRouteChange = false) {
-        this.keepAfterRouteChange = keepAfterRouteChange;
+    private alert(type: AlertType, title: string, message: string, alertOptions?: AlertOptions) {
+        const options = alertOptions ? alertOptions : new AlertOptions();
+
+        this.keepAfterRouteChange = options.keepAfterRouteChange;
         this.subject.next(<Alert>{
             type: type,
             title: title,
-            message: message
+            message: message,
+            forRoot: options.forRoot,
+            showDuring: options.showDuring
         });
     }
 

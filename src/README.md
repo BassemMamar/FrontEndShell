@@ -229,6 +229,9 @@ for more information about the template you can read there [metronic documentati
 
 * Files under `src/` were taken from `metronic_v5.0.6.1\metronic_v5.0.6.1\theme\angular\src`.
 * Files under `tools/` were taken from `metronic_v5.0.6.1\metronic_v5.0.6.1\theme\angular\tools`.
+* In the `tools/conf` directory there is two config files:
+  * `conf.full.json` which contains all configurations as it declared by theme owner.
+  * `conf.current.json` which contains what our app need at the moment, so when we need to apply new feature from theme we need to add it's requirments in this file as they declared in `conf.full.json`.
 
 How to customize theme?
 
@@ -252,7 +255,14 @@ to watch scss files:
 gulp watch:scss
 ```
 
+> 
+
+
 
 ### Useful resources
  *  https://github.com/compodoc/compodoc/issues/394
- *  ToDo
+ *  globals cripts/ third-party-lib
+    * https://github.com/angular/angular-cli/wiki/stories-global-scripts
+    * https://github.com/angular/angular-cli/wiki/stories-third-party-lib
+ *  Compodoc
+    * https://compodoc.github.io/website/guides/usage.html

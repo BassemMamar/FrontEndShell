@@ -39,7 +39,7 @@
       "scripts": [
         "assets/theme-compiled-files/vendors/base/vendors.bundle.js",
         "assets/theme-compiled-files/demo/demo5/base/scripts.bundle.js",
-        "../node_modules/oidc-client/dist/oidc-client.js",
+   
         
         "../theme/src/js/demo/default/custom/components/datatables/base/data-local.js"
       ],
@@ -79,6 +79,23 @@
   },
   "defaults": {
     "styleExt": "scss",
-    "component": {}
+    "module": {
+      "spec": false
+    },
+    "service": {
+      "spec": false
+    },
+    "component": {
+      "spec": false
+    },
+    "directive": {
+      "spec": false
+    },
+    "guard": {
+      "spec": false
+    },
+    "pipe": {
+      "spec": false
+    }
   }
 }

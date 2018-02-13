@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 
 import { AlertService } from './alert.service';
 import { Alert } from './model/alert';
@@ -13,21 +13,36 @@ import { AlertType } from './model/alert-type';
 })
 export class AlertComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];
+  @Input() forRoot = false;
+
   constructor(private alertService: AlertService) { }
 
   ngOnInit() {
     this.alertService
-    .getAlert()
-    .subscribe((alert: Alert) => {
-      if (!alert) {
-        // clear alerts when an empty alert is received
-        this.alerts = [];
-        return;
-      }
+      .getAlert()
+      .subscribe((alert: Alert) => {
+        if (!alert) {
+          // clear alerts when an empty alert is received
+          this.alerts = [];
+          return;
+        }
 
-      // add alert to array
-      this.alerts.push(alert);
-    });
+        if (alert.forRoot === this.forRoot) {
+          // add alert to array
+          this.alerts.push(alert);
+
+          // if showDuring is specified, will remove the alert after this time
+          if (alert.showDuring > 0) {
+            setTimeout(() => {
+              this.removeAlert(alert);
+            }, alert.showDuring);
+          }
+        }
+      });
+  }
+
+  ngOnDestroy() {
+    this.alerts = [];
   }
 
   removeAlert(alert: Alert) {
@@ -58,7 +73,7 @@ export class AlertComponent implements OnInit, OnDestroy {
       return;
     }
 
-    // return css class based on alert type
+    // return font awesome icon based on alert type
     switch (alert.type) {
       case AlertType.Success:
         return 'fa fa-check-circle';
@@ -69,10 +84,6 @@ export class AlertComponent implements OnInit, OnDestroy {
       case AlertType.Warning:
         return 'fa fa-exclamation-circle';
     }
-  }
-
-  ngOnDestroy() {
-    this.alerts = [];
   }
 
 }

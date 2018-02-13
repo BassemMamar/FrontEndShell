@@ -44,20 +44,21 @@ export class HomeComponent implements OnInit {
   }
 
 
-  success(message: string) {
-    this.alertService.success('Well done!', message);
+  success(message: string, forRoot = false) {
+    const title = forRoot ? 'ohhhh for ROOT' : undefined;
+    this.alertService.success(message, title, { forRoot: forRoot });
   }
 
   error(message: string) {
-    this.alertService.error('Opps!', message);
+    this.alertService.error(message, undefined, { forRoot: true, showDuring: 0 });
   }
 
   info(message: string) {
-    this.alertService.info('Info!', message);
+    this.alertService.info(message);
   }
 
   warn(message: string) {
-    this.alertService.warn('Warning!', message);
+    this.alertService.warn(message);
   }
 
   clear() {
