@@ -15,27 +15,29 @@ export class GlobalErrorHandler implements ErrorHandler {
     ) { }
 
     handleError(error) {
-        if (error instanceof HttpErrorResponse) {
-            /**
-             * Http Errors will be handled in another place...
-             * therefore just pass it here
-             */
-            throw error;
-        } else {
-            const message = error.message ? error.message : error.toString();
-            const url = this.location instanceof PathLocationStrategy
-                ? this.location.path() : '';
-            // get the stack trace, lets grab the last 10 stacks only
-            StackTrace.fromError(error).then(stackframes => {
-                const stack = stackframes[0];
+        this.logger.error('[GlobalErrorHandler]', error);
 
-                // log on the server, for now just logging to the console
-                this.logger.error('[GlobalErrorHandler]', { message, url, stack });
-            });
+        // if (error instanceof HttpErrorResponse) {
+        //     /**
+        //      * Http Errors will be handled in another place...
+        //      * therefore just pass it here
+        //      */
+        //     throw error;
+        // } else {
+        //     const message = error.message ? error.message : error.toString();
+        //     const url = this.location instanceof PathLocationStrategy
+        //         ? this.location.path() : '';
+        //     // get the stack trace, lets grab the last 10 stacks only
+        //     StackTrace.fromError(error).then(stackframes => {
+        //         const stack = stackframes[0];
 
-            // IMPORTANT: Rethrow the error otherwise it gets swallowed
-            throw error;
-        }
+        //         // log on the server, for now just logging to the console
+        //         this.logger.error('[GlobalErrorHandler]', { message, url, stack });
+        //     });
+
+        //     // IMPORTANT: Rethrow the error otherwise it gets swallowed
+        //     // throw error;
+        // }
     }
 }
 

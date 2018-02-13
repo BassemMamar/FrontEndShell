@@ -3,6 +3,7 @@ import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@ang
 import { ThemeHelperService } from '../theme-helper.service';
 import { AuthClients } from '../../core/auth/model/auth-clients';
 import { AuthService } from '../../core/auth/services/auth.service';
+import { PageLoaderService } from '../../core/components/page-loader/page-loader.service';
 
 @Component({
     selector: 'app-header-nav-top',
@@ -12,7 +13,10 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     // tslint:disable-next-line:no-input-rename
     @Input('current-module-name') currentModule: string;
 
-    constructor(private themeHelper: ThemeHelperService, public authService: AuthService) { }
+    constructor(
+        private themeHelper: ThemeHelperService,
+        public authService: AuthService,
+        private pageLoader: PageLoaderService) { }
     ngOnInit() {
     }
 
@@ -22,11 +26,14 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
 
 
     login() {
+        this.pageLoader.setLoading(true);
+
         const redirectUrl = '/home';
         this.authService.login(AuthClients.FES, redirectUrl);
     }
 
     logout() {
+        this.pageLoader.setLoading(true);
         this.authService.logout();
     }
 }

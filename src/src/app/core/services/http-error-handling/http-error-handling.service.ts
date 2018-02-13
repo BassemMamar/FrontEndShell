@@ -4,12 +4,16 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { LoggerService } from '../../base/logger/logger.service';
 import { PageLoaderService } from '../../components/page-loader/page-loader.service';
+import { ToasrtService } from '../../../shared/components/toastr/toasrt.service';
 
 @Injectable()
 export class HttpErrorHandlingService {
     // https://angular.io/guide/http#getting-error-details
 
-    constructor(private logger: LoggerService, private pageLoader: PageLoaderService) { }
+    constructor(
+        private logger: LoggerService,
+        private pageLoader: PageLoaderService,
+        private toasrtService: ToasrtService) { }
 
     handleAsPromise(error: HttpErrorResponse): Promise<any> {
         const meg = this.analyseError(error);
@@ -36,6 +40,10 @@ export class HttpErrorHandlingService {
              * These errors produce JavaScript ErrorEvent objects.
              */
             this.logger.error('[ErrorHandlingService]', `An client-side or network error occurred: ${error.error.message}`);
+
+            this.toasrtService.toastr
+                .error(`[ErrorHandlingService].. An client-side or network error occurred: ${error.error.message} `,
+                'Client-side Error Detected!');
         } else {
             /**
              * Something could go wrong on the server-side
@@ -51,11 +59,21 @@ export class HttpErrorHandlingService {
                     userFacingMessage = 'Server not reachable';
                     this.logger.error('[ErrorHandlingService]',
                         `Backend returned code (${error.status}), ${userFacingMessage} `);
+
+                    this.toasrtService.toastr
+                        .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${userFacingMessage} `,
+                        'Server Not Reachable!');
+
                     this.pageLoader.setLoading(false);
                     break;
 
                 case 401:
                     userFacingMessage = '...';
+
+                    this.toasrtService.toastr
+                        .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${userFacingMessage} `,
+                        '401 Unauthorized Request!');
+
                     // https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
                     /**
                      * ToDo
@@ -68,15 +86,22 @@ export class HttpErrorHandlingService {
 
 
                 default:
+                    let msg;
                     if (error.message) {
-                        this.logger.error('[ErrorHandlingService]',
-                            `Backend returned code (${error.status}), ${error.message} `);
+                        msg = error.message;
                     } else {
-                        this.logger.error('[ErrorHandlingService]',
-                            `status code is (${error.status}), ${error} `);
+                        msg = error;
                     }
 
+                    this.logger.error('[ErrorHandlingService]',
+                        `status code is (${error.status}), `, msg);
+
+                    this.toasrtService.toastr
+                        .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${msg} `,
+                        'Http Error Detected!');
+
                     this.pageLoader.setLoading(false);
+                    break;
 
             }
         }

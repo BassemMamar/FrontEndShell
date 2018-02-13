@@ -78,7 +78,7 @@ export class AuthService {
 
     async loginRedirectCallback(): Promise<any> {
         const oidcUserModel = await this.oidcService.signinRedirectCallback(this.eventsCallback.bind(this));
-        this.logger.log(`signin response success: ${oidcUserModel}`);
+        this.logger.log(`signin response success: `, oidcUserModel);
         this.setSession(oidcUserModel);
         const accessAuthorizationretrieved = await this.authorizationService.getPagesAccessAuthorization().toPromise();
         return new Promise((resolve, reject) => {

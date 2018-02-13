@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
+import { LocationStrategy } from '@angular/common';
 
 import { UserManager, User, Log, UserManagerSettings, OidcClient } from 'oidc-client';
 import { CommunicationService } from '../../services/communication/communication.service';
 import { LoggerService } from '../../base/logger/logger.service';
 import { AuthClients } from '../model/auth-clients';
-import { LocationStrategy } from '@angular/common';
 import { HttpErrorHandlingService } from '../../services/http-error-handling/http-error-handling.service';
 
 @Injectable()

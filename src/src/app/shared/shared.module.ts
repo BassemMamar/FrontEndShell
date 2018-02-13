@@ -12,6 +12,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 
 import { HrefPreventDefaultDirective } from './directives/href-prevent-default/href-prevent-default.directive';
 import { AlertService } from './components/alert/alert.service';
+import { ToasrtService } from './components/toastr/toasrt.service';
 
 
 // https://angular.io/guide/styleguide#shared-feature-module
@@ -53,7 +54,8 @@ export class SharedModule {
         return {
             ngModule: SharedModule,
             providers: [
-                AlertService
+                AlertService,
+                ToasrtService
                 // services go here
             ]
         };
