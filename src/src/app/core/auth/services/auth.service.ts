@@ -11,6 +11,8 @@ import { EnumType } from '../../base/utils/interfaces';
 import { AuthorizationService } from '../pages-access-authorization/authorization.service';
 import { StorageService } from '../../base/storage/storage.service';
 
+import swal from 'sweetalert2';
+import Sweetalert2 from 'sweetalert2';
 
 @Injectable()
 export class AuthService {
@@ -153,9 +155,28 @@ export class AuthService {
     eventsCallback(eventName: string) {
 
         this.logger.log(`eventsCallback ${eventName}`);
-        alert(eventName);
-        this.logout();
+
+        switch (eventName) {
+            case 'token expired':
+
+                swal({
+                    title: 'Token Expired',
+                    text: 'Your token has been expired!',
+                    type: 'warning',
+                    confirmButtonText: 'Logout',
+                    allowOutsideClick: false
+                }).then((result) => {
+                    if (result.value) {
+                        this.logout();
+
+                    }
+                });
+
+                break;
+        }
     }
+
+
     // private getRoles(oidcUserRoles): string[] {
     //     let roleResults = [];
     //     const UserRolesArray = this.Common.convertEnumToArray(UserRole, EnumType.String);

@@ -14,6 +14,8 @@ import { HrefPreventDefaultDirective } from './directives/href-prevent-default/h
 import { AlertService } from './components/alert/alert.service';
 import { ToasrtService } from './components/toastr/toasrt.service';
 
+import { BlockUIModule } from 'ng-block-ui';
+import { BlockUITemplateComponent } from './components/block-ui/block-ui-template.component';
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -24,23 +26,31 @@ import { ToasrtService } from './components/toastr/toasrt.service';
     imports: [
         CommonModule,
         FormsModule,
+        UnwrapTagModule,
 
-        UnwrapTagModule
+        // https://github.com/kuuurt13/ng-block-ui
+        BlockUIModule
     ],
     exports: [
         CommonModule,
         FormsModule,
 
         UnwrapTagModule,
+        BlockUIModule,
 
         AlertComponent,
         DateFormatPipe,
-        HrefPreventDefaultDirective
+        HrefPreventDefaultDirective,
+        BlockUITemplateComponent
     ],
     declarations: [
         AlertComponent,
         DateFormatPipe,
-        HrefPreventDefaultDirective
+        HrefPreventDefaultDirective,
+        BlockUITemplateComponent
+    ],
+    entryComponents: [
+        BlockUITemplateComponent
     ],
     providers: [],
 })

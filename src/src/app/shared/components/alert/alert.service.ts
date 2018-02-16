@@ -57,7 +57,7 @@ export class AlertService {
             title: title,
             message: message,
             forRoot: options.forRoot,
-            showDuring: options.showDuring
+            showDuration: options.showDuration
         });
     }
 

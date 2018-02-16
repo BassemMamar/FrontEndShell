@@ -32,10 +32,10 @@ export class AlertComponent implements OnInit, OnDestroy {
           this.alerts.push(alert);
 
           // if showDuring is specified, will remove the alert after this time
-          if (alert.showDuring > 0) {
+          if (alert.showDuration > 0) {
             setTimeout(() => {
               this.removeAlert(alert);
-            }, alert.showDuring);
+            }, alert.showDuration);
           }
         }
       });

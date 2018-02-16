@@ -391,6 +391,8 @@ var mApp = function() {
         * Blocks element with loading indiciator using http://malsup.com/jquery/block/
         * @param {object} target jQuery element object
         * @param {object} options 
+        * Frontend Shell v2 is NOT depent on jquery block ui anymore
+        * next method will give an exception  $.blockUI is not a function
         */
         block: function(target, options) {
             var el = $(target);

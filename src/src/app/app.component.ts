@@ -35,9 +35,9 @@ export class AppComponent implements OnInit, AfterViewInit {
         this.themeHelper.initRequiredJs();
         this.themeHelper.animateContent();
 
-    //    this.pageLoader.setLoading(false);
+         this.pageLoader.setLoading(false);
 
-      //  this.logger.log('NavigationEnd => route.url => ', route.url);
+        //  this.logger.log('NavigationEnd => route.url => ', route.url);
 
       }
 

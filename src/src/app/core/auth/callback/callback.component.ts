@@ -26,7 +26,7 @@ export class CallbackComponent implements OnInit {
             const info = await this.authService.loginRedirectCallback();
             this.router.navigate([info.redirectUrl]);
             const username = this.authService.userProfile.username;
-            this.toasrtService.toastr.success(`Welcome ${username}! `, `Login Success`, { positionClass: 'toast-top-right' });
+            this.toasrtService.success(`Welcome ${username}! `, `Login Success`, { positionClass: 'toast-top-right' });
 
         } catch (err) {
             this.logger.log('handleSigninCallback err: ', err);

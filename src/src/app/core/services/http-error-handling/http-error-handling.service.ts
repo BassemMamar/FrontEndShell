@@ -41,7 +41,7 @@ export class HttpErrorHandlingService {
              */
             this.logger.error('[ErrorHandlingService]', `An client-side or network error occurred: ${error.error.message}`);
 
-            this.toasrtService.toastr
+            this.toasrtService
                 .error(`[ErrorHandlingService].. An client-side or network error occurred: ${error.error.message} `,
                 'Client-side Error Detected!');
         } else {
@@ -60,7 +60,7 @@ export class HttpErrorHandlingService {
                     this.logger.error('[ErrorHandlingService]',
                         `Backend returned code (${error.status}), ${userFacingMessage} `);
 
-                    this.toasrtService.toastr
+                    this.toasrtService
                         .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${userFacingMessage} `,
                         'Server Not Reachable!');
 
@@ -70,7 +70,7 @@ export class HttpErrorHandlingService {
                 case 401:
                     userFacingMessage = '...';
 
-                    this.toasrtService.toastr
+                    this.toasrtService
                         .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${userFacingMessage} `,
                         '401 Unauthorized Request!');
 
@@ -96,7 +96,7 @@ export class HttpErrorHandlingService {
                     this.logger.error('[ErrorHandlingService]',
                         `status code is (${error.status}), `, msg);
 
-                    this.toasrtService.toastr
+                    this.toasrtService
                         .error(`[ErrorHandlingService].. Backend returned code (${error.status}), ${msg} `,
                         'Http Error Detected!');
 

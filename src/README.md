@@ -140,7 +140,7 @@ What goes in `SharedModule`?
 
 SharedModule similarly contains code that will be used across your app and Feature Modules. But the difference is that you will import this SharedModule into the specific Feature Modules as needed.
 
-Common templates components (like `AlertComponent`, `SpinnerComponent`, `NotificationComponent` etc...) should also go in the SharedModule.
+Common templates components (like `Alert`, `BlockUI`, `Toastr` etc...) should also go in the SharedModule.
 Commonly used pipes (ie filters) and directives should go in your SharedModule, too. Prime examples would be custom string/date filters.
 
 In the SharedModule's main file (eg shared.module.ts), might also export the commonly used Angular modules, for example:
@@ -255,7 +255,268 @@ to watch scss files:
 gulp watch:scss
 ```
 
-> 
+
+
+# Frontend Shell FAQs
+
+### How to use block ui in my component?
+
+let's say that we want to block add user div in the `user.component`:
+
+** In the `user.component.ts` there are two ways to control when to start/stop blocking:
+
+1) Declare a variable with the `@BlockUI()` decorator:
+
+```js
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { BlockUITemplateComponent } from 'shared/components/block-ui/block-ui-template.component';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+
+  // Create an instance from our block ui template
+  blockTemplate = BlockUITemplateComponent;
+
+  @BlockUI('block-add-user') blockAddUser: NgBlockUI;
+  
+  constructor(){}
+
+  addUser() {
+  this.blockAddUser.start();
+  this.userService.add(userObject)
+    .subscribe(
+     (res) => {
+
+       // do stuff when add user success
+       this.blockAddUser.stop();
+     },
+     (error) => {
+       
+       // do stuff when add user failed
+       this.blockAddUser.stop();
+     });
+  }
+
+}
+ ```
+
+
+2) using the `BlockUIService` which allows you to easily target multiple instance:
+
+```js
+import { BlockUIService, NgBlockUI } from 'ng-block-ui';
+import { BlockUITemplateComponent } from 'shared/components/block-ui/block-ui-template.component';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+
+  // Create an instance from our block ui template
+  blockTemplate = BlockUITemplateComponent;
+
+  constructor(private blockUIService: BlockUIService){}
+
+  addUser() {
+  this.blockUIService.start('block-add-user');
+  this.userService.add(userObject)
+    .subscribe(
+     (res) => {
+
+       // do stuff when add user success
+       this.blockUIService.stop('block-add-user');
+     },
+     (error) => {
+       
+       // do stuff when add user failed
+       this.blockUIService.stop('block-add-user');
+     });
+  }
+
+}
+ ```
+
+
+* You can pass optional message with `.start()`.
+* `BlockUIService` can start/stop many instances by passing array of there names: `.start(['..'])`
+
+
+** In the `user.component.html` add `blockUI ` directive to that div with an appropriate parameters:
+
+```html
+<div *blockUI="'block-add-user'; template:blockTemplate; message:'Proccessing... '">
+    // add user section
+    ...
+</div>
+``` 
+* As a convintion let's always add name prefix `block-` for `*blockUI` name.
+* `blockTemplate` is an instance reference of our custom block ui component template (property in the `home.component.ts`), if you don't provide it then default style will be applied, 
+and for this case i import custom css style in the style.scss '@import "~app/shared/components/block-ui/block-ui-template.component.scss";'
+* `message` is an optional message to show during blocking.
+
+
+> We depend on [ng-block-ui](https://github.com/kuuurt13/ng-block-ui) library for blocking ui, for more details read there documentaion.
+
+
+### How to use toastr in my component?
+
+let's say that we want to show toastr message for adding user result in the `user.component`:
+
+```js
+import { ToasrtService } from 'shared/components/toastr/toasrt.service';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+
+  constructor(private toasrtService: ToasrtService){}
+
+  addUser() {
+  this.userService.add(userObject)
+    .subscribe(
+     (res) => {
+
+       // do stuff when add user failed
+       // Display a success toast, with a title
+       this.toasrtService.success('User has been added successfully!', 'Done');
+     },
+     (error) => {
+       
+       // do stuff when add user failed
+       // Display an error toast, with a title
+       this.toasrtService.error(error.message, 'Opps!');
+     });
+  }
+
+}
+ ```
+
+
+* You can override global options, for example:
+    `this.toasrtService.success('We do have the Kapua suite available.', null, { timeOut: 2000 });`
+* You can remove/clear all current toasts:  
+    `this.toasrtService.remove();`, `this.toasrtService.clear();`.
+
+
+
+> We depend on [toastr](https://github.com/CodeSeven/toastr) library, for more details read there documentaion.
+
+
+### How to use alert notification in my component?
+
+let's say that we want to show fixed alert for adding user result in the `user.component`:
+
+** In the `user.component.ts` 
+
+```js
+import { AlertService } from 'shared/components/alert/alert.service';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+
+  constructor(private alertService: AlertService){}
+
+  addUser() {
+  this.userService.add(userObject)
+    .subscribe(
+     (res) => {
+
+       // do stuff when add user failed
+       // Display a success fixed alert, with a title
+       this.alertService.success('User has been added successfully!', 'Done');
+     },
+     (error) => {
+       
+       // do stuff when add user failed
+       // Display an error toast, with a title
+       this.alertService.error(error.message, 'Opps!');
+
+     });
+  }
+
+}
+ ```
+
+** In the `user.component.html` add `shrd-alert` element where you want to show alert:
+
+```html
+<shrd-alert></shrd-alert>
+```
+
+Notes:
+* You can declare alert element as a golbal alert:
+
+```html
+<shrd-alert [forRoot]="true"></shrd-alert>
+``` 
+and in the component you can pass option to push alert as a golbal:
+
+```js
+this.alertService.success(message, title, { forRoot: true }); // by default forRoot is false
+```
+
+golbal alert use case is when we want to have one central place for alert in the module base template 
+
+* You can use local and global alert together.
+* You can specify `showDuration` time to show alert, and remove it after this time:
+
+```js
+this.alertService.success(message, title, { showDuration: 5000 }); // by default showDuration is 0
+```
+* If you didn't provide `showDuration` option, or you provide `showDuration: 0 `, the alert will not being removedat all.
+* `showDuration` is millisecond.
+
+
+### How to use sweetalert2 in my component?
+
+let's say that we want to show sweet alert for adding user result in the `user.component`:
+
+
+```js
+// ES6 Modules or TypeScript
+import swal from 'sweetalert2';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit {
+
+  constructor(){}
+
+  addUser() {
+  this.userService.add(userObject)
+    .subscribe(
+     (res) => {
+
+       // do stuff when add user failed
+       // Display a sweet-alert2 success
+       swal('Done', 'User has been added successfully!', 'success');
+     },
+     (error) => {
+       
+       // do stuff when add user failed
+       // Display a sweet-alert2 error
+      // swal('Oops!', error.message, 'error');
+     });
+  }
+
+}
+ ```
+
+
+> We depend on [sweetalert2](https://github.com/sweetalert2/sweetalert2) library, for more details read there documentaion.
+
+
 
 
 
@@ -266,3 +527,5 @@ gulp watch:scss
     * https://github.com/angular/angular-cli/wiki/stories-third-party-lib
  *  Compodoc
     * https://compodoc.github.io/website/guides/usage.html
+ *  ng-block-ui
+    * https://github.com/kuuurt13/ng-block-ui

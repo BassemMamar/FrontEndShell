@@ -5,5 +5,5 @@ export class Alert {
     title: string;
     message: string;
     forRoot: boolean;
-    showDuring: number;
+    showDuration: number;
 }

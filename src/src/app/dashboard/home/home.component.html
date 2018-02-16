@@ -6,20 +6,23 @@
 <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestToastr()">
     toastr</button>
 <shrd-alert></shrd-alert>
-<div class="col-md-10 col-md-offset-1 text-center">
+
+<div *blockUI="'alerts-root'; template:blockTemplate; message:'Proccessing .... '" class="col-md-10 col-md-offset-1 text-center">
     <h1>Alerts for Root</h1>
     <button class="btn btn-success" (click)="success('Success Root!!', true)">Success</button>
     <button class="btn btn-danger" (click)="error('Error :(')">Error</button>
     <button class="btn btn-info" (click)="info('Some info....')">Info</button>
     <button class="btn btn-warning" (click)="warn('Warning: ...')">Warn</button>
     <button class="btn btn-default" (click)="clear()">Clear</button>
+    <button class="btn btn-default" (click)="blockRoot()">Block Root</button>
 </div>
 <hr>
-<div class="col-md-10 col-md-offset-1 text-center">
+<div *blockUI="'alerts-child';template:blockTemplate;" class="col-md-10 col-md-offset-1 text-center">
     <h1>Alerts for Child</h1>
     <button class="btn btn-success" (click)="success('Success!!')">Success</button>
     <button class="btn btn-danger" (click)="error('Error :(')">Error</button>
     <button class="btn btn-info" (click)="info('Some info....')">Info</button>
     <button class="btn btn-warning" (click)="warn('Warning: ...')">Warn</button>
     <button class="btn btn-default" (click)="clear()">Clear</button>
+    <button class="btn btn-default" (click)="blockChild()">Block Child</button>
 </div>
