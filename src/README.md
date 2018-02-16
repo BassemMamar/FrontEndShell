@@ -521,11 +521,12 @@ export class UserComponent implements OnInit {
 
 
 ### Useful resources
- *  https://github.com/compodoc/compodoc/issues/394
+ *  Angular documentaion
+    * https://angular.io/docs
+ *  Angular styleguide (IMPORTANT)
+    * https://angular.io/guide/styleguide
  *  globals cripts/ third-party-lib
     * https://github.com/angular/angular-cli/wiki/stories-global-scripts
     * https://github.com/angular/angular-cli/wiki/stories-third-party-lib
- *  Compodoc
-    * https://compodoc.github.io/website/guides/usage.html
  *  ng-block-ui
     * https://github.com/kuuurt13/ng-block-ui

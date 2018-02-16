@@ -1,6 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+/**
+ * Global styles go here.
+ * Most of the time you'll want to have local styles in your components for easier maintenance,
+ * but styles that affect all of your app need to be in a central place.
+ */
  
-// application.scss
-
+/* node_modules*/
 @import "~toastr/build/toastr.css";
+
+/* app */
 @import "~app/shared/components/block-ui/block-ui-template.component.scss";
