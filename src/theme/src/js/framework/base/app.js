@@ -527,6 +527,6 @@ var mApp = function() {
 }();
 
 //== Initialize mApp class on document ready
-$(document).ready(function() {
-    mApp.init();
-});
+// $(document).ready(function() {
+//     mApp.init();
+// });

@@ -94,6 +94,8 @@ var mQuickSidebar = function() {
     };
 }();
 
-$(document).ready(function() {
-    mQuickSidebar.init();
-});
+// $(document).ready(function() {
+//     mQuickSidebar.init();
+// });$(document).ready(function() {
+//     mQuickSidebar.init();
+// });

@@ -90,7 +90,7 @@
       </ul>
     </div>
   </div>
-  <div class="m-portlet__body">
+  <div *blockUI="'block-business-list'; template:blockTemplate;message:'Loading...'" class="m-portlet__body">
     <!--begin: Search Form -->
     <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
       <div class="row align-items-center">
@@ -175,7 +175,9 @@
     </div>
     <!--end: Search Form -->
     <!--begin: Datatable -->
-    <div class="m_datatable" id="local_data"></div>
-    <!--end: Datatable -->
+    <div  class="m_datatable" id="local_data">
   </div>
+
+  <!--end: Datatable -->
+</div>
 </div>

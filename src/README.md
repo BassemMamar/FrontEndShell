@@ -357,6 +357,7 @@ export class UserComponent implements OnInit {
 * `blockTemplate` is an instance reference of our custom block ui component template (property in the `home.component.ts`), if you don't provide it then default style will be applied, 
 and for this case i import custom css style in the style.scss '@import "~app/shared/components/block-ui/block-ui-template.component.scss";'
 * `message` is an optional message to show during blocking.
+* Keep in mind to use [`AfterViewInit`](https://angular.io/api/core/AfterViewInit) Lifecycle hook when needed.
 
 
 > We depend on [ng-block-ui](https://github.com/kuuurt13/ng-block-ui) library for blocking ui, for more details read there documentaion.

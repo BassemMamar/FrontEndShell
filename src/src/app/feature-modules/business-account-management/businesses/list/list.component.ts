@@ -1,16 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../../../shared/components/alert/alert.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+
+import { AlertService } from '../../../../shared/components/alert/alert.service';
 import { LoggerService } from '../../../../core/base/logger/logger.service';
 import { AccessLevel } from '../../../../core/auth/model/user-roles.enum';
+import { BlockUITemplateComponent } from '../../../../shared/components/block-ui/block-ui-template.component';
 
 declare let DatatableDataLocalDemo: any;
 @Component({
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, AfterViewInit {
+
   accessLevel: AccessLevel;
+  blockTemplate = BlockUITemplateComponent;
+  @BlockUI('block-business-list') blockBusinessList: NgBlockUI;
 
   constructor(
     private route: ActivatedRoute,
@@ -18,9 +24,22 @@ export class ListComponent implements OnInit {
     private logger: LoggerService) { }
 
   ngOnInit() {
-    DatatableDataLocalDemo.init();
+
     this.accessLevel = <AccessLevel>this.route.snapshot.data['accessLevel'];
     this.logger.info(`accessLevel ${this.accessLevel}`);
+
+
+
+  }
+
+  ngAfterViewInit(): void {
+    this.logger.log(`obj `, $('.m_datatable'));
+    DatatableDataLocalDemo.init();
+
+    this.blockBusinessList.start();
+    setTimeout(() => {
+      this.blockBusinessList.stop();
+    }, 3000);
   }
 
 }

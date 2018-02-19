@@ -343,6 +343,6 @@ var mUtil = function() {
 }();
 
 //== Initialize mUtil class on document ready
-$(document).ready(function() {
-    mUtil.init();
-});
+// $(document).ready(function() {
+//     mUtil.init();
+// });
