@@ -9,8 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "doc:build": "compodoc -p src/tsconfig.app.json -t --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  --theme 'Stripe' ",
-    "doc:serve": "compodoc -p src/tsconfig.app.json -t --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  --theme 'Laravel' -r 3005 -s -o -w",
+    "doc:build": "compodoc -p src/tsconfig.app.json --theme \"Postmark\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico -t",
+    "doc:serve": "compodoc -p src/tsconfig.app.json --theme \"Postmark\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  -r 3005 -s -o",
     "doc": "npm run doc:serve"
   },
   "private": true,
