@@ -13,7 +13,7 @@
             "node_modules": "./node_modules"
         },
         "dist": [
-            "./src/assets/theme-compiled-files"
+            "./src/assets"
         ]
     },
     "build": {
@@ -107,10 +107,10 @@
                     }
                 },
                 "bundle": {
-                    "styles": "{$config.output}/vendors/base/vendors.bundle.css",
-                    "scripts": "{$config.output}/vendors/base/vendors.bundle.js",
-                    "images": "{$config.output}/vendors/base/images",
-                    "fonts": "{$config.output}/vendors/base/fonts"
+                    "styles": "{$config.output}/vendors.bundle.css",
+                    "scripts": "{$config.output}/vendors.bundle.js",
+                    "images": "{$config.output}/images",
+                    "fonts": "{$config.output}/fonts"
                 }
             },
             "custom": {}
@@ -126,21 +126,20 @@
                             "{$config.path.src}/js/framework/base/**/*.js",
                             "{$config.path.src}/js/framework/components/general/datatable/datatable.js",
                             "{$config.path.src}/js/framework/components/general/**.js",
-                            "{$config.path.src}/js/demo/demo5/base/**/*.js",
-                            "{$config.path.src}/js/app/base/**/*.js",
-                            "{$config.path.src}/js/snippets/base/**/*.js"
+                            "{$config.path.src}/js/demo/demo5/base/layout.js",
+                            "{$config.path.src}/js/snippets/base/quick-sidebar.js"
                         ]
                     },
                     "bundle": {
-                        "styles": "{$config.output}/demo/demo5/base/style.bundle.css",
-                        "scripts": "{$config.output}/demo/demo5/base/scripts.bundle.js"
+                        "styles": "{$config.output}/style.bundle.css",
+                        "scripts": "{$config.output}/scripts.bundle.js"
                     }
                 },
                 "custom": {
                     "src": {
                         "scripts": [],
                         "media": [
-                            "{$config.path.src}/media/demo/demo5/**/*.*"
+                            
                         ]
                     },
                     "output": {
@@ -162,12 +161,14 @@
             "src": {
                 "scripts": [],
                 "media": [
-                    "{$config.path.src}/media/app/**/*.*"
+                    "{$config.path.src}/media/app/img/error/bg1.jpg",
+                    "{$config.path.src}/media/demo/demo5/img/logo/logo.png",
+                    "{$config.path.src}/media/app/img/misc/user_profile_bg.jpg"
                 ]
             },
             "output": {
                 "scripts": "{$config.output}/app/js",
-                "media": "{$config.output}/app/media"
+                "media": "{$config.output}/images/demo"
             }
         }
     }

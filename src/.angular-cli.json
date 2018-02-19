@@ -34,12 +34,12 @@
       "styles": [
         "styles.scss",
         
-        "assets/theme-compiled-files/vendors/base/vendors.bundle.css",
-        "assets/theme-compiled-files/demo/demo5/base/style.bundle.css"
+        "assets/vendors.bundle.css",
+        "assets/style.bundle.css"
       ],
       "scripts": [
-        "assets/theme-compiled-files/vendors/base/vendors.bundle.js",
-        "assets/theme-compiled-files/demo/demo5/base/scripts.bundle.js",
+        "assets/vendors.bundle.js",
+        "assets/scripts.bundle.js",
    
         
         "../theme/src/js/demo/default/custom/components/datatables/base/data-local.js"

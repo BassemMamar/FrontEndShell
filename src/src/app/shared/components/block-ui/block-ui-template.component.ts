@@ -7,6 +7,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 
 export class BlockUITemplateComponent implements OnInit {
+    message: string;
     constructor() { }
 
     ngOnInit() { }

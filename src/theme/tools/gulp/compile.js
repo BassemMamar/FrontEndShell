@@ -43,7 +43,7 @@ gulp.task('build-bundle', function(cb) {
 });
 
 // entry point
-gulp.task('build', ['clean'], function(cb) {
+gulp.task('build',  function(cb) {
   // clean first and then start bundling
   return sequence(['build-bundle'], cb);
 });
