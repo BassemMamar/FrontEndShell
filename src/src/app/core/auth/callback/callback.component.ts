@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { OidcService } from '../services/oidc.service';
 import { LoggerService } from '../../base/logger/logger.service';
 import { AuthService } from '../services/auth.service';
-import { ToasrtService } from '../../../shared/components/toastr/toasrt.service';
+import { ToastrService } from '../../../shared/components/toastr/toastr.service';
 
 @Component({
     template: ''
@@ -15,7 +15,7 @@ export class CallbackComponent implements OnInit {
         private router: Router,
         private authService: AuthService,
         private logger: LoggerService,
-        private toasrtService: ToasrtService) { }
+        private toasrtService: ToastrService) { }
 
     ngOnInit() {
         this.handleSigninCallback();

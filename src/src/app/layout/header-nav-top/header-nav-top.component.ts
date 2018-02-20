@@ -4,6 +4,7 @@ import { ThemeHelperService } from '../theme-helper.service';
 import { AuthClients } from '../../core/auth/model/auth-clients';
 import { AuthService } from '../../core/auth/services/auth.service';
 import { PageLoaderService } from '../../core/components/page-loader/page-loader.service';
+import { CommunicationService } from '../../core/services/communication/communication.service';
 
 @Component({
     selector: 'app-header-nav-top',
@@ -16,6 +17,7 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     constructor(
         private themeHelper: ThemeHelperService,
         public authService: AuthService,
+        private communicationService: CommunicationService,
         private pageLoader: PageLoaderService) { }
     ngOnInit() {
     }
@@ -35,5 +37,9 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     logout() {
         this.pageLoader.setLoading(true);
         this.authService.logout();
+    }
+
+    isBAM(): boolean {
+        return this.communicationService.businessCode !== '' ? false : true;
     }
 }

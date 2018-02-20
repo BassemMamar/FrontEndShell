@@ -6,22 +6,21 @@ export const pagesAccessAuthorizationInfo = [
     {
         name: FrontendShell.BusinessAccountManagement.Name,
         rolesAccess: [
-            { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess },
-            { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+            { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess }
         ],
         pages: [
             {
                 name: FrontendShell.BusinessAccountManagement.Pages.ListBusiness,
                 rolesAccess: [
                     { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess },
-                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+                   // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
                 ]
             },
             {
                 name: FrontendShell.BusinessAccountManagement.Pages.EditBusiness,
                 rolesAccess: [
                     { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess },
-                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+                   // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
                 ]
             }
         ]
@@ -39,7 +38,7 @@ export const pagesAccessAuthorizationInfo = [
                 name: FrontendShell.InvestigationStudio.Pages.RecentJourneys,
                 rolesAccess: [
                     { role: UserRole.Investigator, accessLevel: AccessLevel.ReadOnly },
-                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
                 ]
             }
         ]
@@ -59,8 +58,7 @@ export const pagesAccessAuthorizationInfo = [
     {
         name: FrontendShell.JourneyDefinition.Name,
         rolesAccess: [
-            { role: UserRole.Investigator, accessLevel: AccessLevel.FullAccess },
-           // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
+            { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
         ],
         pages: []
     }

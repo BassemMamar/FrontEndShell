@@ -12,7 +12,7 @@ import { DateFormatPipe } from './pipes/date-format.pipe';
 
 import { HrefPreventDefaultDirective } from './directives/href-prevent-default/href-prevent-default.directive';
 import { AlertService } from './components/alert/alert.service';
-import { ToasrtService } from './components/toastr/toasrt.service';
+import { ToastrService } from './components/toastr/toastr.service';
 
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUITemplateComponent } from './components/block-ui/block-ui-template.component';
@@ -65,7 +65,7 @@ export class SharedModule {
             ngModule: SharedModule,
             providers: [
                 AlertService,
-                ToasrtService
+                ToastrService
                 // services go here
             ]
         };

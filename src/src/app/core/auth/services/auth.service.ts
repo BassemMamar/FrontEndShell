@@ -33,6 +33,7 @@ export class AuthService {
         private Common: CommonService) {
 
         this.userProfile = this.getUserProfile() || new UserProfile();
+        this.logger.log('userProfile: ', this.userProfile);
 
         // If authenticated, set local profile property and update login status subject
         if (this.userProfile.authClient && this.userProfile.authClient !== '') {
@@ -89,6 +90,7 @@ export class AuthService {
     }
     setSession(oidcUserModel) {
         const userProfile: UserProfile = this.toUserProfileModelMapper(oidcUserModel);
+        this.logger.log('userProfile: ', this.userProfile);
         this.setUserProfile(userProfile);
         this.setLoggedIn(true);
     }

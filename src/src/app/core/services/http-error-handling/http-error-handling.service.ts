@@ -4,7 +4,7 @@ import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { LoggerService } from '../../base/logger/logger.service';
 import { PageLoaderService } from '../../components/page-loader/page-loader.service';
-import { ToasrtService } from '../../../shared/components/toastr/toasrt.service';
+import { ToastrService } from '../../../shared/components/toastr/toastr.service';
 
 @Injectable()
 export class HttpErrorHandlingService {
@@ -13,7 +13,7 @@ export class HttpErrorHandlingService {
     constructor(
         private logger: LoggerService,
         private pageLoader: PageLoaderService,
-        private toasrtService: ToasrtService) { }
+        private toasrtService: ToastrService) { }
 
     handleAsPromise(error: HttpErrorResponse): Promise<any> {
         const meg = this.analyseError(error);

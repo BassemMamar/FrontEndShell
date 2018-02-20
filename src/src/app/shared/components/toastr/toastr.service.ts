@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 import * as toastr from 'toastr';
-import { ToasrtDefaultOptions } from './model/toastr-options';
+import { ToastrDefaultOptions } from './model/toastr-options';
 
 @Injectable()
-export class ToasrtService {
+export class ToastrService {
     constructor() {
-        toastr.options = ToasrtDefaultOptions;
+        toastr.options = ToastrDefaultOptions;
     }
 
     success(message: string, title?: string, optionsOverride?: object) {

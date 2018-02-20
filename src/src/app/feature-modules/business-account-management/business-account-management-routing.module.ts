@@ -35,7 +35,7 @@ const routes: Routes = [
         matcher: ListBusinessMatch, component: ListComponent,
         data: {
           // moduleName: FrontendShell.BusinessAccountManagement.Name,
-          pageName: FrontendShell.BusinessAccountManagement.Pages.ListBusiness
+         // pageName: FrontendShell.BusinessAccountManagement.Pages.ListBusiness
         },
         resolve: {
           accessLevel: AccessLevelResolver

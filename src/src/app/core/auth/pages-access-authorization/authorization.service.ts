@@ -54,13 +54,17 @@ export class AuthorizationService {
     const _pagesAccessAuthorization = this.pagesAccessAuthorization;
     this.logger.log('PagesAccessAuthorization: ', _pagesAccessAuthorization);
 
+    /**
+     * Nither module name nor page name is provided
+     * In this case will throw an exception.
+     */
     if (!moduleName && !pageName) {
       throw new Error(`Can NOT check authority for unknown moduleName and pageName`);
     }
 
     /**
      * Just module name is provided
-     * In this case will try go get default roles access specified for the module it self
+     * In this case will try to get default roles access specified for the module it self
      */
     if (moduleName && !pageName) {
       const currentModule = _pagesAccessAuthorization.find(m => m.name.toLowerCase() === moduleName.toLowerCase());
@@ -74,7 +78,7 @@ export class AuthorizationService {
        * Module name and page name are provided
        * In this case:
        * First get the matched module information
-       * Second get matched page in this module
+       * Second get matched pages in this module
        * As a result will have a collection of matched pages in one module
        */
       if (moduleName && pageName) {
@@ -88,7 +92,7 @@ export class AuthorizationService {
 
       /**
        * Just page name is provided
-       * In this case will try go get any matched page in the all modules
+       * In this case will try to get any matched page in the all modules
        * Do some validation
        * As a result will have a collection of matched pages in one module
        */

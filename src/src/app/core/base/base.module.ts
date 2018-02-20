@@ -11,7 +11,6 @@ import { throwIfAlreadyLoaded } from './module-import-guard/module-import-guard'
 import { TimingInterceptorProvider } from './http-timing-interceptor/timing.interceptor';
 import { StorageService } from './storage/storage.service';
 
-
 @NgModule({
     imports: [
     ],

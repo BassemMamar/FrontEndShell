@@ -1,4 +1,4 @@
-export const ToasrtDefaultOptions = {
+export const ToastrDefaultOptions = {
     'closeButton': true,
     'debug': false,
     'newestOnTop': false,

@@ -7,7 +7,7 @@ import { CommunicationService } from '../../core/services/communication/communic
 import { CommonService } from '../../core/base/utils/common.service';
 import { DashboardService } from '../dashboard.service';
 import { AlertService } from '../../shared/components/alert/alert.service';
-import { ToasrtService } from '../../shared/components/toastr/toasrt.service';
+import { ToastrService } from '../../shared/components/toastr/toastr.service';
 
 // ES6 Modules or TypeScript
 import swal from 'sweetalert2';
@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     private communicationService: CommunicationService,
     private commonService: CommonService,
     private alertService: AlertService,
-    private toasrtService: ToasrtService,
+    private toasrtService: ToastrService,
     private blockUIService: BlockUIService) { }
 
 

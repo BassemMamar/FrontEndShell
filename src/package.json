@@ -4,14 +4,18 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --disable-host-check --port 3000 -o",
-    "build": "ng build --target=production -bh /FrontendShellV2/",
+    "start": "npm run serve:dev",
+    "serve:dev": "ng serve --disable-host-check --port 3000 -o",
+    "serve:prod": "ng serve --prod --disable-host-check --port 3000 -o",
+    "build": "npm run build:prod",
+    "build:prod": "ng build --prod -bh /FrontendShellV2/",
+    "build:dev": "ng dev --dev -bh /FrontendShellV2/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "doc": "npm run doc:serve",
     "doc:build": "compodoc -p src/tsconfig.app.json --theme \"Postmark\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico -t",
-    "doc:serve": "compodoc -p src/tsconfig.app.json --theme \"Postmark\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  -r 3005 -s -o",
-    "doc": "npm run doc:serve"
+    "doc:serve": "compodoc -p src/tsconfig.app.json --theme \"Original\" -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico  -r 3005 -s -o"
   },
   "private": true,
   "dependencies": {

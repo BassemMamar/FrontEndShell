@@ -16,7 +16,7 @@ export class FrontendShell {
     };
 
     static InvestigationStudio = {
-        Name: 'Investigation',
+        Name: 'InvestigationStudio',
         Pages: InvestigationStudioPages
     };
 
