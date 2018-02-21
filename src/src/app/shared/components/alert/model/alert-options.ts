@@ -1,5 +1,5 @@
 export class AlertOptions {
-    forRoot?= false;
+    hostId?: string;
     keepAfterRouteChange?= false;
     showDuration?: number;
 }

@@ -13,7 +13,7 @@ import { AlertType } from './model/alert-type';
 })
 export class AlertComponent implements OnInit, OnDestroy {
   alerts: Alert[] = [];
-  @Input() forRoot = false;
+  @Input() id: string;
 
   constructor(private alertService: AlertService) { }
 
@@ -27,7 +27,7 @@ export class AlertComponent implements OnInit, OnDestroy {
           return;
         }
 
-        if (alert.forRoot === this.forRoot) {
+        if (alert.hostId === this.id) {
           // add alert to array
           this.alerts.push(alert);
 

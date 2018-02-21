@@ -5,5 +5,6 @@ export class Alert {
     title: string;
     message: string;
     forRoot: boolean;
+    hostId: string;
     showDuration: number;
 }

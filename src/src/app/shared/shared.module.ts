@@ -16,6 +16,7 @@ import { ToastrService } from './components/toastr/toastr.service';
 
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUITemplateComponent } from './components/block-ui/block-ui-template.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -41,13 +42,16 @@ import { BlockUITemplateComponent } from './components/block-ui/block-ui-templat
         AlertComponent,
         DateFormatPipe,
         HrefPreventDefaultDirective,
-        BlockUITemplateComponent
+        BlockUITemplateComponent,
+        ModalComponent
+
     ],
     declarations: [
         AlertComponent,
         DateFormatPipe,
         HrefPreventDefaultDirective,
-        BlockUITemplateComponent
+        BlockUITemplateComponent,
+        ModalComponent
     ],
     entryComponents: [
         BlockUITemplateComponent

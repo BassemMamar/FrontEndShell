@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { LoggerService } from '../../core/base/logger/logger.service';
@@ -14,17 +14,22 @@ import swal from 'sweetalert2';
 
 import { BlockUI, NgBlockUI, BlockUIService } from 'ng-block-ui';
 import { BlockUITemplateComponent } from '../../shared/components/block-ui/block-ui-template.component';
+import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
+
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   // Pass instance name to decorator
   blockTemplate = BlockUITemplateComponent;
   @BlockUI('alerts-root') blockAlertsRoot: NgBlockUI;
   @BlockUI('alerts-child') blockAlertsChild: NgBlockUI;
+
+  @ViewChild(ModalComponent)
+  private modal: ModalComponent;
 
   constructor(
     private logger: LoggerService,
@@ -35,9 +40,35 @@ export class HomeComponent implements OnInit {
     private toasrtService: ToastrService,
     private blockUIService: BlockUIService) { }
 
-
   ngOnInit() {
     this.logger.info(`HomeComponent has been Initiated..`);
+
+  }
+
+  ngAfterViewInit(): void {
+    // this.modal.show();
+    this.registerModalEvents();
+  }
+
+  showModal() {
+    this.modal.show();
+  }
+
+  save(saved: boolean) {
+    if (!saved) {
+      this.modal.hide();
+    } else {
+      this.alertService.error('I do not think that word means what you think it means.', undefined, { hostId: 'modal-alert' });
+
+    }
+
+  }
+
+  registerModalEvents() {
+    $(`#${this.modal.id}`).on('hidden.bs.modal', (e) => {
+      // do something...
+      this.alertService.clear();
+    });
   }
 
   TestInterseptor() {
@@ -46,8 +77,8 @@ export class HomeComponent implements OnInit {
       data => console.log(data),
       err => {
         this.toasrtService.error(err);
-        this.alertService.error(err, undefined, { forRoot: true });
-         swal('Oops...', 'Something went wrong!', 'error');
+        this.alertService.error(err, undefined, { hostId: 'root' });
+        swal('Oops...', 'Something went wrong!', 'error');
       }
       );
   }
@@ -81,13 +112,13 @@ export class HomeComponent implements OnInit {
     }, 3000);
   }
 
-  success(message: string, forRoot = false) {
-    const title = forRoot ? 'ohhhh for ROOT' : undefined;
-    this.alertService.success(message, title, { forRoot: forRoot });
+  success(message: string, hostId: string) {
+    const title = hostId ? 'ohhhh for ROOT' : undefined;
+    this.alertService.success(message, title, { hostId: hostId });
   }
 
   error(message: string) {
-    this.alertService.error(message, undefined, { forRoot: true, showDuration: 0 });
+    this.alertService.error(message, undefined, { hostId: 'root', showDuration: 0 });
   }
 
   info(message: string) {

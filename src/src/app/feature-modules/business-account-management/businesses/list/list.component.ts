@@ -27,13 +27,9 @@ export class ListComponent implements OnInit, AfterViewInit {
 
     this.accessLevel = <AccessLevel>this.route.snapshot.data['accessLevel'];
     this.logger.info(`accessLevel ${this.accessLevel}`);
-
-
-
   }
 
   ngAfterViewInit(): void {
-    this.logger.log(`obj `, $('.m_datatable'));
     DatatableDataLocalDemo.init();
 
     this.blockBusinessList.start();

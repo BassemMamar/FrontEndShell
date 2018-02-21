@@ -56,7 +56,7 @@ export class AlertService {
             type: type,
             title: title,
             message: message,
-            forRoot: options.forRoot,
+            hostId: options.hostId,
             showDuration: options.showDuration
         });
     }
