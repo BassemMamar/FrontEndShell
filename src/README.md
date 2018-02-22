@@ -17,6 +17,7 @@ This project is an [Angular](https://angular.io/) `5.0.0` project, and was gener
       * [BlockUI](#how-to-use-block-ui-in-my-component-)   
       * [Toastr](#how-to-use-toastr-in-my-component-)   
       * [Alert Notification](#how-to-use-alert-notification-in-my-component-)   
+      * [Modal](#how-to-use-modal-in-my-component-)   
       * [Sweetalert2](#how-to-use-sweetalert2-in-my-component-)   
    * [Resources](#resources)      
 <!--te-->
@@ -831,25 +832,24 @@ export class UserComponent implements OnInit {
 
 
 *_Notes:_*
-* You can declare alert element as a golbal alert:
+* You can declare alert element with an id, and then show message in that specific alert:
 
 
 ```html
-<shrd-alert [forRoot]="true"></shrd-alert>
+<shrd-alert [id]="'root'"></shrd-alert>
 ``` 
 
-and in the component you can pass option to push alert as a golbal:
+and in the component you can pass option to push choose that alert:
 
 
 ```js
-this.alertService.success(message, title, { forRoot: true }); // by default forRoot is false
+this.alertService.success(message, title, { hostId: 'root' });
 ```
 
-Golbal alert use case is when we want to have one central place for alert in the module base template.
+Declare an alert with `id` is the way if you want to have Golbal alert in one central place to show messages in the module base template.
 
 
 *_Notes:_*
-* You can use local and global alert together.
 * You can specify `showDuration` time to show alert, and remove it after this time:
 
 ```js
@@ -860,6 +860,77 @@ this.alertService.success(message, title, { showDuration: 5000 }); // by default
 *_Notes:_*
 * If you didn't provide `showDuration` option, or you provide `showDuration: 0 `, the alert will not being removedat all.
 * `showDuration` is millisecond.
+
+
+---
+
+
+### How to use Modal in my component?
+
+let's say that we want to show some formation in a modal in the `user.component`:
+
+<dl>
+  <dt>In the `user.component.ts`:</dt>
+</dl>
+
+```js
+import { ModalComponent } from 'shared/components/modal/modal.component';
+
+@Component({
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
+})
+export class UserComponent implements OnInit, AfterViewInit {
+
+  @ViewChild(ModalComponent) private modal: ModalComponent;
+
+  constructor(){}
+
+  ngAfterViewInit(): void {
+    this.registerModalEvents();
+  }
+
+  showModal() {
+    this.modal.show();
+  }
+
+  save(saved: boolean) {
+    if (saved) {
+      this.modal.hide();
+    }
+  }
+
+// https://v4-alpha.getbootstrap.com/components/modal/#events
+  registerModalEvents() {
+    $(`#${this.modal.id}`).on('hidden.bs.modal', (e) => {
+      // do something...
+    });
+  }
+
+}
+ ```
+
+
+*_Notes:_*
+* Use `AfterViewInit` life cycle if you need to do sth with `@ViewChild` instance.
+
+<dl>
+  <dt>In the `user.component.html`:</dt>
+</dl>
+
+```html
+<shrd-modal [id]="'exampleModal'" [title]="'Modal title'" (onSaved)="save($event)">
+    // modal content goes here...
+    ...
+</shrd-modal>
+``` 
+
+*_Notes:_*
+* `onSaved` event is triggered when use click on `save` button, so that you can do what you need to do in this case.
+* You can inject any content you want, even our shared component like `<shrd-alert [id]="'modal-alert'"></shrd-alert>`.
+
+
+> We depend on [Bootstrap Modal](https://v4-alpha.getbootstrap.com/components/modal/), for more details read there documentaion.
 
 
 ---
@@ -922,3 +993,5 @@ export class UserComponent implements OnInit {
  *  Globals scripts/ Third party libraries
     * https://github.com/angular/angular-cli/wiki/stories-global-scripts
     * https://github.com/angular/angular-cli/wiki/stories-third-party-lib
+ *  Bootstrap-v4
+    * https://v4-alpha.getbootstrap.com/getting-started/introduction/    

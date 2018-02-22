@@ -28,8 +28,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @BlockUI('alerts-root') blockAlertsRoot: NgBlockUI;
   @BlockUI('alerts-child') blockAlertsChild: NgBlockUI;
 
-  @ViewChild(ModalComponent)
-  private modal: ModalComponent;
+  @ViewChild(ModalComponent) private modal: ModalComponent;
 
   constructor(
     private logger: LoggerService,
