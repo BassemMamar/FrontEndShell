@@ -29,7 +29,7 @@ export class ListComponent implements OnInit, AfterViewInit {
     this.logger.info(`accessLevel ${this.accessLevel}`);
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     DatatableDataLocalDemo.init();
 
     this.blockBusinessList.start();
@@ -37,5 +37,4 @@ export class ListComponent implements OnInit, AfterViewInit {
       this.blockBusinessList.stop();
     }, 3000);
   }
-
 }

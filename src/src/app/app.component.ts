@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 
-import { AuthService } from './core/auth/services/auth.service';
 import { PageLoaderService } from './core/components/page-loader/page-loader.service';
 import { ThemeHelperService } from './layout/theme-helper.service';
 import { LoggerService } from './core/base/logger/logger.service';
@@ -13,7 +12,7 @@ import { LoggerService } from './core/base/logger/logger.service';
 })
 export class AppComponent implements OnInit, AfterViewInit {
 
-  constructor(private router: Router, private authService: AuthService, private logger: LoggerService,
+  constructor(private router: Router,  private logger: LoggerService,
     private themeHelper: ThemeHelperService, private pageLoader: PageLoaderService) { }
 
   ngOnInit() { }

@@ -3,9 +3,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-/* Shared Public Modules Imports */
-import { UnwrapTagModule } from './directives/unwrap-tag/unwrap-tag.module';
-
 /* Shared Imports */
 import { AlertComponent } from './components/alert/alert.component';
 import { DateFormatPipe } from './pipes/date-format.pipe';
@@ -17,6 +14,8 @@ import { ToastrService } from './components/toastr/toastr.service';
 import { BlockUIModule } from 'ng-block-ui';
 import { BlockUITemplateComponent } from './components/block-ui/block-ui-template.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { UnwrapTagDirective } from './directives/unwrap-tag/unwrap-tag.directive';
+import { UnwrapTagService } from './directives/unwrap-tag/unwrap-tag.service';
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -27,7 +26,6 @@ import { ModalComponent } from './components/modal/modal.component';
     imports: [
         CommonModule,
         FormsModule,
-        UnwrapTagModule,
 
         // https://github.com/kuuurt13/ng-block-ui
         BlockUIModule
@@ -36,12 +34,12 @@ import { ModalComponent } from './components/modal/modal.component';
         CommonModule,
         FormsModule,
 
-        UnwrapTagModule,
         BlockUIModule,
 
         AlertComponent,
         DateFormatPipe,
         HrefPreventDefaultDirective,
+        UnwrapTagDirective,
         BlockUITemplateComponent,
         ModalComponent
 
@@ -50,6 +48,7 @@ import { ModalComponent } from './components/modal/modal.component';
         AlertComponent,
         DateFormatPipe,
         HrefPreventDefaultDirective,
+        UnwrapTagDirective,
         BlockUITemplateComponent,
         ModalComponent
     ],
@@ -69,7 +68,8 @@ export class SharedModule {
             ngModule: SharedModule,
             providers: [
                 AlertService,
-                ToastrService
+                ToastrService,
+                UnwrapTagService
                 // services go here
             ]
         };

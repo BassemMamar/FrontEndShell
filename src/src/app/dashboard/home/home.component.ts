@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     // this.modal.show();
     this.registerModalEvents();
   }

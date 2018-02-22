@@ -1,18 +1,26 @@
-<img src="https://www.aaravinfotech.com//wp-content/uploads/2016/03/web-Redesign-380x380.png" alt="Home page under construction"
-    srcset="">
-<button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestInterseptor()">
-    TEST</button>
+<div style="text-align:center">
+    <img src="https://www.aaravinfotech.com//wp-content/uploads/2016/03/web-Redesign-380x380.png" alt="Home page under construction">
+</div>
 
-<button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestToastr()">
-    toastr</button>
+<div class="col-md-10 col-md-offset-1 text-center ">
+    <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestInterseptor()">
+        Api Call
+    </button>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-</button>
-<button type="button" class="btn btn-primary" (click)="showModal()">
-    Launch demo modal from code
-</button>
+    <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestToastr()">
+        Toastr
+    </button>
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Modal (html)
+    </button>
+    <button type="button" class="btn btn-primary" (click)="showModal()">
+        Modal (code)
+    </button>
+</div>
+
+<hr>
 
 <shrd-alert></shrd-alert>
 
@@ -25,7 +33,9 @@
     <button class="btn btn-default" (click)="clear()">Clear</button>
     <button class="btn btn-default" (click)="blockRoot()">Block Root</button>
 </div>
+
 <hr>
+
 <div *blockUI="'alerts-child';template:blockTemplate;" class="col-md-10 col-md-offset-1 text-center alert-custom">
     <h1>Alerts for Child</h1>
     <button class="btn btn-success" (click)="success('Success!!')">Success</button>
@@ -38,7 +48,7 @@
 
 
 <shrd-modal [id]="'exampleModal'" [title]="'Modal title'" (onSaved)="save($event)">
-        <shrd-alert [id]="'modal-alert'"></shrd-alert>
+    <shrd-alert [id]="'modal-alert'"></shrd-alert>
 
     <div class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-max-height="200">
         <p>

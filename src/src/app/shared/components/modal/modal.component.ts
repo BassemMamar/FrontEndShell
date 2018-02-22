@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 
-// import * as $ from 'jquery';
 import * as bootstrap from 'bootstrap';
 
 // https://v4-alpha.getbootstrap.com/components/modal/#via-javascript

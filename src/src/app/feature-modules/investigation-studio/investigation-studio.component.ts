@@ -6,7 +6,6 @@ import { NavMenuItem } from '../../layout/model/nav-menu-item';
 @Component({
   // tslint:disable-next-line:component-selector
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
-
   templateUrl: './investigation-studio.component.html',
   styleUrls: ['./investigation-studio.component.scss']
 })
