@@ -1,10 +1,10 @@
 <header class="m-grid__item		m-header" data-minimize="minimize" data-minimize-offset="200" data-minimize-mobile-offset="200">
   <app-header-nav-top [current-module-name]="'B.A.M'"></app-header-nav-top>
-  <app-header-nav-bottom [nav-menu-items]="navMenuItems"></app-header-nav-bottom>
 </header>
-
-<div class=" m-grid__item m-grid__item--fluid m-grid m-grid--hor-desktop m-grid--desktop m-body">
+<!-- m-grid--hor-desktop -->
+<div class=" m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
   <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver	m-container m-container--responsive m-container--xxl m-page__container">
+    <app-aside-nav [nav-menu-items]="navMenuItems"></app-aside-nav>
     <div class="m-grid__item m-grid__item--fluid m-wrapper">
       <!-- <app-breadcrumbs></app-breadcrumbs> -->
       <div class="m-content">

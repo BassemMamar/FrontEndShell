@@ -3,11 +3,11 @@ import { NavMenuItem } from '../../model/nav-menu-item';
 
 @Component({
   // tslint:disable-next-line:component-selector
-  selector: 'layout-header-nav-bottom-item',
-  templateUrl: './header-nav-bottom-item.component.html',
-  styleUrls: ['./header-nav-bottom-item.component.scss']
+  selector: 'layout-aside-nav-item',
+  templateUrl: './aside-nav-item.component.html',
+  styleUrls: ['./aside-nav-item.component.scss']
 })
-export class HeaderNavBottomItemComponent implements OnInit {
+export class AsideNavItemComponent implements OnInit {
 
   // tslint:disable-next-line:no-input-rename
   @Input('nav-menu-item') navMenuItem: NavMenuItem;

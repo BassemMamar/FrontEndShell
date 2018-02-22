@@ -7,9 +7,11 @@ import { SharedModule } from '../shared/shared.module';
 import { ThemeHelperService } from './theme-helper.service';
 import { HeaderNavTopComponent } from './header-nav-top/header-nav-top.component';
 import { HeaderNavBottomComponent } from './header-nav-bottom/header-nav-bottom.component';
+import { HeaderNavBottomItemComponent } from './header-nav-bottom/header-nav-bottom-item/header-nav-bottom-item.component';
 import { FooterComponent } from './footer/footer.component';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { NavItemContentComponent } from './header-nav-bottom/nav-item-content/nav-item-content.component';
+import { AsideNavComponent } from './aside-nav/aside-nav.component';
+import { AsideNavItemComponent } from './aside-nav/aside-nav-item/aside-nav-item.component';
 
 
 
@@ -21,15 +23,18 @@ import { NavItemContentComponent } from './header-nav-bottom/nav-item-content/na
   declarations: [
     HeaderNavTopComponent,
     HeaderNavBottomComponent,
-    NavItemContentComponent,
+    HeaderNavBottomItemComponent,
     FooterComponent,
-    BreadcrumbsComponent
+    BreadcrumbsComponent,
+    AsideNavComponent,
+    AsideNavItemComponent
   ],
   exports: [
     HeaderNavTopComponent,
     HeaderNavBottomComponent,
     FooterComponent,
     BreadcrumbsComponent,
+    AsideNavComponent
   ],
   providers: [ThemeHelperService]
 })

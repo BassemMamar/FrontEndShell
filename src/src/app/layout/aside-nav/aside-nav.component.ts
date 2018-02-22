@@ -1,23 +1,26 @@
-// import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, AfterViewInit, Input } from '@angular/core';
+import { NavMenuItem } from '../model/nav-menu-item';
 
-// declare let mLayout: any;
-// @Component({
-//     selector: 'app-aside-nav',
-//     templateUrl: './aside-nav.component.html',
-//     encapsulation: ViewEncapsulation.None,
-// })
-// export class AsideNavComponent implements OnInit, AfterViewInit {
+declare let mLayout: any;
+@Component({
+    selector: 'app-aside-nav',
+    templateUrl: './aside-nav.component.html',
+    encapsulation: ViewEncapsulation.None,
+})
+export class AsideNavComponent implements OnInit, AfterViewInit {
 
+    // tslint:disable-next-line:no-input-rename
+    @Input('nav-menu-items') navMenuItems: NavMenuItem[];
 
-//     constructor() {
+    constructor() {
 
-//     }
+    }
 
-//     ngOnInit() {
+    ngOnInit() {
 
-//     }
+    }
 
-//     ngAfterViewInit() {
-//         mLayout.initAside();
-//     }
-// }
+    ngAfterViewInit() {
+        mLayout.initAside();
+    }
+}
