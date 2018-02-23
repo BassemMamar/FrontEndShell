@@ -17,8 +17,7 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
     constructor(
         private themeHelper: ThemeHelperService,
         public authService: AuthService,
-        private communicationService: CommunicationService,
-        private pageLoader: PageLoaderService) { }
+        private communicationService: CommunicationService) { }
     ngOnInit() {
     }
 
@@ -28,14 +27,11 @@ export class HeaderNavTopComponent implements OnInit, AfterViewInit {
 
 
     login() {
-        this.pageLoader.setLoading(true);
-
         const redirectUrl = '/home';
         this.authService.login(AuthClients.FES, redirectUrl);
     }
 
     logout() {
-        this.pageLoader.setLoading(true);
         this.authService.logout();
     }
 

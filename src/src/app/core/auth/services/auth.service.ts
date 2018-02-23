@@ -11,6 +11,9 @@ import { EnumType } from '../../base/utils/interfaces';
 import { AuthorizationService } from '../pages-access-authorization/authorization.service';
 import { StorageService } from '../../base/storage/storage.service';
 
+import { PageLoaderService } from '../../components/page-loader/page-loader.service';
+import { ToastrService } from '../../../shared/components/toastr/toastr.service';
+
 import swal from 'sweetalert2';
 import Sweetalert2 from 'sweetalert2';
 
@@ -30,7 +33,9 @@ export class AuthService {
         private authorizationService: AuthorizationService,
         private logger: LoggerService,
         private storageService: StorageService,
-        private Common: CommonService) {
+        private Common: CommonService,
+        private toasrtService: ToastrService,
+        private pageLoader: PageLoaderService) {
 
         this.userProfile = this.getUserProfile() || new UserProfile();
         this.logger.log('userProfile: ', this.userProfile);
@@ -60,18 +65,13 @@ export class AuthService {
 
     async login(authClient: string, redirectUrl: string) {
         try {
-            // cfpLoadingBar.start();
+            this.pageLoader.setLoading(true);
             await this.oidcService.signin(authClient, redirectUrl);
-            // cfpLoadingBar.complete();
             this.logger.log('signinRedirect done');
 
         } catch (error) {
-
-            // messageHandler.show({
-            //     message: 'Login Failed... ' + err,
-            //     messageType: messageHandler.messageTypes.error
-            // });
-            // cfpLoadingBar.complete();
+            this.toasrtService.error(error, 'Login Failed.', { timeOut: 5000 });
+            this.pageLoader.setLoading(false);
             this.logger.log(`oidcService login failed: ${error}`);
             throw error;
 
@@ -96,19 +96,15 @@ export class AuthService {
     }
     async logout() {
         try {
-            // cfpLoadingBar.start();
+            this.pageLoader.setLoading(true);
             const resp = await this.oidcService.signout(this.userProfile.id_token);
             this.reset();
             this.authorizationService.remove();
             this.setLoggedIn(false);
-            // cfpLoadingBar.complete();
             this.logger.log(`signed out: ${resp}`);
         } catch (error) {
-            // messageHandler.show({
-            //     message: 'logout Failed.. ' + err,
-            //     messageType: messageHandler.messageTypes.error
-            // });
-            // cfpLoadingBar.complete();
+            this.toasrtService.error(error, 'logout Failed.', { timeOut: 5000 });
+            this.pageLoader.setLoading(false);
             this.logger.log(`signoutRedirect failed: ${error} `);
         }
     }
@@ -173,35 +169,7 @@ export class AuthService {
 
                     }
                 });
-
                 break;
         }
     }
-
-
-    // private getRoles(oidcUserRoles): string[] {
-    //     let roleResults = [];
-    //     const UserRolesArray = this.Common.convertEnumToArray(UserRole, EnumType.String);
-    //     if (Array.isArray(oidcUserRoles)) {
-    //         /**
-    //          * return roles array which exist in both:
-    //          * oidcUserRoles which comes from auth server
-    //          * UserRoles which is already defined in our app
-    //          * result array properties are written as they declared in UserRoles array
-    //          */
-    //         roleResults = UserRolesArray.filter(localRole =>
-    //             oidcUserRoles
-    //                 .map(oidcRole => oidcRole.toLowerCase())
-    //                 .indexOf(localRole.toLowerCase()) !== -1);
-    //     } else
-    //         if (typeof oidcUserRoles === 'string') {
-    //             roleResults = UserRolesArray.filter(localRole => localRole.toLowerCase() === oidcUserRoles.toLowerCase());
-    //         } else {
-    //             this.logger.error(`There is an issue in roles coming from auth server..`, oidcUserRoles);
-    //             throw new Error(`There is an issue in roles coming from auth server..`);
-    //         }
-
-    //     return roleResults;
-    // }
-
 }
