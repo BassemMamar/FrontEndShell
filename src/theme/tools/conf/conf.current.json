@@ -50,7 +50,6 @@
                                 "{$config.path.node_modules}/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
                             ]
                         },
-                     
                         "socicon": {
                             "styles": [
                                 "{$config.path.node_modules}/socicon/css/socicon.css"
@@ -103,6 +102,14 @@
                             "styles": [
                                 "{$config.path.node_modules}/animate.css/animate.min.css"
                             ]
+                        },
+                        "bootstrap-touchspin": {
+                            "styles": [
+                                "{$config.path.node_modules}/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css"
+                            ],
+                            "scripts": [
+                                "{$config.path.node_modules}/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js"
+                            ]
                         }
                     }
                 },
@@ -113,7 +120,26 @@
                     "fonts": "{$config.output}/fonts"
                 }
             },
-            "custom": {}
+            "custom": {
+                "jquery-ui": {
+                    "src": {
+                        "styles": [
+                            "{$config.path.src}/vendors/jquery-ui/jquery-ui.min.css"
+                        ],
+                        "scripts": [
+                            "{$config.path.src}/vendors/jquery-ui/jquery-ui.min.js"
+                        ],
+                        "images": [
+                            "{$config.path.node_modules}/jquery-ui/themes/base/images/*.png"
+                        ]
+                    },
+                    "bundle": {
+                        "styles": "{$config.output}/vendors/custom/jquery-ui/jquery-ui.bundle.css",
+                        "scripts": "{$config.output}/vendors/custom/jquery-ui/jquery-ui.bundle.js",
+                        "images": "{$config.output}/vendors/custom/jquery-ui/images"
+                    }
+                }
+            }
         },
         "demo": {
             "demo5": {
@@ -138,9 +164,7 @@
                 "custom": {
                     "src": {
                         "scripts": [],
-                        "media": [
-                            
-                        ]
+                        "media": []
                     },
                     "output": {
                         "scripts": "{$config.output}/demo/demo5/custom/",

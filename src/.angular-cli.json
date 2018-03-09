@@ -40,8 +40,8 @@
       "scripts": [
         "assets/vendors.bundle.js",
         "assets/scripts.bundle.js",
+        "assets/vendors/custom/jquery-ui/jquery-ui.bundle.js",
    
-        
         "../theme/src/js/demo/default/custom/components/datatables/base/data-local.js"
       ],
       "environmentSource": "environments/environment.ts",

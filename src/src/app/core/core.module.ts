@@ -1,6 +1,7 @@
 /* Angular Imports */
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // this is needed!
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, UrlSerializer } from '@angular/router';
 
@@ -30,6 +31,7 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
 @NgModule({
   imports: [
     BrowserModule, // Which import CommonModule internally
+    BrowserAnimationsModule,
     // import HttpClientModule after BrowserModule.
     HttpClientModule,
     RouterModule,

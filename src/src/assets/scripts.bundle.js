@@ -6311,17 +6311,17 @@ jQuery.fn.extend({
              * Run
              */
             run: function (options) {
-                if (element.data('portlet-object')) {            
+                if (element.data('portlet-object')) {
                     // get instance from the element
                     portlet = element.data('portlet-object');
-                } else {                              
+                } else {
                     // create instance                   
                     Plugin.init(options);
                     Plugin.build();
-                    
+
                     // assign instance to the element                    
                     element.data('portlet-object', portlet);
-                }               
+                }
 
                 return portlet;
             },
@@ -6329,14 +6329,14 @@ jQuery.fn.extend({
             /**
              * Initialize
              */
-            init: function(options) {
+            init: function (options) {
                 portlet.options = $.extend(true, {}, $.fn.mPortlet.defaults, options);
                 portlet.events = [];
-                portlet.eventOne = false;       
+                portlet.eventOne = false;
 
-                if ( element.find('> .m-portlet__body').length !== 0 ) {
+                if (element.find('> .m-portlet__body').length !== 0) {
                     portlet.body = element.find('> .m-portlet__body');
-                } else if ( element.find('> .m-form').length !== 0 ) {
+                } else if (element.find('> .m-form').length !== 0) {
                     portlet.body = element.find('> .m-form');
                 }
             },
@@ -6348,16 +6348,16 @@ jQuery.fn.extend({
                 // remove
                 var remove = element.find('> .m-portlet__head [data-portlet-tool=remove]');
                 if (remove.length === 1) {
-                    remove.click(function(e) {
+                    remove.click(function (e) {
                         e.preventDefault();
                         Plugin.remove();
                     });
-                }                 
+                }
 
                 // reload
                 var reload = element.find('> .m-portlet__head [data-portlet-tool=reload]')
                 if (reload.length === 1) {
-                    reload.click(function(e) {
+                    reload.click(function (e) {
                         e.preventDefault();
                         Plugin.reload();
                     });
@@ -6366,7 +6366,7 @@ jQuery.fn.extend({
                 // toggle
                 var toggle = element.find('> .m-portlet__head [data-portlet-tool=toggle]');
                 if (toggle.length === 1) {
-                    toggle.click(function(e) {
+                    toggle.click(function (e) {
                         e.preventDefault();
                         Plugin.toggle();
                     });
@@ -6375,14 +6375,14 @@ jQuery.fn.extend({
                 // fullscreen
                 var fullscreen = element.find('> .m-portlet__head [data-portlet-tool=fullscreen]');
                 if (fullscreen.length === 1) {
-                    fullscreen.click(function(e) {
+                    fullscreen.click(function (e) {
                         e.preventDefault();
                         Plugin.fullscreen();
                     });
-                }                    
+                }
 
                 Plugin.setupTooltips();
-            }, 
+            },
 
             /**
              * Remove portlet
@@ -6392,16 +6392,16 @@ jQuery.fn.extend({
                     return;
                 }
 
-                if ( $('body').hasClass('m-portlet--fullscreen') && element.hasClass('m-portlet--fullscreen') ) {
+                if ($('body').hasClass('m-portlet--fullscreen') && element.hasClass('m-portlet--fullscreen')) {
                     Plugin.fullscreen('off');
                 }
 
                 Plugin.removeTooltips();
 
                 element.remove();
-                
+
                 Plugin.eventTrigger('afterRemove');
-            }, 
+            },
 
             /**
              * Set content
@@ -6409,7 +6409,7 @@ jQuery.fn.extend({
             setContent: function (html) {
                 if (html) {
                     portlet.body.html(html);
-                }               
+                }
             },
 
             /**
@@ -6476,8 +6476,8 @@ jQuery.fn.extend({
                         fullscreen.data('offset', fullscreenOn ? '0,10px,0,0' : '0,5px');
                         fullscreen.tooltip('dispose');
                         mApp.initTooltip(fullscreen);
-                    }                
-                }                   
+                    }
+                }
             },
 
             /**
@@ -6503,46 +6503,54 @@ jQuery.fn.extend({
                     var fullscreen = element.find('> .m-portlet__head [data-portlet-tool=fullscreen]');
                     if (fullscreen.length === 1) {
                         fullscreen.tooltip('dispose');
-                    }                
-                }                   
+                    }
+                }
             },
 
             /**
              * Reload
              */
             reload: function () {
-                Plugin.eventTrigger('reload');                
+                Plugin.eventTrigger('reload');
             },
 
             /**
              * Toggle
              */
             toggle: function (mode) {
-                if (mode === 'collapse' || element.hasClass('m-portlet--collapse') || element.hasClass('m-portlet--collapsed')) {
+                if (mode == null) {
+                    if (element.hasClass('m-portlet--collapse') || element.hasClass('m-portlet--collapsed')) {
+                        mode = 'expand';
+                    } else {
+                        mode = 'collapse';
+                    }
+                }
+
+                if (mode === 'expand') {
                     if (Plugin.eventTrigger('beforeExpand') === false) {
                         return;
-                    } 
+                    }
 
-                    portlet.body.slideDown(portlet.options.bodyToggleSpeed, function(){                        
-                        Plugin.eventTrigger('afterExpand');                         
+                    portlet.body.slideDown(portlet.options.bodyToggleSpeed, function () {
+                        Plugin.eventTrigger('afterExpand');
                     });
 
                     element.removeClass('m-portlet--collapse');
                     element.removeClass('m-portlet--collapsed');
                     Plugin.setupTooltips();
-                    
+
                 } else {
                     if (Plugin.eventTrigger('beforeCollapse') === false) {
                         return;
-                    } 
+                    }
 
-                    portlet.body.slideUp(portlet.options.bodyToggleSpeed, function() {                        
-                        Plugin.eventTrigger('afterCollapse');    
+                    portlet.body.slideUp(portlet.options.bodyToggleSpeed, function () {
+                        Plugin.eventTrigger('afterCollapse');
                     });
 
                     element.addClass('m-portlet--collapse');
-                    Plugin.setupTooltips();                    
-                }                  
+                    Plugin.setupTooltips();
+                }
             },
 
             /**
@@ -6559,7 +6567,7 @@ jQuery.fn.extend({
                     element.removeClass('m-portlet--fullscreen');
 
                     Plugin.setupTooltips();
-                    
+
                     Plugin.eventTrigger('afterFullscreenOff');
                 } else {
                     Plugin.eventTrigger('beforeFullscreenOn');
@@ -6568,10 +6576,10 @@ jQuery.fn.extend({
                     $('body').addClass('m-portlet--fullscreen');
 
                     Plugin.setupTooltips();
-                    
+
                     Plugin.eventTrigger('afterFullscreenOn');
-                }                  
-            }, 
+                }
+            },
 
             /**
              * sync 
@@ -6583,7 +6591,7 @@ jQuery.fn.extend({
             /**
              * Trigger events
              */
-            eventTrigger: function(name) {
+            eventTrigger: function (name) {
                 for (i = 0; i < portlet.events.length; i++) {
                     var event = portlet.events[i];
                     if (event.name == name) {
@@ -6593,7 +6601,7 @@ jQuery.fn.extend({
                                 return event.handler.call(this, portlet);
                             }
                         } else {
-                            return  event.handler.call(this, portlet);
+                            return event.handler.call(this, portlet);
                         }
                     }
                 }
@@ -6602,7 +6610,7 @@ jQuery.fn.extend({
             /**
              * Add event
              */
-            addEvent: function(name, handler, one) {
+            addEvent: function (name, handler, one) {
                 portlet.events.push({
                     name: name,
                     handler: handler,
@@ -6622,7 +6630,7 @@ jQuery.fn.extend({
         //////////////////////
         // ** Public API ** //
         //////////////////////
-       
+
         /**
          * Remove portlet
          * @returns {mPortlet}
@@ -6687,10 +6695,10 @@ jQuery.fn.extend({
             return Plugin.getBody();
         };
 
-         /**
-         * Get portletbody 
-         * @returns {jQuery}
-         */
+        /**
+        * Get portletbody 
+        * @returns {jQuery}
+        */
         portlet.getSelf = function () {
             return Plugin.getSelf();
         };
@@ -6699,7 +6707,7 @@ jQuery.fn.extend({
          * Set portlet content
          * @returns {mPortlet}
          */
-        portlet.on =  function (name, handler) {
+        portlet.on = function (name, handler) {
             return Plugin.addEvent(name, handler);
         };
 
@@ -6707,9 +6715,9 @@ jQuery.fn.extend({
          * Set portlet content
          * @returns {mPortlet}
          */
-        portlet.one =  function (name, handler) {
+        portlet.one = function (name, handler) {
             return Plugin.addEvent(name, handler, true);
-        };        
+        };
 
         return portlet;
     };
@@ -6720,7 +6728,7 @@ jQuery.fn.extend({
         tooltips: true,
         tools: {
             toggle: {
-                collapse: 'Collapse', 
+                collapse: 'Collapse',
                 expand: 'Expand'
             },
             reload: 'Reload',
@@ -6728,7 +6736,7 @@ jQuery.fn.extend({
             fullscreen: {
                 on: 'Fullscreen',
                 off: 'Exit Fullscreen'
-            }        
+            }
         }
     };
 }(jQuery));
@@ -7311,445 +7319,449 @@ jQuery.fn.extend({
         targetState: ''
     }; 
 }(jQuery));
-// (function($) {
-//     // plugin setup
-//     $.fn.mWizard = function(options) {
-//         //== Main object
-//         var wizard = this;
-//         var element = $(this);
+(function ($) {
+    // plugin setup
+    $.fn.mWizard = function (options) {
+        //== Main object
+        var wizard = this;
+        var element = $(this);
 
-//         /********************
-//          ** PRIVATE METHODS
-//          ********************/
-//         var Plugin = {
-//             /**
-//              * Run
-//              */
-//             run: function (options) {
-//                 if (!element.data('wizard')) {                      
-//                     //== Create instance
-//                     Plugin.init(options);
-//                     Plugin.build();
-                    
-//                     //== Assign instance to the element                    
-//                     element.data('wizard', wizard);
-//                 } else {
-//                     // get instance from the element
-//                     wizard = element.data('wizard');
-//                 }               
+        /********************
+         ** PRIVATE METHODS
+         ********************/
+        var Plugin = {
+            /**
+             * Run
+             */
+            run: function (options) {
+                if (!element.data('wizard')) {
+                    //== Create instance
+                    Plugin.init(options);
+                    Plugin.build();
 
-//                 return wizard;
-//             },
+                    //== Assign instance to the element                    
+                    element.data('wizard', wizard);
+                } else {
+                    // get instance from the element
+                    wizard = element.data('wizard');
+                }
 
-//             /**
-//              * Initialize Form Wizard
-//              */
-//             init: function(options) {
-//                 //== Elements
-//                 wizard.steps = wizard.find('.m-wizard__step');
-//                 wizard.progress = wizard.find('.m-wizard__progress .progress-bar'); 
-//                 wizard.btnSubmit = wizard.find('[data-wizard-action="submit"]'); 
-//                 wizard.btnNext = wizard.find('[data-wizard-action="next"]'); 
-//                 wizard.btnPrev = wizard.find('[data-wizard-action="prev"]'); 
-//                 wizard.btnLast = wizard.find('[data-wizard-action="last"]'); 
-//                 wizard.btnFirst = wizard.find('[data-wizard-action="first"]');  
+                return wizard;
+            },
 
-//                 //== Merge default and user defined options
-//                 wizard.options = $.extend(true, {}, $.fn.mWizard.defaults, options);
+            /**
+             * Initialize Form Wizard
+             */
+            init: function (options) {
+                //== Elements
+                wizard.steps = wizard.find('.m-wizard__step');
+                wizard.progress = wizard.find('.m-wizard__progress .progress-bar');
+                wizard.btnSubmit = wizard.find('[data-wizard-action="submit"]');
+                wizard.btnNext = wizard.find('[data-wizard-action="next"]');
+                wizard.btnPrev = wizard.find('[data-wizard-action="prev"]');
+                wizard.btnLast = wizard.find('[data-wizard-action="last"]');
+                wizard.btnFirst = wizard.find('[data-wizard-action="first"]');
 
-//                 //== Variables
-//                 wizard.events = [];
-//                 wizard.currentStep = 1;
-//                 wizard.totalSteps = wizard.steps.length;  
+                //== Merge default and user defined options
+                wizard.options = $.extend(true, {}, $.fn.mWizard.defaults, options);
 
-//                 //== Init current step
-//                 if (wizard.options.startStep > 1) {
-//                     Plugin.goTo(wizard.options.startStep);
-//                 }       
+                //== Variables
+                wizard.events = [];
+                wizard.currentStep = 1;
+                wizard.totalSteps = wizard.steps.length;
 
-//                 //== Init UI
-//                 Plugin.updateUI();
-//             },
+                //== Init current step
+                if (wizard.options.startStep > 1) {
+                    Plugin.goTo(wizard.options.startStep);
+                }
 
-//             /**
-//              * Build Form Wizard
-//              */
-//             build: function() {
-//                 //== Next button event handler
-//                 wizard.btnNext.on('click', function (e) {
-//                     e.preventDefault();
-//                     Plugin.goNext();
-//                 });
+                //== Init UI
+                Plugin.updateUI();
+            },
 
-//                 //== Prev button event handler
-//                 wizard.btnPrev.on('click', function (e) {
-//                     e.preventDefault();
-//                     Plugin.goPrev();
-//                 });
+            /**
+             * Build Form Wizard
+             */
+            build: function () {
+                //== Next button event handler
+                wizard.btnNext.on('click', function (e) {
+                    e.preventDefault();
+                    Plugin.goNext();
+                });
 
-//                 //== First button event handler
-//                 wizard.btnFirst.on('click', function (e) {
-//                     e.preventDefault();
-//                     Plugin.goFirst();
-//                 });
+                //== Prev button event handler
+                wizard.btnPrev.on('click', function (e) {
+                    e.preventDefault();
+                    Plugin.goPrev();
+                });
 
-//                 //== Last button event handler
-//                 wizard.btnLast.on('click', function (e) {
-//                     e.preventDefault();
-//                     Plugin.goLast();
-//                 });
+                //== First button event handler
+                wizard.btnFirst.on('click', function (e) {
+                    e.preventDefault();
+                    Plugin.goFirst();
+                });
 
-//                 wizard.find('.m-wizard__step a.m-wizard__step-number').on('click', function() {
-//                     var step = $(this).parents('.m-wizard__step');
-//                     var num;
-//                     $(this).parents('.m-wizard__steps').find('.m-wizard__step').each(function(index) {
-//                         if (step.is( $(this) )) {
-//                             num = (index + 1);
-//                             return;
-//                         }
-//                     });
+                //== Last button event handler
+                wizard.btnLast.on('click', function (e) {
+                    e.preventDefault();
+                    Plugin.goLast();
+                });
 
-//                     if (num) {
-//                         Plugin.goTo(num);
-//                     }                    
-//                 });
-//             },
+                wizard.find('.m-wizard__step a.m-wizard__step-number').on('click', function () {
+                    var step = $(this).parents('.m-wizard__step');
+                    var num;
+                    $(this).parents('.m-wizard__steps').find('.m-wizard__step').each(function (index) {
+                        if (step.is($(this))) {
+                            num = (index + 1);
+                            return;
+                        }
+                    });
 
-//             /**
-//              * Sync object instance
-//              */
-//             sync: function () {
-//                 $(element).data('wizard', wizard);
-//             }, 
+                    if (num) {
+                        Plugin.goTo(num);
+                    }
+                });
+            },
 
-//             /**
-//              * Handles wizard click toggle
-//              */
-//             goTo: function(number) {
-//                 //== Skip if this step is already shown
-//                 if (number === wizard.currentStep) {
-//                     return;
-//                 }
+            /**
+             * Sync object instance
+             */
+            sync: function () {
+                $(element).data('wizard', wizard);
+            },
 
-//                 //== Validate step number
-//                 if (number) {
-//                     number = parseInt(number); 
-//                 } else {
-//                     number = Plugin.getNextStep();
-//                 }
+            /**
+             * Handles wizard click toggle
+             */
+            goTo: function (number) {
+                //== Skip if this step is already shown
+                if (number === wizard.currentStep) {
+                    return;
+                }
 
-//                 //== Before next and prev events
-//                 var callback;
+                //== Validate step number
+                if (number) {
+                    number = parseInt(number);
+                } else {
+                    number = Plugin.getNextStep();
+                }
 
-//                 if (number > wizard.currentStep) {
-//                     callback = Plugin.eventTrigger('beforeNext');
-//                 } else {
-//                     callback = Plugin.eventTrigger('beforePrev');
-//                 }
+                //== Before next and prev events
+                var callback;
 
-//                 //== Continue if no exit
-//                 if (callback !== false) {
-//                     //== Set current step
-//                     wizard.currentStep = number;
+                if (number > wizard.currentStep) {
+                    callback = Plugin.eventTrigger('beforeNext');
+                } else {
+                    callback = Plugin.eventTrigger('beforePrev');
+                }
 
-//                     //== Update UI
-//                     Plugin.updateUI();             
+                //== Continue if no exit
+                if (callback !== false) {
+                    //== Set current step
+                    wizard.currentStep = number;
 
-//                     //== Trigger change event
-//                     Plugin.eventTrigger('change')       
-//                 }
-                
-//                 //== After next and prev events
-//                 if (number > wizard.startStep) {
-//                     Plugin.eventTrigger('afterNext');
-//                 } else {
-//                     Plugin.eventTrigger('afterPrev');
-//                 }
+                    //== Update UI
+                    Plugin.updateUI();
 
-//                 return wizard;
-//             },
+                    //== Trigger change event
+                    Plugin.eventTrigger('change')
+                }
 
-//             updateUI: function(argument) {
-//                 //== Update progress bar
-//                 Plugin.updateProgress();
+                //== After next and prev events
+                if (number > wizard.startStep) {
+                    Plugin.eventTrigger('afterNext');
+                } else {
+                    Plugin.eventTrigger('afterPrev');
+                }
 
-//                 //== Show current target content
-//                 Plugin.handleTarget();
+                return wizard;
+            },
 
-//                 //== Set classes
-//                 Plugin.setStepClass();
+            updateUI: function (argument) {
+                //== Update progress bar
+                Plugin.updateProgress();
 
-//                 //== Apply nav step classes
-//                 wizard.find('.m-wizard__step').removeClass('m-wizard__step--current').removeClass('m-wizard__step--done');
-//                 for (var i = 1; i < wizard.currentStep; i++) {
-//                     wizard.find('.m-wizard__step').eq(i - 1).addClass('m-wizard__step--done');
-//                 }
-//                 wizard.find('.m-wizard__step').eq(wizard.currentStep - 1).addClass('m-wizard__step--current');
-//             },
+                //== Show current target content
+                Plugin.handleTarget();
 
-//             /**
-//              * Check last step
-//              */
-//             isLastStep: function() {
-//                 return wizard.currentStep === wizard.totalSteps;
-//             },
+                //== Set classes
+                Plugin.setStepClass();
 
-//             /**
-//              * Check first step
-//              */
-//             isFirstStep: function() {
-//                 return wizard.currentStep === 1;
-//             },
+                //== Apply nav step classes
+                wizard.find('.m-wizard__step').removeClass('m-wizard__step--current').removeClass('m-wizard__step--done');
+                for (var i = 1; i < wizard.currentStep; i++) {
+                    wizard.find('.m-wizard__step').eq(i - 1).addClass('m-wizard__step--done');
+                }
+                wizard.find('.m-wizard__step').eq(wizard.currentStep - 1).addClass('m-wizard__step--current');
+            },
 
-//             /**
-//              * Check between step
-//              */
-//             isBetweenStep: function() {
-//                 return Plugin.isLastStep() === false && Plugin.isFirstStep() === false;
-//             },
+            /**
+             * Check last step
+             */
+            isLastStep: function () {
+                return wizard.currentStep === wizard.totalSteps;
+            },
 
-//             /**
-//              * Set step class
-//              */
-//             setStepClass: function() {
-//                 if (Plugin.isLastStep()) {
-//                     element.addClass('m-wizard--step-last');
-//                 } else {
-//                     element.removeClass('m-wizard--step-last');
-//                 }
+            /**
+             * Check first step
+             */
+            isFirstStep: function () {
+                return wizard.currentStep === 1;
+            },
 
-//                 if (Plugin.isFirstStep()) {
-//                     element.addClass('m-wizard--step-first');
-//                 } else {
-//                     element.removeClass('m-wizard--step-first');
-//                 }
+            /**
+             * Check between step
+             */
+            isBetweenStep: function () {
+                return Plugin.isLastStep() === false && Plugin.isFirstStep() === false;
+            },
 
-//                 if (Plugin.isBetweenStep()) {
-//                     element.addClass('m-wizard--step-between');
-//                 } else {
-//                     element.removeClass('m-wizard--step-between');
-//                 }
-//             },
+            /**
+             * Set step class
+             */
+            setStepClass: function () {
+                if (Plugin.isLastStep()) {
+                    element.addClass('m-wizard--step-last');
+                } else {
+                    element.removeClass('m-wizard--step-last');
+                }
 
-//             /**
-//              * Go to the next step
-//              */
-//             goNext: function() {
-//                 return Plugin.goTo( Plugin.getNextStep() );
-//             },
+                if (Plugin.isFirstStep()) {
+                    element.addClass('m-wizard--step-first');
+                } else {
+                    element.removeClass('m-wizard--step-first');
+                }
 
-//             /**
-//              * Go to the prev step
-//              */
-//             goPrev: function() {
-//                 return Plugin.goTo( Plugin.getPrevStep() );
-//             },
+                if (Plugin.isBetweenStep()) {
+                    element.addClass('m-wizard--step-between');
+                } else {
+                    element.removeClass('m-wizard--step-between');
+                }
+            },
 
-//             /**
-//              * Go to the last step
-//              */
-//             goLast: function() {
-//                 return Plugin.goTo( wizard.totalSteps );
-//             },
+            /**
+             * Go to the next step
+             */
+            goNext: function () {
+                return Plugin.goTo(Plugin.getNextStep());
+            },
 
-//             /**
-//              * Go to the first step
-//              */
-//             goFirst: function() {
-//                 return Plugin.goTo( 1 );
-//             },
+            /**
+             * Go to the prev step
+             */
+            goPrev: function () {
+                return Plugin.goTo(Plugin.getPrevStep());
+            },
 
-//             /**
-//              * Set progress
-//              */
-//             updateProgress: function() {
-//                 //== Calculate progress position
+            /**
+             * Go to the last step
+             */
+            goLast: function () {
+                return Plugin.goTo(wizard.totalSteps);
+            },
 
-//                 if (!wizard.progress) {
-//                     return;
-//                 } 
+            /**
+             * Go to the first step
+             */
+            goFirst: function () {
+                return Plugin.goTo(1);
+            },
 
-//                 //== Update progress
-//                 if (element.hasClass('m-wizard--1')) {
-//                     var width = 100 * ((wizard.currentStep) / (wizard.totalSteps));
-//                     var offset = element.find('.m-wizard__step-number').width();
-//                     wizard.progress.css('width', 'calc(' + width + '% + ' + (offset / 2)  + 'px)');
-//                 } else if (element.hasClass('m-wizard--2')) {
-//                     if (wizard.currentStep === 1) {
-//                         return;
-//                     }
+            /**
+             * Set progress
+             */
+            updateProgress: function () {
+                //== Calculate progress position
 
-//                     var step = element.find('.m-wizard__step').eq(0);
-//                     var progress = (wizard.currentStep - 1) * (100 * (1 / (wizard.totalSteps - 1)));
+                if (!wizard.progress) {
+                    return;
+                }
 
-//                     if (mUtil.isInResponsiveRange('minimal-desktop-and-below')) {  
-//                         wizard.progress.css('height', progress + '%');
-//                     } else {
-//                         wizard.progress.css('width', progress + '%');
-//                     }
-//                 } else {
-//                     var width = 100 * ((wizard.currentStep) / (wizard.totalSteps));
-//                     wizard.progress.css('width', width + '%'); 
-//                 }             
-//             },
+                //== Update progress
+                if (element.hasClass('m-wizard--1')) {
+                    var width = 100 * ((wizard.currentStep) / (wizard.totalSteps));
+                    var offset = element.find('.m-wizard__step-number').width();
+                    wizard.progress.css('width', 'calc(' + width + '% + ' + (offset / 2) + 'px)');
+                } else
+                    if (element.hasClass('m-wizard--2')) {
+                        var progress;
+                        if (wizard.currentStep === 1) {
+                            progress = 0;
+                        } else {
+                            var step = element.find('.m-wizard__step').eq(0);
+                            progress = (wizard.currentStep - 1) * (100 * (1 / (wizard.totalSteps - 1)));
 
-//             /**
-//              * Show/hide target content
-//              */
-//             handleTarget: function() {
-//                 var step = wizard.steps.eq(wizard.currentStep - 1);
-//                 var target = element.find( step.data('wizard-target') );
+                        }
 
-//                 element.find('.m-wizard__form-step--current').removeClass('m-wizard__form-step--current');
-//                 target.addClass('m-wizard__form-step--current');
-//             },
 
-//             /**
-//              * Get next step
-//              */
-//             getNextStep: function() {
-//                 if (wizard.totalSteps >= (wizard.currentStep + 1)) {
-//                     return wizard.currentStep + 1;
-//                 } else {
-//                     return wizard.totalSteps;
-//                 } 
-//             },
+                        if (mUtil.isInResponsiveRange('minimal-desktop-and-below')) {
+                            wizard.progress.css('height', progress + '%');
+                        } else {
+                            wizard.progress.css('width', progress + '%');
+                        }
+                    } else {
+                        var width = 100 * ((wizard.currentStep) / (wizard.totalSteps));
+                        wizard.progress.css('width', width + '%');
+                    }
+            },
 
-//             /**
-//              * Get prev step
-//              */
-//             getPrevStep: function() {
-//                 if ((wizard.currentStep - 1) >= 1) {
-//                     return wizard.currentStep - 1;
-//                 } else {
-//                     return 1;
-//                 } 
-//             },
+            /**
+             * Show/hide target content
+             */
+            handleTarget: function () {
+                var step = wizard.steps.eq(wizard.currentStep - 1);
+                var target = element.find(step.data('wizard-target'));
 
-//             /**
-//              * Trigger event
-//              */
-//             eventTrigger: function(name) {
-//                 for (i = 0; i < wizard.events.length; i++) {
-//                     var event = wizard.events[i];
-//                     if (event.name == name) {
-//                         if (event.one == true) {
-//                             if (event.fired == false) {
-//                                 wizard.events[i].fired = true;
-//                                 return event.handler.call(this, wizard);
-//                             }
-//                         } else {
-//                             return  event.handler.call(this, wizard);
-//                         }
-//                     }
-//                 }
-//             },
+                element.find('.m-wizard__form-step--current').removeClass('m-wizard__form-step--current');
+                target.addClass('m-wizard__form-step--current');
+            },
 
-//             /**
-//              * Register event
-//              */
-//             addEvent: function(name, handler, one) {
-//                 wizard.events.push({
-//                     name: name,
-//                     handler: handler,
-//                     one: one,
-//                     fired: false
-//                 });
+            /**
+             * Get next step
+             */
+            getNextStep: function () {
+                if (wizard.totalSteps >= (wizard.currentStep + 1)) {
+                    return wizard.currentStep + 1;
+                } else {
+                    return wizard.totalSteps;
+                }
+            },
 
-//                 Plugin.sync();
-//             }
-//         };
+            /**
+             * Get prev step
+             */
+            getPrevStep: function () {
+                if ((wizard.currentStep - 1) >= 1) {
+                    return wizard.currentStep - 1;
+                } else {
+                    return 1;
+                }
+            },
 
-//         //== Main variables
-//         var the = this;
-        
-//         //== Init plugin
-//         Plugin.run.apply(this, [options]);
+            /**
+             * Trigger event
+             */
+            eventTrigger: function (name) {
+                for (i = 0; i < wizard.events.length; i++) {
+                    var event = wizard.events[i];
+                    if (event.name == name) {
+                        if (event.one == true) {
+                            if (event.fired == false) {
+                                wizard.events[i].fired = true;
+                                return event.handler.call(this, wizard);
+                            }
+                        } else {
+                            return event.handler.call(this, wizard);
+                        }
+                    }
+                }
+            },
 
-//         /********************
-//          ** PUBLIC API METHODS
-//          ********************/
+            /**
+             * Register event
+             */
+            addEvent: function (name, handler, one) {
+                wizard.events.push({
+                    name: name,
+                    handler: handler,
+                    one: one,
+                    fired: false
+                });
 
-//         /**
-//          * Go to the next step 
-//          */
-//         wizard.goNext =  function () {
-//             return Plugin.goNext();
-//         };
+                Plugin.sync();
+            }
+        };
 
-//         /**
-//          * Go to the prev step 
-//          */
-//         wizard.goPrev =  function () {
-//             return Plugin.goPrev();
-//         };
+        //== Main variables
+        var the = this;
 
-//         /**
-//          * Go to the last step 
-//          */
-//         wizard.goLast =  function () {
-//             return Plugin.goLast();
-//         };
+        //== Init plugin
+        Plugin.run.apply(this, [options]);
 
-//         /**
-//          * Go to the first step 
-//          */
-//         wizard.goFirst =  function () {
-//             return Plugin.goFirst();
-//         };
+        /********************
+         ** PUBLIC API METHODS
+         ********************/
 
-//          /**
-//          * Go to a step
-//          */
-//         wizard.goTo =  function ( number ) {
-//             return Plugin.goTo( number );
-//         };
+        /**
+         * Go to the next step 
+         */
+        wizard.goNext = function () {
+            return Plugin.goNext();
+        };
 
-//         /**
-//          * Get current step number 
-//          */
-//         wizard.getStep =  function () {
-//             return wizard.currentStep;
-//         };
+        /**
+         * Go to the prev step 
+         */
+        wizard.goPrev = function () {
+            return Plugin.goPrev();
+        };
 
-//         /**
-//          * Check last step 
-//          */
-//         wizard.isLastStep =  function () {
-//             return Plugin.isLastStep();
-//         };
+        /**
+         * Go to the last step 
+         */
+        wizard.goLast = function () {
+            return Plugin.goLast();
+        };
 
-//         /**
-//          * Check first step 
-//          */
-//         wizard.isFirstStep =  function () {
-//             return Plugin.isFirstStep();
-//         };
+        /**
+         * Go to the first step 
+         */
+        wizard.goFirst = function () {
+            return Plugin.goFirst();
+        };
 
-//         /**
-//          * Attach event
-//          * @returns {mwizard}
-//          */
-//         wizard.on =  function (name, handler) {
-//             return Plugin.addEvent(name, handler);
-//         };
+        /**
+        * Go to a step
+        */
+        wizard.goTo = function (number) {
+            return Plugin.goTo(number);
+        };
 
-//         /**
-//          * Attach event that will be fired once
-//          * @returns {mwizard}
-//          */
-//         wizard.one =  function (name, handler) {
-//             return Plugin.addEvent(name, handler, true);
-//         };   
+        /**
+         * Get current step number 
+         */
+        wizard.getStep = function () {
+            return wizard.currentStep;
+        };
 
-//         return wizard;
-//     };
+        /**
+         * Check last step 
+         */
+        wizard.isLastStep = function () {
+            return Plugin.isLastStep();
+        };
 
-//     //== Default options
-//     $.fn.mWizard.defaults = {
-//         startStep: 1
-//     }; 
-// }(jQuery));
+        /**
+         * Check first step 
+         */
+        wizard.isFirstStep = function () {
+            return Plugin.isFirstStep();
+        };
+
+        /**
+         * Attach event
+         * @returns {mwizard}
+         */
+        wizard.on = function (name, handler) {
+            return Plugin.addEvent(name, handler);
+        };
+
+        /**
+         * Attach event that will be fired once
+         * @returns {mwizard}
+         */
+        wizard.one = function (name, handler) {
+            return Plugin.addEvent(name, handler, true);
+        };
+
+        return wizard;
+    };
+
+    //== Default options
+    $.fn.mWizard.defaults = {
+        startStep: 1
+    };
+}(jQuery));
 var mLayout = function () {
     var horMenu;
     var asideMenu;

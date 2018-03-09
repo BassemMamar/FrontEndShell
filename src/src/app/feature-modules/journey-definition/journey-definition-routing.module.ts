@@ -7,10 +7,13 @@ import { AuthenticatedGuard } from '../../core/auth/guards/authenticated.guard';
 import { AuthorizedGuard } from '../../core/auth/guards/authorized.guard';
 import { AuthClients } from '../../core/auth/model/auth-clients';
 import { FrontendShell } from '../../core/auth/pages-access-authorization/app-pages-declaration/app-pages-declaration';
+import { AccessLevelResolver } from '../../core/auth/services/access-level.resolver';
+import { AddJourneyDefinitionComponent } from './add-journey-definition/add-journey-definition.component';
 
-export function RecentJourneys1Match() {
-  return CaseInsensitiveMatcher('RecentJourneys1').apply(this, arguments);
+export function AddJourneyDefinitionMatch() {
+  return CaseInsensitiveMatcher('New').apply(this, arguments);
 }
+
 
 const routes: Routes = [
   {
@@ -23,7 +26,17 @@ const routes: Routes = [
       moduleName: FrontendShell.JourneyDefinition.Name
     },
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'RecentJourneys1' },
+      { path: '', pathMatch: 'full', redirectTo: 'New' },
+      {
+        matcher: AddJourneyDefinitionMatch, component: AddJourneyDefinitionComponent,
+        data: {
+          moduleName: FrontendShell.JourneyDefinition.Name,
+          pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
+        },
+        resolve: {
+          accessLevel: AccessLevelResolver
+        }
+      }
     ]
   }
 ];

@@ -13,14 +13,14 @@ export const pagesAccessAuthorizationInfo = [
                 name: FrontendShell.BusinessAccountManagement.Pages.ListBusiness,
                 rolesAccess: [
                     { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess },
-                   // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+                    // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
                 ]
             },
             {
                 name: FrontendShell.BusinessAccountManagement.Pages.EditBusiness,
                 rolesAccess: [
                     { role: UserRole.BusinessAccountManager, accessLevel: AccessLevel.FullAccess },
-                   // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
+                    // { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.ReadOnly }
                 ]
             }
         ]
@@ -60,7 +60,14 @@ export const pagesAccessAuthorizationInfo = [
         rolesAccess: [
             { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
         ],
-        pages: []
+        pages: [
+            {
+                name: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition,
+                rolesAccess: [
+                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
+                ]
+            }
+        ]
     }
 
 ];

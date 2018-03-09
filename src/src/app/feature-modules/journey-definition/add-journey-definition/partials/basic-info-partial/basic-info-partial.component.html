@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-xl-8 offset-xl-2">
+    <div class="m-form__section m-form__section--first">
+      <!-- <div class="m-form__heading">
+        <h3 class="m-form__heading-title">
+          Name & Code
+          <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i>
+        </h3>
+      </div> -->
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          * Name:
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <input type="text" name="name" class="form-control m-input m-input--air" placeholder="" value="Nick Stone">
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          * Code:
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <input #code type="text" name="code" class="form-control m-input m-input--air" placeholder="">
+          <span class="m-form__help">
+            https://{{code.value}}.onboardingsuite.com
+          </span>
+        </div>
+      </div>
+
+      <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Is Active
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <label class="m-checkbox">
+            <input type="checkbox">
+            <span></span>
+          </label>
+
+
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Allow manual cropping
+        </label>
+        <div class="col-xl-9 col-lg-9">
+
+          <label class="m-checkbox">
+            <input type="checkbox">
+            <span></span>
+          </label>
+
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Introduction message:
+        </label>
+        <div class="col-xl-1 col-lg-1">
+
+          <label class="m-checkbox">
+            <input type="checkbox" #introMsg name="msg">
+            <span></span>
+          </label>
+        </div>
+        <div class="col-xl-8 col-lg-8">
+
+          <!-- [attr.disabled]="introMsg.checked?null:''" -->
+          <input *ngIf="introMsg.checked" type="text" class="form-control m-input--air" aria-label="Text input with checkbox">
+
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Enable age limit:
+        </label>
+        <div class="col-xl-1 col-lg-1">
+
+          <label class="m-checkbox">
+            <input type="checkbox" #agelimit name="agelimit" (change)="initTouchSpin(agelimit.checked)">
+            <span></span>
+          </label>
+        </div>
+        <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
+          <input id="age_limite_min" type="text" class="form-control m-input--air" value="0" name="age_limite_min" placeholder="Select time" >
+
+        </div>
+        <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
+          <input id="age_limite_max" type="text" class="form-control m-input--air" value="1" name="age_limite_max" placeholder="Select time" >
+
+        </div>
+      </div>
+
+
+
+      <div class="m-separator m-separator--dashed m-separator--lg"></div>
+
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Reasons:
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <tag-input class="form-control m-input--air" [(ngModel)]="reasons" [secondaryPlaceholder]="'Type a Reason'" [placeholder]="'Another Reason'"></tag-input>
+
+        </div>
+      </div>
+
+      <!-- {{reasons | json}} -->
+    </div>
+
+  </div>
+</div>

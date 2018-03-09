@@ -6,7 +6,9 @@
     "module": "es2015",
     "experimentalDecorators": true,
     "types": [
-      "jquery"
+      "jquery",
+      "bootstrap-touchspin",
+      "jqueryui"
     ]
   },
   "exclude": [

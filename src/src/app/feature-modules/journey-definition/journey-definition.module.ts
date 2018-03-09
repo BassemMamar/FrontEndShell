@@ -8,14 +8,29 @@ import { SharedModule } from '../../shared/shared.module';
 import { LayoutModule } from '../../layout/layout.module';
 
 import { JourneyDefinitionComponent } from './journey-definition.component';
+import { AddJourneyDefinitionComponent } from './add-journey-definition/add-journey-definition.component';
+import { BasicInfoPartialComponent } from './add-journey-definition/partials/basic-info-partial/basic-info-partial.component';
+// tslint:disable-next-line:max-line-length
+import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
+import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
+import { TagInputModule } from 'ngx-chips';
+import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule.forChild(),
     LayoutModule,
+    TagInputModule,
     JourneyDefinitionRoutingModule
   ],
-  declarations: [JourneyDefinitionComponent]
+  declarations: [
+    JourneyDefinitionComponent,
+    AddJourneyDefinitionComponent,
+    BasicInfoPartialComponent,
+    EntryDefinitionPartialComponent,
+    SummaryPartialComponent,
+    TempViewComponent
+  ]
 })
 export class JourneyDefinitionModule { }

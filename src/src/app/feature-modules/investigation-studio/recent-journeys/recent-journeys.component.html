@@ -1,97 +1,221 @@
 
-<div class="m-content">
-  <!--begin::Portlet-->
-  <div class="m-portlet">
-    <div class="m-portlet__head">
-      <div class="m-portlet__head-caption">
-        <div class="m-portlet__head-title">
-          <h3 class="m-portlet__head-text">
-            SweetAlert Examples
-          </h3>
+<div class="m-portlet m-portlet--tab" >
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <span class="m-portlet__head-icon m--hide">
+          <i class="la la-gear"></i>
+        </span>
+        <h3 class="m-portlet__head-text">
+          Checkboxes and Radio addons
+        </h3>
+      </div>
+    </div>
+  </div>
+  <!--begin::Form-->
+  <form class="m-form">
+    <div class="m-portlet__body">
+      <div class="form-group m-form__group m--margin-top-10">
+        <div class="alert m-alert m-alert--default" role="alert">
+          Place any checkbox or radio option within an input group’s addon instead of text.
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Left Checkbox Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            <label class="m-checkbox m-checkbox--single m-checkbox--state m-checkbox--state-success">
+              <input type="checkbox" checked="">
+              <span></span>
+            </label>
+          </span>
+          <span class="input-group-addon">
+            $
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with checkbox">
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Right Checkbox Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            $
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with checkbox">
+          <span class="input-group-addon">
+            <label class="m-checkbox m-checkbox--single m-checkbox--state m-checkbox--state-primary">
+              <input type="checkbox" checked="">
+              <span></span>
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Right &amp; Left Checkbox Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            <label class="m-checkbox m-checkbox--single">
+              <input type="checkbox">
+              <span></span>
+            </label>
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with checkbox">
+          <span class="input-group-addon">
+            <label class="m-checkbox m-checkbox--single">
+              <input type="checkbox">
+              <span></span>
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Left Radio Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            <label class="m-radio m-radio--single m-radio--state m-radio--state-success">
+              <input type="radio" checked="">
+              <span></span>
+            </label>
+          </span>
+          <span class="input-group-addon">
+            $
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with radio">
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Right Radio Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            $
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with radio">
+          <span class="input-group-addon">
+            <label class="m-radio m-radio--single m-radio--state m-radio--state-primary">
+              <input type="radio" checked="">
+              <span></span>
+            </label>
+          </span>
+        </div>
+      </div>
+      <div class="form-group m-form__group">
+        <label>
+          Right &amp; Left Radio Addon
+        </label>
+        <div class="input-group m-form__group">
+          <span class="input-group-addon">
+            <label class="m-radio m-radio--single">
+              <input type="radio">
+              <span></span>
+            </label>
+          </span>
+          <input type="text" class="form-control" aria-label="Text input with radio">
+          <span class="input-group-addon">
+            <label class="m-radio m-radio--single">
+              <input type="radio">
+              <span></span>
+            </label>
+          </span>
         </div>
       </div>
     </div>
-    <div class="m-portlet__body">
-      <table class="table table-bordered">
-        <tbody>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">Basic alert</td>
-            <td>
-              <button type="button" class="btn btn-info m-btn m-btn--custom" id="m_sweetalert_demo_1"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">Alert title and text</td>
-            <td>
-              <button type="button" class="btn btn-focus m-btn m-btn--custom" id="m_sweetalert_demo_2"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">Enable
-              <code>warning</code>,
-              <code>error</code>,
-              <code>success</code>,
-              <code>info</code> and
-              <code>question</code> state icons</td>
-            <td>
-              <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1"> Warning</button>
-              <button type="button" class="btn btn-danger m-btn m-btn--custom" id="m_sweetalert_demo_3_2"> Error</button>
-              <button type="button" class="btn btn-success m-btn m-btn--custom" id="m_sweetalert_demo_3_3"> Success</button>
-              <button type="button" class="btn btn-info m-btn m-btn--custom" id="m_sweetalert_demo_3_4"> Info</button>
-              <button type="button" class="btn btn-metal m-btn m-btn--custom" id="m_sweetalert_demo_3_5"> Question</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">Change confirm button text and class</td>
-            <td>
-              <button type="button" class="btn btn-success m-btn m-btn--custom" id="m_sweetalert_demo_4"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">Custom button with icon</td>
-            <td>
-              <button type="button" class="btn btn-danger m-btn m-btn--custom" id="m_sweetalert_demo_5"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">A custom positioned dialog with timer to auto close</td>
-            <td>
-              <button type="button" class="btn btn-success m-btn m-btn--custom" id="m_sweetalert_demo_6"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">jQuery HTML with custom animate.css animation </td>
-            <td>
-              <button type="button" class="btn btn-focus m-btn m-btn--custom" id="m_sweetalert_demo_7"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">A warning message, with a function attached to the confirm button</td>
-            <td>
-              <button type="button" class="btn btn-info m-btn m-btn--custom" id="m_sweetalert_demo_8"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">By passing a parameter, you can execute something else for cancel</td>
-            <td>
-              <button type="button" class="btn btn-danger m-btn m-btn--custom" id="m_sweetalert_demo_9"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">A message with a custom image and CSS animation disabled</td>
-            <td>
-              <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_10"> Show me</button>
-            </td>
-          </tr>
-          <tr>
-            <td style="width: 40%; vertical-align: middle;">A message with auto close timer</td>
-            <td>
-              <button type="button" class="btn btn-metal m-btn m-btn--custom" id="m_sweetalert_demo_11"> Show me</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+      <div class="m-form__actions">
+        <button type="reset" class="btn btn-primary">
+          Submit
+        </button>
+        <button type="reset" class="btn btn-secondary">
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+  <!--end::Form-->
+</div>
+
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">
+          Bootstrap Touchspin Examples
+        </h3>
+      </div>
     </div>
   </div>
-  <!--end::Portlet-->
+  <!--begin::Form-->
+  <form class="m-form m-form--fit m-form--label-align-right">
+    <div class="m-portlet__body">
+      <div class="form-group m-form__group row">
+        <label class="col-form-label col-lg-3 col-sm-12">
+          Minimum Setup
+        </label>
+        <div class="col-lg-4 col-md-9 col-sm-12">
+          <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="m_touchspin_1" type="text" class="form-control" value="55" name="demo1" placeholder="Select time" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-up" type="button">+</button></span></div>
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-form-label col-lg-3 col-sm-12">
+          With Prefix
+        </label>
+        <div class="col-lg-4 col-md-9 col-sm-12">
+          <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix">$</span><input id="m_touchspin_2" type="text" class="form-control" value="0" name="demo1" placeholder="Select time" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-up" type="button">+</button></span></div>
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-form-label col-lg-3 col-sm-12">
+          With Postfix
+        </label>
+        <div class="col-lg-4 col-md-9 col-sm-12">
+          <div class="input-group bootstrap-touchspin"><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="m_touchspin_3" type="text" class="form-control" value="0" name="demo1" placeholder="Select time" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix">$</span><span class="input-group-btn"><button class="btn btn-secondary bootstrap-touchspin-up" type="button">+</button></span></div>
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-form-label col-lg-3 col-sm-12">
+          Vertical Icons:
+        </label>
+        <div class="col-lg-4 col-md-9 col-sm-12">
+          <div class="input-group bootstrap-touchspin"><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="m_touchspin_4" type="text" class="form-control bootstrap-touchspin-vertical-btn" value="" name="demo1" placeholder="40" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical"><button class="btn btn-secondary bootstrap-touchspin-up" type="button"><i class="la la-plus"></i></button><button class="btn btn-secondary bootstrap-touchspin-down" type="button"><i class="la la-minus"></i></button></span></div>
+        </div>
+      </div>
+      <div class="form-group m-form__group row">
+        <label class="col-form-label col-lg-3 col-sm-12">
+          Vertical Custom Icons:
+        </label>
+        <div class="col-lg-4 col-md-9 col-sm-12">
+          <div class="input-group bootstrap-touchspin"><span class="input-group-addon bootstrap-touchspin-prefix" style="display: none;"></span><input id="m_touchspin_5" type="text" class="form-control bootstrap-touchspin-vertical-btn" value="" name="demo1" placeholder="30" style="display: block;"><span class="input-group-addon bootstrap-touchspin-postfix" style="display: none;"></span><span class="input-group-btn-vertical"><button class="btn btn-secondary bootstrap-touchspin-up" type="button"><i class="la la-angle-up"></i></button><button class="btn btn-secondary bootstrap-touchspin-down" type="button"><i class="la la-angle-down"></i></button></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="m-portlet__foot m-portlet__foot--fit">
+      <div class="m-form__actions m-form__actions">
+        <div class="row">
+          <div class="col-lg-9 ml-lg-auto">
+            <button type="reset" class="btn btn-brand">
+              Submit
+            </button>
+            <button type="reset" class="btn btn-secondary">
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!--end::Form-->
 </div>
+
+
+
+
+

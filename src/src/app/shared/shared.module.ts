@@ -16,6 +16,7 @@ import { BlockUITemplateComponent } from './components/block-ui/block-ui-templat
 import { ModalComponent } from './components/modal/modal.component';
 import { UnwrapTagDirective } from './directives/unwrap-tag/unwrap-tag.directive';
 import { UnwrapTagService } from './directives/unwrap-tag/unwrap-tag.service';
+import { ScrollToDirective } from './directives/scroll-to/scroll-to.directive';
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -41,7 +42,8 @@ import { UnwrapTagService } from './directives/unwrap-tag/unwrap-tag.service';
         HrefPreventDefaultDirective,
         UnwrapTagDirective,
         BlockUITemplateComponent,
-        ModalComponent
+        ModalComponent,
+        ScrollToDirective
 
     ],
     declarations: [
@@ -50,7 +52,8 @@ import { UnwrapTagService } from './directives/unwrap-tag/unwrap-tag.service';
         HrefPreventDefaultDirective,
         UnwrapTagDirective,
         BlockUITemplateComponent,
-        ModalComponent
+        ModalComponent,
+        ScrollToDirective
     ],
     entryComponents: [
         BlockUITemplateComponent

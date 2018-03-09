@@ -11,17 +11,17 @@
              * Run
              */
             run: function (options) {
-                if (element.data('portlet-object')) {            
+                if (element.data('portlet-object')) {
                     // get instance from the element
                     portlet = element.data('portlet-object');
-                } else {                              
+                } else {
                     // create instance                   
                     Plugin.init(options);
                     Plugin.build();
-                    
+
                     // assign instance to the element                    
                     element.data('portlet-object', portlet);
-                }               
+                }
 
                 return portlet;
             },
@@ -29,14 +29,14 @@
             /**
              * Initialize
              */
-            init: function(options) {
+            init: function (options) {
                 portlet.options = $.extend(true, {}, $.fn.mPortlet.defaults, options);
                 portlet.events = [];
-                portlet.eventOne = false;       
+                portlet.eventOne = false;
 
-                if ( element.find('> .m-portlet__body').length !== 0 ) {
+                if (element.find('> .m-portlet__body').length !== 0) {
                     portlet.body = element.find('> .m-portlet__body');
-                } else if ( element.find('> .m-form').length !== 0 ) {
+                } else if (element.find('> .m-form').length !== 0) {
                     portlet.body = element.find('> .m-form');
                 }
             },
@@ -48,16 +48,16 @@
                 // remove
                 var remove = element.find('> .m-portlet__head [data-portlet-tool=remove]');
                 if (remove.length === 1) {
-                    remove.click(function(e) {
+                    remove.click(function (e) {
                         e.preventDefault();
                         Plugin.remove();
                     });
-                }                 
+                }
 
                 // reload
                 var reload = element.find('> .m-portlet__head [data-portlet-tool=reload]')
                 if (reload.length === 1) {
-                    reload.click(function(e) {
+                    reload.click(function (e) {
                         e.preventDefault();
                         Plugin.reload();
                     });
@@ -66,7 +66,7 @@
                 // toggle
                 var toggle = element.find('> .m-portlet__head [data-portlet-tool=toggle]');
                 if (toggle.length === 1) {
-                    toggle.click(function(e) {
+                    toggle.click(function (e) {
                         e.preventDefault();
                         Plugin.toggle();
                     });
@@ -75,14 +75,14 @@
                 // fullscreen
                 var fullscreen = element.find('> .m-portlet__head [data-portlet-tool=fullscreen]');
                 if (fullscreen.length === 1) {
-                    fullscreen.click(function(e) {
+                    fullscreen.click(function (e) {
                         e.preventDefault();
                         Plugin.fullscreen();
                     });
-                }                    
+                }
 
                 Plugin.setupTooltips();
-            }, 
+            },
 
             /**
              * Remove portlet
@@ -92,16 +92,16 @@
                     return;
                 }
 
-                if ( $('body').hasClass('m-portlet--fullscreen') && element.hasClass('m-portlet--fullscreen') ) {
+                if ($('body').hasClass('m-portlet--fullscreen') && element.hasClass('m-portlet--fullscreen')) {
                     Plugin.fullscreen('off');
                 }
 
                 Plugin.removeTooltips();
 
                 element.remove();
-                
+
                 Plugin.eventTrigger('afterRemove');
-            }, 
+            },
 
             /**
              * Set content
@@ -109,7 +109,7 @@
             setContent: function (html) {
                 if (html) {
                     portlet.body.html(html);
-                }               
+                }
             },
 
             /**
@@ -176,8 +176,8 @@
                         fullscreen.data('offset', fullscreenOn ? '0,10px,0,0' : '0,5px');
                         fullscreen.tooltip('dispose');
                         mApp.initTooltip(fullscreen);
-                    }                
-                }                   
+                    }
+                }
             },
 
             /**
@@ -203,46 +203,54 @@
                     var fullscreen = element.find('> .m-portlet__head [data-portlet-tool=fullscreen]');
                     if (fullscreen.length === 1) {
                         fullscreen.tooltip('dispose');
-                    }                
-                }                   
+                    }
+                }
             },
 
             /**
              * Reload
              */
             reload: function () {
-                Plugin.eventTrigger('reload');                
+                Plugin.eventTrigger('reload');
             },
 
             /**
              * Toggle
              */
             toggle: function (mode) {
-                if (mode === 'collapse' || element.hasClass('m-portlet--collapse') || element.hasClass('m-portlet--collapsed')) {
+                if (mode == null) {
+                    if (element.hasClass('m-portlet--collapse') || element.hasClass('m-portlet--collapsed')) {
+                        mode = 'expand';
+                    } else {
+                        mode = 'collapse';
+                    }
+                }
+
+                if (mode === 'expand') {
                     if (Plugin.eventTrigger('beforeExpand') === false) {
                         return;
-                    } 
+                    }
 
-                    portlet.body.slideDown(portlet.options.bodyToggleSpeed, function(){                        
-                        Plugin.eventTrigger('afterExpand');                         
+                    portlet.body.slideDown(portlet.options.bodyToggleSpeed, function () {
+                        Plugin.eventTrigger('afterExpand');
                     });
 
                     element.removeClass('m-portlet--collapse');
                     element.removeClass('m-portlet--collapsed');
                     Plugin.setupTooltips();
-                    
+
                 } else {
                     if (Plugin.eventTrigger('beforeCollapse') === false) {
                         return;
-                    } 
+                    }
 
-                    portlet.body.slideUp(portlet.options.bodyToggleSpeed, function() {                        
-                        Plugin.eventTrigger('afterCollapse');    
+                    portlet.body.slideUp(portlet.options.bodyToggleSpeed, function () {
+                        Plugin.eventTrigger('afterCollapse');
                     });
 
                     element.addClass('m-portlet--collapse');
-                    Plugin.setupTooltips();                    
-                }                  
+                    Plugin.setupTooltips();
+                }
             },
 
             /**
@@ -259,7 +267,7 @@
                     element.removeClass('m-portlet--fullscreen');
 
                     Plugin.setupTooltips();
-                    
+
                     Plugin.eventTrigger('afterFullscreenOff');
                 } else {
                     Plugin.eventTrigger('beforeFullscreenOn');
@@ -268,10 +276,10 @@
                     $('body').addClass('m-portlet--fullscreen');
 
                     Plugin.setupTooltips();
-                    
+
                     Plugin.eventTrigger('afterFullscreenOn');
-                }                  
-            }, 
+                }
+            },
 
             /**
              * sync 
@@ -283,7 +291,7 @@
             /**
              * Trigger events
              */
-            eventTrigger: function(name) {
+            eventTrigger: function (name) {
                 for (i = 0; i < portlet.events.length; i++) {
                     var event = portlet.events[i];
                     if (event.name == name) {
@@ -293,7 +301,7 @@
                                 return event.handler.call(this, portlet);
                             }
                         } else {
-                            return  event.handler.call(this, portlet);
+                            return event.handler.call(this, portlet);
                         }
                     }
                 }
@@ -302,7 +310,7 @@
             /**
              * Add event
              */
-            addEvent: function(name, handler, one) {
+            addEvent: function (name, handler, one) {
                 portlet.events.push({
                     name: name,
                     handler: handler,
@@ -322,7 +330,7 @@
         //////////////////////
         // ** Public API ** //
         //////////////////////
-       
+
         /**
          * Remove portlet
          * @returns {mPortlet}
@@ -387,10 +395,10 @@
             return Plugin.getBody();
         };
 
-         /**
-         * Get portletbody 
-         * @returns {jQuery}
-         */
+        /**
+        * Get portletbody 
+        * @returns {jQuery}
+        */
         portlet.getSelf = function () {
             return Plugin.getSelf();
         };
@@ -399,7 +407,7 @@
          * Set portlet content
          * @returns {mPortlet}
          */
-        portlet.on =  function (name, handler) {
+        portlet.on = function (name, handler) {
             return Plugin.addEvent(name, handler);
         };
 
@@ -407,9 +415,9 @@
          * Set portlet content
          * @returns {mPortlet}
          */
-        portlet.one =  function (name, handler) {
+        portlet.one = function (name, handler) {
             return Plugin.addEvent(name, handler, true);
-        };        
+        };
 
         return portlet;
     };
@@ -420,7 +428,7 @@
         tooltips: true,
         tools: {
             toggle: {
-                collapse: 'Collapse', 
+                collapse: 'Collapse',
                 expand: 'Expand'
             },
             reload: 'Reload',
@@ -428,7 +436,7 @@
             fullscreen: {
                 on: 'Fullscreen',
                 off: 'Exit Fullscreen'
-            }        
+            }
         }
     };
 }(jQuery));

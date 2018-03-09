@@ -9,3 +9,15 @@
 
 /* app */
 @import "~app/shared/components/block-ui/block-ui-template.component.scss";
+
+// @import "~assets/vendors/custom/jquery-ui/jquery-ui.bundle.css";
+
+
+
+.input-group-addon{
+    display: flex;
+}
+
+.m-portlet.m-portlet--fullscreen{
+    z-index: 2 !important;
+}
