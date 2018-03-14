@@ -22,6 +22,8 @@ import { SummaryPartialComponent } from './add-journey-definition/partials/summa
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { TagInputModule } from 'ngx-chips';
 import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
+import { EntryDefinitionContainerComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-container/entry-definition-container.component';
+import { ProofOfIdEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/proof-of-id-entry-type/proof-of-id-entry-type.component';
 
 @NgModule({
   imports: [
@@ -41,7 +43,9 @@ import { TempViewComponent } from './add-journey-definition/partials/temp-view/t
     EntryDefinitionPartialComponent,
     SelfieEntryTypeComponent,
     SummaryPartialComponent,
-    TempViewComponent
+    TempViewComponent,
+    EntryDefinitionContainerComponent,
+    ProofOfIdEntryTypeComponent
   ]
 })
 export class JourneyDefinitionModule { }

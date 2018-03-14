@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, AfterViewChecked, AfterContentInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionInfo } from '../../../model/journey-entry-definition-info';
@@ -9,16 +9,12 @@ import { EntryType } from '../../../model/entry-type';
   templateUrl: './entry-definition-partial.component.html',
   styleUrls: ['./entry-definition-partial.component.scss']
 })
-export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit {
-  portlet1;
-  portlet2;
-  portlet3;
-  portlet4;
-  portlet5;
+export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck {
 
   @Input() entryDefinitionGroup: FormGroup;
   @Input() entryDefinitionDataModel: JourneyEntryDefinitionInfo[];
   // primaryPOIEntryDataModel: JourneyEntryDefinitionInfo; // typeof journey entry definition
+
   get primaryPOIEntryArray(): FormArray {
     return this.entryDefinitionGroup.get('primaryPOIEntry') as FormArray;
   }
@@ -35,11 +31,21 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit {
     { name: 'Additional Document', value: EntryType.AdditionalDocument },
     { name: 'Selfie', value: EntryType.Selfie }
   ];
+  options: any = {
+    moves: (el, container, handle) => {
+      return (<string>handle.className).endsWith('handle');
+      // return handle.className === 'handle';
+    }
+  };
 
   constructor(
     private logger: LoggerService,
+    private cdr: ChangeDetectorRef,
     private fb: FormBuilder) {
 
+  }
+  public ngDoCheck(): void {
+    this.cdr.detectChanges();
   }
 
   ngOnInit() {
@@ -49,10 +55,10 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    setTimeout(() => {
-     // this.sortableInit();
-      this.portletInit();
-    }, 1000);
+    // setTimeout(() => {
+    //   // this.sortableInit();
+    // //  this.portletInit();
+    // }, 1000);
   }
 
   createEntryDefinitionGroup() {
@@ -164,89 +170,38 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit {
   }
 
 
-  deleteEntryDefinition(value: string) {
-    this.logger.log('deleteEntryDefinition ', value);
-    return false;
-    // ToDo
-    // https://embed.plnkr.co/uifYPiyvCfpuRcwcrm2K/
-  }
-
-
-
-  sortableInit() {
-    $('#m_sortable_portlets').sortable({
-      connectWith: '.m-portlet__head',
-      items: '.m-portlet',
-      opacity: 0.8,
-      handle: '.m-portlet__head',
-      forceHelperSize: true,
-      placeholder: 'm-portlet--sortable-placeholder',
-      forcePlaceholderSize: true,
-      helper: 'clone',
-      tolerance: 'pointer',
-      cancel: '.m-portlet--sortable-empty', // cancel dragging if portlet is in fullscreen mode
-      revert: 250, // animation in milliseconds
-      // update: function (b, c) {
-      //   if (c.item.prev().hasClass('m-portlet--sortable-empty')) {
-      //     c.item.prev().before(c.item);
-      //   }
-      // },
-      start: function (e, ui) {
-        // creates a temporary attribute on the element with the old index
-        $(this).attr('data-previndex', ui.item.index());
-      },
-      update: function (e, ui) {
-        // gets the new and old index then removes the temporary attribute
-        const newIndex = ui.item.index();
-        const oldIndex = $(this).attr('data-previndex');
-      //  $(this).removeAttr('data-previndex');
-      }
-    });
-
-
-  }
-
-  portletInit() {
-    const temp = $('#m_portlet_tools_1');
-    if (temp != null) {
-      this.portlet1 = $('#m_portlet_tools_1').mPortlet();
-
+  deleteEntryDefinition(index: number, source: string) {
+    this.logger.log('deleteEntryDefinition index', index);
+    switch (source) {
+      case 'primary':
+        this.primaryPOIEntryArray.removeAt(index);
+        break;
+      case 'entries':
+        this.entriesArray.removeAt(index);
+        break;
+      case 'optional':
+        this.optionalSelfieEntryArray.removeAt(index);
+        break;
     }
-    this.portlet2 = $('#m_portlet_tools_2').mPortlet();
-    this.portlet3 = $('#m_portlet_tools_3').mPortlet();
-    this.portlet4 = $('#m_portlet_tools_4').mPortlet();
-    //  this.portlet5 = $('#m_portlet_tools_5').mPortlet();
-
-    // == Remove event handlers
-    this.portlet1.on('beforeRemove', function (portlet) {
-
-      // return confirm('Are you sure to remove this portlet ?');  // remove portlet after user confirmation
-    });
-
-    this.portlet1.on('afterRemove', (portlet) => {
-      this.logger.log('deleteEntryDefinition afterRemove');
-
-    });
-
   }
 
   expandAll() {
-    if (this.portlet1 != null) {
-      this.portlet1.expand();
-    }
-    this.portlet2.expand();
-    this.portlet3.expand();
-    this.portlet4.expand();
+    // if (this.portlet1 != null) {
+    //   this.portlet1.expand();
+    // }
+    // this.portlet2.expand();
+    // this.portlet3.expand();
+    // this.portlet4.expand();
     //  this.portlet5.expand();
   }
 
   collapseAll() {
-    if (this.portlet1 != null) {
-      this.portlet1.collapse();
-    }
-    this.portlet2.collapse();
-    this.portlet3.collapse();
-    this.portlet4.collapse();
+    // if (this.portlet1 != null) {
+    //   this.portlet1.collapse();
+    // }
+    // this.portlet2.collapse();
+    // this.portlet3.collapse();
+    // this.portlet4.collapse();
     // this.portlet5.collapse();
   }
 
