@@ -5,6 +5,11 @@
       <div class="row">
         <div class="col">
           <!--begin: Dropdown-->
+          primaryPOIEntryArray value: {{primaryPOIEntryArray.value | json}}
+          <br> entriesArray value: {{entriesArray.value | json}}
+          <br> entriesArray length: {{entriesArray.length }}
+          <br> optionalSelfieEntryArray value: {{optionalSelfieEntryArray.value | json}}
+          <br>
           <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow" data-dropdown-toggle="click">
             <a href="#" class="m-dropdown__toggle btn btn-success dropdown-toggle">
               Add
@@ -15,15 +20,15 @@
                 <div class="m-dropdown__body">
                   <div class="m-dropdown__content">
                     <ul class="m-nav">
-                      <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
+                      <li *ngFor="let edOption of entryDefinitionOptions" class="m-nav__item">
+                        <a (click)="addEntryDefinition(edOption.value)" href="" class="m-nav__link">
                           <i class="m-nav__link-icon la	la-angle-right"></i>
                           <span class="m-nav__link-text">
-                            Proof of Identity
+                            {{edOption.name}}
                           </span>
                         </a>
                       </li>
-                      <li class="m-nav__item">
+                      <!-- <li class="m-nav__item">
                         <a href="" class="m-nav__link">
                           <i class="m-nav__link-icon la	la-angle-right"></i>
                           <span class="m-nav__link-text">
@@ -46,7 +51,7 @@
                             Additional Document
                           </span>
                         </a>
-                      </li>
+                      </li> -->
 
                     </ul>
                   </div>
@@ -77,7 +82,7 @@
     <div class="m-separator m-separator--dashed"></div>
 
     <!--begin::Portlet-->
-    <div id="m_portlet_tools_1" data-portlet="true" class="m-portlet m-portlet--mobile  ">
+    <div *ngFor="let poi of primaryPOIEntryArray.controls; let i=index" id="m_portlet_tools_1" data-portlet="true" class="m-portlet m-portlet--mobile  ">
       <div class="m-portlet__head">
         <div class="m-portlet__head-caption">
           <div class="m-portlet__head-title">
@@ -86,9 +91,104 @@
             </span>
             <h3 class="m-portlet__head-text m--font-success">
               <span class="m-badge m-badge--success">
-                1.
+                {{i+1}}.
               </span>
               Proof of Id
+            </h3>
+          </div>
+        </div>
+        <div class="m-portlet__head-tools">
+          <ul class="m-portlet__nav">
+            <li class="m-portlet__nav-item">
+              <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                <i class="la la-angle-down"></i>
+              </a>
+            </li>
+            <li class="m-portlet__nav-item">
+              <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                <i class="la la-expand"></i>
+              </a>
+            </li>
+            <li class="m-portlet__nav-item">
+              <a (click)="deleteEntryDefinition('fuu')" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                <i class="la la-close"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="m-portlet__body">
+        <app-temp-view></app-temp-view>
+
+      </div>
+    </div>
+    <!--end::Portlet-->
+
+    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+      <div class="m-demo__preview" [formGroup]="entryDefinitionGroup">
+        <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"' [dragulaModel]='entriesArray.controls'>
+          <!--begin::Portlet-->
+          <div *ngFor="let poi of entriesArray.controls; let i=index" [formGroupName]="i" id="m_portlet_tools_{{i}}_{{i}}" data-portlet="true"
+            class="m-portlet m-portlet--mobile m-portlet--sortable m-portlet--head-solid-bg">
+            <div class="m-portlet__head">
+              <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                  <span class="m-portlet__head-icon">
+                    <i class="flaticon-placeholder-2"></i>
+                  </span>
+                  <h3 class="m-portlet__head-text">
+                    <span class="m-badge m-badge--metal">
+                      {{i+2}}.
+                    </span>
+                    Another Proof of Id
+                  </h3>
+                </div>
+              </div>
+              <div class="m-portlet__head-tools">
+                <ul class="m-portlet__nav">
+                  <li class="m-portlet__nav-item">
+                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                      <i class="la la-angle-down"></i>
+                    </a>
+                  </li>
+                  <li class="m-portlet__nav-item">
+                    <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                      <i class="la la-expand"></i>
+                    </a>
+                  </li>
+                  <li class="m-portlet__nav-item">
+                    <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
+                      <i class="la la-close"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="m-portlet__body">
+              <!-- <app-temp-view></app-temp-view> -->
+              <!-- <input type="hidden"formControlName="order" value="{{i+2}}"> -->
+              <input type="text" formControlName="order" value="{{i+2}}"> {{poi.value | json}}
+            </div>
+          </div>
+          <!--end::Portlet-->
+
+
+        </div>
+      </div>
+    </div>
+    <!--begin::Portlet-->
+    <div *ngFor="let poi of optionalSelfieEntryArray.controls; let i=index" id="m_portlet_tools_4" data-portlet="true" class="m-portlet m-portlet--mobile">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <span class="m-portlet__head-icon">
+              <i class="la la-thumb-tack m--font-success"></i>
+            </span>
+            <h3 class="m-portlet__head-text m--font-success">
+              <span class="m-badge m-badge--success">
+                {{i}}
+              </span>
+              Face Matching
             </h3>
           </div>
         </div>
@@ -118,139 +218,6 @@
       </div>
     </div>
     <!--end::Portlet-->
-
-    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
-      <div class="m-demo__preview">
-        <div id="m_sortable_portlets">
-          <!--begin::Portlet-->
-          <div id="m_portlet_tools_2" data-portlet="true" class="m-portlet m-portlet--mobile m-portlet--sortable m-portlet--head-solid-bg">
-            <div class="m-portlet__head">
-              <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                  <span class="m-portlet__head-icon">
-                    <i class="flaticon-placeholder-2"></i>
-                  </span>
-                  <h3 class="m-portlet__head-text">
-                    <span class="m-badge m-badge--metal">
-                      2.
-                    </span>
-                    Another Proof of Id
-                  </h3>
-                </div>
-              </div>
-              <div class="m-portlet__head-tools">
-                <ul class="m-portlet__nav">
-                  <li class="m-portlet__nav-item">
-                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-angle-down"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-expand"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-close"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="m-portlet__body">
-              <app-temp-view></app-temp-view>
-
-            </div>
-          </div>
-          <!--end::Portlet-->
-          <!--begin::Portlet-->
-          <div id="m_portlet_tools_3" data-portlet="true" class="m-portlet m-portlet--mobile m-portlet--sortable m-portlet--head-solid-bg">
-            <div class="m-portlet__head">
-              <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                  <span class="m-portlet__head-icon">
-                    <i class="flaticon-placeholder-2"></i>
-                  </span>
-                  <h3 class="m-portlet__head-text">
-                    <span class="m-badge m-badge--metal">
-                      3.
-                    </span>
-                    Proof of Address
-                  </h3>
-                </div>
-              </div>
-              <div class="m-portlet__head-tools">
-                <ul class="m-portlet__nav">
-                  <li class="m-portlet__nav-item">
-                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-angle-down"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-expand"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-close"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="m-portlet__body">
-              <app-temp-view></app-temp-view>
-            </div>
-          </div>
-          <!--end::Portlet-->
-
-        </div>
-      </div>
-    </div>
-    <!--begin::Portlet-->
-    <div id="m_portlet_tools_4" data-portlet="true" class="m-portlet m-portlet--mobile  ">
-        <div class="m-portlet__head">
-          <div class="m-portlet__head-caption">
-            <div class="m-portlet__head-title">
-              <span class="m-portlet__head-icon">
-                <i class="la la-thumb-tack m--font-success"></i>
-              </span>
-              <h3 class="m-portlet__head-text m--font-success">
-                <span class="m-badge m-badge--success">
-                  4.
-                </span>
-                Face Matching
-              </h3>
-            </div>
-          </div>
-          <div class="m-portlet__head-tools">
-            <ul class="m-portlet__nav">
-              <li class="m-portlet__nav-item">
-                <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                  <i class="la la-angle-down"></i>
-                </a>
-              </li>
-              <li class="m-portlet__nav-item">
-                <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                  <i class="la la-expand"></i>
-                </a>
-              </li>
-              <li class="m-portlet__nav-item">
-                <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                  <i class="la la-close"></i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="m-portlet__body">
-          <app-temp-view></app-temp-view>
-  
-        </div>
-      </div>
-      <!--end::Portlet-->
 
 
 
