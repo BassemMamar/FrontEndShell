@@ -1,6 +1,7 @@
 /* Angular Imports */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 /* Journey Definition Imports */
 import { JourneyDefinitionRoutingModule } from './journey-definition-routing.module';
@@ -13,6 +14,7 @@ import { BasicInfoPartialComponent } from './add-journey-definition/partials/bas
 // tslint:disable-next-line:max-line-length
 import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
 import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { TagInputModule } from 'ngx-chips';
 import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
 
@@ -21,6 +23,9 @@ import { TempViewComponent } from './add-journey-definition/partials/temp-view/t
     CommonModule,
     SharedModule.forChild(),
     LayoutModule,
+    ReactiveFormsModule,
+
+    DragulaModule,
     TagInputModule,
     JourneyDefinitionRoutingModule
   ],

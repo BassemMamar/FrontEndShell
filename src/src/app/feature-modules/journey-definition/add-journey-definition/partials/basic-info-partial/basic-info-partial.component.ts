@@ -1,4 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { CommunicationService } from '../../../../../core/services/communication/communication.service';
 
 @Component({
   selector: 'app-basic-info-partial',
@@ -6,11 +8,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
   styleUrls: ['./basic-info-partial.component.scss']
 })
 export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
-
-  reasons = [];
-  constructor() { }
+  @Input() basicInfoGroup: FormGroup;
+  // reasons = [];
+  businessCode: string;
+  constructor(private communicationService: CommunicationService) { }
 
   ngOnInit() {
+    this.businessCode = this.communicationService.businessCode;
   }
 
   ngAfterViewInit(): void {
@@ -21,22 +25,45 @@ export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
     if (checked) {
       $('#age_limite_min').TouchSpin({
         min: 0,
-        max: 99,
+        max: 149,
         step: 1,
-        decimals: 2,
+        decimals: 0,
         boostat: 5,
         maxboostedstep: 10
       });
 
       $('#age_limite_max').TouchSpin({
         min: 1,
-        max: 100,
+        max: 150,
         step: 1,
-        decimals: 2,
+        decimals: 0,
         boostat: 5,
         maxboostedstep: 10
       });
+
+      $('#age_limite_min').on('touchspin.on.startspin', () => {
+        this.test();
+      });
+      $('#age_limite_min').on('touchspin.on.stopspin', () => {
+        this.test();
+      });
+      $('#age_limite_min').on('touchspin.on.change', () => {
+        this.test();
+      });
+      $('#age_limite_min').on('touchspin.on.min', () => {
+        this.test();
+      });
+      $('#age_limite_min').on('touchspin.on.max', () => {
+        this.test();
+      });
     }
+  }
+
+  test() {
+    const newval = $('#age_limite_min').val();
+    console.log('addAlertDollar change fired, dollar value is ', newval);
+    (<FormGroup>this.basicInfoGroup.controls['ageLimitGroup']).controls['alMinValue'].patchValue(newval);
+
   }
 
 }

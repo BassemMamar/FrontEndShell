@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [formGroup]="basicInfoGroup">
   <div class="col-xl-8 offset-xl-2">
     <div class="m-form__section m-form__section--first">
       <!-- <div class="m-form__heading">
@@ -9,87 +9,88 @@
       </div> -->
       <div class="form-group m-form__group row">
         <label class="col-xl-3 col-lg-3 col-form-label">
-          * Name:
+          Name:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <input type="text" name="name" class="form-control m-input m-input--air" placeholder="" value="Nick Stone">
+          <input type="text" class="form-control m-input m-input--air" formControlName="name">
         </div>
       </div>
       <div class="form-group m-form__group row">
         <label class="col-xl-3 col-lg-3 col-form-label">
-          * Code:
+          Code:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <input #code type="text" name="code" class="form-control m-input m-input--air" placeholder="">
+          <input #code type="text" name="code" class="form-control m-input m-input--air" formControlName="code">
           <span class="m-form__help">
-            https://{{code.value}}.onboardingsuite.com
+            https://{{businessCode}}.onboardingsuite.com/CaptureStudio/{{code.value}}
           </span>
         </div>
       </div>
 
       <div class="m-separator m-separator--dashed m-separator--lg"></div>
 
-      <div class="form-group m-form__group row">
-        <label class="col-xl-3 col-lg-3 col-form-label">
-          Is Active
-        </label>
-        <div class="col-xl-9 col-lg-9">
-          <label class="m-checkbox">
-            <input type="checkbox">
-            <span></span>
+        <div class="form-group m-form__group row">
+          <label class="col-xl-3 col-lg-3 col-form-label">
+            Is Active
           </label>
+          <div class="col-xl-9 col-lg-9">
+            <label class="m-checkbox">
+              <input type="checkbox" formControlName="isActive">
+              <span></span>
+            </label>
 
 
+          </div>
         </div>
-      </div>
-      <div class="form-group m-form__group row">
-        <label class="col-xl-3 col-lg-3 col-form-label">
-          Allow manual cropping
-        </label>
-        <div class="col-xl-9 col-lg-9">
-
-          <label class="m-checkbox">
-            <input type="checkbox">
-            <span></span>
+        <!-- <div class="form-group m-form__group row">
+          <label class="col-xl-3 col-lg-3 col-form-label">
+            Allow manual cropping
           </label>
+          <div class="col-xl-9 col-lg-9">
 
-        </div>
-      </div>
-      <div class="form-group m-form__group row">
+            <label class="m-checkbox">
+              <input type="checkbox">
+              <span></span>
+            </label>
+
+          </div>
+        </div> -->
+
+      <div [formGroup]="basicInfoGroup.controls.introductionMessageGroup" class="form-group m-form__group row">
         <label class="col-xl-3 col-lg-3 col-form-label">
           Introduction message:
         </label>
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" #introMsg name="msg">
+            <input type="checkbox" #introMsg  formControlName="imCheck">
             <span></span>
           </label>
         </div>
         <div class="col-xl-8 col-lg-8">
 
           <!-- [attr.disabled]="introMsg.checked?null:''" -->
-          <input *ngIf="introMsg.checked" type="text" class="form-control m-input--air" aria-label="Text input with checkbox">
+          <input *ngIf="introMsg.checked" formControlName="imValue" type="text" class="form-control m-input--air" aria-label="Text input with checkbox">
 
         </div>
       </div>
-      <div class="form-group m-form__group row">
+      <div [formGroup]="basicInfoGroup.controls.ageLimitGroup"  class="form-group m-form__group row">
         <label class="col-xl-3 col-lg-3 col-form-label">
           Enable age limit:
         </label>
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" #agelimit name="agelimit" (change)="initTouchSpin(agelimit.checked)">
+            <input type="checkbox" formControlName="alCheck" #agelimit (change)="initTouchSpin(agelimit.checked)">
             <span></span>
           </label>
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
-          <input id="age_limite_min" type="text" class="form-control m-input--air" value="0" name="age_limite_min" placeholder="Select time" >
+          <input id="age_limite_min" formControlName="alMinValue" type="text" class="form-control m-input--air">
 
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
-          <input id="age_limite_max" type="text" class="form-control m-input--air" value="1" name="age_limite_max" placeholder="Select time" >
+          <input id="age_limite_max" formControlName="alMaxValue" type="text" class="form-control m-input--air" >
 
         </div>
       </div>
@@ -103,7 +104,7 @@
           Reasons:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <tag-input class="form-control m-input--air" [(ngModel)]="reasons" [secondaryPlaceholder]="'Type a Reason'" [placeholder]="'Another Reason'"></tag-input>
+          <tag-input class="form-control m-input--air" formControlName="reasons" [secondaryPlaceholder]="'Type a Reason'" [placeholder]="'Another Reason'"></tag-input>
 
         </div>
       </div>
