@@ -167,7 +167,8 @@
             <div class="m-portlet__body">
               <!-- <app-temp-view></app-temp-view> -->
               <!-- <input type="hidden"formControlName="order" value="{{i+2}}"> -->
-              <input type="text" formControlName="order" value="{{i+2}}"> {{poi.value | json}}
+              <input type="hidden" formControlName="order" [ngModel]="i + 2">
+               {{poi.value | json}}
             </div>
           </div>
           <!--end::Portlet-->
