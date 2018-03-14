@@ -10,6 +10,11 @@ import { LayoutModule } from '../../layout/layout.module';
 import { JourneyDefinitionComponent } from './journey-definition.component';
 import { AddJourneyDefinitionComponent } from './add-journey-definition/add-journey-definition.component';
 import { BasicInfoPartialComponent } from './add-journey-definition/partials/basic-info-partial/basic-info-partial.component';
+
+
+import { SelfieEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/selfie-entry-type/selfie-entry-type.component';
+
+
 // tslint:disable-next-line:max-line-length
 import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
 import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
@@ -29,6 +34,7 @@ import { TempViewComponent } from './add-journey-definition/partials/temp-view/t
     AddJourneyDefinitionComponent,
     BasicInfoPartialComponent,
     EntryDefinitionPartialComponent,
+    SelfieEntryTypeComponent,
     SummaryPartialComponent,
     TempViewComponent
   ]
