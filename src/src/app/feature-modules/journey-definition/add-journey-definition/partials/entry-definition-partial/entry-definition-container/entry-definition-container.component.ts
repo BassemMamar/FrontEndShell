@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-import { EntryType } from '../../../../model/entry-type';
+import { EntryTypes } from '../../../../model/entry-types';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 
 @Component({
@@ -39,14 +39,14 @@ export class EntryDefinitionContainerComponent implements OnInit, AfterViewInit 
     }
 
     switch (entryType.value) {
-      case EntryType.ProofOfIdentity:
+      case EntryTypes.ProofOfIdentity:
         return 'Proof Of Identity';
-      case EntryType.ProofOfAddress:
+      case EntryTypes.ProofOfAddress:
         return 'Proof Of Address';
-      case EntryType.AdditionalDocument:
+      case EntryTypes.AdditionalDocument:
         return 'Additional Document';
 
-      case EntryType.Selfie:
+      case EntryTypes.Selfie:
         return 'Selfie';
     }
   }

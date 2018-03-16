@@ -5,10 +5,10 @@
       <div class="row">
         <div class="col">
           <!--begin: Dropdown-->
-          <br> primaryPOIEntryArray value: {{primaryPOIEntryArray.value | json}}
+          <br> primaryEntryArray value: {{primaryEntryArray.value | json}}
           <br> entriesArray value: {{entriesArray.value | json}}
           <br> entriesArray length: {{entriesArray.length }}
-          <br> optionalSelfieEntryArray value: {{optionalSelfieEntryArray.value | json}}
+          <br> LastEntryArray value: {{LastEntryArray.value | json}}
           <br>
           <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow" data-dropdown-toggle="click">
             <a href="#" class="m-dropdown__toggle btn btn-success dropdown-toggle">
@@ -51,13 +51,13 @@
 
     <!--begin::Primary-->
     <div [formGroup]="entryDefinitionGroup">
-      <div formArrayName="primaryPOIEntry">
+      <div formArrayName="primaryEntryArray">
 
         <!--begin::Portlet-->
-        <app-entry-definition-container *ngFor="let item of primaryPOIEntryArray.controls; let i=index" [index]="i+1" [item]="item"
+        <app-entry-definition-container *ngFor="let item of primaryEntryArray.controls; let i=index" [index]="i+1" [item]="item"
           (deleteEmitter)="deleteEntryDefinition(i,'primary')">
 
-          <app-proof-of-id-entry-type [item]="item" [index]="i+1" [parentGroup]="entryDefinitionGroup" [arrayName]="'primaryPOIEntry'"
+          <app-proof-of-id-entry-type [item]="item" [index]="i+1" [parentGroup]="entryDefinitionGroup" [arrayName]="'primaryEntryArray'"
             [groupName]="i">
           </app-proof-of-id-entry-type>
 
@@ -74,18 +74,18 @@
         <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"'  [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
 
           <!--begin::Portlet-->
-          <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryPOIEntryArray.controls.length+1"
+          <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryEntryArray.controls.length+1"
             [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
           <<  {{item.get('entryType').value}} >>
-            <app-proof-of-id-entry-type *ngSwitchCase="'1'" [item]="item" [index]="i+1+primaryPOIEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+            <app-proof-of-id-entry-type *ngSwitchCase="entryTypes.ProofOfIdentity" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
               [arrayName]="'entriesArray'" [groupName]="i">
             </app-proof-of-id-entry-type>
 
-            <app-proof-of-id-entry-type *ngSwitchCase="'2'" [item]="item" [index]="i+1+primaryPOIEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+            <app-proof-of-id-entry-type *ngSwitchCase="entryTypes.ProofOfAddress" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i">
           </app-proof-of-id-entry-type>
 
-                  <app-temp-view *ngSwitchCase="'3'"></app-temp-view>
+                  <app-temp-view *ngSwitchCase="entryTypes.AdditionalDocument"></app-temp-view>
 
           </app-entry-definition-container>
           <!--end::Portlet-->
@@ -96,13 +96,13 @@
 
     <!--begin::optionalSelfie-->
     <div [formGroup]="entryDefinitionGroup">
-      <div formArrayName="optionalSelfieEntry">
+      <div formArrayName="LastEntryArray">
 
         <!--begin::Portlet-->
-        <app-entry-definition-container *ngFor="let item of optionalSelfieEntryArray.controls; let i=index" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
+        <app-entry-definition-container *ngFor="let item of LastEntryArray.controls; let i=index" [index]="i+1+primaryEntryArray.controls.length+entriesArray.controls.length"
           [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'optional')">
 
-          <!-- <app-proof-of-id-entry-type [item]="item" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
+          <!-- <app-proof-of-id-entry-type [item]="item" [index]="i+1+primaryEntryArray.controls.length+entriesArray.controls.length"
             [parentGroup]="entryDefinitionGroup" [arrayName]="'optionalSelfieEntry'" [groupName]="i">
           </app-proof-of-id-entry-type> -->
             <app-selfie-entry-type [selfieEntryTypeInfo]="entryDefinitionDataModel" ></app-selfie-entry-type>

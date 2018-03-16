@@ -1,5 +1,5 @@
 export enum MediaAcquisitionChannelType {
-    Camera = 1,
-    FileUpload = 2
+    Camera = 'Camera',
+    FileUpload = 'FileUpload'
 }
 
