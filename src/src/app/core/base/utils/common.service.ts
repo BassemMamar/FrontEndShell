@@ -96,7 +96,7 @@ export class CommonService {
 
     }
 
-
+ 
     getEnumNamesAndValues<T extends number>(e: any) {
         return this.getEnumNames(e).map(n => ({ name: n, value: e[n] as T }));
     }

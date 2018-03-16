@@ -43,7 +43,7 @@ export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
   }
 
   initSelector() {
-    $('#media_type').selectpicker();
+    $('.selector').selectpicker();
   }
 
   ngOnInit() {
