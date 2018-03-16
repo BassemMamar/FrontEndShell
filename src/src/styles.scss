@@ -14,11 +14,36 @@
 // @import "~assets/vendors/custom/jquery-ui/jquery-ui.bundle.css";
 
 
-
+/**
+ * This section should be updated in theme scss files 
+ * for now i am butting them here for testing purposes
+ * if everything is fine, reflect scss configuration in the theme 
+*/
 .input-group-addon{
     display: flex;
 }
-
 .m-portlet.m-portlet--fullscreen{
     z-index: 2 !important;
+}
+.m-wizard__head{
+    margin: 2rem 0 1rem 0 !important;
+}
+.m-form .m-form__group {
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
+.m-portlet{
+    margin-bottom: 1.2rem !important;
+}
+.m-portlet .m-portlet__body{
+    padding: 1.2rem 2.2rem !important; 
+}
+.m-form .m-form__section{
+    margin: 20px 0 20px 0 !important;
+}
+.m-demo .m-demo__preview{
+    padding: 20px !important;
+}
+.m-section{
+    margin: 0 0 0px 0 !important; // chech this before
 }
