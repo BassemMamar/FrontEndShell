@@ -10,7 +10,7 @@ import { LoggerService } from '../../../../../../core/base/logger/logger.service
   styleUrls: ['./entry-definition-container.component.scss']
 })
 export class EntryDefinitionContainerComponent implements OnInit, AfterViewInit {
-  portletref: any;
+  private portletref: any;
   id = 'm_portlet_tools_';
 
   @Input() index: number;
@@ -70,5 +70,13 @@ export class EntryDefinitionContainerComponent implements OnInit, AfterViewInit 
 
   delete(index: number) {
     return this.deleteEmitter.emit(index);
+  }
+
+  expand() {
+    this.portletref.expand();
+  }
+
+  collapse() {
+    this.portletref.collapse();
   }
 }

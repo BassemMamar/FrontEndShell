@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, AfterViewChecked, AfterContentInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionInfo } from '../../../model/journey-entry-definition-info';
 import { EntryType } from '../../../model/entry-type';
+import { EntryDefinitionContainerComponent } from './entry-definition-container/entry-definition-container.component';
 
 @Component({
   selector: 'app-entry-definition-partial',
@@ -14,6 +15,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   @Input() entryDefinitionGroup: FormGroup;
   @Input() entryDefinitionDataModel: JourneyEntryDefinitionInfo[];
   // primaryPOIEntryDataModel: JourneyEntryDefinitionInfo; // typeof journey entry definition
+  @ViewChildren(EntryDefinitionContainerComponent) children: EntryDefinitionContainerComponent[];
 
   get primaryPOIEntryArray(): FormArray {
     return this.entryDefinitionGroup.get('primaryPOIEntry') as FormArray;
@@ -186,6 +188,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   expandAll() {
+    this.children.forEach(container => container.expand());
     // if (this.portlet1 != null) {
     //   this.portlet1.expand();
     // }
@@ -196,6 +199,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   collapseAll() {
+    this.children.forEach(container => container.collapse());
     // if (this.portlet1 != null) {
     //   this.portlet1.collapse();
     // }
