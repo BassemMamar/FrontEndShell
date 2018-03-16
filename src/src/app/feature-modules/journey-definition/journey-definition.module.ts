@@ -13,15 +13,14 @@ import { AddJourneyDefinitionComponent } from './add-journey-definition/add-jour
 import { BasicInfoPartialComponent } from './add-journey-definition/partials/basic-info-partial/basic-info-partial.component';
 
 
-import { SelfieEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/selfie-entry-type/selfie-entry-type.component';
-
-
 // tslint:disable-next-line:max-line-length
+import { SelfieEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/selfie-entry-type/selfie-entry-type.component';
 import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
 import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 import { TagInputModule } from 'ngx-chips';
 import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
+// tslint:disable-next-line:max-line-length
 import { EntryDefinitionContainerComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-container/entry-definition-container.component';
 import { ProofOfIdEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/proof-of-id-entry-type/proof-of-id-entry-type.component';
 
