@@ -5,7 +5,7 @@
       <div class="row">
         <div class="col">
           <!--begin: Dropdown-->
-          primaryPOIEntryArray value: {{primaryPOIEntryArray.value | json}}
+          <br> primaryPOIEntryArray value: {{primaryPOIEntryArray.value | json}}
           <br> entriesArray value: {{entriesArray.value | json}}
           <br> entriesArray length: {{entriesArray.length }}
           <br> optionalSelfieEntryArray value: {{optionalSelfieEntryArray.value | json}}
@@ -28,31 +28,6 @@
                           </span>
                         </a>
                       </li>
-                      <!-- <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
-                          <i class="m-nav__link-icon la	la-angle-right"></i>
-                          <span class="m-nav__link-text">
-                            Proof of Address
-                          </span>
-                        </a>
-                      </li>
-                      <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
-                          <i class="m-nav__link-icon la	la-angle-right"></i>
-                          <span class="m-nav__link-text">
-                            Face Matching
-                          </span>
-                        </a>
-                      </li>
-                      <li class="m-nav__item">
-                        <a href="" class="m-nav__link">
-                          <i class="m-nav__link-icon la	la-angle-right"></i>
-                          <span class="m-nav__link-text">
-                            Additional Document
-                          </span>
-                        </a>
-                      </li> -->
-
                     </ul>
                   </div>
                 </div>
@@ -69,158 +44,74 @@
           <a class="btn m-btn m-btn--link" (click)="collapseAll()" data-toggle="m-tooltip" data-placement="top" title="Collapse All">
             <i class="la la-angle-double-up"></i>
           </a>
-          <!-- <button (click)="expandAll()" type="button" data-toggle="m-tooltip" data-placement="top" title="Expand All" class="btn btn-success m-btn m-btn--pill m-btn--air">
-              <i class="la 	la-angle-double-down"></i>
-
-            </button>
-            <button (click)="collapseAll()" type="button" data-toggle="m-tooltip" data-placement="top" title="Collapse All" class="btn btn-success m-btn m-btn--pill m-btn--air">
-              <i class="la la-angle-double-up"></i>
-            </button> -->
         </div>
       </div>
     </div>
     <div class="m-separator m-separator--dashed"></div>
 
-    <!--begin::Portlet-->
-    <div *ngFor="let poi of primaryPOIEntryArray.controls; let i=index" id="m_portlet_tools_1" data-portlet="true" class="m-portlet m-portlet--mobile  ">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-          <div class="m-portlet__head-title">
-            <span class="m-portlet__head-icon">
-              <i class="la la-thumb-tack m--font-success"></i>
-            </span>
-            <h3 class="m-portlet__head-text m--font-success">
-              <span class="m-badge m-badge--success">
-                {{i+1}}.
-              </span>
-              Proof of Id
-            </h3>
-          </div>
-        </div>
-        <div class="m-portlet__head-tools">
-          <ul class="m-portlet__nav">
-            <li class="m-portlet__nav-item">
-              <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-angle-down"></i>
-              </a>
-            </li>
-            <li class="m-portlet__nav-item">
-              <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-expand"></i>
-              </a>
-            </li>
-            <li class="m-portlet__nav-item">
-              <a (click)="deleteEntryDefinition('fuu')" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-close"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="m-portlet__body">
-        <app-temp-view></app-temp-view>
+    <!--begin::Primary-->
+    <div [formGroup]="entryDefinitionGroup">
+      <div formArrayName="primaryPOIEntry">
+
+        <!--begin::Portlet-->
+        <app-entry-definition-container *ngFor="let item of primaryPOIEntryArray.controls; let i=index" [index]="i+1" [item]="item"
+          (deleteEmitter)="deleteEntryDefinition(i,'primary')">
+
+          <app-proof-of-id-entry-type [item]="item" [index]="i+1" [parentGroup]="entryDefinitionGroup" [arrayName]="'primaryPOIEntry'"
+            [groupName]="i">
+          </app-proof-of-id-entry-type>
+
+        </app-entry-definition-container>
+        <!--end::Portlet-->
 
       </div>
     </div>
-    <!--end::Portlet-->
+    <!--end::Primary-->
+
 
     <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
       <div class="m-demo__preview" [formGroup]="entryDefinitionGroup">
-        <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"' [dragulaModel]='entriesArray.controls'>
+        <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"'  [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
+
           <!--begin::Portlet-->
-          <div *ngFor="let poi of entriesArray.controls; let i=index" [formGroupName]="i" id="m_portlet_tools_{{i}}_{{i}}" data-portlet="true"
-            class="m-portlet m-portlet--mobile m-portlet--sortable m-portlet--head-solid-bg">
-            <div class="m-portlet__head">
-              <div class="m-portlet__head-caption">
-                <div class="m-portlet__head-title">
-                  <span class="m-portlet__head-icon">
-                    <i class="flaticon-placeholder-2"></i>
-                  </span>
-                  <h3 class="m-portlet__head-text">
-                    <span class="m-badge m-badge--metal">
-                      {{i+2}}.
-                    </span>
-                    Another Proof of Id
-                  </h3>
-                </div>
-              </div>
-              <div class="m-portlet__head-tools">
-                <ul class="m-portlet__nav">
-                  <li class="m-portlet__nav-item">
-                    <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-angle-down"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-expand"></i>
-                    </a>
-                  </li>
-                  <li class="m-portlet__nav-item">
-                    <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                      <i class="la la-close"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="m-portlet__body">
-              <!-- <app-temp-view></app-temp-view> -->
-              <!-- <input type="hidden"formControlName="order" value="{{i+2}}"> -->
-              <input type="text" formControlName="order" value="{{i+2}}"> {{poi.value | json}}
-            </div>
-          </div>
+          <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryPOIEntryArray.controls.length+1"
+            [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
+          <<  {{item.get('entryType').value}} >>
+            <app-proof-of-id-entry-type *ngSwitchCase="'1'" [item]="item" [index]="i+1+primaryPOIEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+              [arrayName]="'entriesArray'" [groupName]="i">
+            </app-proof-of-id-entry-type>
+
+            <app-proof-of-id-entry-type *ngSwitchCase="'2'" [item]="item" [index]="i+1+primaryPOIEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+            [arrayName]="'entriesArray'" [groupName]="i">
+          </app-proof-of-id-entry-type>
+
+                  <app-temp-view *ngSwitchCase="'3'"></app-temp-view>
+
+          </app-entry-definition-container>
           <!--end::Portlet-->
 
-
         </div>
       </div>
     </div>
-    <!--begin::Portlet-->
-    <div *ngFor="let poi of optionalSelfieEntryArray.controls; let i=index" id="m_portlet_tools_4" data-portlet="true" class="m-portlet m-portlet--mobile">
-      <div class="m-portlet__head">
-        <div class="m-portlet__head-caption">
-          <div class="m-portlet__head-title">
-            <span class="m-portlet__head-icon">
-              <i class="la la-thumb-tack m--font-success"></i>
-            </span>
-            <h3 class="m-portlet__head-text m--font-success">
-              <span class="m-badge m-badge--success">
-                {{i}}
-              </span>
-              Face Matching
-            </h3>
-          </div>
-        </div>
-        <div class="m-portlet__head-tools">
-          <ul class="m-portlet__nav">
-            <li class="m-portlet__nav-item">
-              <a href="" data-portlet-tool="toggle" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-angle-down"></i>
-              </a>
-            </li>
-            <li class="m-portlet__nav-item">
-              <a href="#" data-portlet-tool="fullscreen" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-expand"></i>
-              </a>
-            </li>
-            <li class="m-portlet__nav-item">
-              <a href="#" data-portlet-tool="remove" class="m-portlet__nav-link m-portlet__nav-link--icon">
-                <i class="la la-close"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="m-portlet__body">
-        <app-temp-view></app-temp-view>
+
+    <!--begin::optionalSelfie-->
+    <div [formGroup]="entryDefinitionGroup">
+      <div formArrayName="optionalSelfieEntry">
+
+        <!--begin::Portlet-->
+        <app-entry-definition-container *ngFor="let item of optionalSelfieEntryArray.controls; let i=index" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
+          [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'optional')">
+
+          <app-proof-of-id-entry-type [item]="item" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
+            [parentGroup]="entryDefinitionGroup" [arrayName]="'optionalSelfieEntry'" [groupName]="i">
+          </app-proof-of-id-entry-type>
+
+        </app-entry-definition-container>
+        <!--end::Portlet-->
 
       </div>
     </div>
-    <!--end::Portlet-->
-
-
+    <!--end::optionalSelfie-->
 
   </div>
-
 </div>
