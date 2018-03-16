@@ -4,7 +4,7 @@
       <label>
         Channel Types:
       </label>
-      <select id="media_type" formControlName="mediaType"  class=" selector form-control m-bootstrap-select m_selectpicker" multiple >
+      <select id="media_type"  class=" selector form-control m-bootstrap-select m_selectpicker" multiple >
         <option *ngFor="let type of channelTypes" [ngValue]="type">{{type.name}}</option>
       </select>
 

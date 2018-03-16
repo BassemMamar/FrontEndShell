@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { MediaAcquisitionChannelType } from '../../../../model/media-acquisition-channel-Type';
@@ -16,8 +16,8 @@ export class ProofOfIdEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() groupName;
 
   @Input() index;
-  @ViewChild('tempp') test: any;
-  tempp
+  @ViewChild('tempp') test: ElementRef;
+
   constructor(private common: CommonService) { }
 
   ngOnInit() {
@@ -31,13 +31,14 @@ export class ProofOfIdEntryTypeComponent implements OnInit, AfterViewInit {
   }
 
   initTouchSpin() {
-    $(this.test).TouchSpin({
+    $(this.test.nativeElement).TouchSpin({
       min: 1,
       max: 3,
       step: 1,
       decimals: 0,
       boostat: 5,
       maxboostedstep: 10
+      
     });
 
   }
