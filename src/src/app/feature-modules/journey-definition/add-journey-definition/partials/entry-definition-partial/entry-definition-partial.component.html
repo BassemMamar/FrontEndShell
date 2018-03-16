@@ -102,9 +102,10 @@
         <app-entry-definition-container *ngFor="let item of optionalSelfieEntryArray.controls; let i=index" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
           [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'optional')">
 
-          <app-proof-of-id-entry-type [item]="item" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
+          <!-- <app-proof-of-id-entry-type [item]="item" [index]="i+1+primaryPOIEntryArray.controls.length+entriesArray.controls.length"
             [parentGroup]="entryDefinitionGroup" [arrayName]="'optionalSelfieEntry'" [groupName]="i">
-          </app-proof-of-id-entry-type>
+          </app-proof-of-id-entry-type> -->
+            <app-selfie-entry-type [selfieEntryTypeInfo]="entryDefinitionDataModel" ></app-selfie-entry-type>
 
         </app-entry-definition-container>
         <!--end::Portlet-->
