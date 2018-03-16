@@ -1,8 +1,9 @@
 <div [formGroup]="parentGroup">
   <div formArrayName="{{arrayName}}">
     <div [formGroupName]="groupName">
-      <input type="hidden" formControlName="order" [ngModel]="index"> {{item.value | json}} {{item.get('entryType').value}} 
-        <!-- <app-temp-view></app-temp-view> -->
+      <input type="hidden" formControlName="order" [ngModel]="index"> 
+      <!-- {{item.value | json}} {{item.get('entryType').value}}  -->
+        <app-temp-view></app-temp-view>
 
     </div>
   </div>

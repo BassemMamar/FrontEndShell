@@ -5,10 +5,10 @@
       <div class="row">
         <div class="col">
           <!--begin: Dropdown-->
-          <br> primaryEntryArray value: {{primaryEntryArray.value | json}}
+          <!-- <br> primaryEntryArray value: {{primaryEntryArray.value | json}}
           <br> entriesArray value: {{entriesArray.value | json}}
           <br> entriesArray length: {{entriesArray.length }}
-          <br> LastEntryArray value: {{LastEntryArray.value | json}}
+          <br> LastEntryArray value: {{LastEntryArray.value | json}} -->
           <br>
           <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow" data-dropdown-toggle="click">
             <a href="#" class="m-dropdown__toggle btn btn-success dropdown-toggle">
@@ -69,14 +69,14 @@
     <!--end::Primary-->
 
 
-    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+    <div *ngIf="entriesArray && entriesArray.controls.length>0" class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
       <div class="m-demo__preview" [formGroup]="entryDefinitionGroup">
         <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"'  [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
 
           <!--begin::Portlet-->
           <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryEntryArray.controls.length+1"
             [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
-          <<  {{item.get('entryType').value}} >>
+          
             <app-proof-of-id-entry-type *ngSwitchCase="entryTypes.ProofOfIdentity" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
               [arrayName]="'entriesArray'" [groupName]="i">
             </app-proof-of-id-entry-type>
@@ -85,7 +85,7 @@
             [arrayName]="'entriesArray'" [groupName]="i">
           </app-proof-of-id-entry-type>
 
-                  <app-temp-view *ngSwitchCase="entryTypes.AdditionalDocument"></app-temp-view>
+                  <!-- <app-temp-view *ngSwitchCase="entryTypes.AdditionalDocument"></app-temp-view> -->
 
           </app-entry-definition-container>
           <!--end::Portlet-->
