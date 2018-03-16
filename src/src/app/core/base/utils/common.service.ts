@@ -95,4 +95,22 @@ export class CommonService {
         }
 
     }
+
+
+    getEnumNamesAndValues<T extends number>(e: any) {
+        return this.getEnumNames(e).map(n => ({ name: n, value: e[n] as T }));
+    }
+    getEnumNames(e: any) {
+        return this.getObjValues(e).filter(v => typeof v === "string") as string[];
+    }
+
+    getEnumValues<T extends number>(e: any) {
+        return this.getObjValues(e).filter(v => typeof v === "number") as T[];
+    }
+
+    private getObjValues(e: any): (number | string)[] {
+        return Object.keys(e).map(k => e[k]);
+    }
+
+
 }

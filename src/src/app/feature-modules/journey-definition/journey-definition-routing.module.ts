@@ -19,8 +19,8 @@ const routes: Routes = [
   {
     path: '',
     component: JourneyDefinitionComponent,
-    canActivate: [AuthenticatedGuard, AuthorizedGuard],
-    canActivateChild: [AuthenticatedGuard, AuthorizedGuard],
+  //  canActivate: [AuthenticatedGuard, AuthorizedGuard],
+  //  canActivateChild: [AuthenticatedGuard, AuthorizedGuard],
     data: {
       authClient: AuthClients.FES,
       moduleName: FrontendShell.JourneyDefinition.Name

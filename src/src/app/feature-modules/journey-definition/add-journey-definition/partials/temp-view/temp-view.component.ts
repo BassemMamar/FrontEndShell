@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-temp-view',
+  selector: '',
   templateUrl: './temp-view.component.html',
   styleUrls: ['./temp-view.component.scss']
 })

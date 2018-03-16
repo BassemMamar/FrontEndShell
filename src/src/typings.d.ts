@@ -14,12 +14,16 @@ interface JQuery {
 
   // mPortlet
   mPortlet(): JQuery;
+
+  selectpicker() :JQuery;
+
 }
 
 
 interface JQueryStatic {
   mWizard: any;
   mPortlet: any;
+  selectpicker: any;
 }
 
 
