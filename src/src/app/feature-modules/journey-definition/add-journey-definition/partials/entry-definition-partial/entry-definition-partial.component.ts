@@ -1,9 +1,17 @@
 import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionInfo } from '../../../model/journey-entry-definition-info';
 import { EntryTypes } from '../../../model/entry-types';
 import { EntryDefinitionContainerComponent } from './entry-definition-container/entry-definition-container.component';
+import { EntryDefinitionOptions } from '../../../model/entry-definition-options';
+import { JourneyDefinitionService } from '../../../journey-definition.service';
+import { EntryFormModel } from '../../../model/entry-form-model';
+import { POIEntryFormModel } from '../../../model/poi-entry-form-model';
+import { POAEntryFormModel } from '../../../model/poa-entry-form-model';
+import { SelfieEntryFormModel } from '../../../model/selfie-entry-form-model';
+import { ADEntryFormModel } from '../../../model/ad-entry-form-model';
+import { ToastrService } from '../../../../../shared/components/toastr/toastr.service';
 
 @Component({
   selector: 'app-entry-definition-partial',
@@ -26,13 +34,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   get LastEntryArray(): FormArray {
     return this.entryDefinitionGroup.get('LastEntryArray') as FormArray;
   }
+  entryDefinitionOptions: EntryDefinitionOptions[];
 
-  entryDefinitionOptions = [
-    { name: 'Proof Of Identity', value: EntryTypes.ProofOfIdentity },
-    { name: 'Proof Of Address', value: EntryTypes.ProofOfAddress },
-    { name: 'Additional Document', value: EntryTypes.AdditionalDocument },
-    { name: 'Selfie', value: EntryTypes.Selfie }
-  ];
   options: any = {
     moves: (el, container, handle) => {
       return (<string>handle.className).endsWith('handle');
@@ -42,6 +45,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   constructor(
     private logger: LoggerService,
+    private journeyDefinitionService: JourneyDefinitionService,
+    private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder) {
 
@@ -51,7 +56,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   ngOnInit() {
-    const ff = this.entryDefinitionGroup;
+    this.getEntryDefinitionOptions();
     this.createEntryDefinitionGroup();
     this.initEntryDefinitionGroup(this.entryDefinitionDataModel);
   }
@@ -63,12 +68,20 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     // }, 1000);
   }
 
+  getEntryDefinitionOptions() {
+    this.journeyDefinitionService
+      .getEntryDefinitionOptions()
+      .subscribe(
+      data => this.entryDefinitionOptions = data
+      );
+  }
+
   createEntryDefinitionGroup() {
     // const primaryPOIEntry = this.fb.group(new JourneyEntryDefinitionInfo()); // this one should map proof of identity entry form model
     const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionInfo>());
     this.entryDefinitionGroup.addControl('primaryEntryArray', primaryPOIEntry);
 
-    const entries = this.fb.array(new Array<JourneyEntryDefinitionInfo>()); // this one should map array of journey entry definition
+    const entries = this.fb.array(new Array<EntryFormModel>()); // this one should map array of journey entry definition
     this.entryDefinitionGroup.addControl('entriesArray', entries);
 
 
@@ -82,36 +95,36 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
       return;
     }
 
-    /**
-     * Handle First element
-     */
-    if (true) { // ToDo check if first entry is of type proof of identity
-      const firstEntry = dataModel.shift(); // this should entry of type proof of identity
-      const poi = new JourneyEntryDefinitionInfo();
-      poi.isOptional = false; // should be false for first primary POI entry
-      poi.order = 1; //  should be 1 for; first primary POI entry
-      poi.entryType = firstEntry.entryType; // must be Proof of identity
-      this.primaryEntryArray.push(this.fb.group(poi));
-      // this.primaryPOIEntryArray.setValue( this.fb.group(new JourneyEntryDefinitionInfo()));
-    }
+    // /**
+    //  * Handle First element
+    //  */
+    // if (true) { // ToDo check if first entry is of type proof of identity
+    //   const firstEntry = dataModel.shift(); // this should entry of type proof of identity
+    //   const poi = new JourneyEntryDefinitionInfo();
+    //   poi.isOptional = false; // should be false for first primary POI entry
+    //   poi.order = 1; //  should be 1 for; first primary POI entry
+    //   poi.entryType = firstEntry.entryType; // must be Proof of identity
+    //   this.primaryEntryArray.push(this.fb.group(poi));
+    //   // this.primaryPOIEntryArray.setValue( this.fb.group(new JourneyEntryDefinitionInfo()));
+    // }
+    // /**
+    //  * Handle Last element
+    //  */
+    // if (true) { // ToDo check if last entry is of type selfie
+    //   const lastEntry = dataModel.pop(); // this should entry of type selfie
+    //   const poa = new JourneyEntryDefinitionInfo();
+    //   poa.isOptional = lastEntry.isOptional;
+    //   poa.order = lastEntry.order;
+    //   poa.entryType = lastEntry.entryType; // must be selfie
+    //   this.LastEntryArray.push(this.fb.group(poa));
 
-    /**
-     * Handle Last element
-     */
-    if (true) { // ToDo check if last entry is of type selfie
-      const lastEntry = dataModel.pop(); // this should entry of type selfie
-      const poa = new JourneyEntryDefinitionInfo();
-      poa.isOptional = lastEntry.isOptional;
-      poa.order = lastEntry.order;
-      poa.entryType = lastEntry.entryType; // must be selfie
-      this.LastEntryArray.push(this.fb.group(poa));
-
-    }
+    // }
 
     /**
      * Handle the rest of elements
      */
-    const entryFGs = dataModel.map(entry => this.fb.group(entry));
+    const entryFGs = dataModel.map(entry => this.createNewEntryFormModel(entry.entryType, entry));
+
     // this.entries = this.fb.array(entryFGs); // way(1) afried to lose the refin the main form group
     entryFGs.forEach(fg => this.entriesArray.push(fg)); // way(2)
   }
@@ -120,48 +133,52 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   addEntryDefinition(value: EntryTypes) {
     switch (value) {
       case EntryTypes.ProofOfIdentity:
-        const POIEntry = new JourneyEntryDefinitionInfo();
-        POIEntry.entryType = EntryTypes.ProofOfIdentity;
-        const POIgroup = this.fb.group(POIEntry);
-
-        if (this.primaryEntryArray.length === 0) {
-          // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
-          this.primaryEntryArray.push(POIgroup);
-        } else {
-          this.entriesArray.push(POIgroup);
-        }
+        // const poi = new POIEntryFormModel();
+        // const POIgroup = this.fb.group(poi);
+        // POIgroup.get('acceptExpiredUpToMonthes').disable();
+        const POIgroup = this.createNewEntryFormModel(value);
+        this.entriesArray.push(POIgroup);
+        // if (this.primaryEntryArray.length === 0) {
+        //   // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
+        //   this.primaryEntryArray.push(POIgroup);
+        // } else {
+        //   this.entriesArray.push(POIgroup);
+        // }
         break;
       case EntryTypes.ProofOfAddress:
-        const POAEntry = new JourneyEntryDefinitionInfo();
-        POAEntry.entryType = EntryTypes.ProofOfAddress;
-        const POAgroup = this.fb.group(POAEntry);
+        // const poa = new POAEntryFormModel();
+        // const POAgroup = this.fb.group(poa);
+        // POAgroup.get('acceptExpiredUpToMonthes').disable();
 
+        const POAgroup = this.createNewEntryFormModel(value);
         this.entriesArray.push(POAgroup);
         break;
       case EntryTypes.AdditionalDocument:
-        const ADEntry = new JourneyEntryDefinitionInfo();
-        ADEntry.entryType = EntryTypes.AdditionalDocument;
-        const ADgroup = this.fb.group(ADEntry);
+        // const ad = new ADEntryFormModel();
+        // const ADgroup = this.fb.group(ad);
+        const ADgroup = this.createNewEntryFormModel(value);
 
         this.entriesArray.push(ADgroup);
         break;
       case EntryTypes.Selfie:
-        const SFEntry = new JourneyEntryDefinitionInfo();
-        SFEntry.entryType = EntryTypes.Selfie;
-        const SFgroup = this.fb.group(SFEntry);
+        // const selfie = new SelfieEntryFormModel();
+        // const SFgroup = this.fb.group(selfie);
 
-        if (this.LastEntryArray.length === 0) {
-          // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
-          this.LastEntryArray.push(SFgroup);
-        }
+        // if (this.LastEntryArray.length === 0) {
+        //   // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
+        //   this.LastEntryArray.push(SFgroup);
+        // }
         // else {
         // const dd = this.entriesArray.controls.forEach(e => this.logger.info(` e.get('entryType').value : ${e.get('entryType').value}`));
-        //   const oldSelfie = this.entriesArray.controls.find(e => e.get('entryType').value === EntryType.Selfie);
-        //   if (oldSelfie == null) {
-        //     this.entriesArray.push(SFgroup);
-        //   } else {
-        //     // alert that is only one selfie isallowed
-        //   }
+        const oldSelfie = this.entriesArray.controls.find(e => e.get('entryType').value === EntryTypes.Selfie);
+        if (oldSelfie == null) {
+          const SFgroup = this.createNewEntryFormModel(value);
+
+          this.entriesArray.push(SFgroup);
+        } else {
+          // alert that is only one selfie isallowed
+          this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`);
+        }
         // }
 
         break;
@@ -189,24 +206,68 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   expandAll() {
     this.children.forEach(container => container.expand());
-    // if (this.portlet1 != null) {
-    //   this.portlet1.expand();
-    // }
-    // this.portlet2.expand();
-    // this.portlet3.expand();
-    // this.portlet4.expand();
-    //  this.portlet5.expand();
   }
 
   collapseAll() {
     this.children.forEach(container => container.collapse());
-    // if (this.portlet1 != null) {
-    //   this.portlet1.collapse();
-    // }
-    // this.portlet2.collapse();
-    // this.portlet3.collapse();
-    // this.portlet4.collapse();
-    // this.portlet5.collapse();
+  }
+
+
+
+  createNewEntryFormModel(entryTypes: EntryTypes, entryDataModel: JourneyEntryDefinitionInfo = null): FormGroup {
+    switch (entryTypes) {
+      case EntryTypes.ProofOfIdentity:
+        const poi = new POIEntryFormModel(entryDataModel);
+        const POIgroup = this.fb.group({
+          order: [poi.order, Validators.required],
+          entryType: [entryTypes, Validators.required],
+          isOptional: [poi.isOptional],
+          supportedChannelTypes: [poi.supportedChannelTypes, Validators.required],
+          maxAttempts: [poi.maxAttempts, Validators.required],
+          askForAdditionalSteps: [poi.askForAdditionalSteps, Validators.required],
+          acceptExpiredDocuments: [poi.acceptExpiredDocuments],
+          isUpToMonthes: [poi.isUpToMonthes],
+          acceptExpiredUpToMonthes: [{ value: poi.acceptExpiredUpToMonthes, disabled: poi.isUpToMonthes }],
+        });
+        return POIgroup;
+
+      case EntryTypes.ProofOfAddress:
+        const poa = new POAEntryFormModel(entryDataModel);
+        const POAgroup = this.fb.group({
+          order: [poa.order, Validators.required],
+          entryType: [entryTypes, Validators.required],
+          isOptional: [poa.isOptional],
+          supportedChannelTypes: [poa.supportedChannelTypes, Validators.required],
+          maxAttempts: [poa.maxAttempts, Validators.required],
+          acceptExpiredDocuments: [poa.acceptExpiredDocuments],
+          isUpToMonthes: [poa.isUpToMonthes],
+          acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: poi.isUpToMonthes }],
+        });
+        return POAgroup;
+
+      case EntryTypes.AdditionalDocument:
+        const ad = new ADEntryFormModel(entryDataModel);
+        const ADgroup = this.fb.group({
+          order: [ad.order, Validators.required],
+          entryType: [entryTypes, Validators.required],
+          isOptional: [ad.isOptional],
+          supportedChannelTypes: [ad.supportedChannelTypes, Validators.required],
+          maxAttempts: [ad.maxAttempts, Validators.required],
+          title: [ad.title, Validators.required]
+        });
+        return ADgroup;
+
+      case EntryTypes.Selfie:
+        const selfie = new SelfieEntryFormModel(entryDataModel);
+        const SFgroup = this.fb.group({
+          order: [selfie.order, Validators.required],
+          entryType: [entryTypes, Validators.required],
+          // isOptional: [false],
+          supportedChannelTypes: [selfie.supportedChannelTypes, Validators.required],
+        });
+        return SFgroup;
+
+    }
   }
 
 }

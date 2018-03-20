@@ -81,16 +81,19 @@
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="alCheck" #agelimit (change)="initTouchSpin(agelimit.checked)">
+            <input type="checkbox" formControlName="alCheck" #agelimit >
             <span></span>
           </label>
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
-          <input id="age_limite_min" formControlName="alMinValue" type="text" class="form-control m-input--air">
+          <!-- <input id="age_limite_min" formControlName="alMinValue" type="text" class="form-control m-input--air"> -->
+          <input type="number" min="1"  class="form-control m-input--air" formControlName="alMinValue" />
+
 
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
-          <input id="age_limite_max" formControlName="alMaxValue" type="text" class="form-control m-input--air" >
+          <!-- <input id="age_limite_max" formControlName="alMaxValue" type="text" class="form-control m-input--air" > -->
+          <input type="number"  max="100" class="form-control m-input--air" formControlName="alMaxValue" />
 
         </div>
       </div>

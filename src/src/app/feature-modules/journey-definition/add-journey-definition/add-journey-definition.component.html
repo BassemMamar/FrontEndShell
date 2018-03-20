@@ -32,10 +32,10 @@
 
       <shrd-alert [id]="'temp'"></shrd-alert>
 
-       <!-- <p>Form value: {{ journeyDefinitionForm.value | json }}</p> -->
-    <!--  <p>Form status: {{ journeyDefinitionForm.status | json }}</p> -->
-      <!-- <p>entryDefinitionGroup value: {{ journeyDefinitionForm.controls.entryDefinitionGroup.value | json }}</p> -->
-      
+      <p>Form value: {{ journeyDefinitionForm.value | json }}</p> 
+      <p>Form status: {{ journeyDefinitionForm.status | json }}</p>
+      <p>entryDefinitionGroup value: {{ journeyDefinitionForm.controls.entryDefinitionGroup.value | json }}</p>
+
     </div>
     <!--end: Message container -->
     <!--begin: Form Wizard Head -->
@@ -119,9 +119,7 @@
           <!--end: Form Wizard Step 1-->
           <!--begin: Form Wizard Step 2-->
           <div class="m-wizard__form-step" id="m_wizard_form_step_2">
-            <app-entry-definition-partial
-             [entryDefinitionGroup]="journeyDefinitionForm.controls.entryDefinitionGroup"
-             [entryDefinitionDataModel]="journeyDefinitionDataModel.journeyEntryDefinitions">
+            <app-entry-definition-partial [entryDefinitionGroup]="journeyDefinitionForm.controls.entryDefinitionGroup" [entryDefinitionDataModel]="journeyDefinitionDataModel.journeyEntryDefinitions">
             </app-entry-definition-partial>
           </div>
           <!--end: Form Wizard Step 2-->

@@ -22,7 +22,10 @@ import { TagInputModule } from 'ngx-chips';
 import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
 // tslint:disable-next-line:max-line-length
 import { EntryDefinitionContainerComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-container/entry-definition-container.component';
-import { ProofOfIdEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/proof-of-id-entry-type/proof-of-id-entry-type.component';
+import { POIEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/poi-entry-type/poi-entry-type.component';
+import { JourneyDefinitionService } from './journey-definition.service';
+import { POAEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/poa-entry-type/poa-entry-type.component';
+import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/ad-entry-type/ad-entry-type.component';
 
 @NgModule({
   imports: [
@@ -44,7 +47,10 @@ import { ProofOfIdEntryTypeComponent } from './add-journey-definition/partials/e
     SummaryPartialComponent,
     TempViewComponent,
     EntryDefinitionContainerComponent,
-    ProofOfIdEntryTypeComponent
-  ]
+    POIEntryTypeComponent,
+    POAEntryTypeComponent,
+    ADEntryTypeComponent
+  ],
+  providers: [JourneyDefinitionService]
 })
 export class JourneyDefinitionModule { }

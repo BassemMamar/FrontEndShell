@@ -22,7 +22,6 @@ export class AuthenticatedGuard implements CanActivate, CanActivateChild {
   }
 
   private checkLoggedIn(authClient: string, redirectUrl: string): Observable<boolean> | boolean {
-    return true;
 
     if (this.authService.loggedIn) {
       return true;

@@ -1,0 +1,57 @@
+<div [formGroup]="parentGroup">
+  <div formArrayName="{{arrayName}}">
+    <div [formGroupName]="groupName">
+      <input type="hidden" formControlName="order" [ngModel]="index">
+      <!-- {{item.value | json}} {{item.get('entryType').value}} 
+        <app-temp-view></app-temp-view>  -->
+      <div class="form-group m-form__group row">
+        <div class="col-lg-4">
+          <label>
+            Channel Types:
+          </label>
+          <select #supportedChannelTypesInput  formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker"
+            multiple>
+            <option>Camera</option>
+            <option>File Upload</option>
+          </select>
+
+          <span class="m-form__help">
+            Choose the way to get media for this entry
+          </span>
+        </div>
+        <div class="col-lg-4">
+          <label>
+            Max Attempt:
+          </label>
+          <input type="number" min="1" max="3" class="form-control m-input--air" formControlName="maxAttempts" />
+          <span class="m-form__help">
+          </span>
+        </div>
+
+        <div class="col-lg-4">
+          <label for=""> </label>
+          <div class="m-checkbox-inline">
+            <label class="m-checkbox">
+              Optional entry (can be skipped)
+              <input type="checkbox" formControlName="isOptional">
+              <span></span>
+            </label>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group m-form__group row">
+        <div class="col-lg-4">
+          <label>
+            Title:
+          </label>
+          <input type="text" formControlName="title" class="form-control">
+          <span class="m-form__help">
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
