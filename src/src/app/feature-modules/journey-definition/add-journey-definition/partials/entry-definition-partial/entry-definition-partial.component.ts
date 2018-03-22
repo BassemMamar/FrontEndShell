@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
-import { JourneyEntryDefinitionInfo } from '../../../model/journey-entry-definition-info';
+import { JourneyEntryDefinitionDetails } from '../../../model/journey-entry-definition-details';
 import { EntryTypes } from '../../../model/entry-types';
 import { EntryDefinitionContainerComponent } from './entry-definition-container/entry-definition-container.component';
 import { EntryDefinitionOptions } from '../../../model/entry-definition-options';
@@ -12,6 +12,8 @@ import { POAEntryFormModel } from '../../../model/poa-entry-form-model';
 import { SelfieEntryFormModel } from '../../../model/selfie-entry-form-model';
 import { ADEntryFormModel } from '../../../model/ad-entry-form-model';
 import { ToastrService } from '../../../../../shared/components/toastr/toastr.service';
+import { WorldRegionInfo } from '../../../model/world-region-info';
+import { DocumentCategory } from '../../../model/document-category';
 
 @Component({
   selector: 'app-entry-definition-partial',
@@ -20,9 +22,9 @@ import { ToastrService } from '../../../../../shared/components/toastr/toastr.se
 })
 export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck {
   entryTypes = EntryTypes;
+  entryDefinitionOptions: EntryDefinitionOptions[];
   @Input() entryDefinitionGroup: FormGroup;
-  @Input() entryDefinitionDataModel: JourneyEntryDefinitionInfo[];
-  // primaryPOIEntryDataModel: JourneyEntryDefinitionInfo; // typeof journey entry definition
+  @Input() entryDefinitionDataModel: JourneyEntryDefinitionDetails[];
   @ViewChildren(EntryDefinitionContainerComponent) children: EntryDefinitionContainerComponent[];
 
   get primaryEntryArray(): FormArray {
@@ -34,7 +36,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   get LastEntryArray(): FormArray {
     return this.entryDefinitionGroup.get('LastEntryArray') as FormArray;
   }
-  entryDefinitionOptions: EntryDefinitionOptions[];
+  worldRegionInfo: WorldRegionInfo[];
+  documentCategories: DocumentCategory[];
 
   options: any = {
     moves: (el, container, handle) => {
@@ -56,6 +59,11 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   ngOnInit() {
+    // next 2 call to get countries and categories
+    // for categories later will be one for each entry type
+    this.getWorldRegionInfo();
+    this.getTypes();
+
     this.getEntryDefinitionOptions();
     this.createEntryDefinitionGroup();
     this.initEntryDefinitionGroup(this.entryDefinitionDataModel);
@@ -68,6 +76,22 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     // }, 1000);
   }
 
+  getWorldRegionInfo() {
+    this.journeyDefinitionService
+      .getWorldRegionInfo()
+      .subscribe(
+      data => this.worldRegionInfo = data
+      );
+  }
+
+  getTypes() {
+    this.journeyDefinitionService
+      .getTypes()
+      .subscribe(
+      data => this.documentCategories = data
+      );
+  }
+
   getEntryDefinitionOptions() {
     this.journeyDefinitionService
       .getEntryDefinitionOptions()
@@ -78,7 +102,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   createEntryDefinitionGroup() {
     // const primaryPOIEntry = this.fb.group(new JourneyEntryDefinitionInfo()); // this one should map proof of identity entry form model
-    const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionInfo>());
+    const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
     this.entryDefinitionGroup.addControl('primaryEntryArray', primaryPOIEntry);
 
     const entries = this.fb.array(new Array<EntryFormModel>()); // this one should map array of journey entry definition
@@ -86,11 +110,11 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
 
     // const optionalSelfieEntry = this.fb.group(new JourneyEntryDefinitionInfo()); // this one should map Selfie entry form model
-    const optionalSelfieEntry = this.fb.array(new Array<JourneyEntryDefinitionInfo>());
+    const optionalSelfieEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
     this.entryDefinitionGroup.addControl('LastEntryArray', optionalSelfieEntry);
   }
 
-  initEntryDefinitionGroup(dataModel: JourneyEntryDefinitionInfo[]) {
+  initEntryDefinitionGroup(dataModel: JourneyEntryDefinitionDetails[]) {
     if (dataModel == null || dataModel.length === 0) {
       return;
     }
@@ -214,7 +238,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
 
 
-  createNewEntryFormModel(entryTypes: EntryTypes, entryDataModel: JourneyEntryDefinitionInfo = null): FormGroup {
+  createNewEntryFormModel(entryTypes: EntryTypes, entryDataModel: JourneyEntryDefinitionDetails = null): FormGroup {
     switch (entryTypes) {
       case EntryTypes.ProofOfIdentity:
         const poi = new POIEntryFormModel(entryDataModel);
@@ -227,7 +251,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           askForAdditionalSteps: [poi.askForAdditionalSteps, Validators.required],
           acceptExpiredDocuments: [poi.acceptExpiredDocuments],
           isUpToMonthes: [poi.isUpToMonthes],
-          acceptExpiredUpToMonthes: [{ value: poi.acceptExpiredUpToMonthes, disabled: poi.isUpToMonthes }],
+          acceptExpiredUpToMonthes: [{ value: poi.acceptExpiredUpToMonthes, disabled: !poi.isUpToMonthes }],
+          documentProofPolicies: this.fb.array([]) // ToDo should fill exist policies
         });
         return POIgroup;
 
@@ -241,7 +266,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           maxAttempts: [poa.maxAttempts, Validators.required],
           acceptExpiredDocuments: [poa.acceptExpiredDocuments],
           isUpToMonthes: [poa.isUpToMonthes],
-          acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: poi.isUpToMonthes }],
+          acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: !poa.isUpToMonthes }],
         });
         return POAgroup;
 

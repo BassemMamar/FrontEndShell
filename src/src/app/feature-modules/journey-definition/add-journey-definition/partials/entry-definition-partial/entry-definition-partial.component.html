@@ -5,11 +5,11 @@
       <div class="row">
         <div class="col">
           <!--begin: Dropdown-->
-          <br> primaryEntryArray value: {{primaryEntryArray.value | json}}
+          <!-- <br> primaryEntryArray value: {{primaryEntryArray.value | json}}
           <br> entriesArray value: {{entriesArray.value | json}}
           <br> entriesArray length: {{entriesArray.length }}
-          <br> LastEntryArray value: {{LastEntryArray.value | json}}
-          <br>
+          <br> LastEntryArray value: {{LastEntryArray.value | json}} 
+          <br> -->
           <div class="m-dropdown m-dropdown--inline  m-dropdown--arrow" data-dropdown-toggle="click">
             <a href="#" class="m-dropdown__toggle btn btn-success dropdown-toggle">
               Add
@@ -68,9 +68,9 @@
     <!--end::Primary-->
 
 
-    <div *ngIf="entriesArray && entriesArray.controls.length>0" class="m-demo" data-code-preview="true" data-code-html="true"
-      data-code-js="false">
-      <div class="m-demo__preview" [formGroup]="entryDefinitionGroup">
+    <!-- <div *ngIf="entriesArray && entriesArray.controls.length>0" class="m-demo" data-code-preview="true" data-code-html="true"
+      data-code-js="false"> -->
+      <div class="m-demo__preview1" [formGroup]="entryDefinitionGroup">
         <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"' [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
 
           <!--begin::Portlet-->
@@ -78,7 +78,7 @@
             [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
 
             <app-poi-entry-type *ngSwitchCase="entryTypes.ProofOfIdentity" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
-              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i">
+              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories">
             </app-poi-entry-type>
 
             <app-poa-entry-type *ngSwitchCase="entryTypes.ProofOfAddress" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
@@ -99,7 +99,7 @@
 
         </div>
       </div>
-    </div>
+    <!-- </div> -->
 
     <!--begin::optionalSelfie-->
     <div [formGroup]="entryDefinitionGroup">

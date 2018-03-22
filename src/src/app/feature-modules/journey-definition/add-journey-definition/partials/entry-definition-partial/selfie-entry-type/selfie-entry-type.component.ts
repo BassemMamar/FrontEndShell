@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '
 import { MediaAcquisitionChannelType } from '../../../../model/media-acquisition-channel-Type';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
-import { JourneyDefinitionInfo } from '../../../../model/journey-definition-info';
+import { JourneyDefinitionDetails } from '../../../../model/journey-definition-details';
 
 @Component({
   selector: 'app-selfie-entry-type',

@@ -98,17 +98,19 @@
                                 "{$config.path.node_modules}/bootstrap-select/dist/js/bootstrap-select.js"
                             ]
                         },
+                        "bootstrap-multiselect": {
+                            "styles": [
+                                "{$config.path.node_modules}/bootstrap-multiselect/dist/css/bootstrap-multiselect.css"
+                            ],
+                            "scripts": [
+                                "{$config.path.node_modules}/bootstrap-multiselect/dist/js/bootstrap-multiselect.js",
+                                "{$config.path.node_modules}/bootstrap-multiselect/dist/js/bootstrap-multiselect-collapsible-groups.js"
+                            ]
+                        },
+                       
                         "animate.css": {
                             "styles": [
                                 "{$config.path.node_modules}/animate.css/animate.min.css"
-                            ]
-                        },
-                        "bootstrap-touchspin": {
-                            "styles": [
-                                "{$config.path.node_modules}/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.css"
-                            ],
-                            "scripts": [
-                                "{$config.path.node_modules}/bootstrap-touchspin/dist/jquery.bootstrap-touchspin.js"
                             ]
                         }
                     }

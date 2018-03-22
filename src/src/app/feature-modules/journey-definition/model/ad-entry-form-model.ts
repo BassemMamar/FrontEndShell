@@ -1,6 +1,6 @@
 import { EntryTypes } from './entry-types';
 import { EntryFormModel } from './entry-form-model';
-import { JourneyEntryDefinitionInfo } from './journey-entry-definition-info';
+import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
 
 export class ADEntryFormModel {
 
@@ -10,7 +10,7 @@ export class ADEntryFormModel {
     isOptional: Boolean;
     supportedChannelTypes: string[];
     title: string;
-    constructor(entryDataModel: JourneyEntryDefinitionInfo = null) {
+    constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
         this.entryType = EntryTypes.AdditionalDocument;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
         this.isOptional = entryDataModel == null ? false : entryDataModel.isOptional;

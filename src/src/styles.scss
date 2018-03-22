@@ -35,17 +35,26 @@
 .m-portlet{
     margin-bottom: 1.2rem !important;
 }
+.m-portlet .m-portlet__head{
+    height: 3.5rem !important;
+}
 .m-portlet .m-portlet__body{
     padding: 1.2rem 2.2rem !important; 
 }
 .m-form .m-form__section{
     margin: 20px 0 20px 0 !important;
 }
+.m-form .m-form__actions{
+    padding: 20px !important; 
+}
 .m-demo .m-demo__preview{
     padding: 20px !important;
 }
 .m-section{
     margin: 0 0 0px 0 !important; // chech this before
+}
+.m-widget3 .m-widget3__item{
+    margin-bottom: 0.2rem !important;
 }
 
 // .ng-touched.ng-dirty.ng-invalid{

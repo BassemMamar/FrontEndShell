@@ -26,6 +26,8 @@ import { POIEntryTypeComponent } from './add-journey-definition/partials/entry-d
 import { JourneyDefinitionService } from './journey-definition.service';
 import { POAEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/poa-entry-type/poa-entry-type.component';
 import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/ad-entry-type/ad-entry-type.component';
+import { EntryPolicyComponent } from './add-journey-definition/partials/entry-definition-partial/entry-policy/entry-policy.component';
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-de
     SharedModule.forChild(),
     LayoutModule,
     ReactiveFormsModule,
+    MultiselectDropdownModule,
 
     DragulaModule,
     TagInputModule,
@@ -49,7 +52,8 @@ import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-de
     EntryDefinitionContainerComponent,
     POIEntryTypeComponent,
     POAEntryTypeComponent,
-    ADEntryTypeComponent
+    ADEntryTypeComponent,
+    EntryPolicyComponent
   ],
   providers: [JourneyDefinitionService]
 })

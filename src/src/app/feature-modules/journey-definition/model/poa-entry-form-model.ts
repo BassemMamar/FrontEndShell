@@ -1,6 +1,6 @@
 import { EntryTypes } from './entry-types';
 import { EntryFormModel } from './entry-form-model';
-import { JourneyEntryDefinitionInfo } from './journey-entry-definition-info';
+import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
 
 export class POAEntryFormModel {
     entryType: EntryTypes;
@@ -12,7 +12,7 @@ export class POAEntryFormModel {
     acceptExpiredDocuments: boolean;
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
-    constructor(entryDataModel: JourneyEntryDefinitionInfo = null) {
+    constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
         this.entryType = EntryTypes.ProofOfAddress;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
         this.isOptional = entryDataModel == null ? false : entryDataModel.isOptional;

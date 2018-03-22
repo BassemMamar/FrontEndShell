@@ -1,8 +1,9 @@
 import { EntryTypes } from './entry-types';
 import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
 import { MediaChannelType } from './media-channel-type';
+import { EditDocumentProofPolicy } from './edit-document-proof-policy';
 
-export class JourneyEntryDefinitionInfo {
+export class EditJourneyEntryDefinition {
     entryType: EntryTypes;
     order: number;
     isOptional: boolean;
@@ -10,10 +11,10 @@ export class JourneyEntryDefinitionInfo {
     title: string;
     acceptExpiredDocuments: boolean;
     acceptExpiredUpToMonthes: number;
-    askForAdditionalSteps: string;
+    askForAdditionalStepsStatus: string;
 
-    supportedChannelTypes: MediaChannelType[];
-    // documentProofPolicies: tomoorow[];
+    supportedChannelTypes: string[];
+    documentProofPolicies: EditDocumentProofPolicy[];
     constructor() {
         this.order = 0;
         this.isOptional = false;
@@ -21,7 +22,8 @@ export class JourneyEntryDefinitionInfo {
         this.title = '';
         this.acceptExpiredDocuments = false;
         this.acceptExpiredUpToMonthes = null;
-        this.askForAdditionalSteps = '';
-        this.supportedChannelTypes = [];
+        this.askForAdditionalStepsStatus = '';
+        this.supportedChannelTypes = new Array<string>();
+        this.documentProofPolicies = new Array<EditDocumentProofPolicy>();
     }
 }

@@ -1,0 +1,111 @@
+<!-- <div [formGroup]="parentGroup">
+  <div formArrayName="{{arrayName}}">
+    <div [formGroupName]="groupName"> -->
+
+
+<div class="m-section">
+  <h3 class="m-section__heading">Policy</h3>
+  <!-- <span class="m-section__sub">
+    Rounded badges examples
+  </span> -->
+  <div class="m-section__content">
+    <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
+      <div class="m-demo__preview m-demo__preview--badge">
+
+        <!-- <div [formGroup]="parentGroup">
+          <div formArrayName="documentProofPolicies">
+            <div class="form-group m-form__group row" *ngFor="let policy of documentProofPolicies.controls; let i=index" [formGroupName]="i">
+              <div class="col-lg-4">
+                <div class="m-widget2__item m-widget2__item--warning">
+                  <span class="m-badge m-badge--info m-badge--wide m-badge--rounded" *ngFor="let documentType of policy.get('documentTypes').value">{{documentType.name}}
+                  </span>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <span class="m-badge m-badge--info m-badge--wide m-badge--rounded" *ngFor="let countryCode of policy.get('countryCodes').value">{{countryCode.name}}
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div> -->
+
+        <div class="form-group m-form__group row">
+          <div class="col-lg-4">
+            <label>
+              Categories:
+              <!-- {{categoriesInput | json }} -->
+            </label>
+            <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
+              multiple>
+              <optgroup *ngFor="let type of documentCategoriesCopy" [label]="type.friendlyName">
+                <option *ngFor="let category of type.subCategories" [ngValue]="category">{{category.friendlyName}}</option>
+              </optgroup>
+            </select>
+
+          </div>
+          <div class="col-lg-6">
+            <label>
+              Countries:
+            </label>
+            <select #countriesInput [(ngModel)]="selectedRegion" class="  form-control m-bootstrap-select m_selectpicker" multiple="multiple">
+              <optgroup *ngFor="let region of worldRegionInfoCopy" [label]="region.name">
+                <option *ngFor="let country of region.countries" [ngValue]="country">{{country.name}}| {{country.code}}</option>
+              </optgroup>
+
+            </select>
+
+            <!-- <ss-multiselect-dropdown [options]="myOptions" [texts]="myTexts" [settings]="mySettings" class=" "></ss-multiselect-dropdown> -->
+
+          </div>
+          <div class="col-lg-2">
+            <label>
+              &nbsp;
+            </label>
+            <button type="button" class="btn m-btn--pill form-control btn-success" (click)="addNewPolicy()">Add</button>
+          </div>
+        </div>
+        <div class="m-separator m-separator--dashed m-separator--sm"></div>
+        <div class="form-group m-form__group row justify-content-center">
+          <div [formGroup]="parentGroup" class="col-lg-10">
+            <div formArrayName="documentProofPolicies" class="m-widget3">
+              <div class="m-widget3__item" *ngFor="let policy of documentProofPolicies.controls; let i=index" [formGroupName]="i">
+                <div class="m-widget3__header">
+                  <div class="m-widget3__user-img">
+                    <!-- <img class="m-widget3__img" src="./assets/app/media/img/users/user1.jpg" alt=""> -->
+                    <i class="fa fa-credit-card fa-5x "></i>
+                  </div>
+                  <div class="m-widget3__info">
+                    <span class="m-widget3__username " *ngFor="let documentType of policy.get('documentTypes').value; let isLast =last">
+                      {{documentType.friendlyName}} {{!isLast? ',' :''}}
+                    </span>
+
+                    <br>
+                    <span class="m-widget3__time">
+
+                    </span>
+                  </div>
+                  <span class="m-widget3__status m--font-info">
+                    <a href="#" (click)="deletePolicy(i,policy)" class="m-link m-link--state m-link--danger">Delete</a>
+                  </span>
+                </div>
+                <div class="m-widget3__body">
+                  <p class="m-widget3__text">
+                    <span class="m-badge m-badge--metal m-badge--wide" *ngFor="let countryCode of policy.get('countries').value">{{countryCode.name}}
+                    </span>
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- </div>
+  </div>
+</div> -->

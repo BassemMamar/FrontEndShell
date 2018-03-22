@@ -15,7 +15,8 @@ interface JQuery {
   // mPortlet
   mPortlet(): JQuery;
 
-  selectpicker() :JQuery;
+  // selectpicker() :JQuery;
+  multiselect(options: any): JQuery;
 
 }
 
@@ -23,7 +24,7 @@ interface JQuery {
 interface JQueryStatic {
   mWizard: any;
   mPortlet: any;
-  selectpicker: any;
+  // selectpicker: any;
 }
 
 

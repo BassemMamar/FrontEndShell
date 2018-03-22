@@ -96,16 +96,27 @@ export class CommonService {
 
     }
 
- 
+    /**
+     * Copy an array of objects by value to another array totally isolated
+     * @param array: array of object
+     * @returns return an array of object copied from the source one
+     */
+    deepCopy<T>(array: Array<T>): Array<T> {
+
+        return _.map(array, _.cloneDeep);
+    }
+
+
+
     getEnumNamesAndValues<T extends number>(e: any) {
         return this.getEnumNames(e).map(n => ({ name: n, value: e[n] as T }));
     }
     getEnumNames(e: any) {
-        return this.getObjValues(e).filter(v => typeof v === "string") as string[];
+        return this.getObjValues(e).filter(v => typeof v === 'string') as string[];
     }
 
     getEnumValues<T extends number>(e: any) {
-        return this.getObjValues(e).filter(v => typeof v === "number") as T[];
+        return this.getObjValues(e).filter(v => typeof v === 'number') as T[];
     }
 
     private getObjValues(e: any): (number | string)[] {
