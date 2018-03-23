@@ -5,11 +5,12 @@ import { InMemService } from './in-memory-db/in-mem.service';
 import { environment } from '../../../environments/environment';
 
 const options: InMemoryBackendConfigArgs = {
-  apiBase: 'api/JourneyDefinition/'
+  apiBase: 'api/JourneyDefinition/',
+  rootPath: '//yh.localhost:8084/'
 };
 @NgModule({
   imports: [
-    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemService, options) : [],
+   // !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemService, options) : [],
   ],
   exports: [
 

@@ -483,10 +483,10 @@ xl: 1200px
     } 
 
     // fontaweseom icons 
-    [class^="fa-"], 
-    [class*=" fa-"] {
-        font-size: array-get($config, fontawesome);
-    } 
+    // [class^="fa-"], 
+    // [class*=" fa-"] {
+    //     font-size: array-get($config, fontawesome);
+    // } 
 
     // metronic icons 
     [class^="flaticon-"], 
@@ -505,10 +505,10 @@ xl: 1200px
     } 
 
     // fontaweseom icons 
-    [class^="fa-"], 
-    [class*=" fa-"] {
-        #{$attr}: array-get($config, fontawesome);
-    } 
+    // [class^="fa-"], 
+    // [class*=" fa-"] {
+    //     #{$attr}: array-get($config, fontawesome);
+    // } 
 
     // metronic icons 
     [class^="flaticon-"], 

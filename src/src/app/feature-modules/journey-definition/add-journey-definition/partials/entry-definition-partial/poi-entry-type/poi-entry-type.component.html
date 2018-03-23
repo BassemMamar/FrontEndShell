@@ -9,15 +9,10 @@
           <label>
             Channel Types:
           </label>
-          <select id="media_type" formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker"
-            multiple>
-            <option>Camera</option>
-            <option>File Upload</option>
+          <select #supportedChannelTypesInput formControlName="supportedChannelTypes"
+            class="form-control m-bootstrap-select m_selectpicker" multiple>
+            <option  *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
           </select>
-
-          <span class="m-form__help">
-            Choose the way to get media for this entry
-          </span>
         </div>
         <div class="col-lg-4">
           <label>
@@ -56,10 +51,10 @@
         </div>
         <div class="col-lg-4">
           <label for=""> Accept Expired Document</label>
-          <div class="m-checkbox-inline">
+          <div class=" input-group m-form__group padding-top-0">
             <label class="m-checkbox">
 
-              <input #aed type="checkbox" formControlName="acceptExpiredDocuments">
+              <input #aed type="checkbox" class="form-control"  formControlName="acceptExpiredDocuments">
               <span></span>
             </label>
           </div>
@@ -85,8 +80,9 @@
       </div>
       <!-- <div class="orm-group m-form__group row">
         <div class="col-lg-4"> -->
-          <app-entry-policy [parentGroup]="documentProofPoliciesParentGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories"></app-entry-policy>
-        <!-- </div>
+      <app-entry-policy [parentGroup]="documentProofPoliciesParentGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo"
+        [documentCategories]="documentCategories"></app-entry-policy>
+      <!-- </div>
       </div> -->
     </div>
   </div>

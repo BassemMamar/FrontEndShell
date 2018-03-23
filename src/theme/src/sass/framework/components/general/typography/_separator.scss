@@ -20,6 +20,10 @@
             margin: 20px 0;
         }
 
+        &.m-separator--xs {
+            margin: 10px 0;
+        }
+
         &.m-separator--fit {
             margin-left: -(array-get($m--portlet, layout, self, space));
             margin-right: -(array-get($m--portlet, layout, self, space));

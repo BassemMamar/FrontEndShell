@@ -8,11 +8,11 @@ export const environment = {
   environmentName: 'Development',
   isDebugMode: true,
 
-  authority: 'http://localhost:4000',
+  authority:  'http://localhost:4000', // 'https://onboardingsuite.com:8088/AuthenticationServer', // 'http://localhost:4000',
   api: {
-    url: '//localhost',
+    url: '//localhost:8084', // '//localhost',
     bases: {
-      onBoarding: '/OnBoarding/',
+      onBoarding: '/',
       businessAccountManagement: '/BusinessAccountManagement/'
     }
   },

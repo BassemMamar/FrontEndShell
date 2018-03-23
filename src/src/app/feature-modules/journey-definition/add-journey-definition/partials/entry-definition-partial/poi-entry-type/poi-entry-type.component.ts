@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { MediaAcquisitionChannelType } from '../../../../model/media-acquisition-channel-Type';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategory } from '../../../../model/document-category';
+import { SupportedCaptureMediaChannels } from '../../../../model/supported-capture-media-channels';
 
 @Component({
   selector: 'app-poi-entry-type',
@@ -17,18 +18,21 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName: number;
+
+  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategory[];
 
   @Input() index;
+  @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
   // return current entry form group
   get documentProofPoliciesParentGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
-
   documentProofPoliciesArrayName = 'documentProofPolicies';
+
   constructor(private loggerService: LoggerService, private common: CommonService) { }
 
   ngOnInit() {
@@ -37,7 +41,7 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
     this.initSelector();
   }
   initSelector() {
-    $('.selector').selectpicker();
+    $(this.supportedChannelTypesInput.nativeElement).selectpicker();
   }
 
 

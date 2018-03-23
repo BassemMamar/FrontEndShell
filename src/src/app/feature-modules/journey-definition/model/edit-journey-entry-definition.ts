@@ -1,6 +1,6 @@
 import { EntryTypes } from './entry-types';
 import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
-import { MediaChannelType } from './media-channel-type';
+import { SupportedCaptureMediaChannels } from './supported-capture-media-channels';
 import { EditDocumentProofPolicy } from './edit-document-proof-policy';
 
 export class EditJourneyEntryDefinition {

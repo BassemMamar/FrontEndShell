@@ -4,7 +4,7 @@
 
 
 <div class="m-section">
-  <h3 class="m-section__heading">Policy</h3>
+  <!-- <h3 class="m-section__heading">Policy</h3> -->
   <!-- <span class="m-section__sub">
     Rounded badges examples
   </span> -->
@@ -65,7 +65,9 @@
             <button type="button" class="btn m-btn--pill form-control btn-success" (click)="addNewPolicy()">Add</button>
           </div>
         </div>
-        <div class="m-separator m-separator--dashed m-separator--sm"></div>
+
+        <div *ngIf="documentProofPolicies.controls && documentProofPolicies.controls.length > 0" class="m-separator m-separator--dashed m-separator--xs"></div>
+
         <div class="form-group m-form__group row justify-content-center">
           <div [formGroup]="parentGroup" class="col-lg-10">
             <div formArrayName="documentProofPolicies" class="m-widget3">
@@ -73,7 +75,7 @@
                 <div class="m-widget3__header">
                   <div class="m-widget3__user-img">
                     <!-- <img class="m-widget3__img" src="./assets/app/media/img/users/user1.jpg" alt=""> -->
-                    <i class="fa fa-credit-card fa-5x "></i>
+                    <i class="fa fa-credit-card fa-2x m-widget3__img"></i>
                   </div>
                   <div class="m-widget3__info">
                     <span class="m-widget3__username " *ngFor="let documentType of policy.get('documentTypes').value; let isLast =last">

@@ -1,4 +1,4 @@
-export class MediaChannelType {
+export class SupportedCaptureMediaChannels {
     name: string;
     channelType: string;
     constructor() {

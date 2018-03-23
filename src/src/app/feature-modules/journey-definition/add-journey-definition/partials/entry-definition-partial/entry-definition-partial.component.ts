@@ -14,6 +14,8 @@ import { ADEntryFormModel } from '../../../model/ad-entry-form-model';
 import { ToastrService } from '../../../../../shared/components/toastr/toastr.service';
 import { WorldRegionInfo } from '../../../model/world-region-info';
 import { DocumentCategory } from '../../../model/document-category';
+import { SupportedCaptureMediaChannels } from '../../../model/supported-capture-media-channels';
+import { DocumentCategoryType } from '../../../model/document-category-type';
 
 @Component({
   selector: 'app-entry-definition-partial',
@@ -36,8 +38,12 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   get LastEntryArray(): FormArray {
     return this.entryDefinitionGroup.get('LastEntryArray') as FormArray;
   }
+
+  supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
   worldRegionInfo: WorldRegionInfo[];
-  documentCategories: DocumentCategory[];
+  poiDocumentCategories: DocumentCategory[];
+  poaDocumentCategories: DocumentCategory[];
+
 
   options: any = {
     moves: (el, container, handle) => {
@@ -59,10 +65,12 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   ngOnInit() {
-    // next 2 call to get countries and categories
+    // next calls to get countries and categories
     // for categories later will be one for each entry type
+    this.getSupportedCaptureMediaChannels();
     this.getWorldRegionInfo();
-    this.getTypes();
+    this.getPOADocumentCategories();
+    this.getPOIDocumentCategories();
 
     this.getEntryDefinitionOptions();
     this.createEntryDefinitionGroup();
@@ -76,6 +84,14 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     // }, 1000);
   }
 
+  getSupportedCaptureMediaChannels() {
+    this.journeyDefinitionService
+      .getSupportedCaptureMediaChannels()
+      .subscribe(
+      data => this.supportedCaptureMediaChannels = data
+      );
+  }
+
   getWorldRegionInfo() {
     this.journeyDefinitionService
       .getWorldRegionInfo()
@@ -84,11 +100,19 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
       );
   }
 
-  getTypes() {
+  getPOIDocumentCategories() {
     this.journeyDefinitionService
-      .getTypes()
+      .getDocumentCategories(DocumentCategoryType.POICategory)
       .subscribe(
-      data => this.documentCategories = data
+      data => this.poiDocumentCategories = data
+      );
+  }
+
+  getPOADocumentCategories() {
+    this.journeyDefinitionService
+      .getDocumentCategories(DocumentCategoryType.POACategory)
+      .subscribe(
+      data => this.poaDocumentCategories = data
       );
   }
 
@@ -267,6 +291,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           acceptExpiredDocuments: [poa.acceptExpiredDocuments],
           isUpToMonthes: [poa.isUpToMonthes],
           acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: !poa.isUpToMonthes }],
+          documentProofPolicies: this.fb.array([]) // ToDo should fill exist policies
         });
         return POAgroup;
 

@@ -7,7 +7,6 @@
     "experimentalDecorators": true,
     "types": [
       "jquery",
-      "bootstrap-touchspin",
       "jqueryui",
       "bootstrap-select"
     ]

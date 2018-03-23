@@ -80,36 +80,30 @@ export class InMemService implements InMemoryDbService {
       result: [
         {
           id: '23',
-          documentCategoryType: 'POACategory',
           friendlyName: 'Bank Document',
           subCategories: [
             {
               id: '24',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Bank Account Details',
               subCategories: null
             },
             {
               id: '25',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Bank Letter',
               subCategories: null
             },
             {
               id: '26',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Bank Statement',
               subCategories: null
             },
             {
               id: '27',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Card Statement',
               subCategories: null
             },
             {
               id: '28',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Mortgage Statement',
               subCategories: null
             }
@@ -117,24 +111,20 @@ export class InMemService implements InMemoryDbService {
         },
         {
           id: '29',
-          documentCategoryType: 'POACategory',
           friendlyName: 'Bank Letter',
           subCategories: [
             {
               id: '30',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Card Statement',
               subCategories: null
             },
             {
               id: '31',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Bank Statement',
               subCategories: null
             },
             {
               id: '32',
-              documentCategoryType: 'POACategory',
               friendlyName: 'Mortgage Statement',
               subCategories: null
             }
@@ -144,7 +134,86 @@ export class InMemService implements InMemoryDbService {
       responseMetaData: null
     };
 
+    const POICategory = {
+      result: [
+        {
+          id: '23',
+          friendlyName: 'Passport',
+          subCategories: [
+            {
+              id: '24',
+              friendlyName: 'E-Passport',
+              subCategories: null
+            },
+            {
+              id: '25',
+              friendlyName: 'National Passport',
+              subCategories: null
+            },
+            {
+              id: '26',
+              friendlyName: 'Passport',
+              subCategories: null
+            },
+            {
+              id: '27',
+              friendlyName: 'Travel Document',
+              subCategories: null
+            }
+          ]
+        },
+        {
+          id: '29',
+          friendlyName: 'Driving License',
+          subCategories: [
+            {
+              id: '30',
+              friendlyName: 'Driving License',
+              subCategories: null
+            },
+            {
+              id: '31',
+              friendlyName: 'Provisional Driving License',
+              subCategories: null
+            }
+          ]
+        },
+        {
+          id: '32',
+          friendlyName: 'National Identification Card',
+          subCategories: [
+            {
+              id: '33',
+              friendlyName: 'Proof of Age Card',
+              subCategories: null
+            },
+            {
+              id: '34',
+              friendlyName: 'Agents License',
+              subCategories: null
+            },
+            {
+              id: '35',
+              friendlyName: 'Job License',
+              subCategories: null
+            },
+            {
+              id: '36',
+              friendlyName: 'Membership Identification Card',
+              subCategories: null
+            },
+            {
+              id: '37',
+              friendlyName: 'Health Card',
+              subCategories: null
+            }
+          ]
+        }
+      ],
+      responseMetaData: null
+    };
 
-    return { heroes, entryDefinitionOptions, SupportedCaptureMediaChannels, Regions, POACategory };
+
+    return { heroes, entryDefinitionOptions, SupportedCaptureMediaChannels, Regions, POACategory, POICategory };
   }
 }

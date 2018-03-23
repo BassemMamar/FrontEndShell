@@ -29,7 +29,6 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "@angular/service-worker": "^5.0.0",
-    "@types/bootstrap-touchspin": "0.0.30",
     "angular-2-dropdown-multiselect": "^1.7.1",
     "animate.css": "^3.5.2",
     "bootstrap": "^4.0.0-beta.2",
@@ -57,7 +56,7 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.5.5",
+    "@angular/cli": "^1.5.5",
     "@angular/compiler-cli": "^5.0.0",
     "@angular/language-service": "^5.0.0",
     "@compodoc/compodoc": "^1.0.6",

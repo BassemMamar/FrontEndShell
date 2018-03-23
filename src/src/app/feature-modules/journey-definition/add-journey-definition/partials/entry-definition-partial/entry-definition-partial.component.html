@@ -70,35 +70,37 @@
 
     <!-- <div *ngIf="entriesArray && entriesArray.controls.length>0" class="m-demo" data-code-preview="true" data-code-html="true"
       data-code-js="false"> -->
-      <div class="m-demo__preview1" [formGroup]="entryDefinitionGroup">
-        <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"' [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
+    <div class="m-demo__preview1" [formGroup]="entryDefinitionGroup">
+      <div id="m_sortable_portlets" formArrayName="entriesArray" [dragula]='"bag-items"' [dragulaOptions]="options" [dragulaModel]='entriesArray.controls'>
 
-          <!--begin::Portlet-->
-          <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryEntryArray.controls.length+1"
-            [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
+        <!--begin::Portlet-->
+        <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryEntryArray.controls.length+1"
+          [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
 
-            <app-poi-entry-type *ngSwitchCase="entryTypes.ProofOfIdentity" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
-              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories">
-            </app-poi-entry-type>
+          <app-poi-entry-type *ngSwitchCase="entryTypes.ProofOfIdentity" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
+            [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [supportedCaptureMediaChannels]="supportedCaptureMediaChannels"
+            [worldRegionInfo]="worldRegionInfo" [documentCategories]="poiDocumentCategories">
+          </app-poi-entry-type>
 
-            <app-poa-entry-type *ngSwitchCase="entryTypes.ProofOfAddress" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
-              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i">
-            </app-poa-entry-type>
+          <app-poa-entry-type *ngSwitchCase="entryTypes.ProofOfAddress" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
+            [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [supportedCaptureMediaChannels]="supportedCaptureMediaChannels"
+            [worldRegionInfo]="worldRegionInfo" [documentCategories]="poaDocumentCategories">
+          </app-poa-entry-type>
 
-            <app-ad-entry-type *ngSwitchCase="entryTypes.AdditionalDocument" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
-              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i">
-            </app-ad-entry-type>
+          <app-ad-entry-type *ngSwitchCase="entryTypes.AdditionalDocument" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
+            [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [supportedCaptureMediaChannels]="supportedCaptureMediaChannels">
+          </app-ad-entry-type>
 
-            <app-selfie-entry-type *ngSwitchCase="entryTypes.Selfie" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
-              [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i"></app-selfie-entry-type>
+          <app-selfie-entry-type *ngSwitchCase="entryTypes.Selfie" [item]="item" [index]="i+1+primaryEntryArray?.controls?.length"
+            [parentGroup]="entryDefinitionGroup" [arrayName]="'entriesArray'" [groupName]="i" [supportedCaptureMediaChannels]="supportedCaptureMediaChannels"></app-selfie-entry-type>
 
-            <!-- <app-temp-view *ngSwitchCase="entryTypes.AdditionalDocument"></app-temp-view> -->
+          <!-- <app-temp-view *ngSwitchCase="entryTypes.AdditionalDocument"></app-temp-view> -->
 
-          </app-entry-definition-container>
-          <!--end::Portlet-->
+        </app-entry-definition-container>
+        <!--end::Portlet-->
 
-        </div>
       </div>
+    </div>
     <!-- </div> -->
 
     <!--begin::optionalSelfie-->

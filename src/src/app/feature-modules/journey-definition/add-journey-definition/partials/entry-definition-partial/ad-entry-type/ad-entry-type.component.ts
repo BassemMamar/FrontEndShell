@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
+import { SupportedCaptureMediaChannels } from '../../../../model/supported-capture-media-channels';
 
 @Component({
   selector: 'app-ad-entry-type',
@@ -17,6 +18,8 @@ export class ADEntryTypeComponent implements OnInit, AfterViewInit {
 
   @Input() index;
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
+
+  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
 
   constructor(private loggerService: LoggerService) { }
 

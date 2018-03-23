@@ -6258,11 +6258,6 @@ a.text-dark:focus, a.text-dark:hover {
     .dropdown-menu > .dropdown-item [class^="la-"],
     .dropdown-menu > .dropdown-item [class*=" la-"] {
       font-size: 1.3rem; }
-    .dropdown-menu > li > a [class^="fa-"],
-    .dropdown-menu > li > a [class*=" fa-"],
-    .dropdown-menu > .dropdown-item [class^="fa-"],
-    .dropdown-menu > .dropdown-item [class*=" fa-"] {
-      font-size: 1.1rem; }
     .dropdown-menu > li > a [class^="flaticon-"],
     .dropdown-menu > li > a [class*=" flaticon-"],
     .dropdown-menu > .dropdown-item [class^="flaticon-"],
@@ -6838,9 +6833,6 @@ a.text-dark:focus, a.text-dark:hover {
       .alert.m-alert--icon .m-alert__icon [class^="la-"],
       .alert.m-alert--icon .m-alert__icon [class*=" la-"] {
         font-size: 2.4rem; }
-      .alert.m-alert--icon .m-alert__icon [class^="fa-"],
-      .alert.m-alert--icon .m-alert__icon [class*=" fa-"] {
-        font-size: 1.8rem; }
       .alert.m-alert--icon .m-alert__icon [class^="flaticon-"],
       .alert.m-alert--icon .m-alert__icon [class*=" flaticon-"] {
         font-size: 2.4rem; }
@@ -7251,10 +7243,6 @@ a.text-dark:focus, a.text-dark:hover {
   .nav.nav-pills .nav-link [class*=" la-"], .nav.nav-tabs .nav-link [class^="la-"],
   .nav.nav-tabs .nav-link [class*=" la-"] {
     font-size: 1.4rem; }
-  .nav.nav-pills .nav-link [class^="fa-"],
-  .nav.nav-pills .nav-link [class*=" fa-"], .nav.nav-tabs .nav-link [class^="fa-"],
-  .nav.nav-tabs .nav-link [class*=" fa-"] {
-    font-size: 1.2rem; }
   .nav.nav-pills .nav-link [class^="flaticon-"],
   .nav.nav-pills .nav-link [class*=" flaticon-"], .nav.nav-tabs .nav-link [class^="flaticon-"],
   .nav.nav-tabs .nav-link [class*=" flaticon-"] {
@@ -11252,9 +11240,6 @@ b, strong {
     .m-tabs-line .m-tabs__link [class^="la-"],
     .m-tabs-line .m-tabs__link [class*=" la-"] {
       font-size: 1.6rem; }
-    .m-tabs-line .m-tabs__link [class^="fa-"],
-    .m-tabs-line .m-tabs__link [class*=" fa-"] {
-      font-size: 1.4rem; }
     .m-tabs-line .m-tabs__link [class^="flaticon-"],
     .m-tabs-line .m-tabs__link [class*=" flaticon-"] {
       font-size: 1.6rem; }
@@ -11842,6 +11827,8 @@ b, strong {
     margin: 60px 0; }
   .m-separator.m-separator--sm {
     margin: 20px 0; }
+  .m-separator.m-separator--xs {
+    margin: 10px 0; }
   .m-separator.m-separator--fit {
     margin-left: -2.2rem;
     margin-right: -2.2rem; }
@@ -11993,9 +11980,6 @@ code {
   .m-btn--icon > span [class^="la-"],
   .m-btn--icon > span [class*=" la-"] {
     font-size: 1.3rem; }
-  .m-btn--icon > span [class^="fa-"],
-  .m-btn--icon > span [class*=" fa-"] {
-    font-size: 1.1rem; }
   .m-btn--icon > span [class^="flaticon-"],
   .m-btn--icon > span [class*=" flaticon-"] {
     font-size: 1.3rem; }
@@ -12012,10 +11996,6 @@ code {
 .m-btn--icon.btn-lg > span [class*=" la-"], .btn-group-lg > .m-btn--icon.btn > span [class*=" la-"] {
   font-size: 1.5rem; }
 
-.m-btn--icon.btn-lg > span [class^="fa-"], .btn-group-lg > .m-btn--icon.btn > span [class^="fa-"],
-.m-btn--icon.btn-lg > span [class*=" fa-"], .btn-group-lg > .m-btn--icon.btn > span [class*=" fa-"] {
-  font-size: 1.3rem; }
-
 .m-btn--icon.btn-lg > span [class^="flaticon-"], .btn-group-lg > .m-btn--icon.btn > span [class^="flaticon-"],
 .m-btn--icon.btn-lg > span [class*=" flaticon-"], .btn-group-lg > .m-btn--icon.btn > span [class*=" flaticon-"] {
   font-size: 1.5rem; }
@@ -12023,10 +12003,6 @@ code {
 .m-btn--icon.btn-sm > span [class^="la-"], .btn-group-sm > .m-btn--icon.btn > span [class^="la-"],
 .m-btn--icon.btn-sm > span [class*=" la-"], .btn-group-sm > .m-btn--icon.btn > span [class*=" la-"] {
   font-size: 1.1rem; }
-
-.m-btn--icon.btn-sm > span [class^="fa-"], .btn-group-sm > .m-btn--icon.btn > span [class^="fa-"],
-.m-btn--icon.btn-sm > span [class*=" fa-"], .btn-group-sm > .m-btn--icon.btn > span [class*=" fa-"] {
-  font-size: 1rem; }
 
 .m-btn--icon.btn-sm > span [class^="flaticon-"], .btn-group-sm > .m-btn--icon.btn > span [class^="flaticon-"],
 .m-btn--icon.btn-sm > span [class*=" flaticon-"], .btn-group-sm > .m-btn--icon.btn > span [class*=" flaticon-"] {
@@ -12052,9 +12028,6 @@ code {
   .m-btn--icon.m-btn--icon-only [class^="la-"],
   .m-btn--icon.m-btn--icon-only [class*=" la-"] {
     font-size: 1.3rem; }
-  .m-btn--icon.m-btn--icon-only [class^="fa-"],
-  .m-btn--icon.m-btn--icon-only [class*=" fa-"] {
-    font-size: 1.1rem; }
   .m-btn--icon.m-btn--icon-only [class^="flaticon-"],
   .m-btn--icon.m-btn--icon-only [class*=" flaticon-"] {
     font-size: 1.3rem; }
@@ -12070,9 +12043,6 @@ code {
     .m-btn--icon.m-btn--icon-only.btn-lg [class^="la-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class^="la-"],
     .m-btn--icon.m-btn--icon-only.btn-lg [class*=" la-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class*=" la-"] {
       font-size: 1.5rem; }
-    .m-btn--icon.m-btn--icon-only.btn-lg [class^="fa-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class^="fa-"],
-    .m-btn--icon.m-btn--icon-only.btn-lg [class*=" fa-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class*=" fa-"] {
-      font-size: 1.3rem; }
     .m-btn--icon.m-btn--icon-only.btn-lg [class^="flaticon-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class^="flaticon-"],
     .m-btn--icon.m-btn--icon-only.btn-lg [class*=" flaticon-"], .btn-group-lg > .m-btn--icon.m-btn--icon-only.btn [class*=" flaticon-"] {
       font-size: 1.5rem; }
@@ -12082,9 +12052,6 @@ code {
     .m-btn--icon.m-btn--icon-only.btn-sm [class^="la-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class^="la-"],
     .m-btn--icon.m-btn--icon-only.btn-sm [class*=" la-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class*=" la-"] {
       font-size: 1.1rem; }
-    .m-btn--icon.m-btn--icon-only.btn-sm [class^="fa-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class^="fa-"],
-    .m-btn--icon.m-btn--icon-only.btn-sm [class*=" fa-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class*=" fa-"] {
-      font-size: 1rem; }
     .m-btn--icon.m-btn--icon-only.btn-sm [class^="flaticon-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class^="flaticon-"],
     .m-btn--icon.m-btn--icon-only.btn-sm [class*=" flaticon-"], .btn-group-sm > .m-btn--icon.m-btn--icon-only.btn [class*=" flaticon-"] {
       font-size: 1.1rem; }
@@ -12092,10 +12059,6 @@ code {
 .m-btn--icon.m-btn--custom > span [class^="la-"],
 .m-btn--icon.m-btn--custom > span [class*=" la-"] {
   font-size: 1.3rem; }
-
-.m-btn--icon.m-btn--custom > span [class^="fa-"],
-.m-btn--icon.m-btn--custom > span [class*=" fa-"] {
-  font-size: 1.1rem; }
 
 .m-btn--icon.m-btn--custom > span [class^="flaticon-"],
 .m-btn--icon.m-btn--custom > span [class*=" flaticon-"] {
@@ -12105,10 +12068,6 @@ code {
 .m-btn--icon.m-btn--custom.btn-lg > span [class*=" la-"], .btn-group-lg > .m-btn--icon.m-btn--custom.btn > span [class*=" la-"] {
   font-size: 1.5rem; }
 
-.m-btn--icon.m-btn--custom.btn-lg > span [class^="fa-"], .btn-group-lg > .m-btn--icon.m-btn--custom.btn > span [class^="fa-"],
-.m-btn--icon.m-btn--custom.btn-lg > span [class*=" fa-"], .btn-group-lg > .m-btn--icon.m-btn--custom.btn > span [class*=" fa-"] {
-  font-size: 1.2rem; }
-
 .m-btn--icon.m-btn--custom.btn-lg > span [class^="flaticon-"], .btn-group-lg > .m-btn--icon.m-btn--custom.btn > span [class^="flaticon-"],
 .m-btn--icon.m-btn--custom.btn-lg > span [class*=" flaticon-"], .btn-group-lg > .m-btn--icon.m-btn--custom.btn > span [class*=" flaticon-"] {
   font-size: 1.5rem; }
@@ -12116,10 +12075,6 @@ code {
 .m-btn--icon.m-btn--custom.btn-sm > span [class^="la-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class^="la-"],
 .m-btn--icon.m-btn--custom.btn-sm > span [class*=" la-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class*=" la-"] {
   font-size: 1.1rem; }
-
-.m-btn--icon.m-btn--custom.btn-sm > span [class^="fa-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class^="fa-"],
-.m-btn--icon.m-btn--custom.btn-sm > span [class*=" fa-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class*=" fa-"] {
-  font-size: 1rem; }
 
 .m-btn--icon.m-btn--custom.btn-sm > span [class^="flaticon-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class^="flaticon-"],
 .m-btn--icon.m-btn--custom.btn-sm > span [class*=" flaticon-"], .btn-group-sm > .m-btn--icon.m-btn--custom.btn > span [class*=" flaticon-"] {
@@ -12143,10 +12098,6 @@ code {
 [class*=" la-"] {
   font-size: 1.3rem; }
 
-[class^="fa-"],
-[class*=" fa-"] {
-  font-size: 1.1rem; }
-
 [class^="flaticon-"],
 [class*=" flaticon-"] {
   font-size: 1.3rem; }
@@ -12155,10 +12106,6 @@ code {
 .btn-sm [class*=" la-"], .btn-group-sm > .btn [class*=" la-"] {
   font-size: 1.1rem; }
 
-.btn-sm [class^="fa-"], .btn-group-sm > .btn [class^="fa-"],
-.btn-sm [class*=" fa-"], .btn-group-sm > .btn [class*=" fa-"] {
-  font-size: 1rem; }
-
 .btn-sm [class^="flaticon-"], .btn-group-sm > .btn [class^="flaticon-"],
 .btn-sm [class*=" flaticon-"], .btn-group-sm > .btn [class*=" flaticon-"] {
   font-size: 1.1rem; }
@@ -12166,10 +12113,6 @@ code {
 .btn-lg [class^="la-"], .btn-group-lg > .btn [class^="la-"],
 .btn-lg [class*=" la-"], .btn-group-lg > .btn [class*=" la-"] {
   font-size: 1.5rem; }
-
-.btn-lg [class^="fa-"], .btn-group-lg > .btn [class^="fa-"],
-.btn-lg [class*=" fa-"], .btn-group-lg > .btn [class*=" fa-"] {
-  font-size: 1.3rem; }
 
 .btn-lg [class^="flaticon-"], .btn-group-lg > .btn [class^="flaticon-"],
 .btn-lg [class*=" flaticon-"], .btn-group-lg > .btn [class*=" flaticon-"] {
@@ -15574,9 +15517,6 @@ code {
     .m-list-timeline__items .m-list-timeline__item [class^="la-"],
     .m-list-timeline__items .m-list-timeline__item [class*=" la-"] {
       font-size: 1.6rem; }
-    .m-list-timeline__items .m-list-timeline__item [class^="fa-"],
-    .m-list-timeline__items .m-list-timeline__item [class*=" fa-"] {
-      font-size: 1.2rem; }
     .m-list-timeline__items .m-list-timeline__item [class^="flaticon-"],
     .m-list-timeline__items .m-list-timeline__item [class*=" flaticon-"] {
       font-size: 1.6rem; }
@@ -16429,9 +16369,6 @@ code {
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="la-"],
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" la-"] {
             font-size: 1.6rem; }
-          .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="fa-"],
-          .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" fa-"] {
-            font-size: 1.4rem; }
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="flaticon-"],
           .m-portlet .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" flaticon-"] {
             font-size: 1.8rem; }
@@ -16485,27 +16422,18 @@ code {
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class^="la-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class*=" la-"] {
                 font-size: 1.4rem; }
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class^="fa-"],
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class*=" fa-"] {
-                font-size: 1.4rem; }
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class^="flaticon-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon [class*=" flaticon-"] {
                 font-size: 1.8rem; }
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class^="la-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class*=" la-"] {
                 font-size: 1.8rem; }
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class^="fa-"],
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class*=" fa-"] {
-                font-size: 1.6rem; }
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class^="flaticon-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-lg [class*=" flaticon-"] {
                 font-size: 2rem; }
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class^="la-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class*=" la-"] {
                 font-size: 2.2rem; }
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class^="fa-"],
-              .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class*=" fa-"] {
-                font-size: 2rem; }
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class^="flaticon-"],
               .m-portlet .m-portlet__head .m-portlet__head-tools .m-portlet__nav .m-portlet__nav-item .m-portlet__nav-link.m-portlet__nav-link--icon.m-portlet__nav-link--icon-xl [class*=" flaticon-"] {
                 font-size: 2.4rem; }
@@ -16720,9 +16648,6 @@ code {
         .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="la-"],
         .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" la-"] {
           font-size: 1.3rem; }
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="fa-"],
-        .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" fa-"] {
-          font-size: 1.2rem; }
         .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class^="flaticon-"],
         .m-portlet.m-portlet--creative .m-portlet__head .m-portlet__head-caption .m-portlet__head-title .m-portlet__head-icon [class*=" flaticon-"] {
           font-size: 1.4rem; }
@@ -21839,10 +21764,6 @@ body.m-portlet--fullscreen {
 .input-group .input-group-addon [class*=" la-"] {
   font-size: 1.4em; }
 
-.input-group .input-group-addon [class^="fa-"],
-.input-group .input-group-addon [class*=" fa-"] {
-  font-size: 1.2em; }
-
 .input-group .input-group-addon [class^="flaticon-"],
 .input-group .input-group-addon [class*=" flaticon-"] {
   font-size: 1.3em; }
@@ -21851,10 +21772,6 @@ body.m-portlet--fullscreen {
 .input-group.input-group-lg .input-group-addon [class*=" la-"] {
   font-size: 1.6em; }
 
-.input-group.input-group-lg .input-group-addon [class^="fa-"],
-.input-group.input-group-lg .input-group-addon [class*=" fa-"] {
-  font-size: 1.3em; }
-
 .input-group.input-group-lg .input-group-addon [class^="flaticon-"],
 .input-group.input-group-lg .input-group-addon [class*=" flaticon-"] {
   font-size: 1.4em; }
@@ -21862,10 +21779,6 @@ body.m-portlet--fullscreen {
 .input-group.input-group-lg .input-group-addon [class^="la-"],
 .input-group.input-group-lg .input-group-addon [class*=" la-"] {
   font-size: 1.1em; }
-
-.input-group.input-group-lg .input-group-addon [class^="fa-"],
-.input-group.input-group-lg .input-group-addon [class*=" fa-"] {
-  font-size: 1em; }
 
 .input-group.input-group-lg .input-group-addon [class^="flaticon-"],
 .input-group.input-group-lg .input-group-addon [class*=" flaticon-"] {
@@ -21963,9 +21876,6 @@ body.m-portlet--fullscreen {
     .m-input-icon > .m-input-icon__icon [class^="la-"],
     .m-input-icon > .m-input-icon__icon [class*=" la-"] {
       font-size: 1.4em; }
-    .m-input-icon > .m-input-icon__icon [class^="fa-"],
-    .m-input-icon > .m-input-icon__icon [class*=" fa-"] {
-      font-size: 1.2em; }
     .m-input-icon > .m-input-icon__icon [class^="flaticon-"],
     .m-input-icon > .m-input-icon__icon [class*=" flaticon-"] {
       font-size: 1.3em; }
@@ -21985,22 +21895,6 @@ body.m-portlet--fullscreen {
   .m-input-icon
   .input-group-lg > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class*=" la-"] {
     font-size: 1.6em; }
-  .m-input-icon .form-control.form-control-lg ~ .m-input-icon__icon [class^="fa-"], .m-input-icon .input-group-lg > .form-control ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-lg > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-lg > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-lg > .input-group-prepend > .form-control.btn ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-lg > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class^="fa-"],
-  .m-input-icon .form-control.form-control-lg ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon .input-group-lg > .form-control ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-lg > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-lg > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-lg > .input-group-prepend > .form-control.btn ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-lg > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class*=" fa-"] {
-    font-size: 1.3em; }
   .m-input-icon .form-control.form-control-lg ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon .input-group-lg > .form-control ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
   .input-group-lg > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
   .input-group-lg > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
@@ -22033,22 +21927,6 @@ body.m-portlet--fullscreen {
   .m-input-icon
   .input-group-sm > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class*=" la-"] {
     font-size: 1.1em; }
-  .m-input-icon .form-control.form-control-sm ~ .m-input-icon__icon [class^="fa-"], .m-input-icon .input-group-sm > .form-control ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-sm > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-sm > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-sm > .input-group-prepend > .form-control.btn ~ .m-input-icon__icon [class^="fa-"], .m-input-icon
-  .input-group-sm > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class^="fa-"],
-  .m-input-icon .form-control.form-control-sm ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon .input-group-sm > .form-control ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-sm > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-sm > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-sm > .input-group-prepend > .form-control.btn ~ .m-input-icon__icon [class*=" fa-"],
-  .m-input-icon
-  .input-group-sm > .input-group-append > .form-control.btn ~ .m-input-icon__icon [class*=" fa-"] {
-    font-size: 1em; }
   .m-input-icon .form-control.form-control-sm ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon .input-group-sm > .form-control ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
   .input-group-sm > .input-group-prepend > .form-control.input-group-text ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
   .input-group-sm > .input-group-append > .form-control.input-group-text ~ .m-input-icon__icon [class^="flaticon-"], .m-input-icon
@@ -25407,17 +25285,11 @@ body.m-portlet--fullscreen {
   .alert[data-notify] [class^="la-"],
   .alert[data-notify] [class*=" la-"] {
     font-size: 1.8rem; }
-  .alert[data-notify] [class^="fa-"],
-  .alert[data-notify] [class*=" fa-"] {
-    font-size: 1.6rem; }
   .alert[data-notify] [class^="flaticon-"],
   .alert[data-notify] [class*=" flaticon-"] {
     font-size: 1.8rem; }
   .alert[data-notify] [class^="la-"],
   .alert[data-notify] [class*=" la-"] {
-    margin-top: -0.1rem; }
-  .alert[data-notify] [class^="fa-"],
-  .alert[data-notify] [class*=" fa-"] {
     margin-top: -0.1rem; }
   .alert[data-notify] [class^="flaticon-"],
   .alert[data-notify] [class*=" flaticon-"] {
@@ -26191,9 +26063,6 @@ body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) {
       text-decoration: none; }
     .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class^="la-"],
     .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class*=" la-"] {
-      font-size: 1.2rem; }
-    .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class^="fa-"],
-    .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class*=" fa-"] {
       font-size: 1.2rem; }
     .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class^="flaticon-"],
     .bootstrap-select.btn-group .dropdown-menu.inner > li > a [class*=" flaticon-"] {
