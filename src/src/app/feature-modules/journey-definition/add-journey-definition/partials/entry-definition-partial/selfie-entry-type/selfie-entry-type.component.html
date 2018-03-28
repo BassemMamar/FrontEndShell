@@ -26,12 +26,22 @@
           <label>
             Channel Types:
           </label>
-          <select #supportedChannelTypesInput formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker" multiple>
-              <option  *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
+          <select #supportedChannelTypesInput formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker"
+            multiple>
+            <option *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
 
           </select>
         </div>
-    
+        <div class="col-lg-4">
+          <label for=""> </label>
+          <div class="m-checkbox-inline">
+            <label class="m-checkbox">
+              Optional entry (can be skipped)
+              <input type="checkbox" formControlName="isOptional">
+              <span></span>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>

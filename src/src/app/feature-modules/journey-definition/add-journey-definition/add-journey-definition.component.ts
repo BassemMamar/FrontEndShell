@@ -41,15 +41,16 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     private fieldValidatorService: FieldValidatorService,
     private logger: LoggerService) {
 
+    this.journeyDefinitionDataModel = new JourneyDefinitionDetails();
     // create new instance if add, get data if update
     this.journeyDefinitionId = this.route.snapshot.paramMap.get('journeyDefinitionId');
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
       this.getJourneyDefinition();
     } else {
-      this.journeyDefinitionDataModel = new JourneyDefinitionDetails();
+      //  this.journeyDefinitionDataModel = new JourneyDefinitionDetails();
     }
-
     this.createMainFormGroup();
+
   }
 
   ngOnInit() {
@@ -63,7 +64,11 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     this.journeyDefinitionService
       .getJourneyDefinition(this.journeyDefinitionId)
       .subscribe(
-      (journeyDefinition: JourneyDefinitionDetails) => this.journeyDefinitionDataModel = journeyDefinition,
+      (journeyDefinition: JourneyDefinitionDetails) => {
+        this.journeyDefinitionDataModel = journeyDefinition;
+        // this.createMainFormGroup();
+        this.setBasicInfoGroupValues();
+      },
       error => this.toastrService.error(error, 'getJourneyDefinition error')
       );
   }
@@ -99,6 +104,25 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
         alMaxValue: [this.journeyDefinitionDataModel.maxAgeLimit]
       }),
       reasons: [this.journeyDefinitionDataModel.journeyReasons]
+    });
+  }
+
+  setBasicInfoGroupValues() {
+    const _alCheck = this.journeyDefinitionDataModel.maxAgeLimit != null || this.journeyDefinitionDataModel.minAgeLimit != null;
+    this.basicInfoGroup.setValue({
+      name: this.journeyDefinitionDataModel.name,
+      code: this.journeyDefinitionDataModel.code,
+      isActive: this.journeyDefinitionDataModel.isActive,
+      introductionMessageGroup: {
+        imCheck: this.journeyDefinitionDataModel.introductionMessage !== '' ? true : false,
+        imValue: this.journeyDefinitionDataModel.introductionMessage
+      },
+      ageLimitGroup: {
+        alCheck: _alCheck,
+        alMinValue: this.journeyDefinitionDataModel.minAgeLimit,
+        alMaxValue: this.journeyDefinitionDataModel.maxAgeLimit
+      },
+      reasons: this.journeyDefinitionDataModel.journeyReasons
     });
   }
 

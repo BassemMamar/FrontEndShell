@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
 
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { WorldRegionInfo, CountryInfo } from '../../../../model/world-region-info';
@@ -13,7 +13,7 @@ import { TreeviewItem } from 'ngx-treeview';
   styleUrls: ['./entry-policy.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EntryPolicyComponent implements OnInit, AfterViewInit {
+export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
   RegionsTest = [
     {
       id: '1',
@@ -107,14 +107,28 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit {
   }
 
   constructor(private fb: FormBuilder, private commonService: CommonService) {
-
+    this.selectedRegion = new Array<CountryInfo>();
+    this.selectedDocumentCategories = new Array<DocumentCategory>();
   }
 
   ngOnInit() {
-    // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
-    // this.documentCategoriesCopy = this.commonService.deepCopy(this.documentCategories);
-    this.worldRegionInfoCopy = this.worldRegionInfo.slice();
-    this.documentCategoriesCopy = this.documentCategories;
+    this.copyData();
+  }
+  ngOnChanges() {
+    this.copyData();
+  }
+  copyData() {
+    if (this.worldRegionInfo != null && this.worldRegionInfo.length !== 0 && this.worldRegionInfoCopy == null) {
+      // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
+      this.worldRegionInfoCopy = this.worldRegionInfo.slice();
+    }
+
+    if (this.documentCategories != null && this.documentCategories.length !== 0 && this.documentCategoriesCopy == null) {
+      // this.documentCategoriesCopy = this.commonService.deepCopy(this.documentCategories);
+      this.documentCategoriesCopy = this.documentCategories;
+      this.refreshSelector();
+    }
+
   }
 
   ngAfterViewInit(): void {
@@ -122,6 +136,9 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit {
   }
 
   addNewPolicy() {
+    if (this.selectedDocumentCategories.length === 0 || this.selectedRegion.length === 0) {
+      return;
+    }
     this.documentCategoriesCopy.map(x => x.subCategories = x.subCategories.filter(s =>
       this.selectedDocumentCategories.indexOf(s) === -1
     ));
@@ -159,7 +176,10 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit {
   }
 
   initSelector() {
-    $(this.categoriesInput.nativeElement).selectpicker();
+    $(this.categoriesInput.nativeElement).selectpicker({
+      actionsBox: true
+      // dropupAuto: false
+    });
     $(this.countriesInput.nativeElement).selectpicker('refresh');
   }
 

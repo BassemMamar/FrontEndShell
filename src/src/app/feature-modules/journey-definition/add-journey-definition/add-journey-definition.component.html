@@ -58,7 +58,7 @@
               </span>
             </a>
             <div class="m-wizard__step-info">
-              <div class="m-wizard__step-title"  [ngClass]="{'m--font-danger':basicInfoValidationStatus && submitted}">
+              <div class="m-wizard__step-title"  [ngClass]="{'m--font-danger':submitted && basicInfoValidationStatus  }">
                 1. Basic Information 
               </div>
               <!-- <div class="m-wizard__step-desc">
@@ -74,7 +74,7 @@
               </span>
             </a>
             <div class="m-wizard__step-info">
-              <div class="m-wizard__step-title" [ngClass]="{'m--font-danger':entryDefinitionsValidationStatus && submitted}">
+              <div class="m-wizard__step-title" [ngClass]="{'m--font-danger':submitted && entryDefinitionsValidationStatus }">
                 2. Entry Definitions {{entryDefinitionsValidationStatus}}
               </div>
               <!-- <div class="m-wizard__step-desc">
@@ -120,6 +120,7 @@
           <!--end: Form Wizard Step 1-->
           <!--begin: Form Wizard Step 2-->
           <div class="m-wizard__form-step" id="m_wizard_form_step_2">
+            <!-- {{journeyDefinitionDataModel.journeyEntryDefinitions | json}} -->
             <app-entry-definition-partial [entryDefinitionGroup]="journeyDefinitionForm.controls.entryDefinitionGroup" 
             [entryDefinitionDataModel]="journeyDefinitionDataModel.journeyEntryDefinitions" >
             </app-entry-definition-partial>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren, EventEmitter, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionDetails } from '../../../model/journey-entry-definition-details';
@@ -21,7 +21,7 @@ import { SupportedCaptureMediaChannelInfo } from '../../../model/supported-captu
   templateUrl: './entry-definition-partial.component.html',
   styleUrls: ['./entry-definition-partial.component.scss']
 })
-export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck {
+export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck, OnChanges {
   entryTypes = EntryType;
   entryDefinitionOptions: EntryDefinitionOptions[];
   @Input() entryDefinitionGroup: FormGroup;
@@ -82,6 +82,9 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     //   // this.sortableInit();
     // //  this.portletInit();
     // }, 1000);
+  }
+  ngOnChanges() {
+    this.initEntryDefinitionGroup(this.entryDefinitionDataModel);
   }
 
   getSupportedCaptureMediaChannels() {

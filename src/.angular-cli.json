@@ -32,10 +32,11 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.scss",
         
         "assets/vendors.bundle.css",
-        "assets/style.bundle.css"
+        "assets/style.bundle.css",
+        "styles.scss"
+        
       ],
       "scripts": [
         "assets/vendors.bundle.js",

@@ -56,7 +56,15 @@
 .m-widget3 .m-widget3__item{
     margin-bottom: 0.2rem !important;
 }
-
+.full-width{
+    width:100% !important;
+}
+.btn[disabled]{
+    cursor: no-drop !important;
+ }
+ .m-body {
+    overflow:visible !important;
+}
 // .ng-touched.ng-dirty.ng-invalid{
 //     border-color: #f4516c !important;
 // }

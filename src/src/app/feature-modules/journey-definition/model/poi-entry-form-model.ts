@@ -1,6 +1,7 @@
 import { EntryType } from './entry-type';
 import { EntryFormModel } from './entry-form-model';
 import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
+import { AskForAdditionalSteps } from './ask-for-additional-steps';
 
 export class POIEntryFormModel {
     entryType: EntryType;
@@ -22,7 +23,7 @@ export class POIEntryFormModel {
         this.supportedChannelTypes = entryDataModel == null ? [] : entryDataModel.supportedChannelTypes.map(t => t.channelType);
 
         this.maxAttempts = entryDataModel == null ? 1 : entryDataModel.maxAttempts;
-        this.askForAdditionalSteps = entryDataModel == null ? '' : entryDataModel.askForAdditionalSteps;
+        this.askForAdditionalSteps = entryDataModel == null ? AskForAdditionalSteps.Never : entryDataModel.askForAdditionalSteps;
         this.acceptExpiredDocuments = entryDataModel == null ? false : entryDataModel.acceptExpiredDocuments;
         this.isUpToMonthes = entryDataModel == null || entryDataModel.acceptExpiredUpToMonthes == null
             ? false : true;

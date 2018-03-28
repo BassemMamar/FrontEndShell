@@ -13,6 +13,9 @@ import { AddJourneyDefinitionComponent } from './add-journey-definition/add-jour
 export function AddJourneyDefinitionMatch() {
   return CaseInsensitiveMatcher('New').apply(this, arguments);
 }
+export function EditJourneyDefinitionMatch() {
+  return CaseInsensitiveMatcher(':journeyDefinitionId').apply(this, arguments);
+}
 
 
 const routes: Routes = [
@@ -29,6 +32,16 @@ const routes: Routes = [
       { path: '', pathMatch: 'full', redirectTo: 'New' },
       {
         matcher: AddJourneyDefinitionMatch, component: AddJourneyDefinitionComponent,
+        data: {
+          moduleName: FrontendShell.JourneyDefinition.Name,
+          pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
+        },
+        resolve: {
+          accessLevel: AccessLevelResolver
+        }
+      },
+      {
+        matcher: EditJourneyDefinitionMatch, component: AddJourneyDefinitionComponent,
         data: {
           moduleName: FrontendShell.JourneyDefinition.Name,
           pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition

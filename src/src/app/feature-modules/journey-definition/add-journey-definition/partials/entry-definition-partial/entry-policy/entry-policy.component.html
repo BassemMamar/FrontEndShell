@@ -1,5 +1,4 @@
-
-      <!-- <div class="form-group m-form__group row">
+<!-- <div class="form-group m-form__group row">
         <div class="col-lg-6">
           <ngx-dropdown-treeview class="  form-control m-bootstrap-select m_selectpicker" [config]="config" [items]="items">
           </ngx-dropdown-treeview>
@@ -22,10 +21,10 @@
           <div class="col-lg-4">
             <label>
               Categories:
-              <!-- {{this.documentCategoriesCopy | json }} -->
+              <!-- {{this.documentCategories | json }} -->
             </label>
             <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
-              multiple>
+              multiple >
               <optgroup *ngFor="let type of documentCategoriesCopy" [label]="type.friendlyName">
                 <option *ngFor="let category of type.subCategories" [ngValue]="category">{{category.friendlyName}}</option>
               </optgroup>
@@ -47,10 +46,12 @@
 
           </div>
           <div class="col-lg-2">
+
             <label>
               &nbsp;
             </label>
-            <button type="button" class="btn m-btn--pill form-control btn-success" (click)="addNewPolicy()">Add</button>
+            <button type="button" class="full-width btn m-btn--pill    btn-success"
+             [disabled]="selectedRegion.length===0 || selectedDocumentCategories.length===0 " (click)="addNewPolicy()">Add</button>
           </div>
         </div>
 
