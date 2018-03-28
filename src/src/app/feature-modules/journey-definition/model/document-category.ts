@@ -1,9 +1,9 @@
 export class DocumentCategory {
-    id: string;
+    level: string;
     friendlyName: string;
     subCategories: DocumentCategory[];
     constructor() {
-        this.id = '';
+        this.level = '';
         this.friendlyName = '';
         this.subCategories = new Array<DocumentCategory>();
     }

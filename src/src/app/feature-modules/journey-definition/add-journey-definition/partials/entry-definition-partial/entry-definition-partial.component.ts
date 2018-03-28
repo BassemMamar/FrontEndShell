@@ -15,11 +15,13 @@ import { ToastrService } from '../../../../../shared/components/toastr/toastr.se
 import { WorldRegionInfo } from '../../../model/world-region-info';
 import { DocumentCategory } from '../../../model/document-category';
 import { SupportedCaptureMediaChannelInfo } from '../../../model/supported-capture-media-channel-info';
+import { CategorySourceLisnerService } from './category-source-lisner.service';
 
 @Component({
   selector: 'app-entry-definition-partial',
   templateUrl: './entry-definition-partial.component.html',
-  styleUrls: ['./entry-definition-partial.component.scss']
+  styleUrls: ['./entry-definition-partial.component.scss'],
+  providers: [CategorySourceLisnerService]
 })
 export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck, OnChanges {
   entryTypes = EntryType;
