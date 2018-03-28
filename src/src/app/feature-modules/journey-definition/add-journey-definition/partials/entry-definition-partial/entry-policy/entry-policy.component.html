@@ -25,7 +25,7 @@
             </label>
             <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
               multiple >
-              <optgroup *ngFor="let type of documentCategoriesCopy" [label]="type.friendlyName">
+              <optgroup *ngFor="let type of documentCategories" [label]="type.friendlyName">
                 <option *ngFor="let category of type.subCategories" [ngValue]="category">{{category.friendlyName}}</option>
               </optgroup>
             </select>

@@ -2,8 +2,6 @@
   <div formArrayName="{{arrayName}}">
     <div [formGroupName]="groupName">
       <input type="hidden" formControlName="order" [ngModel]="index">
-      <!-- {{item.value | json}} {{item.get('entryType').value}} 
-        <app-temp-view></app-temp-view>  -->
       <div class="form-group m-form__group row" >
         <div class="col-lg-4" [ngClass]="displayFieldCss('supportedChannelTypes')">
           <label>
@@ -82,7 +80,7 @@
       </div>
       <!-- <div class="orm-group m-form__group row">
         <div class="col-lg-4"> -->
-      <app-entry-policy [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo"
+      <app-entry-policy [parentType]="entryType.ProofOfIdentity" [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo"
         [documentCategories]="documentCategories"></app-entry-policy>
       <!-- </div>
       </div> -->

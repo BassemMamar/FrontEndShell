@@ -10,7 +10,6 @@ import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-ca
 })
 export class ADEntryTypeComponent implements OnInit, AfterViewInit {
 
-  @Input() item: FormGroup;
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName;

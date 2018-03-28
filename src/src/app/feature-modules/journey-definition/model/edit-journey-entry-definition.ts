@@ -1,5 +1,4 @@
 import { EntryType } from './entry-type';
-import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
 import { SupportedCaptureMediaChannelInfo } from './supported-capture-media-channel-info';
 import { EditDocumentProofPolicy } from './edit-document-proof-policy';
 

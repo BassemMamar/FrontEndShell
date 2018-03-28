@@ -2,8 +2,6 @@
   <div formArrayName="{{arrayName}}">
     <div [formGroupName]="groupName">
       <input type="hidden" formControlName="order" [ngModel]="index">
-      <!-- {{item.value | json}} {{item.get('entryType').value}} 
-        <app-temp-view></app-temp-view>  -->
       <div class="form-group m-form__group row">
         <div class="col-lg-4">
           <label>
@@ -68,7 +66,7 @@
         </div>
       </div>
 
-      <app-entry-policy [parentGroup]="documentProofPoliciesParentGroup" [arrayName]="documentProofPoliciesArrayName"
+      <app-entry-policy [parentType]="entryType.ProofOfAddress" [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName"
        [worldRegionInfo]="worldRegionInfo"
       [documentCategories]="documentCategories"></app-entry-policy>
 

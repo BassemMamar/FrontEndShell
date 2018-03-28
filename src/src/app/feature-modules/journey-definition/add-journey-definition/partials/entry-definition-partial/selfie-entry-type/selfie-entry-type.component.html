@@ -1,21 +1,3 @@
-<!-- <div [formGroup]="selfieEntryTypeGroup">
-  <div class="form-group m-form__group row">
-    <div class="col-lg-4">
-      <label>
-        Channel Types:
-      </label>
-      <select id="media_type" class=" selector form-control m-bootstrap-select m_selectpicker" multiple>
-        <option *ngFor="let type of channelTypes" [ngValue]="type">{{type.name}}</option>
-      </select>
-
-      <span class="m-form__help">
-        Please choose the way to get media for this entry
-      </span>
-    </div>
-
-  </div>
-</div> -->
-
 
 <div [formGroup]="parentGroup">
   <div formArrayName="{{arrayName}}">

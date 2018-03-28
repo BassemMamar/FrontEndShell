@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren, EventEmitter, OnChanges } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionDetails } from '../../../model/journey-entry-definition-details';
 import { EntryType } from '../../../model/entry-type';
@@ -24,7 +25,7 @@ import { CategorySourceLisnerService } from './category-source-lisner.service';
   providers: [CategorySourceLisnerService]
 })
 export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck, OnChanges {
-  entryTypes = EntryType;
+  entryType = EntryType;
   entryDefinitionOptions: EntryDefinitionOptions[];
   @Input() entryDefinitionGroup: FormGroup;
   @Input() entryDefinitionDataModel: JourneyEntryDefinitionDetails[];
@@ -59,9 +60,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     private journeyDefinitionService: JourneyDefinitionService,
     private toastrService: ToastrService,
     private cdr: ChangeDetectorRef,
-    private fb: FormBuilder) {
+    private fb: FormBuilder) { }
 
-  }
   public ngDoCheck(): void {
     this.cdr.detectChanges();
   }
@@ -80,11 +80,8 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
   ngAfterViewInit() {
-    // setTimeout(() => {
-    //   // this.sortableInit();
-    // //  this.portletInit();
-    // }, 1000);
   }
+
   ngOnChanges() {
     this.initEntryDefinitionGroup(this.entryDefinitionDataModel);
   }
@@ -92,53 +89,43 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   getSupportedCaptureMediaChannels() {
     this.journeyDefinitionService
       .getSupportedCaptureMediaChannels()
-      .subscribe(
-      data => this.supportedCaptureMediaChannels = data
-      );
+      .subscribe(data => this.supportedCaptureMediaChannels = data);
   }
 
   getWorldRegionInfo() {
     this.journeyDefinitionService
       .getWorldRegionInfo()
-      .subscribe(
-      data => this.worldRegionInfo = data
-      );
+      .subscribe(data => this.worldRegionInfo = data);
   }
 
   getPOIDocumentCategories() {
     this.journeyDefinitionService
       .getDocumentCategories(EntryType.ProofOfIdentity)
-      .subscribe(
-      data => this.poiDocumentCategories = data
-      );
+      .subscribe(data => this.poiDocumentCategories = data);
   }
 
   getPOADocumentCategories() {
     this.journeyDefinitionService
       .getDocumentCategories(EntryType.ProofOfAddress)
-      .subscribe(
-      data => this.poaDocumentCategories = data
-      );
+      .subscribe(data => this.poaDocumentCategories = data);
   }
 
   getEntryDefinitionOptions() {
     this.journeyDefinitionService
       .getEntryDefinitionOptions()
-      .subscribe(
-      data => this.entryDefinitionOptions = data
-      );
+      .subscribe(data => this.entryDefinitionOptions = data);
   }
 
   createEntryDefinitionGroup() {
-    // const primaryPOIEntry = this.fb.group(new JourneyEntryDefinitionInfo()); // this one should map proof of identity entry form model
+    // For now no need for this but will keep it for future change :)
     const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
     this.entryDefinitionGroup.addControl('primaryEntryArray', primaryPOIEntry);
 
-    const entries = this.fb.array(new Array<EntryFormModel>()); // this one should map array of journey entry definition
+    // this one should map array of journey entry definition
+    const entries = this.fb.array(new Array<EntryFormModel>());
     this.entryDefinitionGroup.addControl('entriesArray', entries);
 
-
-    // const optionalSelfieEntry = this.fb.group(new JourneyEntryDefinitionInfo()); // this one should map Selfie entry form model
+    // For now no need for this but will keep it for future change :)
     const optionalSelfieEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
     this.entryDefinitionGroup.addControl('LastEntryArray', optionalSelfieEntry);
   }
@@ -148,34 +135,6 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
       return;
     }
 
-    // /**
-    //  * Handle First element
-    //  */
-    // if (true) { // ToDo check if first entry is of type proof of identity
-    //   const firstEntry = dataModel.shift(); // this should entry of type proof of identity
-    //   const poi = new JourneyEntryDefinitionInfo();
-    //   poi.isOptional = false; // should be false for first primary POI entry
-    //   poi.order = 1; //  should be 1 for; first primary POI entry
-    //   poi.entryType = firstEntry.entryType; // must be Proof of identity
-    //   this.primaryEntryArray.push(this.fb.group(poi));
-    //   // this.primaryPOIEntryArray.setValue( this.fb.group(new JourneyEntryDefinitionInfo()));
-    // }
-    // /**
-    //  * Handle Last element
-    //  */
-    // if (true) { // ToDo check if last entry is of type selfie
-    //   const lastEntry = dataModel.pop(); // this should entry of type selfie
-    //   const poa = new JourneyEntryDefinitionInfo();
-    //   poa.isOptional = lastEntry.isOptional;
-    //   poa.order = lastEntry.order;
-    //   poa.entryType = lastEntry.entryType; // must be selfie
-    //   this.LastEntryArray.push(this.fb.group(poa));
-
-    // }
-
-    /**
-     * Handle the rest of elements
-     */
     const entryFGs = dataModel.map(entry => this.createNewEntryFormModel(entry.entryType, entry));
 
     // this.entries = this.fb.array(entryFGs); // way(1) afried to lose the refin the main form group
@@ -186,43 +145,21 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   addEntryDefinition(value: EntryType) {
     switch (value) {
       case EntryType.ProofOfIdentity:
-        // const poi = new POIEntryFormModel();
-        // const POIgroup = this.fb.group(poi);
-        // POIgroup.get('acceptExpiredUpToMonthes').disable();
         const POIgroup = this.createNewEntryFormModel(value);
         this.entriesArray.push(POIgroup);
-        // if (this.primaryEntryArray.length === 0) {
-        //   // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
-        //   this.primaryEntryArray.push(POIgroup);
-        // } else {
-        //   this.entriesArray.push(POIgroup);
-        // }
         break;
-      case EntryType.ProofOfAddress:
-        // const poa = new POAEntryFormModel();
-        // const POAgroup = this.fb.group(poa);
-        // POAgroup.get('acceptExpiredUpToMonthes').disable();
 
+      case EntryType.ProofOfAddress:
         const POAgroup = this.createNewEntryFormModel(value);
         this.entriesArray.push(POAgroup);
         break;
-      case EntryType.AdditionalDocument:
-        // const ad = new ADEntryFormModel();
-        // const ADgroup = this.fb.group(ad);
-        const ADgroup = this.createNewEntryFormModel(value);
 
+      case EntryType.AdditionalDocument:
+        const ADgroup = this.createNewEntryFormModel(value);
         this.entriesArray.push(ADgroup);
         break;
-      case EntryType.Selfie:
-        // const selfie = new SelfieEntryFormModel();
-        // const SFgroup = this.fb.group(selfie);
 
-        // if (this.LastEntryArray.length === 0) {
-        //   // this.entryDefinitionGroup.addControl('primaryEntryArray', POIgroup);
-        //   this.LastEntryArray.push(SFgroup);
-        // }
-        // else {
-        // const dd = this.entriesArray.controls.forEach(e => this.logger.info(` e.get('entryType').value : ${e.get('entryType').value}`));
+      case EntryType.Selfie:
         const oldSelfie = this.entriesArray.controls.find(e => e.get('entryType').value === EntryType.Selfie);
         if (oldSelfie == null) {
           const SFgroup = this.createNewEntryFormModel(value);
@@ -233,14 +170,11 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`);
         }
         // }
-
         break;
 
     }
     this.logger.log('addEntryDefinition value ', value);
-    //  this.entryDefinitionArray.push(this.fb.group(new JourneyEntryDefinitionInfo()));
   }
-
 
   deleteEntryDefinition(index: number, source: string) {
     this.logger.log('deleteEntryDefinition index', index);
@@ -264,8 +198,6 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   collapseAll() {
     this.children.forEach(container => container.collapse());
   }
-
-
 
   createNewEntryFormModel(entryTypes: EntryType, entryDataModel: JourneyEntryDefinitionDetails = null): FormGroup {
     switch (entryTypes) {
@@ -317,7 +249,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         const SFgroup = this.fb.group({
           order: [selfie.order, Validators.required],
           entryType: [entryTypes, Validators.required],
-          // isOptional: [false],
+          isOptional: [selfie.isOptional],
           supportedChannelTypes: [selfie.supportedChannelTypes, Validators.required],
         });
         return SFgroup;

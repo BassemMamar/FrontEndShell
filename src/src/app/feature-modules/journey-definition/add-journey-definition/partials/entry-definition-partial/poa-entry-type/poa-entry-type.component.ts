@@ -4,6 +4,7 @@ import { CommonService } from '../../../../../../core/base/utils/common.service'
 import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategory } from '../../../../model/document-category';
+import { EntryType } from '../../../../model/entry-type';
 
 @Component({
   selector: 'app-poa-entry-type',
@@ -11,9 +12,8 @@ import { DocumentCategory } from '../../../../model/document-category';
   styleUrls: ['./poa-entry-type.component.scss']
 })
 export class POAEntryTypeComponent implements OnInit, AfterViewInit {
+  entryType = EntryType;
 
-
-  @Input() item: FormGroup;
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName;
@@ -26,7 +26,7 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
   // return current entry form group
-  get documentProofPoliciesParentGroup(): FormGroup {
+  get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
@@ -46,10 +46,10 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
 
   onChange(value: boolean) {
     if (!value) {
-      this.item.controls['acceptExpiredUpToMonthes'].setValue('');
-      this.item.controls['acceptExpiredUpToMonthes'].disable();
+      this.currentEntryGroup.controls['acceptExpiredUpToMonthes'].setValue('');
+      this.currentEntryGroup.controls['acceptExpiredUpToMonthes'].disable();
     } else {
-      this.item.controls['acceptExpiredUpToMonthes'].enable();
+      this.currentEntryGroup.controls['acceptExpiredUpToMonthes'].enable();
     }
   }
 

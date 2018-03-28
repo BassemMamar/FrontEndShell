@@ -1,4 +1,3 @@
-import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
 import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
 import { EntryType } from './entry-type';
 

@@ -4,7 +4,8 @@ import { DocumentCategory } from '../../../model/document-category';
 
 @Injectable()
 export class CategorySourceLisnerService {
-    lisner = new Subject<CategorySourceData>();
+    poiPolicyCategoryLisner = new Subject<boolean>();
+    poaPolicyCategoryLisner = new Subject<boolean>();
     constructor() { }
 }
 

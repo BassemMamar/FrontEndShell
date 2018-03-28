@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, ElementRef, OnChanges } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, ElementRef, OnChanges, OnDestroy } from '@angular/core';
 
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { WorldRegionInfo, CountryInfo } from '../../../../model/world-region-info';
@@ -7,6 +7,8 @@ import { DocumentCategory } from '../../../../model/document-category';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { TreeviewItem } from 'ngx-treeview';
 import { CategorySourceLisnerService, CategorySourceData } from '../category-source-lisner.service';
+import { EntryType } from '../../../../model/entry-type';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-entry-policy',
@@ -14,7 +16,7 @@ import { CategorySourceLisnerService, CategorySourceData } from '../category-sou
   styleUrls: ['./entry-policy.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
+export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   myOptions = [
     { id: 1, name: 'Option 1' },
@@ -54,6 +56,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
   });
   items = [this.itCategory];
 
+  @Input() parentType: EntryType;
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategory[];
   @Input() parentGroup: FormGroup;
@@ -70,6 +73,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
     return this.parentGroup.get(this.arrayName) as FormArray;
   }
 
+  subscription: Subscription;
+
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
@@ -80,25 +85,38 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit() {
     this.copyData();
-    this.categorySourceLisnerService.lisner
-      .subscribe((data: CategorySourceData) => {
-        if (data) {
-          switch (data.operation) {
-            case 'add':
-              this.disableDocumentCategoriesInSource(data.documentCategory);
-              break;
-            case 'delete':
-              this.enableDocumentCategoriesInSource(data.documentCategory);
+    this.initCategoryLisner(this.parentType);
 
-              break;
-          }
-          this.refreshSelector();
-        }
-      });
   }
   ngOnChanges() {
     this.copyData();
   }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  initCategoryLisner(entryType: EntryType) {
+    switch (entryType) {
+      case EntryType.ProofOfIdentity:
+        this.subscription = this.categorySourceLisnerService.poiPolicyCategoryLisner
+          .subscribe((data: boolean) => {
+            if (data) {
+              this.refreshSelector();
+            }
+          });
+        break;
+
+      case EntryType.ProofOfAddress:
+        this.subscription = this.categorySourceLisnerService.poaPolicyCategoryLisner
+          .subscribe((data: boolean) => {
+            if (data) {
+              this.refreshSelector();
+            }
+          });
+        break;
+    }
+  }
+
   copyData() {
     if (this.worldRegionInfo != null && this.worldRegionInfo.length !== 0 && this.worldRegionInfoCopy == null) {
       // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
@@ -122,7 +140,6 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
       return;
     }
 
-
     const selectedDC = this.selectedDocumentCategories.slice();
     const selectedCT = this.selectedRegion.slice();
     this.documentProofPolicies.push(this.fb.group({
@@ -130,53 +147,55 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges {
       countries: [selectedCT]
     }));
 
-    // this.documentCategoriesCopy.map(x => x.subCategories = x.subCategories.filter(s =>
-    //   this.selectedDocumentCategories.indexOf(s) === -1
-    // ));
-    this.categorySourceLisnerService.lisner
-      .next(new CategorySourceData(this.selectedDocumentCategories.slice(), 'add'));
+    this.disableDocumentCategoriesInSource(this.selectedDocumentCategories.slice());
 
     this.selectedDocumentCategories = [];
     this.selectedRegion = [];
   }
 
   disableDocumentCategoriesInSource(data: DocumentCategory[]) {
-    this.documentCategoriesCopy
+    this.documentCategories
       .map(x => x.subCategories = x.subCategories.filter(s =>
         data.findIndex(d => d.level === s.level && d.friendlyName === s.friendlyName) === -1
       ));
 
-    this.refreshSelector();
+    this.changeCategoryEmitter();
+
   }
 
   deletePolicy(index: number, policy: FormGroup) {
     this.documentProofPolicies.removeAt(index);
 
-    // handle retturn data to category DDL
     const documentTypesFG = policy.get('documentTypes') as FormGroup;
     const documentCategories = documentTypesFG.value as DocumentCategory[];
-    // documentCategories.forEach(currentCategory => {
-    //   const parent = this.documentCategories.filter(x => x.subCategories.find(sx => sx.id === currentCategory.id));
-    //   const parentInOrginal = this.documentCategoriesCopy.find(orginal => orginal.id === parent[0].id);
-    //   parentInOrginal.subCategories.push(currentCategory);
-    // });
 
-    // this.refreshSelector();
-    this.categorySourceLisnerService.lisner
-      .next(new CategorySourceData(documentCategories, 'delete'));
+
+    this.enableDocumentCategoriesInSource(documentCategories);
 
   }
 
   enableDocumentCategoriesInSource(data: DocumentCategory[]) {
     data.forEach(currentCategory => {
-      const parent = this.documentCategories.filter(x => x.subCategories
+      const parent = this.documentCategoriesCopy.filter(x => x.subCategories
         .findIndex(sx => sx.level === currentCategory.level && sx.friendlyName === currentCategory.friendlyName) !== -1);
-      const parentInOrginal = this.documentCategoriesCopy
+      const parentInOrginal = this.documentCategories
         .find(dcCopy => dcCopy.level === parent[0].level && dcCopy.friendlyName === parent[0].friendlyName);
       parentInOrginal.subCategories.push(currentCategory);
     });
 
-    this.refreshSelector();
+    this.changeCategoryEmitter();
+  }
+
+  changeCategoryEmitter() {
+    switch (this.parentType) {
+      case EntryType.ProofOfIdentity:
+        this.categorySourceLisnerService.poiPolicyCategoryLisner.next(true);
+        break;
+
+      case EntryType.ProofOfAddress:
+        this.categorySourceLisnerService.poaPolicyCategoryLisner.next(true);
+        break;
+    }
   }
 
   initSelector() {
