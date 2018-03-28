@@ -1,10 +1,10 @@
-import { EntryTypes } from './entry-types';
+import { EntryType } from './entry-type';
 import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
-import { SupportedCaptureMediaChannels } from './supported-capture-media-channels';
+import { SupportedCaptureMediaChannelInfo } from './supported-capture-media-channel-info';
 import { EditDocumentProofPolicy } from './edit-document-proof-policy';
 
 export class EditJourneyEntryDefinition {
-    entryType: EntryTypes;
+    entryType: EntryType;
     order: number;
     isOptional: boolean;
     maxAttempts: number;

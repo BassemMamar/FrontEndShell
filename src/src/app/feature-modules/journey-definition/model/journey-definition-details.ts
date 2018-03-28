@@ -16,8 +16,8 @@ export class JourneyDefinitionDetails {
     constructor() {
         this.journeyDefinitionGroupId = '';
         this.lastUpdateDate = null;
-        this.minAgeLimit = null;
-        this.maxAgeLimit = null;
+        this.minAgeLimit = 18;
+        this.maxAgeLimit = 35;
         this.isActive = false;
         this.name = '';
         this.code = '';

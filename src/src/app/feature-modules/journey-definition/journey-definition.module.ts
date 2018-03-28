@@ -28,6 +28,7 @@ import { POAEntryTypeComponent } from './add-journey-definition/partials/entry-d
 import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/ad-entry-type/ad-entry-type.component';
 import { EntryPolicyComponent } from './add-journey-definition/partials/entry-definition-partial/entry-policy/entry-policy.component';
 import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
+import { TreeviewModule } from 'ngx-treeview';
 
 @NgModule({
   imports: [
@@ -35,7 +36,9 @@ import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
     SharedModule.forChild(),
     LayoutModule,
     ReactiveFormsModule,
-    MultiselectDropdownModule,
+    MultiselectDropdownModule, // ToDo remoe this
+    TreeviewModule.forRoot(),
+
 
     DragulaModule,
     TagInputModule,

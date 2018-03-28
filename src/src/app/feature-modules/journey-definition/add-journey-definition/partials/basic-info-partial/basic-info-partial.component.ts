@@ -1,6 +1,7 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CommunicationService } from '../../../../../core/services/communication/communication.service';
+import { FieldValidatorService } from '../../../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
   selector: 'app-basic-info-partial',
@@ -14,8 +15,8 @@ export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
 
   constructor(
     private fb: FormBuilder,
-    private communicationService: CommunicationService
-  ) {
+    private communicationService: CommunicationService,
+    private fieldValidatorService: FieldValidatorService) {
   }
 
   ngOnInit() {
@@ -26,52 +27,21 @@ export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
     //  this.initTouchSpin();
   }
 
+  isFieldValid(field: string) {
+    const isFieldValid = this.fieldValidatorService.isFieldValid(this.basicInfoGroup, field);
+    // this.validationStatus.emit(isFieldValid);
+    return isFieldValid;
+    // return this.basicInfoGroup.get(field).invalid &&
+    //   (this.basicInfoGroup.get(field).dirty || this.basicInfoGroup.get(field).touched);
+  }
 
+  displayFieldCss(field: string) {
+    return this.fieldValidatorService.displayFieldCss(this.basicInfoGroup, field);
 
-
-
-  // initTouchSpin(checked) {
-  //   if (checked) {
-  //     $('#age_limite_min').TouchSpin({
-  //       min: 0,
-  //       max: 149,
-  //       step: 1,
-  //       decimals: 0,
-  //       boostat: 5,
-  //       maxboostedstep: 10
-  //     });
-
-  //     $('#age_limite_max').TouchSpin({
-  //       min: 1,
-  //       max: 150,
-  //       step: 1,
-  //       decimals: 0,
-  //       boostat: 5,
-  //       maxboostedstep: 10
-  //     });
-
-  //     $('#age_limite_min').on('touchspin.on.startspin', () => {
-  //       this.test();
-  //     });
-  //     $('#age_limite_min').on('touchspin.on.stopspin', () => {
-  //       this.test();
-  //     });
-  //     $('#age_limite_min').on('touchspin.on.change', () => {
-  //       this.test();
-  //     });
-  //     $('#age_limite_min').on('touchspin.on.min', () => {
-  //       this.test();
-  //     });
-  //     $('#age_limite_min').on('touchspin.on.max', () => {
-  //       this.test();
-  //     });
-  //   }
-  // }
-
-  // test() {
-  //   const newval = $('#age_limite_min').val();
-  //   console.log('addAlertDollar change fired, dollar value is ', newval);
-  //   (<FormGroup>this.basicInfoGroup.controls['ageLimitGroup']).controls['alMinValue'].patchValue(newval);
-  // }
+    // return {
+    //   'has-danger': this.isFieldValid(field),
+    //   'has-feedback': this.isFieldValid(field)
+    // };
+  }
 
 }

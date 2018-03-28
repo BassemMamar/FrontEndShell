@@ -3,7 +3,7 @@ import { MediaAcquisitionChannelType } from '../../../../model/media-acquisition
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { JourneyDefinitionDetails } from '../../../../model/journey-definition-details';
-import { SupportedCaptureMediaChannels } from '../../../../model/supported-capture-media-channels';
+import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
 
 @Component({
   selector: 'app-selfie-entry-type',
@@ -23,7 +23,7 @@ export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() index;
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
+  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
 
   constructor(private common: CommonService, private formBuilder: FormBuilder) {
     // this.channelTypes = this.getChannelTypes();

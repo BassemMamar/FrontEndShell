@@ -4,8 +4,8 @@
       <input type="hidden" formControlName="order" [ngModel]="index">
       <!-- {{item.value | json}} {{item.get('entryType').value}} 
         <app-temp-view></app-temp-view>  -->
-      <div class="form-group m-form__group row">
-        <div class="col-lg-4">
+      <div class="form-group m-form__group row" >
+        <div class="col-lg-4" [ngClass]="displayFieldCss('supportedChannelTypes')">
           <label>
             Channel Types:
           </label>
@@ -13,6 +13,8 @@
             class="form-control m-bootstrap-select m_selectpicker" multiple>
             <option  *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
           </select>
+          <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
+
         </div>
         <div class="col-lg-4">
           <label>
@@ -80,7 +82,7 @@
       </div>
       <!-- <div class="orm-group m-form__group row">
         <div class="col-lg-4"> -->
-      <app-entry-policy [parentGroup]="documentProofPoliciesParentGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo"
+      <app-entry-policy [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName" [worldRegionInfo]="worldRegionInfo"
         [documentCategories]="documentCategories"></app-entry-policy>
       <!-- </div>
       </div> -->

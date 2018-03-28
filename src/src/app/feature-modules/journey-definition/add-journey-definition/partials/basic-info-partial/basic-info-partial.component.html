@@ -7,20 +7,22 @@
           <i data-toggle="m-tooltip" data-width="auto" class="m-form__heading-help-icon flaticon-info" title="Some help text goes here"></i>
         </h3>
       </div> -->
-      <div class="form-group m-form__group row">
+      <div class="form-group m-form__group row" [ngClass]="displayFieldCss('name')">
         <label class="col-xl-3 col-lg-3 col-form-label">
           Name:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <input type="text" class="form-control m-input m-input--air" formControlName="name">
+          <input type="text" class="form-control m-input m-input--air" formControlName="name" >
+          <app-field-state-display [displayMessage]="isFieldValid('name')" [message]="'Name Field is Required!'"></app-field-state-display>
         </div>
       </div>
-      <div class="form-group m-form__group row">
+      <div class="form-group m-form__group row" [ngClass]="displayFieldCss('code')">
         <label class="col-xl-3 col-lg-3 col-form-label">
           Code:
         </label>
         <div class="col-xl-9 col-lg-9">
           <input #code type="text" name="code" class="form-control m-input m-input--air" formControlName="code">
+          <app-field-state-display [displayMessage]="isFieldValid('code')" [message]="'Code Field is Required!'"></app-field-state-display>
           <span class="m-form__help">
             https://{{businessCode}}.onboardingsuite.com/CaptureStudio/{{code.value}}
           </span>
@@ -29,20 +31,20 @@
 
       <div class="m-separator m-separator--dashed m-separator--sm"></div>
 
-        <div class="form-group m-form__group row">
-          <label class="col-xl-3 col-lg-3 col-form-label">
-            Is Active
+      <div class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">
+          Is Active
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <label class="m-checkbox">
+            <input type="checkbox" formControlName="isActive">
+            <span></span>
           </label>
-          <div class="col-xl-9 col-lg-9">
-            <label class="m-checkbox">
-              <input type="checkbox" formControlName="isActive">
-              <span></span>
-            </label>
 
 
-          </div>
         </div>
-        <!-- <div class="form-group m-form__group row">
+      </div>
+      <!-- <div class="form-group m-form__group row">
           <label class="col-xl-3 col-lg-3 col-form-label">
             Allow manual cropping
           </label>
@@ -63,7 +65,7 @@
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" #introMsg  formControlName="imCheck">
+            <input type="checkbox" #introMsg formControlName="imCheck">
             <span></span>
           </label>
         </div>
@@ -74,26 +76,26 @@
 
         </div>
       </div>
-      <div [formGroup]="basicInfoGroup.controls.ageLimitGroup"  class="form-group m-form__group row">
+      <div [formGroup]="basicInfoGroup.controls.ageLimitGroup" class="form-group m-form__group row">
         <label class="col-xl-3 col-lg-3 col-form-label">
           Enable age limit:
         </label>
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="alCheck" #agelimit >
+            <input type="checkbox" formControlName="alCheck" #agelimit>
             <span></span>
           </label>
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
           <!-- <input id="age_limite_min" formControlName="alMinValue" type="text" class="form-control m-input--air"> -->
-          <input type="number" min="1"  class="form-control m-input--air" formControlName="alMinValue" />
+          <input type="number" min="1" class="form-control m-input--air" formControlName="alMinValue" />
 
 
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
           <!-- <input id="age_limite_max" formControlName="alMaxValue" type="text" class="form-control m-input--air" > -->
-          <input type="number"  max="100" class="form-control m-input--air" formControlName="alMaxValue" />
+          <input type="number" max="100" class="form-control m-input--air" formControlName="alMaxValue" />
 
         </div>
       </div>

@@ -1,9 +1,9 @@
-import { EntryTypes } from './entry-types';
+import { EntryType } from './entry-type';
 import { EntryFormModel } from './entry-form-model';
 import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
 
 export class POAEntryFormModel {
-    entryType: EntryTypes;
+    entryType: EntryType;
     order: number;
     isOptional: Boolean;
     supportedChannelTypes: string[];
@@ -13,7 +13,7 @@ export class POAEntryFormModel {
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
     constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
-        this.entryType = EntryTypes.ProofOfAddress;
+        this.entryType = EntryType.ProofOfAddress;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
         this.isOptional = entryDataModel == null ? false : entryDataModel.isOptional;
         this.supportedChannelTypes = entryDataModel == null ? [] : entryDataModel.supportedChannelTypes.map(t => t.channelType);

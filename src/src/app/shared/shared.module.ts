@@ -17,6 +17,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { UnwrapTagDirective } from './directives/unwrap-tag/unwrap-tag.directive';
 import { UnwrapTagService } from './directives/unwrap-tag/unwrap-tag.service';
 import { ScrollToDirective } from './directives/scroll-to/scroll-to.directive';
+import { FieldStateDisplayComponent } from './components/field-state-display/field-state-display.component';
+import { FieldValidatorService } from './components/field-state-display/field-validator.service';
 
 // https://angular.io/guide/styleguide#shared-feature-module
 /*
@@ -43,7 +45,8 @@ import { ScrollToDirective } from './directives/scroll-to/scroll-to.directive';
         UnwrapTagDirective,
         BlockUITemplateComponent,
         ModalComponent,
-        ScrollToDirective
+        ScrollToDirective,
+        FieldStateDisplayComponent
 
     ],
     declarations: [
@@ -53,7 +56,8 @@ import { ScrollToDirective } from './directives/scroll-to/scroll-to.directive';
         UnwrapTagDirective,
         BlockUITemplateComponent,
         ModalComponent,
-        ScrollToDirective
+        ScrollToDirective,
+        FieldStateDisplayComponent
     ],
     entryComponents: [
         BlockUITemplateComponent
@@ -72,7 +76,8 @@ export class SharedModule {
             providers: [
                 AlertService,
                 ToastrService,
-                UnwrapTagService
+                UnwrapTagService,
+                FieldValidatorService
                 // services go here
             ]
         };

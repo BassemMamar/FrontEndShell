@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
-import { SupportedCaptureMediaChannels } from '../../../../model/supported-capture-media-channels';
+import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategory } from '../../../../model/document-category';
 
@@ -18,7 +18,7 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() arrayName: string;
   @Input() groupName;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
+  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategory[];
 

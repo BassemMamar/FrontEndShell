@@ -5,7 +5,8 @@ import { MediaAcquisitionChannelType } from '../../../../model/media-acquisition
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategory } from '../../../../model/document-category';
-import { SupportedCaptureMediaChannels } from '../../../../model/supported-capture-media-channels';
+import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
+import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
   selector: 'app-poi-entry-type',
@@ -19,7 +20,7 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() arrayName: string;
   @Input() groupName: number;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
+  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategory[];
 
@@ -27,13 +28,16 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
   // return current entry form group
-  get documentProofPoliciesParentGroup(): FormGroup {
+  get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
   documentProofPoliciesArrayName = 'documentProofPolicies';
 
-  constructor(private loggerService: LoggerService, private common: CommonService) { }
+  constructor(
+    private loggerService: LoggerService,
+    private fieldValidatorService: FieldValidatorService,
+    private common: CommonService) { }
 
   ngOnInit() {
   }
@@ -52,6 +56,14 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
     } else {
       this.item.controls['acceptExpiredUpToMonthes'].enable();
     }
+  }
+
+  isFieldValid(field: string) {
+    return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
+  }
+
+  displayFieldCss(field: string) {
+    return this.fieldValidatorService.displayFieldCss(this.currentEntryGroup, field);
   }
 
 }

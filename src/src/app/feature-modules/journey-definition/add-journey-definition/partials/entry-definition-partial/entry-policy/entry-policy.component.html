@@ -1,7 +1,13 @@
-<!-- <div [formGroup]="parentGroup">
-  <div formArrayName="{{arrayName}}">
-    <div [formGroupName]="groupName"> -->
 
+      <!-- <div class="form-group m-form__group row">
+        <div class="col-lg-6">
+          <ngx-dropdown-treeview class="  form-control m-bootstrap-select m_selectpicker" [config]="config" [items]="items">
+          </ngx-dropdown-treeview>
+        </div>
+        <div  class="col-lg-6">
+          <ss-multiselect-dropdown [options]="worldRegionInfo" class="  form-control m-bootstrap-select m_selectpicker"> </ss-multiselect-dropdown>
+        </div>
+      </div> -->
 
 <div class="m-section">
   <!-- <h3 class="m-section__heading">Policy</h3> -->
@@ -12,29 +18,11 @@
     <div class="m-demo" data-code-preview="true" data-code-html="true" data-code-js="false">
       <div class="m-demo__preview m-demo__preview--badge">
 
-        <!-- <div [formGroup]="parentGroup">
-          <div formArrayName="documentProofPolicies">
-            <div class="form-group m-form__group row" *ngFor="let policy of documentProofPolicies.controls; let i=index" [formGroupName]="i">
-              <div class="col-lg-4">
-                <div class="m-widget2__item m-widget2__item--warning">
-                  <span class="m-badge m-badge--info m-badge--wide m-badge--rounded" *ngFor="let documentType of policy.get('documentTypes').value">{{documentType.name}}
-                  </span>
-                </div>
-              </div>
-              <div class="col-lg-8">
-                <span class="m-badge m-badge--info m-badge--wide m-badge--rounded" *ngFor="let countryCode of policy.get('countryCodes').value">{{countryCode.name}}
-                </span>
-              </div>
-            </div>
-
-          </div>
-        </div> -->
-
         <div class="form-group m-form__group row">
           <div class="col-lg-4">
             <label>
               Categories:
-              <!-- {{categoriesInput | json }} -->
+              <!-- {{this.documentCategoriesCopy | json }} -->
             </label>
             <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
               multiple>
@@ -50,7 +38,7 @@
             </label>
             <select #countriesInput [(ngModel)]="selectedRegion" class="  form-control m-bootstrap-select m_selectpicker" multiple="multiple">
               <optgroup *ngFor="let region of worldRegionInfoCopy" [label]="region.name">
-                <option *ngFor="let country of region.countries" [ngValue]="country">{{country.name}}| {{country.code}}</option>
+                <option *ngFor="let country of region.countries" [ngValue]="country">{{country.name}}</option>
               </optgroup>
 
             </select>
@@ -106,8 +94,3 @@
     </div>
   </div>
 </div>
-
-
-<!-- </div>
-  </div>
-</div> -->

@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from '../../../shared/components/toastr/toastr.service';
 import { EditJourneyDefinition } from '../model/edit-journey-definition';
 import { EditJourneyEntryDefinition } from '../model/edit-journey-entry-definition';
+import { FieldValidatorService } from '../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
   selector: 'app-add-journey-definition',
@@ -17,16 +18,30 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   journeyDefinitionId: string;
   journeyDefinitionDataModel: JourneyDefinitionDetails;
   journeyDefinitionForm: FormGroup; // journeyDefinitionForm is of type FormGroup
+  submitted = false;
+  get basicInfoGroup(): FormGroup {
+    return this.journeyDefinitionForm.get('basicInfoGroup') as FormGroup;
+  }
+  get entryDefinitionGroup(): FormGroup {
+    return this.journeyDefinitionForm.get('entryDefinitionGroup') as FormGroup;
+  }
+
+  get basicInfoValidationStatus() {
+    return !this.basicInfoGroup.valid;
+  }
+  get entryDefinitionsValidationStatus() {
+    return !this.entryDefinitionGroup.valid;
+  }
+
   constructor(
-    private fb: FormBuilder, // inject FormBuilder
+    private fb: FormBuilder,
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private journeyDefinitionService: JourneyDefinitionService,
+    private fieldValidatorService: FieldValidatorService,
     private logger: LoggerService) {
-    /**
-     * create new instance if add(for now this one)
-     * get data if update
-     */
+
+    // create new instance if add, get data if update
     this.journeyDefinitionId = this.route.snapshot.paramMap.get('journeyDefinitionId');
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
       this.getJourneyDefinition();
@@ -34,8 +49,16 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
       this.journeyDefinitionDataModel = new JourneyDefinitionDetails();
     }
 
-    this.createForm();
+    this.createMainFormGroup();
   }
+
+  ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.initWizard();
+  }
+
   getJourneyDefinition() {
     this.journeyDefinitionService
       .getJourneyDefinition(this.journeyDefinitionId)
@@ -44,81 +67,109 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
       error => this.toastrService.error(error, 'getJourneyDefinition error')
       );
   }
-  createForm() {
+
+  /**
+   * Create main FormGroup for angular reactive form
+   */
+  createMainFormGroup() {
     this.journeyDefinitionForm = this.fb.group({
       basicInfoGroup: this.createBasicInfoGroup(),
-      // entryDefinitionArray: this.createEntryDefinitionArray(),
       entryDefinitionGroup: this.createEntryDefinitionGroup(),
     });
   }
 
+  /**
+   * create new FormGroup to hold basic info section
+   * default value is taken from journeyDefinitionDataModel instance for both ADD/Update cases
+   * return new FormGroup instance to be hold in the main FormGroup which is journeyDefinitionForm
+   */
   createBasicInfoGroup(): FormGroup {
+    const _alCheck = this.journeyDefinitionDataModel.maxAgeLimit != null || this.journeyDefinitionDataModel.minAgeLimit != null;
     return this.fb.group({
-      name: ['', Validators.required], // the FormControl called "name"
-      code: ['', Validators.required],
-      isActive: [false],
+      name: [this.journeyDefinitionDataModel.name, Validators.required], // the FormControl called "name"
+      code: [this.journeyDefinitionDataModel.code, Validators.required],
+      isActive: [this.journeyDefinitionDataModel.isActive],
       introductionMessageGroup: this.fb.group({
-        imCheck: [false],
-        imValue: ['']
+        imCheck: [this.journeyDefinitionDataModel.introductionMessage !== '' ? true : false],
+        imValue: [this.journeyDefinitionDataModel.introductionMessage]
       }),
       ageLimitGroup: this.fb.group({
-        alCheck: [false],
-        alMinValue: [18],
-        alMaxValue: [25]
+        alCheck: [_alCheck],
+        alMinValue: [this.journeyDefinitionDataModel.minAgeLimit],
+        alMaxValue: [this.journeyDefinitionDataModel.maxAgeLimit]
       }),
-      reasons: [[]]
+      reasons: [this.journeyDefinitionDataModel.journeyReasons]
     });
   }
 
+  /**
+   * create new FormGroup to hold Entries section
+   * for this one it will be empty group passed into entry component,
+   * which in his turn will inject new FormAbstract and update then with values for update case
+   * return new FormGroup instance to be hold in the main FormGroup which is journeyDefinitionForm
+   */
   createEntryDefinitionGroup(): FormGroup {
     return this.fb.group({});
-
-    // return this.fb.array([]); // entryDefinition as an empty FormArray;
-  }
-
-  ngOnInit() {
-
-  }
-
-  ngAfterViewInit(): void {
-    this.initWizard();
   }
 
   onSubmit() {
-    const datamodel = this.prepareDataModel();
+    this.submitted = true;
+    if (this.journeyDefinitionForm.valid) {
+
+      this.doSubmit();
+    } else {
+      // validate all form fields
+      this.fieldValidatorService.validateAllFormFields(this.journeyDefinitionForm);
+    }
+
+  }
+
+  doSubmit() {
+    const datamodel = this.toJourneyDefinitionDataModelMapper();
     // ToDo: Maybe here do some custom validation dono
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
       this.journeyDefinitionService
-        .updateJourneyDefinition(datamodel).subscribe(/* error handling */);
+        .updateJourneyDefinition(datamodel).subscribe(
+        data => this.toastrService.success('Update journey definition has been done successfully', 'Done!'),
+        error => {
+          this.toastrService.error('Update journey definition Faild for some reason', 'Opps!');
+          this.logger.error('Update journey definition Faild for some reason ', error);
+        });
 
     } else {
       this.journeyDefinitionService
-        .addJourneyDefinition(datamodel).subscribe(/* error handling */);
+        .addJourneyDefinition(datamodel).subscribe(
+        data => this.toastrService.success('Add journey definition has been done successfully', 'Done!'),
+        error => {
+          this.toastrService.error('Add journey definition Faild for some reason', 'Opps!');
+          this.logger.error('Add journey definition Faild for some reason ', error);
+        }
+        );
     }
+    // resetForm(); ToDo
   }
 
-  prepareDataModel(): EditJourneyDefinition {
-    const basicInfoFormModel = this.journeyDefinitionForm.get('basicInfoGroup').value;
-    const entryDefinitionFormModel = this.journeyDefinitionForm.get('entryDefinitionGroup').value;
-
+  toJourneyDefinitionDataModelMapper(): EditJourneyDefinition {
+    const basicInfoValue = this.journeyDefinitionForm.get('basicInfoGroup').value;
+    const entryDefinitionValue = this.journeyDefinitionForm.get('entryDefinitionGroup').value;
 
     const result = new EditJourneyDefinition();
     // fill basicInfo
     result.id = this.journeyDefinitionId;
-    result.name = basicInfoFormModel.name;
-    result.code = basicInfoFormModel.code;
-    result.isActive = basicInfoFormModel.isActive;
-    result.introductionMessage = basicInfoFormModel.introductionMessageGroup.imCheck ?
-      basicInfoFormModel.introductionMessageGroup.imValue : '';
-    if (basicInfoFormModel.ageLimitGroup.alCheck) {
-      result.minAgeLimit = basicInfoFormModel.ageLimitGroup.alMinValue;
-      result.maxAgeLimit = basicInfoFormModel.ageLimitGroup.alMaxValue;
+    result.name = basicInfoValue.name;
+    result.code = basicInfoValue.code;
+    result.isActive = basicInfoValue.isActive;
+    result.introductionMessage = basicInfoValue.introductionMessageGroup.imCheck ?
+      basicInfoValue.introductionMessageGroup.imValue : '';
+    if (basicInfoValue.ageLimitGroup.alCheck) {
+      result.minAgeLimit = basicInfoValue.ageLimitGroup.alMinValue;
+      result.maxAgeLimit = basicInfoValue.ageLimitGroup.alMaxValue;
     }
-    result.journeyReasons = (<any[]>basicInfoFormModel.reasons).map(x => x.value);
+    result.journeyReasons = (<any[]>basicInfoValue.reasons).map(x => x.value);
 
     // fill entries
-    entryDefinitionFormModel.entriesArray.forEach(entry => {
-      const entryDataModel = this.prepareEntrtDataModel(entry);
+    entryDefinitionValue.entriesArray.forEach(entry => {
+      const entryDataModel = this.toEntryDefinitionDataModelMapper(entry);
       result.journeyEntryDefinitions.push(entryDataModel);
     });
 
@@ -126,32 +177,33 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     return result;
   }
 
-  prepareEntrtDataModel(entry): EditJourneyEntryDefinition {
+  toEntryDefinitionDataModelMapper(entry: any): EditJourneyEntryDefinition {
 
     const entryDataModel = new EditJourneyEntryDefinition();
     entryDataModel.entryType = entry.entryType;
     entryDataModel.acceptExpiredDocuments = entry.acceptExpiredDocuments;
     entryDataModel.acceptExpiredUpToMonthes = entry.isUpToMonthes ? entry.acceptExpiredUpToMonthes : 0;
     entryDataModel.askForAdditionalStepsStatus = entry.askForAdditionalSteps;
-    entryDataModel.documentProofPolicies = entry.documentProofPolicies.map(policy => {
-      const rObj = { countryCodes: [], documentTypes: [] };
-      rObj.countryCodes = policy.countries.map(country => country.code);
-      rObj.documentTypes = policy.documentTypes.map(category => {
-        return {
-          level: category.id,
-          friendlyName: category.friendlyName
-        };
-      });
+    if (entry.documentProofPolicies) {
+      entryDataModel.documentProofPolicies = entry.documentProofPolicies.map(policy => {
+        const rObj = { countryCodes: [], documentTypes: [] };
+        rObj.countryCodes = policy.countries.map(country => country.code);
+        rObj.documentTypes = policy.documentTypes.map(category => {
+          return {
+            level: category.level,
+            friendlyName: category.friendlyName
+          };
+        });
 
-      return rObj;
-    });
+        return rObj;
+      });
+    }
     entryDataModel.isOptional = entry.isOptional;
     entryDataModel.maxAttempts = entry.maxAttempts;
     entryDataModel.order = entry.order;
     entryDataModel.supportedChannelTypes = entry.supportedChannelTypes;
     entryDataModel.title = entry.title;
     entryDataModel.order = entry.order;
-
 
     return entryDataModel;
   }

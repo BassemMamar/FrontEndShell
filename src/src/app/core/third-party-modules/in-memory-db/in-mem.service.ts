@@ -1,5 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { EntryTypes } from '../../../feature-modules/journey-definition/model/entry-types';
+import { EntryType } from '../../../feature-modules/journey-definition/model/entry-type';
 
 // https://github.com/angular/in-memory-web-api
 export class InMemService implements InMemoryDbService {
@@ -12,15 +12,15 @@ export class InMemService implements InMemoryDbService {
     ];
     const entryDefinitionOptions = {
       result: [
-        { name: 'Proof Of Identity', value: EntryTypes.ProofOfIdentity },
-        { name: 'Proof Of Address', value: EntryTypes.ProofOfAddress },
-        { name: 'Additional Document', value: EntryTypes.AdditionalDocument },
-        { name: 'Selfie', value: EntryTypes.Selfie }
+        { name: 'Proof Of Identity', value: EntryType.ProofOfIdentity },
+        { name: 'Proof Of Address', value: EntryType.ProofOfAddress },
+        { name: 'Additional Document', value: EntryType.AdditionalDocument },
+        { name: 'Selfie', value: EntryType.Selfie }
       ],
       responseMetaData: null
     };
 
-    const SupportedCaptureMediaChannels = {
+    const CaptureMediaChannels = {
       result: [
         {
           channelType: 'Camera',
@@ -76,7 +76,7 @@ export class InMemService implements InMemoryDbService {
       responseMetaData: null
     };
 
-    const POACategory = {
+    const ProofOfAddress = {
       result: [
         {
           id: '23',
@@ -134,7 +134,7 @@ export class InMemService implements InMemoryDbService {
       responseMetaData: null
     };
 
-    const POICategory = {
+    const ProofOfIdentity = {
       result: [
         {
           id: '23',
@@ -214,6 +214,8 @@ export class InMemService implements InMemoryDbService {
     };
 
 
-    return { heroes, entryDefinitionOptions, SupportedCaptureMediaChannels, Regions, POACategory, POICategory };
+    return {
+      heroes, entryDefinitionOptions, CaptureMediaChannels, Regions, ProofOfAddress, ProofOfIdentity
+    };
   }
 }

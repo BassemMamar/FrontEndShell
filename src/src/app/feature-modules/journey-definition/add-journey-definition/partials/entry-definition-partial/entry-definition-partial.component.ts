@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, ViewChildren, EventEmitter } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
 import { JourneyEntryDefinitionDetails } from '../../../model/journey-entry-definition-details';
-import { EntryTypes } from '../../../model/entry-types';
+import { EntryType } from '../../../model/entry-type';
 import { EntryDefinitionContainerComponent } from './entry-definition-container/entry-definition-container.component';
 import { EntryDefinitionOptions } from '../../../model/entry-definition-options';
 import { JourneyDefinitionService } from '../../../journey-definition.service';
@@ -14,8 +14,7 @@ import { ADEntryFormModel } from '../../../model/ad-entry-form-model';
 import { ToastrService } from '../../../../../shared/components/toastr/toastr.service';
 import { WorldRegionInfo } from '../../../model/world-region-info';
 import { DocumentCategory } from '../../../model/document-category';
-import { SupportedCaptureMediaChannels } from '../../../model/supported-capture-media-channels';
-import { DocumentCategoryType } from '../../../model/document-category-type';
+import { SupportedCaptureMediaChannelInfo } from '../../../model/supported-capture-media-channel-info';
 
 @Component({
   selector: 'app-entry-definition-partial',
@@ -23,10 +22,11 @@ import { DocumentCategoryType } from '../../../model/document-category-type';
   styleUrls: ['./entry-definition-partial.component.scss']
 })
 export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, DoCheck {
-  entryTypes = EntryTypes;
+  entryTypes = EntryType;
   entryDefinitionOptions: EntryDefinitionOptions[];
   @Input() entryDefinitionGroup: FormGroup;
   @Input() entryDefinitionDataModel: JourneyEntryDefinitionDetails[];
+
   @ViewChildren(EntryDefinitionContainerComponent) children: EntryDefinitionContainerComponent[];
 
   get primaryEntryArray(): FormArray {
@@ -39,7 +39,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     return this.entryDefinitionGroup.get('LastEntryArray') as FormArray;
   }
 
-  supportedCaptureMediaChannels: SupportedCaptureMediaChannels[];
+  supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
   worldRegionInfo: WorldRegionInfo[];
   poiDocumentCategories: DocumentCategory[];
   poaDocumentCategories: DocumentCategory[];
@@ -102,7 +102,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   getPOIDocumentCategories() {
     this.journeyDefinitionService
-      .getDocumentCategories(DocumentCategoryType.POICategory)
+      .getDocumentCategories(EntryType.ProofOfIdentity)
       .subscribe(
       data => this.poiDocumentCategories = data
       );
@@ -110,7 +110,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   getPOADocumentCategories() {
     this.journeyDefinitionService
-      .getDocumentCategories(DocumentCategoryType.POACategory)
+      .getDocumentCategories(EntryType.ProofOfAddress)
       .subscribe(
       data => this.poaDocumentCategories = data
       );
@@ -178,9 +178,9 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   }
 
 
-  addEntryDefinition(value: EntryTypes) {
+  addEntryDefinition(value: EntryType) {
     switch (value) {
-      case EntryTypes.ProofOfIdentity:
+      case EntryType.ProofOfIdentity:
         // const poi = new POIEntryFormModel();
         // const POIgroup = this.fb.group(poi);
         // POIgroup.get('acceptExpiredUpToMonthes').disable();
@@ -193,7 +193,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         //   this.entriesArray.push(POIgroup);
         // }
         break;
-      case EntryTypes.ProofOfAddress:
+      case EntryType.ProofOfAddress:
         // const poa = new POAEntryFormModel();
         // const POAgroup = this.fb.group(poa);
         // POAgroup.get('acceptExpiredUpToMonthes').disable();
@@ -201,14 +201,14 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         const POAgroup = this.createNewEntryFormModel(value);
         this.entriesArray.push(POAgroup);
         break;
-      case EntryTypes.AdditionalDocument:
+      case EntryType.AdditionalDocument:
         // const ad = new ADEntryFormModel();
         // const ADgroup = this.fb.group(ad);
         const ADgroup = this.createNewEntryFormModel(value);
 
         this.entriesArray.push(ADgroup);
         break;
-      case EntryTypes.Selfie:
+      case EntryType.Selfie:
         // const selfie = new SelfieEntryFormModel();
         // const SFgroup = this.fb.group(selfie);
 
@@ -218,7 +218,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         // }
         // else {
         // const dd = this.entriesArray.controls.forEach(e => this.logger.info(` e.get('entryType').value : ${e.get('entryType').value}`));
-        const oldSelfie = this.entriesArray.controls.find(e => e.get('entryType').value === EntryTypes.Selfie);
+        const oldSelfie = this.entriesArray.controls.find(e => e.get('entryType').value === EntryType.Selfie);
         if (oldSelfie == null) {
           const SFgroup = this.createNewEntryFormModel(value);
 
@@ -262,9 +262,9 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
 
 
-  createNewEntryFormModel(entryTypes: EntryTypes, entryDataModel: JourneyEntryDefinitionDetails = null): FormGroup {
+  createNewEntryFormModel(entryTypes: EntryType, entryDataModel: JourneyEntryDefinitionDetails = null): FormGroup {
     switch (entryTypes) {
-      case EntryTypes.ProofOfIdentity:
+      case EntryType.ProofOfIdentity:
         const poi = new POIEntryFormModel(entryDataModel);
         const POIgroup = this.fb.group({
           order: [poi.order, Validators.required],
@@ -280,7 +280,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         });
         return POIgroup;
 
-      case EntryTypes.ProofOfAddress:
+      case EntryType.ProofOfAddress:
         const poa = new POAEntryFormModel(entryDataModel);
         const POAgroup = this.fb.group({
           order: [poa.order, Validators.required],
@@ -295,7 +295,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         });
         return POAgroup;
 
-      case EntryTypes.AdditionalDocument:
+      case EntryType.AdditionalDocument:
         const ad = new ADEntryFormModel(entryDataModel);
         const ADgroup = this.fb.group({
           order: [ad.order, Validators.required],
@@ -307,7 +307,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         });
         return ADgroup;
 
-      case EntryTypes.Selfie:
+      case EntryType.Selfie:
         const selfie = new SelfieEntryFormModel(entryDataModel);
         const SFgroup = this.fb.group({
           order: [selfie.order, Validators.required],

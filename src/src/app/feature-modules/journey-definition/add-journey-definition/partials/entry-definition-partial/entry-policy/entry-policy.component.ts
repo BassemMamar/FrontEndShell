@@ -5,6 +5,7 @@ import { WorldRegionInfo, CountryInfo } from '../../../../model/world-region-inf
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { DocumentCategory } from '../../../../model/document-category';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
+import { TreeviewItem } from 'ngx-treeview';
 
 @Component({
   selector: 'app-entry-policy',
@@ -13,6 +14,81 @@ import { CommonService } from '../../../../../../core/base/utils/common.service'
   encapsulation: ViewEncapsulation.None
 })
 export class EntryPolicyComponent implements OnInit, AfterViewInit {
+  RegionsTest = [
+    {
+      id: '1',
+      name: 'Reg 1',
+      countries: [
+        {
+          code: 'AF',
+          name: 'Afghanistan',
+        },
+        {
+          code: 'PL',
+          name: 'Poland',
+        },
+        {
+          code: 'SA',
+          name: 'Saudi Arabia',
+        }
+      ]
+    },
+    {
+      id: '2',
+      name: 'Reg 2',
+      countries: [
+        {
+          code: 'RO',
+          name: 'Romania',
+        },
+        {
+          code: 'SE',
+          name: 'Sweden',
+        },
+        {
+          code: 'AE',
+          name: 'United Arab Emirates',
+        }
+      ]
+    }
+  ];
+  myOptions = [
+    { id: 1, name: 'Option 1' },
+    { id: 2, name: 'Option 2' },
+  ];
+  config = {
+    hasAllCheckBox: true,
+    hasFilter: true,
+    hasCollapseExpand: true,
+    decoupleChildFromParent: true,
+    maxHeight: 500
+  };
+  itCategory = new TreeviewItem({
+    text: 'IT', value: 9, children: [
+      {
+        text: 'Programming', value: 91, children: [{
+          text: 'Frontend', value: 911, children: [
+            { text: 'Angular 1', value: 9111 },
+            { text: 'Angular 2', value: 9112 },
+            { text: 'ReactJS', value: 9113 }
+          ]
+        }, {
+          text: 'Backend', value: 912, children: [
+            { text: 'C#', value: 9121 },
+            { text: 'Java', value: 9122 },
+            { text: 'Python', value: 9123, checked: false }
+          ]
+        }]
+      },
+      {
+        text: 'Networking', value: 92, children: [
+          { text: 'Internet', value: 921 },
+          { text: 'Security', value: 922 }
+        ]
+      }
+    ]
+  });
+  items = [this.itCategory];
 
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategory[];
@@ -35,8 +111,10 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
-    this.documentCategoriesCopy = this.commonService.deepCopy(this.documentCategories);
+    // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
+    // this.documentCategoriesCopy = this.commonService.deepCopy(this.documentCategories);
+    this.worldRegionInfoCopy = this.worldRegionInfo.slice();
+    this.documentCategoriesCopy = this.documentCategories;
   }
 
   ngAfterViewInit(): void {

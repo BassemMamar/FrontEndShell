@@ -1,10 +1,10 @@
-import { EntryTypes } from './entry-types';
+import { EntryType } from './entry-type';
 import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
-import { SupportedCaptureMediaChannels } from './supported-capture-media-channels';
+import { SupportedCaptureMediaChannelInfo } from './supported-capture-media-channel-info';
 import { DocumentProofPolicyDetails } from './document-proof-policy-details';
 
 export class JourneyEntryDefinitionDetails {
-    entryType: EntryTypes;
+    entryType: EntryType;
     order: number;
     isOptional: boolean;
     maxAttempts: number;
@@ -13,7 +13,7 @@ export class JourneyEntryDefinitionDetails {
     acceptExpiredUpToMonthes: number;
     askForAdditionalSteps: string;
 
-    supportedChannelTypes: SupportedCaptureMediaChannels[];
+    supportedChannelTypes: SupportedCaptureMediaChannelInfo[];
     documentProofPolicies: DocumentProofPolicyDetails[];
     constructor() {
         this.order = 0;
@@ -23,7 +23,7 @@ export class JourneyEntryDefinitionDetails {
         this.acceptExpiredDocuments = false;
         this.acceptExpiredUpToMonthes = null;
         this.askForAdditionalSteps = '';
-        this.supportedChannelTypes = new Array<SupportedCaptureMediaChannels>();
+        this.supportedChannelTypes = new Array<SupportedCaptureMediaChannelInfo>();
         this.documentProofPolicies = new Array<DocumentProofPolicyDetails>();
     }
 }

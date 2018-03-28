@@ -1,15 +1,15 @@
 import { MediaAcquisitionChannelType } from './media-acquisition-channel-Type';
 import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
-import { EntryTypes } from './entry-types';
+import { EntryType } from './entry-type';
 
 export class EntryFormModel {
     order: number;
-    entryType: EntryTypes;
+    entryType: EntryType;
     isOptional: Boolean;
     supportedChannelTypes: string[];
     constructor() {
         this.order = 0;
-        this.entryType = EntryTypes.ProofOfIdentity;
+        this.entryType = EntryType.ProofOfIdentity;
         this.isOptional = false;
         this.supportedChannelTypes = new Array<string>();
     }

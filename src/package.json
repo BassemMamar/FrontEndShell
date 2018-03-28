@@ -45,6 +45,7 @@
     "ng-block-ui": "^1.0.0-beta.18",
     "ng2-dragula": "^1.5.0",
     "ngx-chips": "^1.6.7",
+    "ngx-treeview": "^2.0.5",
     "oidc-client": "^1.4.1",
     "popper.js": "^1.12.3",
     "prismjs": "^1.8.4",
