@@ -122,7 +122,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     this.entryDefinitionGroup.addControl('primaryEntryArray', primaryPOIEntry);
 
     // this one should map array of journey entry definition
-    const entries = this.fb.array(new Array<EntryFormModel>());
+    const entries = this.fb.array(new Array<EntryFormModel>(), Validators.required);
     this.entryDefinitionGroup.addControl('entriesArray', entries);
 
     // For now no need for this but will keep it for future change :)
@@ -255,6 +255,16 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
         return SFgroup;
 
     }
+  }
+
+  isEntriesArrayEmpty(field: string) {
+    return this.entriesArray.length === 0;
+  }
+
+  displayEntriesArrayEmptyCss(field: string) {
+    return {
+      'has-danger': this.isEntriesArrayEmpty(field)
+    };
   }
 
 }
