@@ -3,7 +3,7 @@
     <div [formGroupName]="groupName">
       <input type="hidden" formControlName="order" [ngModel]="index">
       <div class="form-group m-form__group row">
-        <div class="col-lg-4">
+        <div class="col-lg-4" [ngClass]="displayFieldCss('supportedChannelTypes')">
           <label>
             Channel Types:
           </label>
@@ -12,6 +12,8 @@
             <option *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
 
           </select>
+          <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
+          
         </div>
         <div class="col-lg-4">
           <label>
@@ -35,13 +37,14 @@
 
       </div>
       <div class="form-group m-form__group row">
-        <div class="col-lg-4">
+        <div class="col-lg-4"  [ngClass]="displayFieldCss('title')">
           <label>
             Title:
           </label>
           <input type="text" formControlName="title" class="form-control">
           <span class="m-form__help">
           </span>
+          <app-field-state-display [displayMessage]="isFieldValid('title')" [message]="'Title Field is Required!'"></app-field-state-display>
         </div>
 
       </div>

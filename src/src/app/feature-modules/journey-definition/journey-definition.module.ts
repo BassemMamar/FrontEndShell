@@ -17,8 +17,6 @@ import { BasicInfoPartialComponent } from './add-journey-definition/partials/bas
 import { SelfieEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/selfie-entry-type/selfie-entry-type.component';
 import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
 import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
-import { DragulaModule } from 'ng2-dragula/ng2-dragula';
-import { TagInputModule } from 'ngx-chips';
 import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
 // tslint:disable-next-line:max-line-length
 import { EntryDefinitionContainerComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-container/entry-definition-container.component';
@@ -27,8 +25,8 @@ import { JourneyDefinitionService } from './journey-definition.service';
 import { POAEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/poa-entry-type/poa-entry-type.component';
 import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/ad-entry-type/ad-entry-type.component';
 import { EntryPolicyComponent } from './add-journey-definition/partials/entry-definition-partial/entry-policy/entry-policy.component';
-import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
-import { TreeviewModule } from 'ngx-treeview';
+
+import { ThirdPartyModule } from './third-party-modules/third-party.module';
 
 @NgModule({
   imports: [
@@ -36,12 +34,8 @@ import { TreeviewModule } from 'ngx-treeview';
     SharedModule.forChild(),
     LayoutModule,
     ReactiveFormsModule,
-    MultiselectDropdownModule, // ToDo remoe this
-    TreeviewModule.forRoot(),
+    ThirdPartyModule,
 
-
-    DragulaModule,
-    TagInputModule,
     JourneyDefinitionRoutingModule
   ],
   declarations: [

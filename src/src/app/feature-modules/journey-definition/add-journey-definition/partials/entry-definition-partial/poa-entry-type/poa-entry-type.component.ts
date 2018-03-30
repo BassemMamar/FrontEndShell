@@ -5,6 +5,7 @@ import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-ca
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategory } from '../../../../model/document-category';
 import { EntryType } from '../../../../model/entry-type';
+import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
   selector: 'app-poa-entry-type',
@@ -32,7 +33,9 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   }
   documentProofPoliciesArrayName = 'documentProofPolicies';
 
-  constructor(private common: CommonService) { }
+  constructor(
+    private common: CommonService,
+    private fieldValidatorService: FieldValidatorService) { }
 
   ngOnInit() {
   }
@@ -51,6 +54,14 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
     } else {
       this.currentEntryGroup.controls['acceptExpiredUpToMonthes'].enable();
     }
+  }
+
+  isFieldValid(field: string) {
+    return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
+  }
+
+  displayFieldCss(field: string) {
+    return this.fieldValidatorService.displayFieldCss(this.currentEntryGroup, field);
   }
 
 }

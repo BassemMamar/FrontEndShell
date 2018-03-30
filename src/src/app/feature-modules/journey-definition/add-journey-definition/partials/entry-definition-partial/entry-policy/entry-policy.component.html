@@ -1,12 +1,13 @@
 <!-- <div class="form-group m-form__group row">
-        <div class="col-lg-6">
-          <ngx-dropdown-treeview class="  form-control m-bootstrap-select m_selectpicker" [config]="config" [items]="items">
-          </ngx-dropdown-treeview>
-        </div>
-        <div  class="col-lg-6">
-          <ss-multiselect-dropdown [options]="worldRegionInfo" class="  form-control m-bootstrap-select m_selectpicker"> </ss-multiselect-dropdown>
-        </div>
-      </div> -->
+  <div class="col-lg-6">
+    {{values | json}}
+    <ngx-dropdown-treeview #testt class="btn-outline-secondary" (selectedChange)="values = $event" [config]="config" [items]="worldRegionInfoMapped">
+    </ngx-dropdown-treeview>
+  </div>
+  <div class="col-lg-6">
+    <ss-multiselect-dropdown [options]="worldRegionInfo" class="  form-control m-bootstrap-select m_selectpicker"> </ss-multiselect-dropdown>
+  </div>
+</div> -->
 
 <div class="m-section">
   <!-- <h3 class="m-section__heading">Policy</h3> -->
@@ -21,14 +22,21 @@
           <div class="col-lg-4">
             <label>
               Categories:
-              <!-- {{this.documentCategories | json }} -->
             </label>
             <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
-              multiple >
+              multiple>
               <optgroup *ngFor="let type of documentCategories" [label]="type.friendlyName">
-                <option *ngFor="let category of type.subCategories" [ngValue]="category">{{category.friendlyName}}</option>
+                <option *ngFor="let category of type.subCategories" [ngValue]="category">&nbsp;&nbsp;&nbsp;{{category.friendlyName}}</option>
               </optgroup>
             </select>
+            <!-- <select #categoriesInput [(ngModel)]="selectedDocumentCategories" class="  form-control m-bootstrap-select m_selectpicker"
+              multiple>
+              <ng-container *ngFor="let type of documentCategories">
+                <option class="dropdown-header"  [ngValue]="type.friendlyName">&nbsp;&nbsp;&nbsp;{{type.friendlyName}}</option>
+                <option *ngFor="let category of type.subCategories" [ngValue]="category">&nbsp;&nbsp;&nbsp;{{category.friendlyName}}</option>
+                
+              </ng-container>
+            </select> -->
 
           </div>
           <div class="col-lg-6">
@@ -50,8 +58,8 @@
             <label>
               &nbsp;
             </label>
-            <button type="button" class="full-width btn m-btn--pill    btn-success"
-             [disabled]="selectedRegion.length===0 || selectedDocumentCategories.length===0 " (click)="addNewPolicy()">Add</button>
+            <button type="button" class="full-width btn m-btn--pill    btn-success" [disabled]="selectedRegion.length===0 || selectedDocumentCategories.length===0 "
+              (click)="addNewPolicy()">Add</button>
           </div>
         </div>
 

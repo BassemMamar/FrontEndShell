@@ -26,35 +26,11 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     hasAllCheckBox: true,
     hasFilter: true,
     hasCollapseExpand: true,
-    decoupleChildFromParent: true,
+    decoupleChildFromParent: false,
     maxHeight: 500
   };
-  itCategory = new TreeviewItem({
-    text: 'IT', value: 9, children: [
-      {
-        text: 'Programming', value: 91, children: [{
-          text: 'Frontend', value: 911, children: [
-            { text: 'Angular 1', value: 9111 },
-            { text: 'Angular 2', value: 9112 },
-            { text: 'ReactJS', value: 9113 }
-          ]
-        }, {
-          text: 'Backend', value: 912, children: [
-            { text: 'C#', value: 9121 },
-            { text: 'Java', value: 9122 },
-            { text: 'Python', value: 9123, checked: false }
-          ]
-        }]
-      },
-      {
-        text: 'Networking', value: 92, children: [
-          { text: 'Internet', value: 921 },
-          { text: 'Security', value: 922 }
-        ]
-      }
-    ]
-  });
-  items = [this.itCategory];
+  worldRegionInfoMapped: TreeviewItem[];
+
 
   @Input() parentType: EntryType;
   @Input() worldRegionInfo: WorldRegionInfo[];
@@ -121,6 +97,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     if (this.worldRegionInfo != null && this.worldRegionInfo.length !== 0 && this.worldRegionInfoCopy == null) {
       // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
       this.worldRegionInfoCopy = this.worldRegionInfo.slice();
+      this.worldRegionInfoMapped = this.toNGTreeModelMapper();
     }
 
     if (this.documentCategories != null && this.documentCategories.length !== 0 && this.documentCategoriesCopy == null) {
@@ -220,5 +197,19 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       buttonContainer: '<div id="example-enableCollapsibleOptGroups-collapsed-container" />'
     });
     $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
+  }
+
+  toNGTreeModelMapper() {
+    return this.worldRegionInfo.map(region => new TreeviewItem({
+      text: region.name,
+      value: region.id,
+      checked: false,
+      children: region.countries.map(contry => new TreeviewItem({
+        text: contry.name,
+        value: contry.code,
+        checked: false
+      }))
+    }));
+
   }
 }

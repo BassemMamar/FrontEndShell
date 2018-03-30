@@ -1,3 +1,10 @@
 .dropdown-menu {
     width:100% !important;
 }
+.dropdown-menu > li > a.dropdown-header > span.text {
+   font-size:14px !important;
+   color: #868e96 !important;
+}
+.dropdown-menu > li > a:not(.dropdown-header) {
+    padding-left: 35px !important;
+ }
