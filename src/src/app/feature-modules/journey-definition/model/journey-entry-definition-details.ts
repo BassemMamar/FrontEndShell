@@ -1,5 +1,5 @@
 import { EntryType } from './entry-type';
-import { SupportedCaptureMediaChannelInfo } from './supported-capture-media-channel-info';
+import { CaptureMediaChannels } from './capture-media-channels';
 import { DocumentProofPolicyDetails } from './document-proof-policy-details';
 
 export class JourneyEntryDefinitionDetails {
@@ -12,7 +12,7 @@ export class JourneyEntryDefinitionDetails {
     acceptExpiredUpToMonthes: number;
     askForAdditionalSteps: string;
 
-    supportedChannelTypes: SupportedCaptureMediaChannelInfo[];
+    supportedChannelTypes: CaptureMediaChannels[];
     documentProofPolicies: DocumentProofPolicyDetails[];
     constructor() {
         this.order = 0;
@@ -22,7 +22,7 @@ export class JourneyEntryDefinitionDetails {
         this.acceptExpiredDocuments = false;
         this.acceptExpiredUpToMonthes = null;
         this.askForAdditionalSteps = '';
-        this.supportedChannelTypes = new Array<SupportedCaptureMediaChannelInfo>();
+        this.supportedChannelTypes = new Array<CaptureMediaChannels>();
         this.documentProofPolicies = new Array<DocumentProofPolicyDetails>();
     }
 }

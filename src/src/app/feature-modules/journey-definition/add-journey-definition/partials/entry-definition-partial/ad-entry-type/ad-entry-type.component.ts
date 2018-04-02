@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
-import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
+import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class ADEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() index;
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
+  @Input() captureMediaChannels: CaptureMediaChannels[];
 
   // return current entry form group
   get currentEntryGroup(): FormGroup {

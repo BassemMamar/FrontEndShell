@@ -1,4 +1,4 @@
-import { DocumentCategory } from './document-category';
+import { DocumentCategoryInfo } from './document-category-info';
 
 export class EditDocumentProofPolicy {
     documentTypes: string[];

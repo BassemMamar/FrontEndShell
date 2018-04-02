@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { DocumentCategory } from '../../../model/document-category';
+import { DocumentCategoryInfo } from '../../../model/document-category-info';
 
 @Injectable()
 export class CategorySourceLisnerService {
@@ -10,9 +10,9 @@ export class CategorySourceLisnerService {
 }
 
 export class CategorySourceData {
-    documentCategory: DocumentCategory[];
+    documentCategory: DocumentCategoryInfo[];
     operation: string; // add OR delete
-    constructor(documentCategory: DocumentCategory[], operation: string) {
+    constructor(documentCategory: DocumentCategoryInfo[], operation: string) {
         this.documentCategory = documentCategory;
         this.operation = operation;
     }

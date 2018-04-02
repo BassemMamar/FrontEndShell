@@ -9,10 +9,10 @@ import { LoggerService } from '../../core/base/logger/logger.service';
 import { HttpErrorHandlingService } from '../../core/services/http-error-handling/http-error-handling.service';
 import { EntryDefinitionOptions } from './model/entry-definition-options';
 import { WorldRegionInfo } from './model/world-region-info';
-import { DocumentCategory } from './model/document-category';
+import { DocumentCategoryInfo } from './model/document-category-info';
 import { EditJourneyDefinition } from './model/edit-journey-definition';
 import { JourneyDefinitionDetails } from './model/journey-definition-details';
-import { SupportedCaptureMediaChannelInfo } from './model/supported-capture-media-channel-info';
+import { CaptureMediaChannels } from './model/capture-media-channels';
 import { CommunicationService } from '../../core/services/communication/communication.service';
 import { EntryType } from './model/entry-type';
 
@@ -45,8 +45,8 @@ export class JourneyDefinitionService {
     //   );
   }
 
-  getSupportedCaptureMediaChannels(): Observable<SupportedCaptureMediaChannelInfo[]> {
-    return this.http.get<SupportedCaptureMediaChannelInfo[]>(this.apiUrl + 'api/JourneyDefinitions/CaptureMediaChannels')
+  getCaptureMediaChannels(): Observable<CaptureMediaChannels[]> {
+    return this.http.get<CaptureMediaChannels[]>(this.apiUrl + 'api/JourneyDefinitions/CaptureMediaChannels')
       .map((respons: any) => respons.result)
       .pipe(
       catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
@@ -61,8 +61,8 @@ export class JourneyDefinitionService {
       );
   }
 
-  getDocumentCategories(type: EntryType): Observable<DocumentCategory[]> {
-    return this.http.get<DocumentCategory[]>(this.apiUrl + `api/JourneyDefinitions/DocumentCategories/${type}`) // DocumentCategories/
+  getDocumentCategories(type: EntryType): Observable<DocumentCategoryInfo[]> {
+    return this.http.get<DocumentCategoryInfo[]>(this.apiUrl + `api/JourneyDefinitions/DocumentCategories/${type}`) // DocumentCategories/
       .map((respons: any) => respons.result)
       .pipe(
       catchError(error => this.httpErrorHandlingService.handleAsObservable(error))

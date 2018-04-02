@@ -1,10 +1,10 @@
-import { DocumentCategory } from './document-category';
+import { DocumentCategoryInfo } from './document-category-info';
 
 export class DocumentProofPolicyDetails {
-    documentTypes: DocumentCategory[];
+    documentTypes: DocumentCategoryInfo[];
     countryCodes: string[];
     constructor() {
-        this.documentTypes = new Array<DocumentCategory>();
+        this.documentTypes = new Array<DocumentCategoryInfo>();
         this.countryCodes = new Array<string>();
     }
 }

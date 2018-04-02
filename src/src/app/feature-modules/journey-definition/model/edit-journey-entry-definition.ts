@@ -1,5 +1,5 @@
 import { EntryType } from './entry-type';
-import { SupportedCaptureMediaChannelInfo } from './supported-capture-media-channel-info';
+import { CaptureMediaChannels } from './capture-media-channels';
 import { EditDocumentProofPolicy } from './edit-document-proof-policy';
 
 export class EditJourneyEntryDefinition {

@@ -3,7 +3,7 @@ import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, 
 import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { WorldRegionInfo, CountryInfo } from '../../../../model/world-region-info';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { DocumentCategory } from '../../../../model/document-category';
+import { DocumentCategoryInfo, DocumentTypeInfo } from '../../../../model/document-category-info';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { TreeviewItem } from 'ngx-treeview';
 import { CategorySourceLisnerService, CategorySourceData } from '../category-source-lisner.service';
@@ -34,16 +34,16 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   @Input() parentType: EntryType;
   @Input() worldRegionInfo: WorldRegionInfo[];
-  @Input() documentCategories: DocumentCategory[];
+  @Input() documentCategories: DocumentCategoryInfo[];
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @ViewChild('categoriesInput') categoriesInput: ElementRef;
   @ViewChild('countriesInput') countriesInput: ElementRef;
 
   worldRegionInfoCopy: WorldRegionInfo[];
-  documentCategoriesCopy: DocumentCategory[];
+  documentCategoriesCopy: DocumentCategoryInfo[];
   selectedRegion: CountryInfo[];
-  selectedDocumentCategories: DocumentCategory[];
+  selectedDocumentTypes: DocumentTypeInfo[];
 
   get documentProofPolicies(): FormArray {
     return this.parentGroup.get(this.arrayName) as FormArray;
@@ -56,7 +56,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     private commonService: CommonService,
     private categorySourceLisnerService: CategorySourceLisnerService) {
     this.selectedRegion = new Array<CountryInfo>();
-    this.selectedDocumentCategories = new Array<DocumentCategory>();
+    this.selectedDocumentTypes = new Array<DocumentTypeInfo>();
   }
 
   ngOnInit() {
@@ -113,27 +113,27 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   addNewPolicy() {
-    if (this.selectedDocumentCategories.length === 0 || this.selectedRegion.length === 0) {
+    if (this.selectedDocumentTypes.length === 0 || this.selectedRegion.length === 0) {
       return;
     }
 
-    const selectedDC = this.selectedDocumentCategories.slice();
+    const selectedDT = this.selectedDocumentTypes.slice();
     const selectedCT = this.selectedRegion.slice();
     this.documentProofPolicies.push(this.fb.group({
-      documentTypes: [selectedDC],
+      documentTypes: [selectedDT],
       countries: [selectedCT]
     }));
 
-    this.disableDocumentCategoriesInSource(this.selectedDocumentCategories.slice());
+    this.disableDocumentCategoriesInSource(this.selectedDocumentTypes.slice());
 
-    this.selectedDocumentCategories = [];
+    this.selectedDocumentTypes = [];
     this.selectedRegion = [];
   }
 
-  disableDocumentCategoriesInSource(data: DocumentCategory[]) {
+  disableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
     this.documentCategories
-      .map(x => x.subCategories = x.subCategories.filter(s =>
-        data.findIndex(d => d.level === s.level && d.friendlyName === s.friendlyName) === -1
+      .map(x => x.documentTypes = x.documentTypes.filter(s =>
+        data.findIndex(d => d.id === s.id && d.typeName === s.typeName && d.categoryName === s.categoryName) === -1
       ));
 
     this.changeCategoryEmitter();
@@ -144,20 +144,21 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     this.documentProofPolicies.removeAt(index);
 
     const documentTypesFG = policy.get('documentTypes') as FormGroup;
-    const documentCategories = documentTypesFG.value as DocumentCategory[];
+    const documentCategories = documentTypesFG.value as DocumentTypeInfo[];
 
 
     this.enableDocumentCategoriesInSource(documentCategories);
 
   }
 
-  enableDocumentCategoriesInSource(data: DocumentCategory[]) {
-    data.forEach(currentCategory => {
-      const parent = this.documentCategoriesCopy.filter(x => x.subCategories
-        .findIndex(sx => sx.level === currentCategory.level && sx.friendlyName === currentCategory.friendlyName) !== -1);
+  enableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
+    data.forEach(currentType => {
+      const parent = this.documentCategoriesCopy.filter(x => x.documentTypes
+        .findIndex(sx => sx.id === currentType.id && sx.typeName === currentType.typeName
+          && sx.categoryName === currentType.categoryName) !== -1);
       const parentInOrginal = this.documentCategories
-        .find(dcCopy => dcCopy.level === parent[0].level && dcCopy.friendlyName === parent[0].friendlyName);
-      parentInOrginal.subCategories.push(currentCategory);
+        .find(dcCopy => dcCopy.categoryName === parent[0].categoryName );
+      parentInOrginal.documentTypes.push(currentType);
     });
 
     this.changeCategoryEmitter();

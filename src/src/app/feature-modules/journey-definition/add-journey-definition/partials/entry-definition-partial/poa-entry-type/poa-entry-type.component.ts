@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
-import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
+import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
-import { DocumentCategory } from '../../../../model/document-category';
+import { DocumentCategoryInfo } from '../../../../model/document-category-info';
 import { EntryType } from '../../../../model/entry-type';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 
@@ -19,9 +19,9 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() arrayName: string;
   @Input() groupName;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
+  @Input() captureMediaChannels: CaptureMediaChannels[];
   @Input() worldRegionInfo: WorldRegionInfo[];
-  @Input() documentCategories: DocumentCategory[];
+  @Input() documentCategories: DocumentCategoryInfo[];
 
   @Input() index;
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;

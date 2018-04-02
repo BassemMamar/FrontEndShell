@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { JourneyDefinitionDetails } from '../../../../model/journey-definition-details';
-import { SupportedCaptureMediaChannelInfo } from '../../../../model/supported-capture-media-channel-info';
+import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 
 @Component({
@@ -18,7 +19,7 @@ export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() index;
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
-  @Input() supportedCaptureMediaChannels: SupportedCaptureMediaChannelInfo[];
+  @Input() captureMediaChannels: CaptureMediaChannels[];
   // return current entry form group
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;

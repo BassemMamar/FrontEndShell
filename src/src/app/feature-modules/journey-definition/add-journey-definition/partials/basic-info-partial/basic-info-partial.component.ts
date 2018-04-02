@@ -10,7 +10,6 @@ import { FieldValidatorService } from '../../../../../shared/components/field-st
 })
 export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
   @Input() basicInfoGroup: FormGroup;
-  // reasons = [];
   businessCode: string;
 
   constructor(
@@ -23,25 +22,16 @@ export class BasicInfoPartialComponent implements OnInit, AfterViewInit {
     this.businessCode = this.communicationService.businessCode;
   }
 
-  ngAfterViewInit(): void {
-    //  this.initTouchSpin();
+  ngAfterViewInit() {
   }
 
   isFieldValid(field: string) {
     const isFieldValid = this.fieldValidatorService.isFieldValid(this.basicInfoGroup, field);
-    // this.validationStatus.emit(isFieldValid);
     return isFieldValid;
-    // return this.basicInfoGroup.get(field).invalid &&
-    //   (this.basicInfoGroup.get(field).dirty || this.basicInfoGroup.get(field).touched);
   }
 
   displayFieldCss(field: string) {
     return this.fieldValidatorService.displayFieldCss(this.basicInfoGroup, field);
-
-    // return {
-    //   'has-danger': this.isFieldValid(field),
-    //   'has-feedback': this.isFieldValid(field)
-    // };
   }
 
 }
