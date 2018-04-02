@@ -9,7 +9,7 @@
           </label>
           <select #supportedChannelTypesInput formControlName="supportedChannelTypes"
             class="form-control m-bootstrap-select m_selectpicker" multiple>
-            <option  *ngFor="let mediaChannel of supportedCaptureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
+            <option  *ngFor="let mediaChannel of captureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
           </select>
           <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
 

@@ -214,8 +214,12 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     }
   }
 
+  /**
+   * simply delete selected entry definition from the list
+   * @param index entry index which we want to delete
+   * @param source is one of these values: 'optional', 'primary' and 'entries', for now just 'entries' is being used
+   */
   deleteEntryDefinition(index: number, source: string) {
-    this.logger.log('deleteEntryDefinition index', index);
     switch (source) {
       case 'primary':
         this.primaryEntryArray.removeAt(index);

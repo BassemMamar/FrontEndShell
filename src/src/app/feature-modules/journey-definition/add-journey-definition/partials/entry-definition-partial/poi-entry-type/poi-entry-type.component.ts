@@ -15,6 +15,7 @@ import { EntryType } from '../../../../model/entry-type';
   styleUrls: ['./poi-entry-type.component.scss']
 })
 export class POIEntryTypeComponent implements OnInit, AfterViewInit {
+  // needed to current entry type to the <app-entry-policy> instance
   entryType = EntryType;
 
   @Input() parentGroup: FormGroup;

@@ -78,27 +78,34 @@
         <app-entry-definition-container *ngFor="let item of entriesArray.controls; let i=index" [index]="i+primaryEntryArray.controls.length+1"
           [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
 
+          <!--begin::ProofOfIdentity entry type -->
           <app-poi-entry-type *ngSwitchCase="entryType.ProofOfIdentity" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels" [worldRegionInfo]="worldRegionInfo"
             [documentCategories]="poiDocumentCategories">
           </app-poi-entry-type>
+          <!--end::ProofOfIdentity entry type -->
 
+          <!--begin::ProofOfAddress entry type -->
           <app-poa-entry-type *ngSwitchCase="entryType.ProofOfAddress" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels" [worldRegionInfo]="worldRegionInfo"
             [documentCategories]="poaDocumentCategories">
           </app-poa-entry-type>
+          <!--end::ProofOfAddress entry type -->
 
+          <!--begin::AdditionalDocument entry type -->
           <app-ad-entry-type *ngSwitchCase="entryType.AdditionalDocument" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels">
           </app-ad-entry-type>
+          <!--end::AdditionalDocument entry type -->
 
+          <!--begin::Selfie entry type -->
           <app-selfie-entry-type *ngSwitchCase="entryType.Selfie" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels"></app-selfie-entry-type>
-
-          <!-- <app-temp-view *ngSwitchCase="entryType.AdditionalDocument"></app-temp-view> -->
+          <!--end::Selfie entry type -->
 
         </app-entry-definition-container>
         <!--end::Portlet-->
+
         <div [ngClass]="displayEntriesArrayEmptyCss('entriesArray')">
           <app-field-state-display [displayMessage]="isEntriesArrayEmpty('entriesArray')" [message]="'at least one entry definition should be exist!'"></app-field-state-display>
         </div>
@@ -106,25 +113,21 @@
     </div>
     <!-- </div> -->
 
-    <!--begin::optionalSelfie-->
-    <div [formGroup]="entryDefinitionGroup">
+    <!--begin::optional-->
+    <!-- <div [formGroup]="entryDefinitionGroup">
       <div formArrayName="LastEntryArray">
 
-        <!--begin::Portlet-->
         <app-entry-definition-container *ngFor="let item of LastEntryArray.controls; let i=index" [index]="i+1+primaryEntryArray.controls.length+entriesArray.controls.length"
           [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'optional')">
 
-          <!-- <app-poi-entry-type [item]="item" [index]="i+1+primaryEntryArray.controls.length+entriesArray.controls.length"
-            [parentGroup]="entryDefinitionGroup" [arrayName]="'optionalSelfieEntry'" [groupName]="i">
-          </app-poi-entry-type> -->
-          <app-selfie-entry-type></app-selfie-entry-type>
+          <app-selfie-entry-type *ngSwitchCase="entryType.Selfie" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+          [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels"></app-selfie-entry-type>
 
         </app-entry-definition-container>
-        <!--end::Portlet-->
 
       </div>
-    </div>
-    <!--end::optionalSelfie-->
+    </div> -->
+    <!--end::optional-->
 
   </div>
 </div>
