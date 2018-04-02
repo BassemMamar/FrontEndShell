@@ -77,6 +77,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
         this.subscription = this.categorySourceLisnerService.poiPolicyCategoryLisner
           .subscribe((data: boolean) => {
             if (data) {
+              this.selectedDocumentTypes = [];
+              this.selectedRegion = [];
               this.refreshSelector();
             }
           });
@@ -86,6 +88,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
         this.subscription = this.categorySourceLisnerService.poaPolicyCategoryLisner
           .subscribe((data: boolean) => {
             if (data) {
+              this.selectedDocumentTypes = [];
+              this.selectedRegion = [];
               this.refreshSelector();
             }
           });

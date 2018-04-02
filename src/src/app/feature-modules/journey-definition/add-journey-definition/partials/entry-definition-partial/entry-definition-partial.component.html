@@ -79,7 +79,8 @@
           [item]="item" (deleteEmitter)="deleteEntryDefinition(i,'entries')" [ngSwitch]="item.get('entryType').value">
 
           <!--begin::ProofOfIdentity entry type -->
-          <app-poi-entry-type *ngSwitchCase="entryType.ProofOfIdentity" [index]="i+1+primaryEntryArray?.controls?.length" [parentGroup]="entryDefinitionGroup"
+          <app-poi-entry-type *ngSwitchCase="entryType.ProofOfIdentity" [index]="i+1+primaryEntryArray?.controls?.length" 
+          [parentGroup]="entryDefinitionGroup"
             [arrayName]="'entriesArray'" [groupName]="i" [captureMediaChannels]="captureMediaChannels" [worldRegionInfo]="worldRegionInfo"
             [documentCategories]="poiDocumentCategories">
           </app-poi-entry-type>

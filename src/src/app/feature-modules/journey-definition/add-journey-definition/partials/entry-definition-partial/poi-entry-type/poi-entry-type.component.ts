@@ -18,9 +18,14 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   // needed to current entry type to the <app-entry-policy> instance
   entryType = EntryType;
 
-  @Input() parentGroup: FormGroup;
-  @Input() arrayName: string;
-  @Input() groupName: number;
+  /**
+   * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
+   * that's why we need to pass the parent of current FormArray
+   * parentGroup
+   */
+  @Input() parentGroup: FormGroup; // entryDefinitionGroup coming from root
+  @Input() arrayName: string; // entriesArray
+  @Input() groupName: number; // i or index
 
   @Input() captureMediaChannels: CaptureMediaChannels[];
   @Input() worldRegionInfo: WorldRegionInfo[];
