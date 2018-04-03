@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
-import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategoryInfo } from '../../../../model/document-category-info';
@@ -21,40 +20,41 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   /**
    * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
    * that's why we need to pass the parent of current FormArray
-   * parentGroup
+   * parentGroup ==> entryDefinitionGroup coming from root
+   * arrayName ==> 'entriesArray'
+   * groupName ==> i or index for current FormGroup inside 'entriesArray' FormArray
    */
-  @Input() parentGroup: FormGroup; // entryDefinitionGroup coming from root
-  @Input() arrayName: string; // entriesArray
-  @Input() groupName: number; // i or index
+  @Input() parentGroup: FormGroup;
+  @Input() arrayName: string;
+  @Input() groupName: number;
 
   @Input() captureMediaChannels: CaptureMediaChannels[];
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategoryInfo[];
 
+  // the current entry index to be as as order
   @Input() index;
+
+  // this is needed to initialize bootstrap selectpicker
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
-  // return current entry form group
+  // return current entry form group which is inside 'entriesArray' FormArray
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
+
+  // this need to be passed to the <app-entry-policy> instance
   documentProofPoliciesArrayName = 'documentProofPolicies';
 
-  constructor(
-    private loggerService: LoggerService,
-    private fieldValidatorService: FieldValidatorService,
-    private common: CommonService) { }
+  constructor(private loggerService: LoggerService, private fieldValidatorService: FieldValidatorService) { }
 
   ngOnInit() {
   }
-  ngAfterViewInit(): void {
+
+  ngAfterViewInit() {
     this.initSelector();
   }
-  initSelector() {
-    $(this.supportedChannelTypesInput.nativeElement).selectpicker();
-  }
-
 
   onChange(value: boolean) {
     if (!value) {
@@ -65,12 +65,17 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // validation stuff
   isFieldValid(field: string) {
     return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
   }
 
   displayFieldCss(field: string) {
     return this.fieldValidatorService.displayFieldCss(this.currentEntryGroup, field);
+  }
+
+  initSelector() {
+    $(this.supportedChannelTypesInput.nativeElement).selectpicker();
   }
 
 }

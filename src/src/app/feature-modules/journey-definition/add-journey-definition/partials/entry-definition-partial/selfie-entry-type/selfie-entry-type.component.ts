@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
-import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { JourneyDefinitionDetails } from '../../../../model/journey-definition-details';
 import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
@@ -13,28 +12,38 @@ import { FieldValidatorService } from '../../../../../../shared/components/field
 })
 export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
 
+  /**
+   * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
+   * that's why we need to pass the parent of current FormArray
+   * parentGroup ==> entryDefinitionGroup coming from root
+   * arrayName ==> 'entriesArray'
+   * groupName ==> i or index for current FormGroup inside 'entriesArray' FormArray
+   */
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName;
-  @Input() index;
-  @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
   @Input() captureMediaChannels: CaptureMediaChannels[];
-  // return current entry form group
+
+  // the current entry index to be as as order
+  @Input() index;
+
+  // this is needed to initialize bootstrap selectpicker
+  @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
+
+  // return current entry form group which is inside 'entriesArray' FormArray
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
 
-  constructor(private common: CommonService,
-    private fieldValidatorService: FieldValidatorService,
-    private formBuilder: FormBuilder) {
+  constructor(private fieldValidatorService: FieldValidatorService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.initSelector();
   }
 
@@ -42,12 +51,7 @@ export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
     $(this.supportedChannelTypesInput.nativeElement).selectpicker();
   }
 
-
-
-  initFormGroup() {
-
-  }
-
+  // validation stuff
   isFieldValid(field: string) {
     return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
   }

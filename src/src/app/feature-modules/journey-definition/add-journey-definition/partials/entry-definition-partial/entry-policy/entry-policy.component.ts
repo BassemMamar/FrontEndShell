@@ -31,17 +31,27 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   };
   worldRegionInfoMapped: TreeviewItem[];
 
-
+  /**
+   * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
+   * that's why we need to pass the parent of current FormArray
+   * parentType ==> ProofOfIdentity Or ProofOfAddress
+   * parentGroup ==> current entry form group which is inside 'entriesArray' FormArray
+   * arrayName ==> 'documentProofPolicies'
+   */
   @Input() parentType: EntryType;
-  @Input() worldRegionInfo: WorldRegionInfo[];
-  @Input() documentCategories: DocumentCategoryInfo[];
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
+
+  @Input() worldRegionInfo: WorldRegionInfo[];
+  @Input() documentCategories: DocumentCategoryInfo[];
+
   @ViewChild('categoriesInput') categoriesInput: ElementRef;
   @ViewChild('countriesInput') countriesInput: ElementRef;
 
+  // copy the original one coz it will be modified
   worldRegionInfoCopy: WorldRegionInfo[];
   documentCategoriesCopy: DocumentCategoryInfo[];
+
   selectedRegion: CountryInfo[];
   selectedDocumentTypes: DocumentTypeInfo[];
 
@@ -49,6 +59,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     return this.parentGroup.get(this.arrayName) as FormArray;
   }
 
+  // PolicyCategoryLisner subscripber reference to be unsubscribe OnDestroy component
   subscription: Subscription;
 
   constructor(
@@ -64,13 +75,23 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     this.initCategoryLisner(this.parentType);
 
   }
+
+  ngAfterViewInit() {
+    this.initSelector();
+  }
+
   ngOnChanges() {
     this.copyData();
   }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
+  /**
+   * share information between entries components to handle categories duplication issue
+   * @param entryType entry type to know which lisnet we are going to subscribe
+   */
   initCategoryLisner(entryType: EntryType) {
     switch (entryType) {
       case EntryType.ProofOfIdentity:
@@ -101,7 +122,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     if (this.worldRegionInfo != null && this.worldRegionInfo.length !== 0 && this.worldRegionInfoCopy == null) {
       // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
       this.worldRegionInfoCopy = this.worldRegionInfo.slice();
-      this.worldRegionInfoMapped = this.toNGTreeModelMapper();
+      //   this.worldRegionInfoMapped = this.toNGTreeModelMapper();
     }
 
     if (this.documentCategories != null && this.documentCategories.length !== 0 && this.documentCategoriesCopy == null) {
@@ -109,11 +130,6 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       // this.documentCategoriesCopy = this.documentCategories;
       this.refreshSelector();
     }
-
-  }
-
-  ngAfterViewInit(): void {
-    this.initSelector();
   }
 
   addNewPolicy() {
@@ -134,6 +150,10 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     this.selectedRegion = [];
   }
 
+  /**
+   * remove selected categories/types from the list when add them as a new policy field
+   * @param data selected Document Types to be removed from the source
+   */
   disableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
     this.documentCategories
       .map(x => x.documentTypes = x.documentTypes.filter(s =>
@@ -141,7 +161,6 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       ));
 
     this.changeCategoryEmitter();
-
   }
 
   deletePolicy(index: number, policy: FormGroup) {
@@ -155,19 +174,27 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   }
 
+    /**
+   * return categories/types back to the list when delete them from the policy
+   * @param data deleted Document Types to be added again to the source
+   */
   enableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
     data.forEach(currentType => {
       const parent = this.documentCategoriesCopy.filter(x => x.documentTypes
         .findIndex(sx => sx.id === currentType.id && sx.typeName === currentType.typeName
           && sx.categoryName === currentType.categoryName) !== -1);
       const parentInOrginal = this.documentCategories
-        .find(dcCopy => dcCopy.categoryName === parent[0].categoryName );
+        .find(dcCopy => dcCopy.categoryName === parent[0].categoryName);
       parentInOrginal.documentTypes.push(currentType);
     });
 
     this.changeCategoryEmitter();
   }
 
+  /**
+   * simplt notify other entries that there is change in the category source
+   * please update yourselves :)
+   */
   changeCategoryEmitter() {
     switch (this.parentType) {
       case EntryType.ProofOfIdentity:
@@ -195,14 +222,10 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     }, 10);
   }
 
-  initMultiselect() {
-    $('#test').multiselect({
-      enableCollapsibleOptGroups: true,
-      enableClickableOptGroups: true,
-      buttonContainer: '<div id="example-enableCollapsibleOptGroups-collapsed-container" />'
-    });
-    $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
-  }
+
+
+
+
 
   toNGTreeModelMapper() {
     return this.worldRegionInfo.map(region => new TreeviewItem({
@@ -216,5 +239,14 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       }))
     }));
 
+  }
+
+  initMultiselect() {
+    $('#test').multiselect({
+      enableCollapsibleOptGroups: true,
+      enableClickableOptGroups: true,
+      buttonContainer: '<div id="example-enableCollapsibleOptGroups-collapsed-container" />'
+    });
+    $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
   }
 }

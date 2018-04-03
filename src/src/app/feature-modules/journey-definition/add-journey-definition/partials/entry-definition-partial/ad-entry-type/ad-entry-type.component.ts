@@ -11,16 +11,27 @@ import { FieldValidatorService } from '../../../../../../shared/components/field
 })
 export class ADEntryTypeComponent implements OnInit, AfterViewInit {
 
+  /**
+   * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
+   * that's why we need to pass the parent of current FormArray
+   * parentGroup ==> entryDefinitionGroup coming from root
+   * arrayName ==> 'entriesArray'
+   * groupName ==> i or index for current FormGroup inside 'entriesArray' FormArray
+   */
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName;
 
-  @Input() index;
-  @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
-
   @Input() captureMediaChannels: CaptureMediaChannels[];
 
-  // return current entry form group
+  // the current entry index to be as as order
+  @Input() index;
+
+  // return current entry form group which is inside 'entriesArray' FormArray
+  @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
+
+
+  // return current entry form group which is inside 'entriesArray' FormArray
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
@@ -30,7 +41,8 @@ export class ADEntryTypeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
-  ngAfterViewInit(): void {
+
+  ngAfterViewInit() {
     this.initSelector();
   }
 
@@ -38,6 +50,7 @@ export class ADEntryTypeComponent implements OnInit, AfterViewInit {
     $(this.supportedChannelTypesInput.nativeElement).selectpicker();
   }
 
+  // validation stuff
   isFieldValid(field: string) {
     return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
   }

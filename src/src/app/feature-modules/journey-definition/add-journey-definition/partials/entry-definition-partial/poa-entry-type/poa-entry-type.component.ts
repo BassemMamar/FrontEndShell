@@ -13,8 +13,16 @@ import { FieldValidatorService } from '../../../../../../shared/components/field
   styleUrls: ['./poa-entry-type.component.scss']
 })
 export class POAEntryTypeComponent implements OnInit, AfterViewInit {
+  // needed to current entry type to the <app-entry-policy> instance
   entryType = EntryType;
 
+  /**
+   * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
+   * that's why we need to pass the parent of current FormArray
+   * parentGroup ==> entryDefinitionGroup coming from root
+   * arrayName ==> 'entriesArray'
+   * groupName ==> i or index for current FormGroup inside 'entriesArray' FormArray
+   */
   @Input() parentGroup: FormGroup;
   @Input() arrayName: string;
   @Input() groupName;
@@ -23,23 +31,26 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategoryInfo[];
 
+  // the current entry index to be as as order
   @Input() index;
+
+  // this is needed to initialize bootstrap selectpicker
   @ViewChild('supportedChannelTypesInput') supportedChannelTypesInput: ElementRef;
 
-  // return current entry form group
+  // return current entry form group which is inside 'entriesArray' FormArray
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
   }
+
+  // this need to be passed to the <app-entry-policy> instance
   documentProofPoliciesArrayName = 'documentProofPolicies';
 
-  constructor(
-    private common: CommonService,
-    private fieldValidatorService: FieldValidatorService) { }
+  constructor(private common: CommonService, private fieldValidatorService: FieldValidatorService) { }
 
   ngOnInit() {
   }
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     this.initSelector();
   }
 
@@ -56,6 +67,7 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
     }
   }
 
+  // validation stuff
   isFieldValid(field: string) {
     return this.fieldValidatorService.isFieldValid(this.currentEntryGroup, field);
   }
