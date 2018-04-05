@@ -28,7 +28,7 @@ This project is an [Angular](https://angular.io/) `5.0.0` project, and was gener
 **Make sure you have Node version >= 6.x and NPM >= 5.x**
 ```bash
 # clone our repo
-git clone  http://sc.corp.idscan.com:8080/tfs/SaaS/FrontendShell/_git/FrontendShell-v2
+git clone https://gbg-idscan.visualstudio.com/_git/SaaS-FrontEndShell
 
 # change directory to our repo
 cd FrontendShell-v2/src
