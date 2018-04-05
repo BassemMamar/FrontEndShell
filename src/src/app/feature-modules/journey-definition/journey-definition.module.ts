@@ -17,7 +17,7 @@ import { BasicInfoPartialComponent } from './add-journey-definition/partials/bas
 import { SelfieEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/selfie-entry-type/selfie-entry-type.component';
 import { EntryDefinitionPartialComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-partial.component';
 import { SummaryPartialComponent } from './add-journey-definition/partials/summary-partial/summary-partial.component';
-import { TempViewComponent } from './add-journey-definition/partials/temp-view/temp-view.component';
+
 // tslint:disable-next-line:max-line-length
 import { EntryDefinitionContainerComponent } from './add-journey-definition/partials/entry-definition-partial/entry-definition-container/entry-definition-container.component';
 import { POIEntryTypeComponent } from './add-journey-definition/partials/entry-definition-partial/poi-entry-type/poi-entry-type.component';
@@ -45,7 +45,6 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
     EntryDefinitionPartialComponent,
     SelfieEntryTypeComponent,
     SummaryPartialComponent,
-    TempViewComponent,
     EntryDefinitionContainerComponent,
     POIEntryTypeComponent,
     POAEntryTypeComponent,
