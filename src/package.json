@@ -8,7 +8,7 @@
     "serve:dev": "ng serve --disable-host-check --port 3000 -o",
     "serve:prod": "ng serve --prod --disable-host-check --port 3000 -o",
     "build": "npm run build:prod",
-    "build:prod": "ng build --prod -bh /FrontendShell/",
+    "build:prod": "ng build --prod",
     "build:dev": "ng dev --dev -bh /FrontendShell/",
     "doc": "npm run doc:serve",
     "doc:build": "compodoc -p src/tsconfig.app.json --theme \"Original\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"../doc/Documentaion/\" --customFavicon src/favicon.ico -t",
