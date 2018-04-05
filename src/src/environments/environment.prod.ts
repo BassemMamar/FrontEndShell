@@ -7,7 +7,7 @@ export const environment = {
   api: {
     url: '//OnboardingSuite.com',
     bases: {
-      onBoarding: ':8082/',
+      onBoarding: ':8084/',
       businessAccountManagement: ':8088/BAM/'
     }
   },
