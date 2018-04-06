@@ -34,7 +34,7 @@ const routes: Routes = [
         matcher: AddJourneyDefinitionMatch, component: AddJourneyDefinitionComponent,
         data: {
           moduleName: FrontendShell.JourneyDefinition.Name,
-          pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
+         pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
         },
         resolve: {
           accessLevel: AccessLevelResolver
