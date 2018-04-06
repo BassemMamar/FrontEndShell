@@ -11,8 +11,8 @@
     "build:prod": "ng build --prod",
     "build:dev": "ng dev --dev -bh /FrontendShell/",
     "doc": "npm run doc:serve",
-    "doc:build": "compodoc -p src/tsconfig.app.json --theme \"Original\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"./Documentaion/\" --customFavicon src/favicon.ico -t",
-    "doc:serve": "compodoc -p src/tsconfig.app.json --theme \"Original\" -n \"IEOS-v2 Frontend Documentation\" -d \"./Documentaion/\" --customFavicon src/favicon.ico  -r 3005 -s -o",
+    "doc:build": "compodoc -p src/tsconfig.app.json --theme \"Original\" --hideGenerator -n \"IEOS-v2 Frontend Documentation\" -d \"./documentaion/\" --customFavicon src/favicon.ico -t",
+    "doc:serve": "compodoc -p src/tsconfig.app.json --theme \"Original\" -n \"IEOS-v2 Frontend Documentation\" -d \"./documentaion/\" --customFavicon src/favicon.ico  -r 3005 -s -o",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
