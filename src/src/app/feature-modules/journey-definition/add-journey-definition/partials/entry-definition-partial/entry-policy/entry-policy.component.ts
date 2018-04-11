@@ -9,6 +9,8 @@ import { TreeviewItem } from 'ngx-treeview';
 import { CategorySourceLisnerService, CategorySourceData } from '../category-source-lisner.service';
 import { EntryType } from '../../../../model/entry-type';
 import { Subscription } from 'rxjs/Subscription';
+import { ENETUNREACH } from 'constants';
+import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 
 @Component({
   selector: 'app-entry-policy',
@@ -17,6 +19,7 @@ import { Subscription } from 'rxjs/Subscription';
   encapsulation: ViewEncapsulation.None
 })
 export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
+  @ViewChild('bootstrapMultiselecIinput') bootstrap_multiselect_input: ElementRef;
 
   myOptions = [
     { id: 1, name: 'Option 1' },
@@ -30,6 +33,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     maxHeight: 500
   };
   worldRegionInfoMapped: TreeviewItem[];
+  documentCategoriesMapped: TreeviewItem[];
 
   /**
    * in Reactive Forms when we want to bind properties inside an FormArray, we should wrap them with parent FormGroup
@@ -54,6 +58,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   selectedRegion: CountryInfo[];
   selectedDocumentTypes: DocumentTypeInfo[];
+  selectedDocumentTypesTEST = [];
 
   get documentProofPolicies(): FormArray {
     return this.parentGroup.get(this.arrayName) as FormArray;
@@ -65,6 +70,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   constructor(
     private fb: FormBuilder,
     private commonService: CommonService,
+    private loggerService: LoggerService,
     private categorySourceLisnerService: CategorySourceLisnerService) {
     this.selectedRegion = new Array<CountryInfo>();
     this.selectedDocumentTypes = new Array<DocumentTypeInfo>();
@@ -77,7 +83,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   ngAfterViewInit() {
-    this.initSelector();
+    //  this.initSelector();
+    // this.initMultiselect();
   }
 
   ngOnChanges() {
@@ -122,12 +129,13 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     if (this.worldRegionInfo != null && this.worldRegionInfo.length !== 0 && this.worldRegionInfoCopy == null) {
       // this.worldRegionInfoCopy = this.commonService.deepCopy(this.worldRegionInfo);
       this.worldRegionInfoCopy = this.worldRegionInfo.slice();
-      //   this.worldRegionInfoMapped = this.toNGTreeModelMapper();
+      this.worldRegionInfoMapped = this.toWorldRegionNGTreeModelMapper();
     }
 
     if (this.documentCategories != null && this.documentCategories.length !== 0 && this.documentCategoriesCopy == null) {
       this.documentCategoriesCopy = this.commonService.deepCopy(this.documentCategories);
       // this.documentCategoriesCopy = this.documentCategories;
+      this.documentCategoriesMapped = this.toDocumentCategoriesNGTreeModelMapper();
       this.refreshSelector();
     }
   }
@@ -155,10 +163,34 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
    * @param data selected Document Types to be removed from the source
    */
   disableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
+    // this to remove just selected types and keep there brothers and parent **
+    // this.documentCategories
+    //   .map(x => x.documentTypes = x.documentTypes.filter(s =>
+    //     data.findIndex(d => d.id === s.id && d.typeName === s.typeName && d.categoryName === s.categoryName) === -1
+    //   ));
+
+
+    const categoriesToBeRemoved = new Array<DocumentCategoryInfo>();
     this.documentCategories
-      .map(x => x.documentTypes = x.documentTypes.filter(s =>
-        data.findIndex(d => d.id === s.id && d.typeName === s.typeName && d.categoryName === s.categoryName) === -1
-      ));
+      .forEach(x => {
+        let removeParent = false;
+        x.documentTypes.forEach(s => {
+          const existinternal
+            = data.find(d => d.id === s.id && d.typeName === s.typeName && d.categoryName === s.categoryName) !== undefined;
+          if (!removeParent) {
+            removeParent = existinternal;
+          }
+        });
+
+        if (removeParent) {
+          categoriesToBeRemoved.push(x);
+        }
+      });
+
+    categoriesToBeRemoved.forEach(item => {
+      this.documentCategories.splice(this.documentCategories.indexOf(item), 1);
+
+    });
 
     this.changeCategoryEmitter();
   }
@@ -174,18 +206,34 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   }
 
-    /**
-   * return categories/types back to the list when delete them from the policy
-   * @param data deleted Document Types to be added again to the source
-   */
+  /**
+ * return categories/types back to the list when delete them from the policy
+ * @param data deleted Document Types to be added again to the source
+ */
   enableDocumentCategoriesInSource(data: DocumentTypeInfo[]) {
+    // this to remove just selected types and keep there brothers and parent **
+    // data.forEach(currentType => {
+    //   const parent = this.documentCategoriesCopy.filter(x => x.documentTypes
+    //     .findIndex(sx => sx.id === currentType.id && sx.typeName === currentType.typeName
+    //       && sx.categoryName === currentType.categoryName) !== -1);
+    //   const parentInOrginal = this.documentCategories
+    //     .find(dcCopy => dcCopy.categoryName === parent[0].categoryName);
+    //   parentInOrginal.documentTypes.push(currentType);
+    // });
+
     data.forEach(currentType => {
       const parent = this.documentCategoriesCopy.filter(x => x.documentTypes
         .findIndex(sx => sx.id === currentType.id && sx.typeName === currentType.typeName
           && sx.categoryName === currentType.categoryName) !== -1);
+
       const parentInOrginal = this.documentCategories
         .find(dcCopy => dcCopy.categoryName === parent[0].categoryName);
-      parentInOrginal.documentTypes.push(currentType);
+      if (parentInOrginal == null) {
+        const i = this.documentCategoriesCopy.findIndex(d => d === parent[0]);
+        // this.documentCategories.push(parent[0]);
+        this.documentCategories.splice(i, 0, parent[0]);
+      }
+
     });
 
     this.changeCategoryEmitter();
@@ -216,25 +264,48 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   refreshSelector() {
-    setTimeout(() => {
-      $(this.categoriesInput.nativeElement).selectpicker('refresh');
-      $(this.countriesInput.nativeElement).selectpicker('refresh');
-    }, 10);
+    // setTimeout(() => {
+    //   $(this.categoriesInput.nativeElement).selectpicker('refresh');
+    //   $(this.countriesInput.nativeElement).selectpicker('refresh');
+    // }, 10);
+
+    // this.documentCategoriesMapped
+    //   .map(x => x.children = x.children.filter(s =>
+    //     this.selectedDocumentTypesTEST.findIndex(d => d === s.value) === -1
+    //   ));
+    this.documentCategoriesMapped = this.toDocumentCategoriesNGTreeModelMapper();
+
+    this.documentCategoriesMapped.forEach(treeItem => treeItem.setCheckedRecursive(false));
+    this.worldRegionInfoMapped.forEach(treeItem => treeItem.setCheckedRecursive(false));
   }
 
 
 
 
+  toDocumentCategoriesNGTreeModelMapper() {
+    return this.documentCategories.map(category => new TreeviewItem({
+      text: category.categoryName,
+      value: category.categoryName,
+      checked: false,
+      disabled: false,
+      children: category.documentTypes.map(type => new TreeviewItem({
+        text: type.typeName,
+        value: type,
+        checked: false,
+        disabled: false
+      }))
+    }));
 
+  }
 
-  toNGTreeModelMapper() {
+  toWorldRegionNGTreeModelMapper() {
     return this.worldRegionInfo.map(region => new TreeviewItem({
       text: region.name,
       value: region.id,
       checked: false,
       children: region.countries.map(contry => new TreeviewItem({
         text: contry.name,
-        value: contry.code,
+        value: contry,
         checked: false
       }))
     }));
@@ -242,11 +313,19 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   initMultiselect() {
-    $('#test').multiselect({
+    $(this.bootstrap_multiselect_input.nativeElement).multiselect({
       enableCollapsibleOptGroups: true,
-      enableClickableOptGroups: true,
-      buttonContainer: '<div id="example-enableCollapsibleOptGroups-collapsed-container" />'
+      enableClickableOptGroups: true
     });
-    $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
+    //  $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
+  }
+
+
+  categoryChange(value) {
+    if (value == null || value.length === 0) {
+      return;
+    }
+    this.loggerService.log('categoryChange ', value);
+    this.selectedDocumentTypesTEST = value;
   }
 }

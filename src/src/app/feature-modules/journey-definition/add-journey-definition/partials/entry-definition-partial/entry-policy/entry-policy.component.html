@@ -1,11 +1,30 @@
 <!-- <div class="form-group m-form__group row">
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     {{values | json}}
-    <ngx-dropdown-treeview #testt class="btn-outline-secondary" (selectedChange)="values = $event" [config]="config" [items]="worldRegionInfoMapped">
+    <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="values = $event" [config]="config" [items]="worldRegionInfoMapped">
     </ngx-dropdown-treeview>
   </div>
+  <div class="col-lg-5">
+    {{selectedDocumentTypesTEST | json}}
+    <ngx-dropdown-treeview class="btn-outline-secondary"  (selectedChange)="selectedDocumentTypesTEST = $event"  [config]="config" [items]="documentCategoriesMapped">
+    </ngx-dropdown-treeview>
+  </div>
+  <div class="col-lg-5">
+
+  </div>
+</div> -->
+
+<!-- <div class="form-group m-form__group row">
   <div class="col-lg-6">
-    <ss-multiselect-dropdown [options]="worldRegionInfo" class="  form-control m-bootstrap-select m_selectpicker"> </ss-multiselect-dropdown>
+      <label>
+          Categories Test:
+          {{selectedDocumentTypes}}
+        </label>
+        <select #bootstrapMultiselecIinput [(ngModel)]="selectedDocumentTypes" class="form-control m-bootstrap-select m_selectpicker" multiple="multiple" >
+          <optgroup *ngFor="let documentCategory of documentCategories" [label]="documentCategory.categoryName">
+            <option *ngFor="let type of documentCategory.documentTypes" [ngValue]="type">&nbsp;&nbsp;&nbsp;{{type.typeName}}</option>
+          </optgroup>
+        </select>
   </div>
 </div> -->
 
@@ -23,12 +42,15 @@
             <label>
               Categories:
             </label>
-            <select #categoriesInput [(ngModel)]="selectedDocumentTypes" class="  form-control m-bootstrap-select m_selectpicker"
-              multiple>
+            <!-- <select #categoriesInput  [(ngModel)]="selectedDocumentTypes"  class="  form-control m-bootstrap-select m_selectpicker" multiple>
               <optgroup *ngFor="let documentCategory of documentCategories" [label]="documentCategory.categoryName">
                 <option *ngFor="let type of documentCategory.documentTypes" [ngValue]="type">&nbsp;&nbsp;&nbsp;{{type.typeName}}</option>
               </optgroup>
-            </select>
+            </select> -->
+            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedDocumentTypes = $event" [config]="config"
+              [items]="documentCategoriesMapped">
+            </ngx-dropdown-treeview>
+
             <!-- <select #categoriesInput [(ngModel)]="selectedDocumentTypes" class="  form-control m-bootstrap-select m_selectpicker"
               multiple>
               <ng-container *ngFor="let documentCategory of documentCategories">
@@ -43,12 +65,14 @@
             <label>
               Countries:
             </label>
-            <select #countriesInput [(ngModel)]="selectedRegion" class="  form-control m-bootstrap-select m_selectpicker" multiple="multiple">
+            <!-- <select #countriesInput [(ngModel)]="selectedRegion" class="  form-control m-bootstrap-select m_selectpicker" multiple="multiple">
               <optgroup *ngFor="let region of worldRegionInfoCopy" [label]="region.name">
                 <option *ngFor="let country of region.countries" [ngValue]="country">{{country.name}}</option>
               </optgroup>
 
-            </select>
+            </select> -->
+            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedRegion = $event" [config]="config" [items]="worldRegionInfoMapped">
+            </ngx-dropdown-treeview>
 
             <!-- <ss-multiselect-dropdown [options]="myOptions" [texts]="myTexts" [settings]="mySettings" class=" "></ss-multiselect-dropdown> -->
 
