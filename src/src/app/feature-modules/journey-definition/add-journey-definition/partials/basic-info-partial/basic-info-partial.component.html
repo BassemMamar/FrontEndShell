@@ -12,7 +12,7 @@
           Name:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <input type="text" class="form-control m-input m-input--air" formControlName="name" >
+          <input type="text" class="form-control m-input m-input--air" formControlName="name">
           <app-field-state-display [displayMessage]="isFieldValid('name')" [message]="'Name Field is Required!'"></app-field-state-display>
         </div>
       </div>
@@ -41,6 +41,17 @@
             <span></span>
           </label>
 
+
+        </div>
+      </div>
+      <div [formGroup]="basicInfoGroup" class="form-group m-form__group row">
+        <label class="col-xl-3 col-lg-3 col-form-label">Allow Extra Documents
+        </label>
+        <div class="col-xl-9 col-lg-9">
+          <label class="m-checkbox">
+            <input type="checkbox" formControlName="canHaveExtraDocuments">
+            <span></span>
+          </label>
 
         </div>
       </div>

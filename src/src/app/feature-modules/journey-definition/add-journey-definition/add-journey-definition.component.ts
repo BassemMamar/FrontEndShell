@@ -94,6 +94,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
       name: [this.journeyDefinitionData.name, Validators.required], // the FormControl called "name"
       code: [this.journeyDefinitionData.code, Validators.required],
       isActive: [this.journeyDefinitionData.isActive],
+      canHaveExtraDocuments: [this.journeyDefinitionData.canHaveExtraDocuments],
       introductionMessageGroup: this.fb.group({
         imCheck: [this.journeyDefinitionData.introductionMessage !== '' ? true : false],
         imValue: [this.journeyDefinitionData.introductionMessage]
@@ -113,6 +114,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
       name: this.journeyDefinitionData.name,
       code: this.journeyDefinitionData.code,
       isActive: this.journeyDefinitionData.isActive,
+      canHaveExtraDocuments: this.journeyDefinitionData.canHaveExtraDocuments,
       introductionMessageGroup: {
         imCheck: this.journeyDefinitionData.introductionMessage !== '' ? true : false,
         imValue: this.journeyDefinitionData.introductionMessage
@@ -183,6 +185,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     result.name = basicInfoValue.name;
     result.code = basicInfoValue.code;
     result.isActive = basicInfoValue.isActive;
+    result.canHaveExtraDocuments = basicInfoValue.canHaveExtraDocuments;
     result.introductionMessage = basicInfoValue.introductionMessageGroup.imCheck ?
       basicInfoValue.introductionMessageGroup.imValue : '';
     if (basicInfoValue.ageLimitGroup.alCheck) {
