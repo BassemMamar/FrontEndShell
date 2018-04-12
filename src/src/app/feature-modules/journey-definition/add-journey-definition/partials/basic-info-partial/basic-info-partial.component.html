@@ -12,7 +12,7 @@
           Name:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <input type="text" class="form-control m-input m-input--air" formControlName="name">
+          <input  name="name" type="text" class="form-control m-input m-input--air" formControlName="name">
           <app-field-state-display [displayMessage]="isFieldValid('name')" [message]="'Name Field is Required!'"></app-field-state-display>
         </div>
       </div>
@@ -37,7 +37,7 @@
         </label>
         <div class="col-xl-9 col-lg-9">
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="isActive">
+            <input name="isActive"  type="checkbox" formControlName="isActive">
             <span></span>
           </label>
 
@@ -49,7 +49,7 @@
         </label>
         <div class="col-xl-9 col-lg-9">
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="canHaveExtraDocuments">
+            <input name="canHaveExtraDocuments" type="checkbox" formControlName="canHaveExtraDocuments">
             <span></span>
           </label>
 
@@ -76,14 +76,14 @@
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" #introMsg formControlName="imCheck">
+            <input name="imCheck"  type="checkbox" #introMsg formControlName="imCheck">
             <span></span>
           </label>
         </div>
         <div class="col-xl-8 col-lg-8">
 
           <!-- [attr.disabled]="introMsg.checked?null:''" -->
-          <input *ngIf="introMsg.checked" formControlName="imValue" type="text" class="form-control m-input--air" aria-label="Text input with checkbox">
+          <input *ngIf="introMsg.checked" name="imValue" formControlName="imValue" type="text" class="form-control m-input--air" aria-label="Text input with checkbox">
 
         </div>
       </div>
@@ -94,19 +94,19 @@
         <div class="col-xl-1 col-lg-1">
 
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="alCheck" #agelimit>
+            <input name="alCheck"  type="checkbox" formControlName="alCheck" #agelimit>
             <span></span>
           </label>
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
           <!-- <input id="age_limite_min" formControlName="alMinValue" type="text" class="form-control m-input--air"> -->
-          <input type="number" min="1" class="form-control m-input--air" formControlName="alMinValue" />
+          <input name="alMinValue"  type="number" min="1" class="form-control m-input--air" formControlName="alMinValue" />
 
 
         </div>
         <div *ngIf="agelimit.checked" class="col-xl-3 col-lg-3">
           <!-- <input id="age_limite_max" formControlName="alMaxValue" type="text" class="form-control m-input--air" > -->
-          <input type="number" max="100" class="form-control m-input--air" formControlName="alMaxValue" />
+          <input name="alMaxValue" type="number" max="100" class="form-control m-input--air" formControlName="alMaxValue" />
 
         </div>
       </div>
@@ -120,7 +120,7 @@
           Reasons:
         </label>
         <div class="col-xl-9 col-lg-9">
-          <tag-input class="form-control m-input--air" formControlName="reasons" [secondaryPlaceholder]="'Type a Reason'" [placeholder]="'Another Reason'"></tag-input>
+          <tag-input name="reasons"  class="form-control m-input--air" formControlName="reasons" [secondaryPlaceholder]="'Type a Reason'" [placeholder]="'Another Reason'"></tag-input>
 
         </div>
       </div>
