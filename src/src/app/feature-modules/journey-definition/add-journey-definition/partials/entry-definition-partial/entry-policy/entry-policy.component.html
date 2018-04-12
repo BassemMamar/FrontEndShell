@@ -1,33 +1,3 @@
-<!-- <div class="form-group m-form__group row">
-  <div class="col-lg-5">
-    {{values | json}}
-    <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="values = $event" [config]="config" [items]="worldRegionInfoMapped">
-    </ngx-dropdown-treeview>
-  </div>
-  <div class="col-lg-5">
-    {{selectedDocumentTypesTEST | json}}
-    <ngx-dropdown-treeview class="btn-outline-secondary"  (selectedChange)="selectedDocumentTypesTEST = $event"  [config]="config" [items]="documentCategoriesMapped">
-    </ngx-dropdown-treeview>
-  </div>
-  <div class="col-lg-5">
-
-  </div>
-</div> -->
-
-<!-- <div class="form-group m-form__group row">
-  <div class="col-lg-6">
-      <label>
-          Categories Test:
-          {{selectedDocumentTypes}}
-        </label>
-        <select #bootstrapMultiselecIinput [(ngModel)]="selectedDocumentTypes" class="form-control m-bootstrap-select m_selectpicker" multiple="multiple" >
-          <optgroup *ngFor="let documentCategory of documentCategories" [label]="documentCategory.categoryName">
-            <option *ngFor="let type of documentCategory.documentTypes" [ngValue]="type">&nbsp;&nbsp;&nbsp;{{type.typeName}}</option>
-          </optgroup>
-        </select>
-  </div>
-</div> -->
-
 <div class="m-section">
   <!-- <h3 class="m-section__heading">Policy</h3> -->
   <!-- <span class="m-section__sub">
@@ -47,7 +17,7 @@
                 <option *ngFor="let type of documentCategory.documentTypes" [ngValue]="type">&nbsp;&nbsp;&nbsp;{{type.typeName}}</option>
               </optgroup>
             </select> -->
-            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedDocumentTypes = $event" [config]="config"
+            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedDocumentTypes = $event" [config]="treeviewConfig"
               [items]="documentCategoriesMapped">
             </ngx-dropdown-treeview>
 
@@ -71,11 +41,8 @@
               </optgroup>
 
             </select> -->
-            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedRegion = $event" [config]="config" [items]="worldRegionInfoMapped">
+            <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedRegion = $event" [config]="treeviewConfig" [items]="worldRegionInfoMapped">
             </ngx-dropdown-treeview>
-
-            <!-- <ss-multiselect-dropdown [options]="myOptions" [texts]="myTexts" [settings]="mySettings" class=" "></ss-multiselect-dropdown> -->
-
           </div>
           <div class="col-lg-2">
 

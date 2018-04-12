@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, ViewEncapsulation, Input, ViewChild, ElementRef, OnChanges, OnDestroy } from '@angular/core';
 
-import { IMultiSelectOption, IMultiSelectSettings, IMultiSelectTexts } from 'angular-2-dropdown-multiselect';
 import { WorldRegionInfo, CountryInfo } from '../../../../model/world-region-info';
 import { FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { DocumentCategoryInfo, DocumentTypeInfo } from '../../../../model/document-category-info';
@@ -18,13 +17,8 @@ import { LoggerService } from '../../../../../../core/base/logger/logger.service
   encapsulation: ViewEncapsulation.None
 })
 export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
-  @ViewChild('bootstrapMultiselecIinput') bootstrap_multiselect_input: ElementRef;
 
-  myOptions = [
-    { id: 1, name: 'Option 1' },
-    { id: 2, name: 'Option 2' },
-  ];
-  config = {
+  treeviewConfig = {
     hasAllCheckBox: true,
     hasFilter: true,
     hasCollapseExpand: true,
@@ -83,7 +77,6 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   ngAfterViewInit() {
     //  this.initSelector();
-    // this.initMultiselect();
   }
 
   ngOnChanges() {
@@ -310,15 +303,6 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     }));
 
   }
-
-  initMultiselect() {
-    $(this.bootstrap_multiselect_input.nativeElement).multiselect({
-      enableCollapsibleOptGroups: true,
-      enableClickableOptGroups: true
-    });
-    //  $('#example-enableCollapsibleOptGroups-collapsed-container .caret-container').click();
-  }
-
 
   categoryChange(value) {
     if (value == null || value.length === 0) {
