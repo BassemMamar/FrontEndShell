@@ -9,12 +9,14 @@
     padding-left: 35px !important;
  }
  
-  ngx-treeview ngx-treeview-item ngx-treeview-item{color: #868e96;}
-  ngx-treeview ngx-treeview-item ngx-treeview-item .form-check-input:checked + .form-check-label{color: black; background: #dddddd}
-  ngx-treeview>div>div>ngx-treeview-item>div>div> div.form-check{background: #7ddcc9;
+  ngx-treeview ngx-treeview-item ngx-treeview-item{color: #868e96; padding-left: 5px;}
+  ngx-treeview ngx-treeview-item ngx-treeview-item .form-check-input:checked + .form-check-label{color: black; background: #e8f9f5}
+  ngx-treeview>div>div>ngx-treeview-item>div>div> div.form-check{background: #c0eee5;
     border-radius: 3px;
     padding-left: 2px !important;
     padding-right: 5px !important;}
     ngx-treeview>div>div>ngx-treeview-item>div>div> div.form-check .form-check-input:checked + .form-check-label{font-weight: bold;}
     i.fa-caret-right:before{content: "\f055" !important; color:#dc7d87}
     i.fa-caret-down:before{content: "\f056" !important; color:#dca87d}
+div.treeview-item{margin-left: 0px !important;}
+ngx-treeview>div>div>ngx-treeview-item>div>div.ng-star-inserted:nth-child(2){margin-left: 1.7rem ; border-left: 1px dotted #c27537;}
