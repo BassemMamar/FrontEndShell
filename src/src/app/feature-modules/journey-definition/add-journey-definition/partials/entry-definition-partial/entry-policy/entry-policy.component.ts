@@ -9,7 +9,6 @@ import { TreeviewItem } from 'ngx-treeview';
 import { CategorySourceLisnerService, CategorySourceData } from '../category-source-lisner.service';
 import { EntryType } from '../../../../model/entry-type';
 import { Subscription } from 'rxjs/Subscription';
-import { ENETUNREACH } from 'constants';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 
 @Component({
