@@ -53,7 +53,7 @@ ngx-treeview>div>div>ngx-treeview-item>div>div.ng-star-inserted:nth-child(2) {
     border-left: 1px dashed gray;
 }
 
-.btn.dropdown-toggle {
+.btn.dropdown-toggle:not(.btn-success) {
     display: inline-block;
     overflow: hidden;
     width: 100%;
@@ -62,7 +62,7 @@ ngx-treeview>div>div>ngx-treeview-item>div>div.ng-star-inserted:nth-child(2) {
     background-color: transparent;
 }
 
-.btn.dropdown-toggle:hover {
+.btn.dropdown-toggle:not(.btn-success):hover {
     display: inline-block;
     overflow: hidden;
     width: 100%;
@@ -71,7 +71,7 @@ ngx-treeview>div>div>ngx-treeview-item>div>div.ng-star-inserted:nth-child(2) {
     background-color: transparent !important;
 }
 
-.btn.dropdown-toggle:focus {
+.btn.dropdown-toggle:not(.btn-success):focus {
     display: inline-block;
     overflow: hidden;
     width: 100%;
