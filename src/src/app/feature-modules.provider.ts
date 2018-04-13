@@ -13,5 +13,4 @@ import { Routes } from '@angular/router';
 
 /* Lazy Loading Modules */
 export const featureModules: Routes = [
-
 ];

@@ -8,7 +8,8 @@
     "types": [
       "jquery",
       "jqueryui",
-      "bootstrap-select"
+      "bootstrap-select",
+      "mcustomscrollbar"
     ]
   },
   "exclude": [

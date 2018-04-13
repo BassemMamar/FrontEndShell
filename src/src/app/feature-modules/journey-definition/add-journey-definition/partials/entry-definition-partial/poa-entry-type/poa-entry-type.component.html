@@ -7,19 +7,19 @@
           <label>
             Channel Types:
           </label>
-          <select #supportedChannelTypesInput formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker" multiple>
-              <option  *ngFor="let mediaChannel of captureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
+          <select #supportedChannelTypesInput formControlName="supportedChannelTypes" class=" selector form-control m-bootstrap-select m_selectpicker"
+            multiple>
+            <option *ngFor="let mediaChannel of captureMediaChannels" [value]="mediaChannel.channelType">{{mediaChannel.name}}</option>
 
           </select>
           <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
-          
+
         </div>
         <div class="col-lg-4">
           <label>
             Max Attempt:
           </label>
-          <input  type="number" min="1" max="3"   class="form-control m-input--air"  formControlName="maxAttempts"
-            />
+          <input type="number" min="1" max="3" class="form-control m-input--air" formControlName="maxAttempts" />
           <span class="m-form__help">
           </span>
         </div>
@@ -37,12 +37,22 @@
 
       </div>
       <div class="form-group m-form__group row">
-    
+        <div class="col-lg-4">
+          <label for=""> Can Continue On Failure</label>
+          <div class=" input-group m-form__group padding-top-0">
+            <label class="m-checkbox">
+
+              <input type="checkbox" class="form-control" formControlName="canContinueOnFailure">
+              <span></span>
+            </label>
+          </div>
+
+        </div>
         <div class="col-lg-4">
           <label for=""> Accept Expired Document</label>
           <div class=" input-group m-form__group padding-top-0">
             <label class="m-checkbox">
-              
+
               <input #aed type="checkbox" class="form-control" formControlName="acceptExpiredDocuments">
               <span></span>
             </label>
@@ -57,20 +67,19 @@
             <div class="input-group m-form__group padding-top-0">
               <span class="input-group-addon">
                 <label class="m-checkbox m-checkbox--single">
-                  <input #upto type="checkbox" formControlName="isUpToMonthes"  (change)="onChange(upto.checked)">
+                  <input #upto type="checkbox" formControlName="isUpToMonthes" (change)="onChange(upto.checked)">
                   <span></span>
                 </label>
               </span>
 
-              <input type="text"  formControlName="acceptExpiredUpToMonthes"  class="form-control" aria-label="Text input with checkbox">
+              <input type="text" formControlName="acceptExpiredUpToMonthes" class="form-control" aria-label="Text input with checkbox">
             </div>
           </div>
         </div>
       </div>
 
       <app-entry-policy [parentType]="entryType.ProofOfAddress" [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName"
-       [worldRegionInfo]="worldRegionInfo"
-      [documentCategories]="documentCategories"></app-entry-policy>
+        [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories"></app-entry-policy>
 
     </div>
   </div>

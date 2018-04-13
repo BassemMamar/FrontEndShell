@@ -12,6 +12,7 @@ export class POAEntryFormModel {
     acceptExpiredDocuments: boolean;
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
+    canContinueOnFailure: boolean;
     constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
         this.entryType = EntryType.ProofOfAddress;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
@@ -22,5 +23,6 @@ export class POAEntryFormModel {
         this.acceptExpiredDocuments = entryDataModel == null ? false : entryDataModel.acceptExpiredDocuments;
         this.isUpToMonthes = entryDataModel == null || entryDataModel.acceptExpiredUpToMonthes == null ? false : true;
         this.acceptExpiredUpToMonthes = entryDataModel == null ? null : entryDataModel.acceptExpiredUpToMonthes;
+        this.canContinueOnFailure = entryDataModel == null ? false : entryDataModel.canContinueOnFailure;
     }
 }

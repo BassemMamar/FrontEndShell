@@ -10,6 +10,7 @@ export class ADEntryFormModel {
     isOptional: Boolean;
     supportedChannelTypes: string[];
     title: string;
+    canContinueOnFailure: boolean;
     constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
         this.entryType = EntryType.AdditionalDocument;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
@@ -18,5 +19,6 @@ export class ADEntryFormModel {
 
         this.maxAttempts = entryDataModel == null ? 1 : entryDataModel.maxAttempts;
         this.title = entryDataModel == null ? '' : entryDataModel.title;
+        this.canContinueOnFailure = entryDataModel == null ? false : entryDataModel.canContinueOnFailure;
     }
 }

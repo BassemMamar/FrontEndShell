@@ -1,10 +1,97 @@
 .dropdown-menu {
-    width:100% !important;
+    width: 100% !important;
+    color: black;
 }
-.dropdown-menu > li > a.dropdown-header > span.text {
-   font-size:14px !important;
-   color: #868e96 !important;
+
+ngx-treeview>div>div>ngx-treeview-item>div>div>div>label {
+    font-size: 1.1rem;
 }
-.dropdown-menu > li > a:not(.dropdown-header) {
+
+.dropdown-menu>ngx-treeview-item>a.dropdown-header>span.text {
+    font-size: 14px !important;
+    color: #868e96 !important;
+}
+
+.dropdown-menu>ngx-treeview-item>a:not(.dropdown-header) {
     padding-left: 35px !important;
- }
+}
+
+ngx-treeview ngx-treeview-item ngx-treeview-item {
+    color: black;
+    padding-left: 5px;
+}
+
+ngx-treeview ngx-treeview-item ngx-treeview-item .form-check-input:checked+.form-check-label {
+    color: black;
+    background: #eeeeee;
+}
+
+ngx-treeview>div>div>ngx-treeview-item>div>div>div.form-check {
+    border-radius: 3px;
+    padding-left: 2px !important;
+    padding-right: 5px !important;
+}
+
+ngx-treeview>div>div>ngx-treeview-item>div>div>div.form-check .form-check-input:checked+.form-check-label {
+    font-weight: bold;
+}
+
+i.fa-caret-right:before {
+    font-size: 1.1em;
+}
+
+i.fa-caret-down:before {
+    font-size: 1.1em;
+}
+
+div.treeview-item {
+    margin-left: 0px !important;
+}
+
+ngx-treeview>div>div>ngx-treeview-item>div>div.ng-star-inserted:nth-child(2) {
+    margin-left: 1.7rem;
+    border-left: 1px dashed gray;
+}
+
+.btn.dropdown-toggle {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    color: #9699a2;
+    background-color: transparent;
+}
+
+.btn.dropdown-toggle:hover {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    color: #9699a2;
+    background-color: transparent !important;
+}
+
+.btn.dropdown-toggle:focus {
+    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    text-align: left;
+    color: #9699a2;
+    background-color: transparent !important;
+}
+
+.dropdown[_ngcontent-c19] button[_ngcontent-c19]::after {
+    right: 2rem !important;
+    margin-top: 1.5em !important;
+}
+
+.btn-outline-secondary:hover {
+    background-color: transparent !important;
+}
+
+.dropdown.show {
+    background-color: transparent;
+    border: #716aca 1px solid;
+}
+.dropdown-menu.show{width:100%;}
+.show > .btn-outline-secondary.dropdown-toggle{background-color: transparent;}

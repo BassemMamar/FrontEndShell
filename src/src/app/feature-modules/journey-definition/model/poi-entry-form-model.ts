@@ -14,6 +14,7 @@ export class POIEntryFormModel {
     acceptExpiredDocuments: boolean;
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
+    canContinueOnFailure: boolean;
     constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
 
 
@@ -28,5 +29,6 @@ export class POIEntryFormModel {
         this.isUpToMonthes = entryDataModel == null || entryDataModel.acceptExpiredUpToMonthes == null
             ? false : true;
         this.acceptExpiredUpToMonthes = entryDataModel == null ? null : entryDataModel.acceptExpiredUpToMonthes;
+        this.canContinueOnFailure = entryDataModel == null ? false : entryDataModel.canContinueOnFailure;
     }
 }

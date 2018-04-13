@@ -7,9 +7,11 @@ export class SelfieEntryFormModel {
     order: number;
     isOptional: boolean;
     supportedChannelTypes: string[];
+    canContinueOnFailure: boolean;
     constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
         this.entryType = EntryType.Selfie;
         this.order = entryDataModel == null ? 0 : entryDataModel.order;
         this.supportedChannelTypes = entryDataModel == null ? [] : entryDataModel.supportedChannelTypes.map(t => t.channelType);
+        this.canContinueOnFailure = entryDataModel == null ? false : entryDataModel.canContinueOnFailure;
     }
 }

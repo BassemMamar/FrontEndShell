@@ -9,6 +9,7 @@ export class EditJourneyDefinition {
     minAgeLimit?: number;
     maxAgeLimit?: number;
     isActive: boolean;
+    canHaveExtraDocuments:boolean;
     journeyReasons: string[];
     journeyEntryDefinitions: EditJourneyEntryDefinition[];
     constructor() {
@@ -19,6 +20,7 @@ export class EditJourneyDefinition {
         this.minAgeLimit = null;
         this.maxAgeLimit = null;
         this.isActive = false;
+        this.canHaveExtraDocuments=false;
         this.journeyReasons = new Array<string>();
         this.journeyEntryDefinitions = new Array<EditJourneyEntryDefinition>();
     }
