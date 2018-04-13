@@ -11,6 +11,7 @@ export class JourneyEntryDefinitionDetails {
     acceptExpiredDocuments: boolean;
     acceptExpiredUpToMonthes: number;
     askForAdditionalSteps: string;
+    canContinueOnFailure: boolean;
 
     supportedChannelTypes: CaptureMediaChannels[];
     documentProofPolicies: DocumentProofPolicyDetails[];
@@ -22,6 +23,8 @@ export class JourneyEntryDefinitionDetails {
         this.acceptExpiredDocuments = false;
         this.acceptExpiredUpToMonthes = null;
         this.askForAdditionalSteps = '';
+        this.canContinueOnFailure = false;
+
         this.supportedChannelTypes = new Array<CaptureMediaChannels>();
         this.documentProofPolicies = new Array<DocumentProofPolicyDetails>();
     }

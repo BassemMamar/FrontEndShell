@@ -11,6 +11,7 @@ export class EditJourneyEntryDefinition {
     acceptExpiredDocuments: boolean;
     acceptExpiredUpToMonthes: number;
     askForAdditionalStepsStatus: string;
+    canContinueOnFailure: boolean;
 
     supportedChannelTypes: string[];
     documentProofPolicies: EditDocumentProofPolicy[];
@@ -22,6 +23,8 @@ export class EditJourneyEntryDefinition {
         this.acceptExpiredDocuments = false;
         this.acceptExpiredUpToMonthes = null;
         this.askForAdditionalStepsStatus = '';
+        this.canContinueOnFailure = false;
+
         this.supportedChannelTypes = new Array<string>();
         this.documentProofPolicies = new Array<EditDocumentProofPolicy>();
     }

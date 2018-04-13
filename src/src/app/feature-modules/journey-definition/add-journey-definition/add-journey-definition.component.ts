@@ -8,6 +8,7 @@ import { ToastrService } from '../../../shared/components/toastr/toastr.service'
 import { EditJourneyDefinition } from '../model/edit-journey-definition';
 import { EditJourneyEntryDefinition } from '../model/edit-journey-entry-definition';
 import { FieldValidatorService } from '../../../shared/components/field-state-display/field-validator.service';
+import { EntryType } from '../model/entry-type';
 
 @Component({
   selector: 'app-add-journey-definition',
@@ -65,10 +66,10 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     this.journeyDefinitionService
       .getJourneyDefinition(id)
       .subscribe((journeyDefinition: JourneyDefinitionDetails) => {
-          this.journeyDefinitionData = journeyDefinition;
-          // this.createMainFormGroup();
-          this.setBasicInfoGroupValues();
-        },
+        this.journeyDefinitionData = journeyDefinition;
+        // this.createMainFormGroup();
+        this.setBasicInfoGroupValues();
+      },
         error => this.toastrService.error(error, 'getJourneyDefinition error')
       );
   }
@@ -153,6 +154,14 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   doSubmit() {
     const datamodel = this.toJourneyDefinitionDataModelMapper();
     // ToDo: Maybe here do some custom validation dono
+    if (datamodel.journeyEntryDefinitions == null || datamodel.journeyEntryDefinitions.length === 0) {
+      this.toastrService.warning('Can not have a journey definition without any entry definition', 'Data Not Valid!');
+    }
+    if (datamodel.journeyEntryDefinitions.length === 1 && datamodel.journeyEntryDefinitions[0].entryType === EntryType.Selfie) {
+      this.toastrService.warning('Can not have a journey definition with one Selfie entry definition', 'Data Not Valid!');
+    }
+
+
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
       this.journeyDefinitionService
         .updateJourneyDefinition(datamodel).subscribe(
@@ -209,8 +218,9 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     const entryDataModel = new EditJourneyEntryDefinition();
     entryDataModel.entryType = entry.entryType;
     entryDataModel.acceptExpiredDocuments = entry.acceptExpiredDocuments;
-    entryDataModel.acceptExpiredUpToMonthes = entry.isUpToMonthes ? entry.acceptExpiredUpToMonthes : 0;
+    entryDataModel.acceptExpiredUpToMonthes = entry.isUpToMonthes ? entry.acceptExpiredUpToMonthes : null;
     entryDataModel.askForAdditionalStepsStatus = entry.askForAdditionalSteps;
+    entryDataModel.canContinueOnFailure = entry.canContinueOnFailure;
     if (entry.documentProofPolicies) {
       entryDataModel.documentProofPolicies = entry.documentProofPolicies.map(policy => {
         const rObj = { countryCodes: [], documentCategories: [] };

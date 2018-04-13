@@ -207,7 +207,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           this.entriesArray.push(SFgroup);
         } else {
           // alert that is only one selfie isallowed
-          this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`);
+          this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`,'Data Not Valid!');
         }
         break;
 
@@ -256,6 +256,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           acceptExpiredDocuments: [poi.acceptExpiredDocuments],
           isUpToMonthes: [poi.isUpToMonthes],
           acceptExpiredUpToMonthes: [{ value: poi.acceptExpiredUpToMonthes, disabled: !poi.isUpToMonthes }],
+          canContinueOnFailure: [poi.canContinueOnFailure],
           documentProofPolicies: this.fb.array([]) // ToDo should fill exist policies
         });
         return POIgroup;
@@ -271,6 +272,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           acceptExpiredDocuments: [poa.acceptExpiredDocuments],
           isUpToMonthes: [poa.isUpToMonthes],
           acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: !poa.isUpToMonthes }],
+          canContinueOnFailure: [poa.canContinueOnFailure],
           documentProofPolicies: this.fb.array([]) // ToDo should fill exist policies
         });
         return POAgroup;
@@ -283,6 +285,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           isOptional: [ad.isOptional],
           supportedChannelTypes: [ad.supportedChannelTypes, Validators.required],
           maxAttempts: [ad.maxAttempts, Validators.required],
+          canContinueOnFailure: [ad.canContinueOnFailure],
           title: [ad.title, Validators.required]
         });
         return ADgroup;
@@ -293,6 +296,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           order: [selfie.order, Validators.required],
           entryType: [entryType, Validators.required],
           isOptional: [selfie.isOptional],
+          canContinueOnFailure: [selfie.canContinueOnFailure],
           supportedChannelTypes: [selfie.supportedChannelTypes, Validators.required],
         });
         return SFgroup;
