@@ -67,6 +67,9 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
     private categorySourceLisnerService: CategorySourceLisnerService) {
     this.selectedRegion = new Array<CountryInfo>();
     this.selectedDocumentTypes = new Array<DocumentTypeInfo>();
+
+    this.worldRegionInfoMapped = new Array<TreeviewItem>();
+    this.documentCategoriesMapped = new Array<TreeviewItem>();
   }
 
   ngOnInit() {
@@ -275,6 +278,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
 
   toDocumentCategoriesNGTreeModelMapper() {
+
     return this.documentCategories.map(category => new TreeviewItem({
       text: category.categoryName,
       value: category.categoryName,
@@ -291,6 +295,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   toWorldRegionNGTreeModelMapper() {
+
     return this.worldRegionInfo.map(region => new TreeviewItem({
       text: region.name,
       value: region.id,
