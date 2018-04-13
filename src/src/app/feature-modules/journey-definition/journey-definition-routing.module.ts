@@ -9,12 +9,16 @@ import { AuthClients } from '../../core/auth/model/auth-clients';
 import { FrontendShell } from '../../core/auth/pages-access-authorization/app-pages-declaration/app-pages-declaration';
 import { AccessLevelResolver } from '../../core/auth/services/access-level.resolver';
 import { AddJourneyDefinitionComponent } from './add-journey-definition/add-journey-definition.component';
+import { ShowJourneyDefinitionsComponent } from './show-journey-definitions/show-journey-definitions.component';
 
 export function AddJourneyDefinitionMatch() {
   return CaseInsensitiveMatcher('New').apply(this, arguments);
 }
 export function EditJourneyDefinitionMatch() {
   return CaseInsensitiveMatcher(':journeyDefinitionId').apply(this, arguments);
+}
+export function ShowJourneyDefinitionsMatch() {
+  return CaseInsensitiveMatcher('').apply(this, arguments);
 }
 
 
@@ -29,12 +33,12 @@ const routes: Routes = [
       moduleName: FrontendShell.JourneyDefinition.Name
     },
     children: [
-      { path: '', pathMatch: 'full', redirectTo: 'New' },
+      // { path: '', pathMatch: 'full', redirectTo: 'New' },
       {
         matcher: AddJourneyDefinitionMatch, component: AddJourneyDefinitionComponent,
         data: {
           moduleName: FrontendShell.JourneyDefinition.Name,
-         pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
+          pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
         },
         resolve: {
           accessLevel: AccessLevelResolver
@@ -45,6 +49,17 @@ const routes: Routes = [
         data: {
           moduleName: FrontendShell.JourneyDefinition.Name,
           pageName: FrontendShell.JourneyDefinition.Pages.AddJourneyDefinition
+        },
+        resolve: {
+          accessLevel: AccessLevelResolver
+        }
+      },
+      {
+        path: '', //  matcher: ShowJourneyDefinitionsMatch,
+        component: ShowJourneyDefinitionsComponent,
+        data: {
+          moduleName: FrontendShell.JourneyDefinition.Name,
+          pageName: FrontendShell.JourneyDefinition.Pages.ShowJourneyDefinitions
         },
         resolve: {
           accessLevel: AccessLevelResolver

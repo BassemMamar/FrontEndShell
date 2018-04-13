@@ -27,6 +27,7 @@ import { ADEntryTypeComponent } from './add-journey-definition/partials/entry-de
 import { EntryPolicyComponent } from './add-journey-definition/partials/entry-definition-partial/entry-policy/entry-policy.component';
 
 import { ThirdPartyModule } from './third-party-modules/third-party.module';
+import { ShowJourneyDefinitionsComponent } from './show-journey-definitions/show-journey-definitions.component';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { ThirdPartyModule } from './third-party-modules/third-party.module';
     POIEntryTypeComponent,
     POAEntryTypeComponent,
     ADEntryTypeComponent,
-    EntryPolicyComponent
+    EntryPolicyComponent,
+    ShowJourneyDefinitionsComponent
   ],
   providers: [JourneyDefinitionService]
 })
