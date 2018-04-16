@@ -15,6 +15,7 @@ import { JourneyDefinitionDetails } from './model/journey-definition-details';
 import { CaptureMediaChannels } from './model/capture-media-channels';
 import { CommunicationService } from '../../core/services/communication/communication.service';
 import { EntryType } from './model/entry-type';
+import { JourneyDefinitionSummary } from './model/journey-definition-summary';
 
 @Injectable()
 export class JourneyDefinitionService {
@@ -49,7 +50,7 @@ export class JourneyDefinitionService {
     return this.http.get<CaptureMediaChannels[]>(this.apiUrl + 'api/JourneyDefinitions/CaptureMediaChannels')
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
@@ -57,7 +58,7 @@ export class JourneyDefinitionService {
     return this.http.get<WorldRegionInfo[]>(this.apiUrl + 'api/JourneyDefinitions/Regions')
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
@@ -65,7 +66,7 @@ export class JourneyDefinitionService {
     return this.http.get<DocumentCategoryInfo[]>(this.apiUrl + `api/JourneyDefinitions/DocumentCategories/${type}`) // DocumentCategories/
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
@@ -73,7 +74,7 @@ export class JourneyDefinitionService {
     return this.http.get<JourneyDefinitionDetails>(this.apiUrl + `api/JourneyDefinitions/${id}`)
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
@@ -81,7 +82,7 @@ export class JourneyDefinitionService {
     return this.http.post<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
@@ -89,9 +90,16 @@ export class JourneyDefinitionService {
     return this.http.put<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
       .map((respons: any) => respons.result)
       .pipe(
-      catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
+  getJourneyDefinitions(): Observable<JourneyDefinitionSummary[]> {
+    return this.http.get<JourneyDefinitionSummary[]>(this.apiUrl + `api/JourneyDefinitions`)
+      .map((respons: any) => respons.result)
+      .pipe(
+        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+      );
+  }
 
 }

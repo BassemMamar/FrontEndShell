@@ -66,6 +66,12 @@ export const pagesAccessAuthorizationInfo = [
                 rolesAccess: [
                     { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
                 ]
+            },
+            {
+                name: FrontendShell.JourneyDefinition.Pages.ShowJourneyDefinitions,
+                rolesAccess: [
+                    { role: UserRole.BusinessAdmin, accessLevel: AccessLevel.FullAccess }
+                ]
             }
         ]
     }

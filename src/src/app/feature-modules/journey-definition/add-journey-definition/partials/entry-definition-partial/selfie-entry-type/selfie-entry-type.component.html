@@ -16,26 +16,21 @@
           <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
           
         </div>
-        <div class="col-lg-4">
-            <label for=""> Can Continue On Failure</label>
-            <div class=" input-group m-form__group padding-top-0">
-              <label class="m-checkbox">
-  
-                <input type="checkbox" class="form-control" formControlName="canContinueOnFailure">
-                <span></span>
-              </label>
-            </div>
-  
-          </div>
+
         <div class="col-lg-4">
           <label for=""> </label>
-          <div class="m-checkbox-inline">
-            <label class="m-checkbox">
-              Optional entry (can be skipped)
-              <input type="checkbox" formControlName="isOptional">
-              <span></span>
-            </label>
-          </div>
+          <div class="m-checkbox-list">
+
+              <label class="m-checkbox">
+                <input #isOptionalInput type="checkbox" formControlName="isOptional"> Optional entry (can be skipped)
+                <span></span>
+              </label>
+              <label *ngIf="!isOptionalInput.checked" class="m-checkbox">
+                <input type="checkbox" formControlName="canContinueOnFailure"> Continue On Failure
+                <span></span>
+              </label>
+  
+            </div>
         </div>
       </div>
     </div>

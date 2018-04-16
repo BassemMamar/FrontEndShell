@@ -30,8 +30,6 @@
     <div class="m-portlet__padding-x">
       <!-- Here you can put a message or alert -->
 
-      <shrd-alert [id]="'temp'"></shrd-alert>
-
       <!-- <p>Form value: {{ journeyDefinitionForm.value | json }}</p> 
       <p>Form status: {{ journeyDefinitionForm.status | json }}</p>
       <p>entryDefinitionGroup value: {{ journeyDefinitionForm.controls.entryDefinitionGroup.value | json }}</p> -->
@@ -60,6 +58,7 @@
             <div class="m-wizard__step-info">
               <div class="m-wizard__step-title"  [ngClass]="{'m--font-danger':submitted && basicInfoValidationStatus  }">
                 1. Basic Information 
+                
               </div>
               <!-- <div class="m-wizard__step-desc">
                 Information required for journey definition like  
@@ -150,7 +149,7 @@
                 </a>
               </div>
               <div class="col-lg-4 m--align-right">
-                <button type="submit" class="btn btn-primary m-btn m-btn--custom m-btn--icon" data-wizard-action="submit" >
+                <button type="submit" class="btn btn-success m-btn m-btn--custom m-btn--icon" data-wizard-action="submit" >
                   <span>
                     <i class="la la-check"></i>
                     &nbsp;&nbsp;

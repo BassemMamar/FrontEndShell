@@ -207,7 +207,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           this.entriesArray.push(SFgroup);
         } else {
           // alert that is only one selfie isallowed
-          this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`,'Data Not Valid!');
+          this.toastrService.warning(`Journey definition can't have more than one Selfie entry definition.`, 'Data Not Valid!');
         }
         break;
 
@@ -246,6 +246,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     switch (entryType) {
       case EntryType.ProofOfIdentity:
         const poi = new POIEntryFormModel(entryDataModel);
+        const polهcy = poi.documentProofPolicies; // ToDO  poi.documentProofPolicies type is wrong
         const POIgroup = this.fb.group({
           order: [poi.order, Validators.required],
           entryType: [entryType, Validators.required],
