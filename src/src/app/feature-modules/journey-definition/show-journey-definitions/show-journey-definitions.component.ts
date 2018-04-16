@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { JourneyDefinitionService } from '../journey-definition.service';
 import { JourneyDefinitionSummary } from '../model/journey-definition-summary';
+import { DomSanitizer } from '@angular/platform-browser';
+import { LoggerService } from '../../../core/base/logger/logger.service';
 
 @Component({
   selector: 'app-show-journey-definitions',
   templateUrl: './show-journey-definitions.component.html',
   styleUrls: ['./show-journey-definitions.component.scss']
 })
-export class ShowJourneyDefinitionsComponent implements OnInit {
+export class ShowJourneyDefinitionsComponent implements OnInit, AfterViewInit {
   journeyDefinitions: JourneyDefinitionSummary[];
+  @ViewChildren('journeyDefinitionsLoop') public loop: any;
+
   options = {
     // datasource definition
     data: {
@@ -83,18 +87,22 @@ export class ShowJourneyDefinitionsComponent implements OnInit {
       title: "Actions",
       sortable: false,
       overflow: 'visible',
-      template: function (row, index, datatable) {
-        var dropup = (datatable.getPageSize() - index) <= 4 ? 'dropup' : '';
-
-        return `
-          <botton onclick="edit('${row.journeyDefinitionGroupId}')" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="View ">\
-                          <i class="la la-edit"></i>\
-                      </botton>\
-        `;
+      template: (row, index, datatable) => {
+        const edit = `
+        <a (click)="edit('a52e5f36-e43f-46cc-8e54-378e23ac18aa')" class="m-portlet__nav-link btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" title="Edit ">\
+                        <i class="la la-edit"></i>\
+                    </a>\
+      `;
+        console.log(edit);
+        return edit;
       }
     }]
   };
-  constructor(private journeyDefinitionService: JourneyDefinitionService, private router: Router) {
+
+  constructor(
+    private journeyDefinitionService: JourneyDefinitionService,
+    private router: Router,
+    private loggerService: LoggerService) {
     this.journeyDefinitions = new Array<JourneyDefinitionSummary>();
   }
 
@@ -102,18 +110,41 @@ export class ShowJourneyDefinitionsComponent implements OnInit {
     this.getJourneyDefinitions();
   }
 
+  ngAfterViewInit() {
+    this.loop.changes.subscribe(
+      () => {
+        this.loggerService.log('ngFor loop Finishes..');
+        this.createDataTable()
+
+      }
+    );
+
+
+  }
+
   getJourneyDefinitions() {
     this.journeyDefinitionService.getJourneyDefinitions()
       .subscribe(data => {
         this.journeyDefinitions = data;
-        this.createDataTable()
       });
   }
 
   createDataTable() {
     this.options.data.source = this.journeyDefinitions;
     this.options.search.input = $('#generalSearch');
-    var datatable = $('.m_datatable').mDatatable(this.options);
+    //  var datatable = $('.m_datatable').mDatatable(this.options);
+
+    var datatable = $('.m-datatable').mDatatable({
+      data: {
+        saveState: { cookie: false },
+      },
+      search: {
+        input: $('#generalSearch'),
+      },
+      columns: [
+
+      ],
+    });
 
   }
 

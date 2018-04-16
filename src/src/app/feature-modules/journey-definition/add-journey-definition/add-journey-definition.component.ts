@@ -3,12 +3,13 @@ import { LoggerService } from '../../../core/base/logger/logger.service';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { JourneyDefinitionDetails } from '../model/journey-definition-details';
 import { JourneyDefinitionService } from '../journey-definition.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from '../../../shared/components/toastr/toastr.service';
 import { EditJourneyDefinition } from '../model/edit-journey-definition';
 import { EditJourneyEntryDefinition } from '../model/edit-journey-entry-definition';
 import { FieldValidatorService } from '../../../shared/components/field-state-display/field-validator.service';
 import { EntryType } from '../model/entry-type';
+import { AlertService } from '../../../shared/components/alert/alert.service';
 
 @Component({
   selector: 'app-add-journey-definition',
@@ -38,7 +39,9 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private toastrService: ToastrService,
+    private alertService: AlertService,
     private journeyDefinitionService: JourneyDefinitionService,
     private fieldValidatorService: FieldValidatorService,
     private loggerService: LoggerService) {
@@ -151,6 +154,15 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
 
   }
 
+  test() {
+
+    this.alertService.error('Update journey definition has been done successfully', 'Done!', {
+      hostId: 'root',
+      keepAfterRouteChange: true,
+      showDuration: 0
+    });
+    this.router.navigate(['/JourneyDefinition']);
+  }
   doSubmit() {
     const datamodel = this.toJourneyDefinitionDataModelMapper();
     // ToDo: Maybe here do some custom validation dono
@@ -165,18 +177,40 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
       this.journeyDefinitionService
         .updateJourneyDefinition(datamodel).subscribe(
-          data => this.toastrService.success('Update journey definition has been done successfully', 'Done!'),
+          data => {
+            this.alertService.success('Update journey definition has been done successfully', 'Done!', {
+              hostId: 'root',
+              keepAfterRouteChange: true,
+              showDuration: 5000
+            });
+            this.router.navigate(['/JourneyDefinition']);
+          },
           error => {
-            this.toastrService.error('Update journey definition Faild for some reason', 'Opps!');
+            // this.toastrService.error('Update journey definition Faild for some reason', 'Opps!');
+            this.alertService.error(error, 'Update Faild!', {
+              hostId: 'root',
+              showDuration: 0
+            });
             this.loggerService.error('Update journey definition Faild for some reason ', error);
           });
 
     } else {
       this.journeyDefinitionService
         .addJourneyDefinition(datamodel).subscribe(
-          data => this.toastrService.success('Add journey definition has been done successfully', 'Done!'),
+          data => {
+            this.alertService.success('Add journey definition has been done successfully', 'Done!', {
+              hostId: 'root',
+              keepAfterRouteChange: true,
+              showDuration: 5000
+            });
+            this.router.navigate(['/JourneyDefinition']);
+          },
           error => {
-            this.toastrService.error('Add journey definition Faild for some reason', 'Opps!');
+            // this.toastrService.error('Add journey definition Faild for some reason', 'Opps!');
+            this.alertService.error(error, 'Add Faild!', {
+              hostId: 'root',
+              showDuration: 0
+            });
             this.loggerService.error('Add journey definition Faild for some reason ', error);
           }
         );
@@ -220,7 +254,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     entryDataModel.acceptExpiredDocuments = entry.acceptExpiredDocuments;
     entryDataModel.acceptExpiredUpToMonthes = entry.isUpToMonthes ? entry.acceptExpiredUpToMonthes : null;
     entryDataModel.askForAdditionalStepsStatus = entry.askForAdditionalSteps;
-    entryDataModel.canContinueOnFailure = entry.canContinueOnFailure;
+    entryDataModel.canContinueOnFailure = entry.isOptional === false ? entry.canContinueOnFailure : false;
     if (entry.documentProofPolicies) {
       entryDataModel.documentProofPolicies = entry.documentProofPolicies.map(policy => {
         const rObj = { countryCodes: [], documentCategories: [] };
