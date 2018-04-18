@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LoggerService } from '../../../core/base/logger/logger.service';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { JourneyDefinitionDetails } from '../model/journey-definition-details';
+import { JourneyDefinitionInfo } from '../model/journey-definition-details';
 import { JourneyDefinitionService } from '../journey-definition.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from '../../../shared/components/toastr/toastr.service';
@@ -10,6 +10,8 @@ import { EditJourneyEntryDefinition } from '../model/edit-journey-entry-definiti
 import { FieldValidatorService } from '../../../shared/components/field-state-display/field-validator.service';
 import { EntryType } from '../model/entry-type';
 import { AlertService } from '../../../shared/components/alert/alert.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { BlockUITemplateComponent } from '../../../shared/components/block-ui/block-ui-template.component';
 
 @Component({
   selector: 'app-add-journey-definition',
@@ -18,7 +20,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 })
 export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   journeyDefinitionId: string;
-  journeyDefinitionData: JourneyDefinitionDetails;
+  journeyDefinitionData: JourneyDefinitionInfo;
   journeyDefinitionForm: FormGroup;
   submitted = false;
 
@@ -36,6 +38,11 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     return !this.entryDefinitionGroup.valid;
   }
 
+  // Create an instance from our block ui template
+  blockTemplate = BlockUITemplateComponent;
+
+  @BlockUI('block-edit-journey-definition') blockEditJourneyDefinition: NgBlockUI;
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -46,7 +53,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     private fieldValidatorService: FieldValidatorService,
     private loggerService: LoggerService) {
 
-    this.journeyDefinitionData = new JourneyDefinitionDetails();
+    this.journeyDefinitionData = new JourneyDefinitionInfo();
     // create new instance if add, get data if update
     this.journeyDefinitionId = this.route.snapshot.paramMap.get('journeyDefinitionId');
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
@@ -66,14 +73,19 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   }
 
   getJourneyDefinition(id: string) {
+    this.blockEditJourneyDefinition.start();
     this.journeyDefinitionService
       .getJourneyDefinition(id)
-      .subscribe((journeyDefinition: JourneyDefinitionDetails) => {
+      .subscribe((journeyDefinition: JourneyDefinitionInfo) => {
         this.journeyDefinitionData = journeyDefinition;
         // this.createMainFormGroup();
         this.setBasicInfoGroupValues();
+        this.blockEditJourneyDefinition.stop();
       },
-        error => this.toastrService.error(error, 'getJourneyDefinition error')
+        error => {
+          this.toastrService.error(error, 'getJourneyDefinition error');
+          this.blockEditJourneyDefinition.stop();
+        }
       );
   }
 
@@ -128,7 +140,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
         alMinValue: this.journeyDefinitionData.minAgeLimit,
         alMaxValue: this.journeyDefinitionData.maxAgeLimit
       },
-      reasons: this.journeyDefinitionData.journeyReasons
+      reasons: this.journeyDefinitionData.journeyReasons.map(reason => { return { display: reason, value: reason }; })
     });
   }
 

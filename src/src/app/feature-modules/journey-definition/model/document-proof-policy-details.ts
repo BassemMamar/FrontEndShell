@@ -1,11 +1,12 @@
 import { DocumentCategoryInfo } from './document-category-info';
+import { CountryInfo } from './world-region-info';
 
 export class DocumentProofPolicyDetails {
-    documentTypes: DocumentCategoryInfo[];
-    countryCodes: string[];
+    documentCategories: DocumentCategoryInfo[];
+    countries: CountryInfo[];
 
     constructor() {
-        this.documentTypes = new Array<DocumentCategoryInfo>();
-        this.countryCodes = new Array<string>();
+        this.documentCategories = new Array<DocumentCategoryInfo>();
+        this.countries = new Array<CountryInfo>();
     }
 }

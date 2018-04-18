@@ -9,6 +9,7 @@ import { CategorySourceLisnerService, CategorySourceData } from '../category-sou
 import { EntryType } from '../../../../model/entry-type';
 import { Subscription } from 'rxjs/Subscription';
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
+import { DocumentProofPolicyDetails } from '../../../../model/document-proof-policy-details';
 
 @Component({
   selector: 'app-entry-policy',
@@ -42,6 +43,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategoryInfo[];
 
+  @Input() currentPolicyData: DocumentProofPolicyDetails[];
+
   @ViewChild('categoriesInput') categoriesInput: ElementRef;
   @ViewChild('countriesInput') countriesInput: ElementRef;
 
@@ -70,6 +73,8 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
     this.worldRegionInfoMapped = new Array<TreeviewItem>();
     this.documentCategoriesMapped = new Array<TreeviewItem>();
+
+    this.currentPolicyData = new Array<DocumentProofPolicyDetails>();
   }
 
   ngOnInit() {
@@ -84,6 +89,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
   ngOnChanges() {
     this.copyData();
+    this.fillOldDataToUpdate();
   }
 
   ngOnDestroy() {
@@ -133,6 +139,34 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       this.documentCategoriesMapped = this.toDocumentCategoriesNGTreeModelMapper();
       this.refreshSelector();
     }
+
+    // if (this.worldRegionInfoCopy != null && this.documentCategoriesCopy != null) {
+    //  // this.fillOldDataToUpdate();
+    // }
+  }
+
+  fillOldDataToUpdate() {
+    if (this.currentPolicyData != null && this.currentPolicyData.length > 0 && this.documentCategories != null && this.worldRegionInfo != null) {
+      const x = 7;
+      // // Fill Old Data
+      // //
+
+      this.currentPolicyData.forEach(policyData => {
+        // fill categories
+        const temp = policyData.documentCategories.map((documentCategoryData: DocumentCategoryInfo) => documentCategoryData.documentTypes);
+        const selectedDT = temp.reduce((a, b) => [...a, ...b]); // this is what i nees for first param
+        this.loggerService.log('selectedDT 11 : ', selectedDT);
+
+        // rempve from main source
+        this.disableDocumentCategoriesInSource(selectedDT);
+
+        // fill countries
+        const selectedCT = policyData.countries.slice();
+
+        this.updateDocumentProofPoliciesList(selectedDT, selectedCT);
+      });
+
+    }
   }
 
   addNewPolicy() {
@@ -142,15 +176,22 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
     const selectedDT = this.selectedDocumentTypes.slice();
     const selectedCT = this.selectedRegion.slice();
+
+    this.updateDocumentProofPoliciesList(selectedDT, selectedCT);
+
+    this.disableDocumentCategoriesInSource(selectedDT);
+
+    this.selectedDocumentTypes = [];
+    this.selectedRegion = [];
+  }
+
+
+  updateDocumentProofPoliciesList(selectedDT: DocumentTypeInfo[], selectedCT: CountryInfo[]) {
     this.documentProofPolicies.push(this.fb.group({
       documentTypes: [selectedDT],
       countries: [selectedCT]
     }));
 
-    this.disableDocumentCategoriesInSource(this.selectedDocumentTypes.slice());
-
-    this.selectedDocumentTypes = [];
-    this.selectedRegion = [];
   }
 
   /**
@@ -278,6 +319,9 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
 
 
   toDocumentCategoriesNGTreeModelMapper() {
+    // if (this.documentCategories == null || this.documentCategories.length == 0) {
+    //   return [];
+    // }
 
     return this.documentCategories.map(category => new TreeviewItem({
       text: category.categoryName,
@@ -295,6 +339,9 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
   }
 
   toWorldRegionNGTreeModelMapper() {
+    // if (this.worldRegionInfo == null || this.worldRegionInfo.length == 0) {
+    //   return [];
+    // }
 
     return this.worldRegionInfo.map(region => new TreeviewItem({
       text: region.name,

@@ -25,7 +25,7 @@
   </div> -->
   <!--end: Portlet Head-->
   <!--begin: Form Wizard-->
-  <div class="m-wizard m-wizard--2 m-wizard--success" id="m_wizard">
+  <div class="m-wizard m-wizard--2 m-wizard--success" id="m_wizard" *blockUI="'block-edit-journey-definition'; template:blockTemplate; message:'Fetching Data... '">
     <!--begin: Message container -->
     <div class="m-portlet__padding-x">
       <!-- Here you can put a message or alert -->
@@ -104,7 +104,7 @@
     </div>
     <!--end: Form Wizard Head -->
     <!--begin: Form Wizard Form-->
-    <div class="m-wizard__form">
+    <div class="m-wizard__form" >
       <!--
                 1) Use m-form--label-align-left class to alight the form input lables to the right
                 2) Use m-form--state class to highlight input control borders on form validation

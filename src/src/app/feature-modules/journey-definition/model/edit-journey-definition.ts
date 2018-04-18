@@ -1,4 +1,4 @@
-import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
+import { JourneyEntryDefinitionInfo } from './journey-entry-definition-details';
 import { EditJourneyEntryDefinition } from './edit-journey-entry-definition';
 
 export class EditJourneyDefinition {

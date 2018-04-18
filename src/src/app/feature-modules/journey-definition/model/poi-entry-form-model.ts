@@ -1,6 +1,6 @@
 import { EntryType } from './entry-type';
 import { EntryFormModel } from './entry-form-model';
-import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
+import { JourneyEntryDefinitionInfo } from './journey-entry-definition-details';
 import { AskForAdditionalSteps } from './ask-for-additional-steps';
 
 export class POIEntryFormModel {
@@ -15,9 +15,8 @@ export class POIEntryFormModel {
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
     canContinueOnFailure: boolean;
-    documentProofPolicies: string[];
 
-    constructor(entryDataModel: JourneyEntryDefinitionDetails = null) {
+    constructor(entryDataModel: JourneyEntryDefinitionInfo = null) {
 
 
         this.entryType = EntryType.ProofOfIdentity;

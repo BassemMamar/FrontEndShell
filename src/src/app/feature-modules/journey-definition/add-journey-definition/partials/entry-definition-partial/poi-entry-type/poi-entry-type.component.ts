@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
@@ -7,13 +7,15 @@ import { DocumentCategoryInfo } from '../../../../model/document-category-info';
 import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 import { EntryType } from '../../../../model/entry-type';
+import { JourneyEntryDefinitionInfo } from '../../../../model/journey-entry-definition-details';
 
 @Component({
   selector: 'app-poi-entry-type',
   templateUrl: './poi-entry-type.component.html',
   styleUrls: ['./poi-entry-type.component.scss']
 })
-export class POIEntryTypeComponent implements OnInit, AfterViewInit {
+export class POIEntryTypeComponent implements OnInit, AfterViewInit, OnChanges {
+
   // needed to current entry type to the <app-entry-policy> instance
   entryType = EntryType;
 
@@ -32,6 +34,8 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategoryInfo[];
 
+  @Input() currentEntryData: JourneyEntryDefinitionInfo;
+
   // the current entry index to be as as order
   @Input() index;
 
@@ -47,9 +51,17 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit {
   // this need to be passed to the <app-entry-policy> instance
   documentProofPoliciesArrayName = 'documentProofPolicies';
 
-  constructor(private loggerService: LoggerService, private fieldValidatorService: FieldValidatorService) { }
+  constructor(private loggerService: LoggerService, private fieldValidatorService: FieldValidatorService) {
+    this.currentEntryData = new JourneyEntryDefinitionInfo();
+  }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.currentEntryData == null) {
+      this.currentEntryData = new JourneyEntryDefinitionInfo();
+    }
   }
 
   ngAfterViewInit() {

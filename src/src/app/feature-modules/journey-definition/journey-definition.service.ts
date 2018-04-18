@@ -11,7 +11,7 @@ import { EntryDefinitionOptions } from './model/entry-definition-options';
 import { WorldRegionInfo } from './model/world-region-info';
 import { DocumentCategoryInfo } from './model/document-category-info';
 import { EditJourneyDefinition } from './model/edit-journey-definition';
-import { JourneyDefinitionDetails } from './model/journey-definition-details';
+import { JourneyDefinitionInfo } from './model/journey-definition-details';
 import { CaptureMediaChannels } from './model/capture-media-channels';
 import { CommunicationService } from '../../core/services/communication/communication.service';
 import { EntryType } from './model/entry-type';
@@ -70,15 +70,15 @@ export class JourneyDefinitionService {
       );
   }
 
-  getJourneyDefinition(id: string): Observable<JourneyDefinitionDetails> {
-    return this.http.get<JourneyDefinitionDetails>(this.apiUrl + `api/JourneyDefinitions/${id}`)
+  getJourneyDefinition(id: string): Observable<JourneyDefinitionInfo> {
+    return this.http.get<JourneyDefinitionInfo>(this.apiUrl + `api/JourneyDefinitions/${id}`)
       .map((respons: any) => respons.result)
       .pipe(
         catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
       );
   }
 
-  addJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionDetails[]> {
+  addJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionInfo[]> {
     return this.http.post<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
       .map((respons: any) => respons.result)
       .pipe(
@@ -86,7 +86,7 @@ export class JourneyDefinitionService {
       );
   }
 
-  updateJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionDetails[]> {
+  updateJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionInfo[]> {
     return this.http.put<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
       .map((respons: any) => respons.result)
       .pipe(

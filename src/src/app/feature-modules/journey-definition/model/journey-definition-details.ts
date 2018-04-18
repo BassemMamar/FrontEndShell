@@ -1,7 +1,7 @@
-import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
+import { JourneyEntryDefinitionInfo } from './journey-entry-definition-details';
 
 
-export class JourneyDefinitionDetails {
+export class JourneyDefinitionInfo {
     journeyDefinitionGroupId: string;
     lastUpdateDate: Date;
     minAgeLimit?: number;
@@ -12,7 +12,7 @@ export class JourneyDefinitionDetails {
     code: string;
     introductionMessage: string;
     journeyReasons: string[];
-    journeyEntryDefinitions: JourneyEntryDefinitionDetails[];
+    journeyEntryDefinitions: JourneyEntryDefinitionInfo[];
     constructor() {
         this.journeyDefinitionGroupId = '';
         this.lastUpdateDate = null;
@@ -24,6 +24,6 @@ export class JourneyDefinitionDetails {
         this.code = '';
         this.introductionMessage = '';
         this.journeyReasons = new Array<string>();
-        this.journeyEntryDefinitions = new Array<JourneyEntryDefinitionDetails>();
+        this.journeyEntryDefinitions = new Array<JourneyEntryDefinitionInfo>();
     }
 }

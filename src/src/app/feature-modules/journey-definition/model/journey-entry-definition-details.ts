@@ -2,7 +2,7 @@ import { EntryType } from './entry-type';
 import { CaptureMediaChannels } from './capture-media-channels';
 import { DocumentProofPolicyDetails } from './document-proof-policy-details';
 
-export class JourneyEntryDefinitionDetails {
+export class JourneyEntryDefinitionInfo {
     entryType: EntryType;
     order: number;
     isOptional: boolean;

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, DoCheck, ChangeDetectorRef, Vi
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { LoggerService } from '../../../../../core/base/logger/logger.service';
-import { JourneyEntryDefinitionDetails } from '../../../model/journey-entry-definition-details';
+import { JourneyEntryDefinitionInfo } from '../../../model/journey-entry-definition-details';
 import { EntryType } from '../../../model/entry-type';
 import { EntryDefinitionContainerComponent } from './entry-definition-container/entry-definition-container.component';
 import { EntryDefinitionOptions } from '../../../model/entry-definition-options';
@@ -33,7 +33,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   @Input() entryDefinitionGroup: FormGroup;
 
   // entryDefinitions Data come from the server to be filled in the UI in Update case
-  @Input() entryDefinitionData: JourneyEntryDefinitionDetails[];
+  @Input() entryDefinitionData: JourneyEntryDefinitionInfo[];
 
   // refs for all entries containers to use for expandAll or collapseAll
   @ViewChildren(EntryDefinitionContainerComponent) children: EntryDefinitionContainerComponent[];
@@ -150,7 +150,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
 
   createEntryDefinitionGroup() {
     // For now no need for this but will keep it for future change :)
-    const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
+    const primaryPOIEntry = this.fb.array(new Array<JourneyEntryDefinitionInfo>());
     this.entryDefinitionGroup.addControl('primaryEntryArray', primaryPOIEntry);
 
     /**
@@ -161,7 +161,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     this.entryDefinitionGroup.addControl('entriesArray', entries);
 
     // For now no need for this but will keep it for future change :)
-    const optionalSelfieEntry = this.fb.array(new Array<JourneyEntryDefinitionDetails>());
+    const optionalSelfieEntry = this.fb.array(new Array<JourneyEntryDefinitionInfo>());
     this.entryDefinitionGroup.addControl('LastEntryArray', optionalSelfieEntry);
   }
 
@@ -170,7 +170,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
    * then each mapped form group will be added to entriesArray  which hold whole entries
    * @param dataModel data from the server in the update case, if null method do nothing
    */
-  initEntryDefinitionGroup(dataModel: JourneyEntryDefinitionDetails[]) {
+  initEntryDefinitionGroup(dataModel: JourneyEntryDefinitionInfo[]) {
     if (dataModel == null || dataModel.length === 0) {
       return;
     }
@@ -242,11 +242,10 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
    * @param entryDataModel used in update case to set old data as default values
    * return new entry FormGroup
    */
-  createAndInitEntryFormModel(entryType: EntryType, entryDataModel: JourneyEntryDefinitionDetails = null): FormGroup {
+  createAndInitEntryFormModel(entryType: EntryType, entryDataModel: JourneyEntryDefinitionInfo = null): FormGroup {
     switch (entryType) {
       case EntryType.ProofOfIdentity:
         const poi = new POIEntryFormModel(entryDataModel);
-        const polهcy = poi.documentProofPolicies; // ToDO  poi.documentProofPolicies type is wrong
         const POIgroup = this.fb.group({
           order: [poi.order, Validators.required],
           entryType: [entryType, Validators.required],
@@ -285,7 +284,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           entryType: [entryType, Validators.required],
           isOptional: [ad.isOptional],
           supportedChannelTypes: [ad.supportedChannelTypes, Validators.required],
-          maxAttempts: [ad.maxAttempts, Validators.required],
+        //  maxAttempts: [ad.maxAttempts, Validators.required],
           canContinueOnFailure: [ad.canContinueOnFailure],
           title: [ad.title, Validators.required]
         });
@@ -297,6 +296,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           order: [selfie.order, Validators.required],
           entryType: [entryType, Validators.required],
           isOptional: [selfie.isOptional],
+          maxAttempts: [selfie.maxAttempts, Validators.required],
           canContinueOnFailure: [selfie.canContinueOnFailure],
           supportedChannelTypes: [selfie.supportedChannelTypes, Validators.required],
         });

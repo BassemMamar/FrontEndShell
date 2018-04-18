@@ -1,4 +1,4 @@
-import { JourneyEntryDefinitionDetails } from './journey-entry-definition-details';
+import { JourneyEntryDefinitionInfo } from './journey-entry-definition-details';
 import { EntryType } from './entry-type';
 
 export class EntryFormModel {
