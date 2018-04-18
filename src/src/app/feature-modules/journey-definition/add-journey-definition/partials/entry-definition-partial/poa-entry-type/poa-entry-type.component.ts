@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
@@ -6,13 +6,14 @@ import { WorldRegionInfo } from '../../../../model/world-region-info';
 import { DocumentCategoryInfo } from '../../../../model/document-category-info';
 import { EntryType } from '../../../../model/entry-type';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
+import { JourneyEntryDefinitionInfo } from '../../../../model/journey-entry-definition-details';
 
 @Component({
   selector: 'app-poa-entry-type',
   templateUrl: './poa-entry-type.component.html',
   styleUrls: ['./poa-entry-type.component.scss']
 })
-export class POAEntryTypeComponent implements OnInit, AfterViewInit {
+export class POAEntryTypeComponent implements OnInit, AfterViewInit, OnChanges {
   // needed to current entry type to the <app-entry-policy> instance
   entryType = EntryType;
 
@@ -31,6 +32,8 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
   @Input() worldRegionInfo: WorldRegionInfo[];
   @Input() documentCategories: DocumentCategoryInfo[];
 
+  @Input() currentEntryData: JourneyEntryDefinitionInfo;
+  
   // the current entry index to be as as order
   @Input() index;
 
@@ -50,6 +53,13 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.currentEntryData == null) {
+      this.currentEntryData = new JourneyEntryDefinitionInfo();
+    }
+  }
+  
   ngAfterViewInit() {
     this.initSelector();
   }

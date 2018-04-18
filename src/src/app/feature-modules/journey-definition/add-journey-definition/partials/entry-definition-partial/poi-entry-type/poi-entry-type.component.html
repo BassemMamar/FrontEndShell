@@ -1,3 +1,4 @@
+
 <div [formGroup]="parentGroup">
   <div formArrayName="{{arrayName}}">
     <div [formGroupName]="groupName">
@@ -110,7 +111,7 @@
       <!-- <div class="orm-group m-form__group row">
         <div class="col-lg-4"> -->
       <app-entry-policy [parentType]="entryType.ProofOfIdentity" [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName"
-        [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories"></app-entry-policy>
+        [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories" [currentPolicyData]="currentEntryData.documentProofPolicies"></app-entry-policy>
       <!-- </div>
       </div> -->
     </div>

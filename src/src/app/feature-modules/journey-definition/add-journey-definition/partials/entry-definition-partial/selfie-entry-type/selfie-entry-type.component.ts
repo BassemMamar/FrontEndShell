@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { JourneyDefinitionDetails } from '../../../../model/journey-definition-details';
+import { JourneyDefinitionInfo } from '../../../../model/journey-definition-details';
 import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { FieldValidatorService } from '../../../../../../shared/components/field-state-display/field-validator.service';
 

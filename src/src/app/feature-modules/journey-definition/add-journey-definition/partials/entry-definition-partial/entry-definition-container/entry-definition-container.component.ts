@@ -50,6 +50,24 @@ export class EntryDefinitionContainerComponent implements OnInit, AfterViewInit 
     }
   }
 
+  entryTypeIcon() {
+    const entryType = this.item.get('entryType') as FormControl;
+    if (entryType == null) {
+      return 'entryType is null..';
+    }
+
+    switch (entryType.value) {
+      case EntryType.ProofOfIdentity:
+        return 'fa fa-vcard fa-2x';
+      case EntryType.ProofOfAddress:
+        return 'fa fa-address-book fa-2x';
+      case EntryType.AdditionalDocument:
+        return 'fa fa-wpforms fa-2x';
+      case EntryType.Selfie:
+        return 'fa fa-camera fa-2x';
+    }
+  }
+
   initPortlet() {
     this.portletref = $(`#${this.id}`).mPortlet();
   }

@@ -12,6 +12,7 @@
             <label>
               Categories:
             </label>
+            <!-- {{selectedDocumentTypes |json }} -->
             <!-- <select #categoriesInput  [(ngModel)]="selectedDocumentTypes"  class="  form-control m-bootstrap-select m_selectpicker" multiple>
               <optgroup *ngFor="let documentCategory of documentCategories" [label]="documentCategory.categoryName">
                 <option *ngFor="let type of documentCategory.documentTypes" [ngValue]="type">&nbsp;&nbsp;&nbsp;{{type.typeName}}</option>
@@ -41,6 +42,7 @@
               </optgroup>
 
             </select> -->
+            <!-- {{selectedRegion |json }} -->
             <ngx-dropdown-treeview class="btn-outline-secondary" (selectedChange)="selectedRegion = $event" [config]="treeviewConfig" [items]="worldRegionInfoMapped">
             </ngx-dropdown-treeview>
           </div>

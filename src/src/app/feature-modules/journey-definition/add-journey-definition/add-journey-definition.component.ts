@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { LoggerService } from '../../../core/base/logger/logger.service';
 import { FormGroup, FormControl, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { JourneyDefinitionDetails } from '../model/journey-definition-details';
+import { JourneyDefinitionInfo } from '../model/journey-definition-details';
 import { JourneyDefinitionService } from '../journey-definition.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from '../../../shared/components/toastr/toastr.service';
@@ -18,7 +18,7 @@ import { AlertService } from '../../../shared/components/alert/alert.service';
 })
 export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   journeyDefinitionId: string;
-  journeyDefinitionData: JourneyDefinitionDetails;
+  journeyDefinitionData: JourneyDefinitionInfo;
   journeyDefinitionForm: FormGroup;
   submitted = false;
 
@@ -46,7 +46,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     private fieldValidatorService: FieldValidatorService,
     private loggerService: LoggerService) {
 
-    this.journeyDefinitionData = new JourneyDefinitionDetails();
+    this.journeyDefinitionData = new JourneyDefinitionInfo();
     // create new instance if add, get data if update
     this.journeyDefinitionId = this.route.snapshot.paramMap.get('journeyDefinitionId');
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
@@ -68,7 +68,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   getJourneyDefinition(id: string) {
     this.journeyDefinitionService
       .getJourneyDefinition(id)
-      .subscribe((journeyDefinition: JourneyDefinitionDetails) => {
+      .subscribe((journeyDefinition: JourneyDefinitionInfo) => {
         this.journeyDefinitionData = journeyDefinition;
         // this.createMainFormGroup();
         this.setBasicInfoGroupValues();
@@ -128,7 +128,7 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
         alMinValue: this.journeyDefinitionData.minAgeLimit,
         alMaxValue: this.journeyDefinitionData.maxAgeLimit
       },
-      reasons: this.journeyDefinitionData.journeyReasons
+      reasons: this.journeyDefinitionData.journeyReasons.map(reason => { return { display: reason, value: reason }; })
     });
   }
 
