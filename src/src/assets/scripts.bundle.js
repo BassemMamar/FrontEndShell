@@ -878,12 +878,12 @@ var mUtil = function() {
 // $(document).ready(function() {
 //     mUtil.init();
 // });
-(function($) {
+(function ($) {
 
 	if (typeof mUtil === 'undefined') throw new Error('mUtil is required and must be included before mDatatable.');
 
 	// plugin setup
-	$.fn.mDatatable = function(options) {
+	$.fn.mDatatable = function (options) {
 		if ($(this).length === 0) throw new Error('No mDatatable element exist.');
 
 		// global variables
@@ -910,7 +910,7 @@ var mUtil = function() {
 			stateId: 'meta',
 			ajaxParams: {},
 
-			init: function(options) {
+			init: function (options) {
 				Plugin.setupBaseDOM.call();
 				Plugin.setupDOM(datatable.table);
 				Plugin.spinnerCallback(true);
@@ -924,7 +924,7 @@ var mUtil = function() {
 				if (datatable.debug) Plugin.stateRemove(Plugin.stateId);
 
 				// initialize extensions
-				$.each(Plugin.getOption('extensions'), function(extName, extOptions) {
+				$.each(Plugin.getOption('extensions'), function (extName, extOptions) {
 					if (typeof $.fn.mDatatable[extName] === 'function')
 						new $.fn.mDatatable[extName](datatable, extOptions);
 				});
@@ -985,7 +985,7 @@ var mUtil = function() {
 
 				$(datatable).height('');
 
-				$(Plugin.getOption('search.input')).on('keyup', function(e) {
+				$(Plugin.getOption('search.input')).on('keyup', function (e) {
 					if (Plugin.getOption('search.onEnter') && e.which !== 13) return;
 					Plugin.search($(this).val().toLowerCase());
 				});
@@ -996,17 +996,17 @@ var mUtil = function() {
 			/**
 			 * Extract static HTML table content into datasource
 			 */
-			extractTable: function() {
+			extractTable: function () {
 				var columns = [];
 				var headers = $(datatable).
 					find('tr:first-child th').
 					get().
-					map(function(cell, i) {
+					map(function (cell, i) {
 						var field = $(cell).data('field');
 						if (typeof field === 'undefined') {
 							field = $(cell).text().trim();
 						}
-						var column = {field: field, title: field};
+						var column = { field: field, title: field };
 						for (var ii in options.columns) {
 							if (options.columns[ii].field === field) {
 								column = $.extend(true, {}, options.columns[ii], column);
@@ -1018,16 +1018,16 @@ var mUtil = function() {
 				// auto create columns config
 				options.columns = columns;
 
-				var data = $(datatable).find('tr').get().map(function(row) {
-					return $(row).find('td').get().map(function(cell, i) {
+				var data = $(datatable).find('tr').get().map(function (row) {
+					return $(row).find('td').get().map(function (cell, i) {
 						return $(cell).html();
 					});
 				});
 				var source = [];
-				$.each(data, function(i, row) {
+				$.each(data, function (i, row) {
 					if (row.length === 0) return;
 					var td = {};
-					$.each(row, function(index, value) {
+					$.each(row, function (index, value) {
 						td[headers[index]] = value;
 					});
 					source.push(td);
@@ -1038,7 +1038,7 @@ var mUtil = function() {
 			/**
 			 * One time layout update on init
 			 */
-			layoutUpdate: function() {
+			layoutUpdate: function () {
 				// setup nested datatable, if option enabled
 				Plugin.setupSubDatatable.call();
 
@@ -1060,18 +1060,18 @@ var mUtil = function() {
 				}
 
 				if (!Plugin.isInit) {
-					$(datatable).trigger('m-datatable--on-init', {table: $(datatable.wrap).attr('id'), options: options});
+					$(datatable).trigger('m-datatable--on-init', { table: $(datatable.wrap).attr('id'), options: options });
 					Plugin.isInit = true;
 				}
 
-				$(datatable).trigger('m-datatable--on-layout-updated', {table: $(datatable.wrap).attr('id')});
+				$(datatable).trigger('m-datatable--on-layout-updated', { table: $(datatable.wrap).attr('id') });
 			},
 
-			lockTable: function() {
+			lockTable: function () {
 				// todo; revise lock table responsive
 				var lock = {
 					lockEnabled: false,
-					init: function() {
+					init: function () {
 						// check if table should be locked columns
 						lock.lockEnabled = Plugin.lockEnabledColumns();
 						if (lock.lockEnabled.left.length === 0 &&
@@ -1080,8 +1080,8 @@ var mUtil = function() {
 						}
 						lock.enable();
 					},
-					enable: function() {
-						var enableLock = function(tablePart) {
+					enable: function () {
+						var enableLock = function (tablePart) {
 							// check if already has lock column
 							if ($(tablePart).find('.m-datatable__lock').length > 0) {
 								Plugin.log('Locked container already exist in: ', tablePart);
@@ -1101,7 +1101,7 @@ var mUtil = function() {
 							var lockRight = $('<div/>').
 								addClass('m-datatable__lock m-datatable__lock--right');
 
-							$(tablePart).find('.m-datatable__row').each(function() {
+							$(tablePart).find('.m-datatable__row').each(function () {
 								var rowLeft = $('<tr/>').
 									addClass('m-datatable__row').
 									appendTo(lockLeft);
@@ -1111,7 +1111,7 @@ var mUtil = function() {
 								var rowRight = $('<tr/>').
 									addClass('m-datatable__row').
 									appendTo(lockRight);
-								$(this).find('.m-datatable__cell').each(function() {
+								$(this).find('.m-datatable__cell').each(function () {
 									var locked = $(this).data('locked');
 									if (typeof locked !== 'undefined') {
 										if (typeof locked.left !== 'undefined' || locked === true) {
@@ -1142,10 +1142,10 @@ var mUtil = function() {
 							}
 						};
 
-						$(datatable.table).find('thead,tbody,tfoot').each(function() {
+						$(datatable.table).find('thead,tbody,tfoot').each(function () {
 							var tablePart = this;
 							if ($(this).find('.m-datatable__lock').length === 0) {
-								$(this).ready(function() {
+								$(this).ready(function () {
 									enableLock(tablePart);
 								});
 							}
@@ -1159,7 +1159,7 @@ var mUtil = function() {
 			/**
 			 * Render everything for resize
 			 */
-			fullRender: function() {
+			fullRender: function () {
 				// todo; full render datatable for specific condition only
 				Plugin.spinnerCallback(true);
 				$(datatable.wrap).removeClass('m-datatable--loaded');
@@ -1179,11 +1179,11 @@ var mUtil = function() {
 				Plugin.insertData();
 			},
 
-			lockEnabledColumns: function() {
+			lockEnabledColumns: function () {
 				var screen = $(window).width();
 				var columns = options.columns;
-				var enabled = {left: [], right: []};
-				$.each(columns, function(i, column) {
+				var enabled = { left: [], right: [] };
+				$.each(columns, function (i, column) {
 					if (typeof column.locked !== 'undefined') {
 						if (typeof column.locked.left !== 'undefined') {
 							if (mUtil.getBreakpoint(column.locked.left) <= screen) {
@@ -1205,7 +1205,7 @@ var mUtil = function() {
 			 * @param e
 			 * @param args
 			 */
-			afterRender: function(e, args) {
+			afterRender: function (e, args) {
 				if (args.table == $(datatable.wrap).attr('id')) {
 					if (!Plugin.isLocked()) {
 						Plugin.redraw();
@@ -1216,7 +1216,7 @@ var mUtil = function() {
 							$(datatable.table).find('.m-datatable__row').css('height', '');
 						}
 					}
-					$(datatable).ready(function() {
+					$(datatable).ready(function () {
 						// row even class
 						$(datatable.tableBody).find('.m-datatable__row').removeClass('m-datatable__row--even');
 						if ($(datatable.wrap).hasClass('m-datatable--subtable')) {
@@ -1238,8 +1238,8 @@ var mUtil = function() {
 
 			hoverTimer: 0,
 			isScrolling: false,
-			setupHover: function() {
-				$(window).scroll(function(e) {
+			setupHover: function () {
+				$(window).scroll(function (e) {
 					// stop hover when scrolling
 					clearTimeout(Plugin.hoverTimer);
 					Plugin.isScrolling = true;
@@ -1248,9 +1248,9 @@ var mUtil = function() {
 				$(datatable.tableBody).
 					find('.m-datatable__cell').
 					off('mouseenter', 'mouseleave').
-					on('mouseenter', function() {
+					on('mouseenter', function () {
 						// reset scroll timer to hover class
-						Plugin.hoverTimer = setTimeout(function() {
+						Plugin.hoverTimer = setTimeout(function () {
 							Plugin.isScrolling = false;
 						}, 200);
 						if (Plugin.isScrolling) return;
@@ -1268,7 +1268,7 @@ var mUtil = function() {
 							find('.m-datatable__row:nth-child(' + index + ')').
 							addClass('m-datatable__row--hover');
 					}).
-					on('mouseleave', function() {
+					on('mouseleave', function () {
 						// normal table
 						var row = $(this).
 							closest('.m-datatable__row').
@@ -1288,7 +1288,7 @@ var mUtil = function() {
 			 * Adjust width of locked table containers by resize handler
 			 * @returns {number}
 			 */
-			adjustLockContainer: function() {
+			adjustLockContainer: function () {
 				if (!Plugin.isLocked()) return 0;
 
 				// refer to head dimension
@@ -1314,13 +1314,13 @@ var mUtil = function() {
 			/**
 			 * todo; not in use
 			 */
-			dragResize: function() {
+			dragResize: function () {
 				var pressed = false;
 				var start = undefined;
 				var startX, startWidth;
 				$(datatable.tableHead).
 					find('.m-datatable__cell').
-					mousedown(function(e) {
+					mousedown(function (e) {
 						start = $(this);
 						pressed = true;
 						startX = e.pageX;
@@ -1328,7 +1328,7 @@ var mUtil = function() {
 						$(start).addClass('m-datatable__cell--resizing');
 
 					}).
-					mousemove(function(e) {
+					mousemove(function (e) {
 						if (pressed) {
 							var i = $(start).index();
 							var tableBody = $(datatable.tableBody);
@@ -1341,7 +1341,7 @@ var mUtil = function() {
 									eq(lockedIndex);
 							}
 
-							$(tableBody).find('.m-datatable__row').each(function(tri, tr) {
+							$(tableBody).find('.m-datatable__row').each(function (tri, tr) {
 								$(tr).
 									find('.m-datatable__cell').
 									eq(i).
@@ -1354,12 +1354,12 @@ var mUtil = function() {
 						}
 
 					}).
-					mouseup(function() {
+					mouseup(function () {
 						$(start).removeClass('m-datatable__cell--resizing');
 						pressed = false;
 					});
 
-				$(document).mouseup(function() {
+				$(document).mouseup(function () {
 					$(start).removeClass('m-datatable__cell--resizing');
 					pressed = false;
 				});
@@ -1368,7 +1368,7 @@ var mUtil = function() {
 			/**
 			 * To prepare placeholder for table before content is loading
 			 */
-			initHeight: function() {
+			initHeight: function () {
 				if (options.layout.height && options.layout.scroll) {
 					var theadHeight = $(datatable.tableHead).find('.m-datatable__row').height();
 					var tfootHeight = $(datatable.tableFoot).find('.m-datatable__row').height();
@@ -1386,7 +1386,7 @@ var mUtil = function() {
 			/**
 			 * Setup base DOM (table, thead, tbody, tfoot) and create if not exist.
 			 */
-			setupBaseDOM: function() {
+			setupBaseDOM: function () {
 				// keep original state before mDatatable initialize
 				datatable.initialDatatable = $(datatable).clone();
 
@@ -1463,13 +1463,13 @@ var mUtil = function() {
 			/**
 			 * Set column data before table manipulation.
 			 */
-			setupCellField: function(tableParts) {
+			setupCellField: function (tableParts) {
 				if (typeof tableParts === 'undefined') tableParts = $(datatable.table).children();
 				var columns = options.columns;
-				$.each(tableParts, function(part, tablePart) {
-					$(tablePart).find('.m-datatable__row').each(function(tri, tr) {
+				$.each(tableParts, function (part, tablePart) {
+					$(tablePart).find('.m-datatable__row').each(function (tri, tr) {
 						// prepare data
-						$(tr).find('.m-datatable__cell').each(function(tdi, td) {
+						$(tr).find('.m-datatable__cell').each(function (tdi, td) {
 							if (typeof columns[tdi] !== 'undefined') {
 								$(td).data(columns[tdi]);
 							}
@@ -1482,19 +1482,19 @@ var mUtil = function() {
 			 * Set column template callback
 			 * @param tablePart
 			 */
-			setupTemplateCell: function(tablePart) {
+			setupTemplateCell: function (tablePart) {
 				if (typeof tablePart === 'undefined') tablePart = datatable.tableBody;
 				var columns = options.columns;
-				$(tablePart).find('.m-datatable__row').each(function(tri, tr) {
+				$(tablePart).find('.m-datatable__row').each(function (tri, tr) {
 					// row data object, if any
 					var obj = $(tr).data('obj') || {};
 
 					// @deprecated in v5.0.6
-					obj['getIndex'] = function() {
+					obj['getIndex'] = function () {
 						return tri;
 					};
 					// @deprecated in v5.0.6
-					obj['getDatatable'] = function() {
+					obj['getDatatable'] = function () {
 						return datatable;
 					};
 
@@ -1511,9 +1511,9 @@ var mUtil = function() {
 					// if data object is undefined, collect from table
 					if (typeof obj === 'undefined') {
 						obj = {};
-						$(tr).find('.m-datatable__cell').each(function(tdi, td) {
+						$(tr).find('.m-datatable__cell').each(function (tdi, td) {
 							// get column settings by field
-							var column = $.grep(columns, function(n, i) {
+							var column = $.grep(columns, function (n, i) {
 								return $(td).data('field') === n.field;
 							})[0];
 							if (typeof column !== 'undefined') {
@@ -1522,9 +1522,9 @@ var mUtil = function() {
 						});
 					}
 
-					$(tr).find('.m-datatable__cell').each(function(tdi, td) {
+					$(tr).find('.m-datatable__cell').each(function (tdi, td) {
 						// get column settings by field
-						var column = $.grep(columns, function(n, i) {
+						var column = $.grep(columns, function (n, i) {
 							return $(td).data('field') === n.field;
 						})[0];
 						if (typeof column !== 'undefined') {
@@ -1563,7 +1563,7 @@ var mUtil = function() {
 			 * Setup extra system column properties
 			 * Note: selector checkbox, subtable toggle
 			 */
-			setupSystemColumn: function() {
+			setupSystemColumn: function () {
 				datatable.dataSet = datatable.dataSet || [];
 				// no records available
 				if (datatable.dataSet.length === 0) return;
@@ -1571,10 +1571,10 @@ var mUtil = function() {
 				var columns = options.columns;
 				$(datatable.tableBody).
 					find('.m-datatable__row').
-					each(function(tri, tr) {
-						$(tr).find('.m-datatable__cell').each(function(tdi, td) {
+					each(function (tri, tr) {
+						$(tr).find('.m-datatable__cell').each(function (tdi, td) {
 							// get column settings by field
-							var column = $.grep(columns, function(n, i) {
+							var column = $.grep(columns, function (n, i) {
 								return $(td).data('field') === n.field;
 							})[0];
 							if (typeof column !== 'undefined') {
@@ -1592,7 +1592,9 @@ var mUtil = function() {
 										append($('<input/>').
 											attr('type', 'checkbox').
 											attr('value', value).
-											on('click', function() {
+											on('click', function () {
+												console.log('Line 716');
+
 												if ($(this).is(':checked')) {
 													// add checkbox active row class
 													Plugin.setActive(this);
@@ -1630,9 +1632,9 @@ var mUtil = function() {
 					});
 
 				// init checkbox for header/footer
-				var initCheckbox = function(tr) {
+				var initCheckbox = function (tr) {
 					// get column settings by field
-					var column = $.grep(columns, function(n, i) {
+					var column = $.grep(columns, function (n, i) {
 						return typeof n.selector !== 'undefined' && n.selector !== false;
 					})[0];
 
@@ -1650,7 +1652,9 @@ var mUtil = function() {
 								addClass('m-checkbox m-checkbox--single m-checkbox--all').
 								append($('<input/>').
 									attr('type', 'checkbox').
-									on('click', function() {
+									on('click', function () {
+										console.log('Line 776');
+
 										if ($(this).is(':checked')) {
 											Plugin.setActiveAll(true);
 										} else {
@@ -1680,7 +1684,7 @@ var mUtil = function() {
 			/**
 			 * Adjust width to match container size
 			 */
-			adjustCellsWidth: function() {
+			adjustCellsWidth: function () {
 				// get table width
 				var containerWidth = $(datatable.tableHead).width();
 
@@ -1702,7 +1706,7 @@ var mUtil = function() {
 					$(datatable.table).
 						find('.m-datatable__row').
 						find('.m-datatable__cell').
-						each(function(tdi, td) {
+						each(function (tdi, td) {
 							var width = minWidth;
 							var dataWidth = $(td).data('width');
 							if (typeof dataWidth !== 'undefined') {
@@ -1716,13 +1720,13 @@ var mUtil = function() {
 			/**
 			 * Adjust height to match container size
 			 */
-			adjustCellsHeight: function() {
-				$.each($(datatable.table).children(), function(part, tablePart) {
+			adjustCellsHeight: function () {
+				$.each($(datatable.table).children(), function (part, tablePart) {
 					var totalRows = $(tablePart).find('.m-datatable__row').first().parent().find('.m-datatable__row').length;
 					for (var i = 1; i <= totalRows; i++) {
 						var rows = $(tablePart).find('.m-datatable__row:nth-child(' + i + ')');
 						if ($(rows).length > 0) {
-							var maxHeight = Math.max.apply(null, $(rows).map(function() {
+							var maxHeight = Math.max.apply(null, $(rows).map(function () {
 								return $(this).height();
 							}).get());
 							$(rows).css('height', Math.ceil(parseInt(maxHeight)));
@@ -1734,14 +1738,14 @@ var mUtil = function() {
 			/**
 			 * Setup table DOM and classes
 			 */
-			setupDOM: function(table) {
+			setupDOM: function (table) {
 				// set table classes
 				$(table).find('> thead').addClass('m-datatable__head');
 				$(table).find('> tbody').addClass('m-datatable__body');
 				$(table).find('> tfoot').addClass('m-datatable__foot');
 				$(table).find('tr').addClass('m-datatable__row');
 				$(table).find('tr > th, tr > td').addClass('m-datatable__cell');
-				$(table).find('tr > th, tr > td').each(function(i, td) {
+				$(table).find('tr > th, tr > td').each(function (i, td) {
 					if ($(td).find('span').length === 0) {
 						$(td).wrapInner($('<span/>').css('width', Plugin.offset));
 					}
@@ -1752,7 +1756,7 @@ var mUtil = function() {
 			 * Default scrollbar
 			 * @returns {{tableLocked: null, init: init, onScrolling: onScrolling}}
 			 */
-			scrollbar: function() {
+			scrollbar: function () {
 				var scroll = {
 					scrollable: null,
 					tableLocked: null,
@@ -1772,7 +1776,7 @@ var mUtil = function() {
 						},
 						theme: 'minimal-dark',
 					},
-					init: function() {
+					init: function () {
 						// destroy previous custom scrollbar
 						Plugin.destroyScroller(scroll.scrollable);
 						var screen = mUtil.getViewPort().width;
@@ -1808,22 +1812,22 @@ var mUtil = function() {
 								css('overflow-x', 'auto');
 						}
 					},
-					defaultScrollbar: function(scrollable) {
+					defaultScrollbar: function (scrollable) {
 						$(scrollable).
 							css('overflow', 'auto').
 							css('max-height', Plugin.getOption('layout.height')).
 							on('scroll', scroll.onScrolling);
 					},
-					onScrolling: function(e) {
+					onScrolling: function (e) {
 						var left = $(this).scrollLeft();
 						var top = $(this).scrollTop();
 						$(scroll.scrollHead).css('left', -left);
 						$(scroll.scrollFoot).css('left', -left);
-						$(scroll.tableLocked).each(function(i, table) {
+						$(scroll.tableLocked).each(function (i, table) {
 							$(table).css('top', -top);
 						});
 					},
-					mCustomScrollbar: function(scrollable) {
+					mCustomScrollbar: function (scrollable) {
 						scroll.scrollable = scrollable;
 						var height = Plugin.getOption('layout.height');
 						// vertical and horizontal scrollbar
@@ -1836,11 +1840,11 @@ var mUtil = function() {
 							axis: axis,
 							setHeight: $(datatable.tableBody).height(),
 							callbacks: {
-								whileScrolling: function() {
+								whileScrolling: function () {
 									var mcs = this.mcs;
 									$(scroll.scrollHead).css('left', mcs.left);
 									$(scroll.scrollFoot).css('left', mcs.left);
-									$(scroll.tableLocked).each(function(i, table) {
+									$(scroll.tableLocked).each(function (i, table) {
 										$(table).css('top', mcs.top);
 									});
 									// stop hover when scrolling
@@ -1867,7 +1871,7 @@ var mUtil = function() {
 			 * @param element
 			 * @param options
 			 */
-			mCustomScrollbar: function(element, options) {
+			mCustomScrollbar: function (element, options) {
 				$(datatable.tableBody).css('overflow', '');
 				// check if any custom scrollbar exist in the element
 				Plugin.destroyScroller($(datatable.table).find('.mCustomScrollbar'));
@@ -1877,7 +1881,7 @@ var mUtil = function() {
 			/**
 			 * Set column title from options.columns settings
 			 */
-			setHeadTitle: function(tablePart) {
+			setHeadTitle: function (tablePart) {
 				if (typeof tablePart === 'undefined') tablePart = datatable.tableHead;
 				var columns = options.columns;
 				var row = $(tablePart).find('.m-datatable__row');
@@ -1885,7 +1889,7 @@ var mUtil = function() {
 				if ($(row).length === 0) {
 					row = $('<tr/>').appendTo(tablePart);
 				}
-				$.each(columns, function(i, column) {
+				$.each(columns, function (i, column) {
 					var th = $(ths).eq(i);
 					if ($(th).length === 0) {
 						th = $('<th/>').appendTo(row);
@@ -1900,7 +1904,7 @@ var mUtil = function() {
 					// apply text align to thead/tfoot
 					if (typeof column.textAlign !== 'undefined') {
 						var align = typeof datatable.textAlign[column.textAlign] !==
-						'undefined' ? datatable.textAlign[column.textAlign] : '';
+							'undefined' ? datatable.textAlign[column.textAlign] : '';
 						$(th).addClass(align);
 					}
 				});
@@ -1910,12 +1914,12 @@ var mUtil = function() {
 			/**
 			 * Initiate to get remote or local data via ajax
 			 */
-			dataRender: function(action) {
+			dataRender: function (action) {
 				$(datatable.table).
 					siblings('.m-datatable__pager').
 					removeClass('m-datatable--paging-loaded');
 
-				var buildMeta = function() {
+				var buildMeta = function () {
 					datatable.dataSet = datatable.dataSet || [];
 					Plugin.localDataUpdate();
 					// local pagination meta
@@ -1930,13 +1934,13 @@ var mUtil = function() {
 					return meta;
 				};
 
-				var afterGetData = function(result) {
-					var localPagingCallback = function(ctx, meta) {
+				var afterGetData = function (result) {
+					var localPagingCallback = function (ctx, meta) {
 						if (!$(ctx.pager).hasClass('m-datatable--paging-loaded')) {
 							$(ctx.pager).remove();
 							ctx.init(meta);
 						}
-						$(ctx.pager).off().on('m-datatable--on-goto-page', function(e) {
+						$(ctx.pager).off().on('m-datatable--on-goto-page', function (e) {
 							$(ctx.pager).remove();
 							ctx.init(meta);
 						});
@@ -1994,7 +1998,7 @@ var mUtil = function() {
 			/**
 			 * Process ajax data
 			 */
-			insertData: function() {
+			insertData: function () {
 				datatable.dataSet = datatable.dataSet || [];
 				var params = Plugin.getDataSourceParam();
 
@@ -2004,7 +2008,7 @@ var mUtil = function() {
 					css('visibility', 'hidden');
 				var colLength = options.columns.length;
 
-				$.each(datatable.dataSet, function(i, row) {
+				$.each(datatable.dataSet, function (i, row) {
 					// keep data object to row
 					var tr = $('<tr/>').attr('data-row', i).data('obj', row);
 					var idx = 0;
@@ -2020,7 +2024,7 @@ var mUtil = function() {
 						// apply text align
 						if (typeof column.textAlign !== 'undefined') {
 							var align = typeof datatable.textAlign[column.textAlign] !==
-							'undefined' ? datatable.textAlign[column.textAlign] : '';
+								'undefined' ? datatable.textAlign[column.textAlign] : '';
 							classes.push(align);
 						}
 
@@ -2057,7 +2061,7 @@ var mUtil = function() {
 				Plugin.layoutUpdate();
 			},
 
-			updateTableComponents: function() {
+			updateTableComponents: function () {
 				datatable.tableHead = $(datatable.table).children('thead');
 				datatable.tableBody = $(datatable.table).children('tbody');
 				datatable.tableFoot = $(datatable.table).children('tfoot');
@@ -2066,7 +2070,7 @@ var mUtil = function() {
 			/**
 			 * Call ajax for raw JSON data
 			 */
-			getData: function() {
+			getData: function () {
 				datatable.ajaxParams = {
 					dataType: 'json',
 					method: 'GET',
@@ -2096,13 +2100,13 @@ var mUtil = function() {
 					datatable.ajaxParams.data['datatable'] = data;
 				}
 
-				return $.ajax(datatable.ajaxParams).done(function(response, textStatus, jqXHR) {
+				return $.ajax(datatable.ajaxParams).done(function (response, textStatus, jqXHR) {
 					datatable.lastResponse = response;
 					// extendible data map callback for custom datasource
 					datatable.dataSet = datatable.originalDataSet = Plugin.dataMapCallback(response);
 					$(datatable).
 						trigger('m-datatable--on-ajax-done', [datatable.dataSet]);
-				}).fail(function(jqXHR, textStatus, errorThrown) {
+				}).fail(function (jqXHR, textStatus, errorThrown) {
 					Plugin.destroyScroller($(datatable.table).find('.mCustomScrollbar'));
 					$(datatable).trigger('m-datatable--on-ajax-fail', [jqXHR]);
 					$('<span/>').
@@ -2112,7 +2116,7 @@ var mUtil = function() {
 						appendTo(datatable.tableBody);
 					$(datatable.wrap).addClass('m-datatable--error m-datatable--loaded');
 					Plugin.spinnerCallback(false);
-				}).always(function() {
+				}).always(function () {
 				});
 			},
 
@@ -2121,14 +2125,14 @@ var mUtil = function() {
 			 * @param meta if null, local pagination, otherwise remote pagination
 			 * @param callback for update data when navigating page
 			 */
-			paging: function(meta, callback) {
+			paging: function (meta, callback) {
 				var pg = {
 					meta: null,
 					pager: null,
 					paginateEvent: null,
-					pagerLayout: {pagination: null, info: null},
+					pagerLayout: { pagination: null, info: null },
 					callback: null,
-					init: function(meta) {
+					init: function (meta) {
 						pg.meta = meta;
 
 						// todo; if meta object not exist will cause error
@@ -2173,10 +2177,10 @@ var mUtil = function() {
 						pg.pagingBreakpoint.call();
 						$(window).resize(pg.pagingBreakpoint);
 					},
-					serverCallback: function(ctx, meta) {
+					serverCallback: function (ctx, meta) {
 						Plugin.dataRender();
 					},
-					populate: function() {
+					populate: function () {
 						var icons = Plugin.getOption('layout.icons.pagination');
 						var title = Plugin.getOption('translate.toolbar.pagination.items.default');
 						// pager root element
@@ -2216,11 +2220,11 @@ var mUtil = function() {
 								attr('type', 'text').
 								addClass('m-pager-input form-control').
 								attr('title', title.input).
-								on('keyup', function() {
+								on('keyup', function () {
 									// on keyup update [data-page]
 									$(this).attr('data-page', Math.abs($(this).val()));
 								}).
-								on('keypress', function(e) {
+								on('keypress', function (e) {
 									// on keypressed enter button
 									if (e.which === 13) pg.gotoMorePage(e);
 								})).
@@ -2277,7 +2281,7 @@ var mUtil = function() {
 								append($('<span/>').addClass('m-datatable__pager-detail'));
 						}
 
-						$.each(Plugin.getOption('toolbar.layout'), function(i, layout) {
+						$.each(Plugin.getOption('toolbar.layout'), function (i, layout) {
 							$(pg.pagerLayout[layout]).appendTo(pg.pager);
 						});
 
@@ -2293,7 +2297,7 @@ var mUtil = function() {
 						var pageSizes = Plugin.getOption('toolbar.items.pagination.pageSizeSelect');
 						// default value here, to fix override option by user
 						if (pageSizes.length == 0) pageSizes = [10, 20, 30, 50, 100];
-						$.each(pageSizes, function(i, size) {
+						$.each(pageSizes, function (i, size) {
 							var display = size;
 							if (size === -1) display = 'All';
 							$('<option/>').
@@ -2303,7 +2307,7 @@ var mUtil = function() {
 						});
 
 						// init selectpicker to dropdown
-						$(datatable).ready(function() {
+						$(datatable).ready(function () {
 							$('.selectpicker').
 								selectpicker().
 								siblings('.dropdown-toggle').
@@ -2313,10 +2317,10 @@ var mUtil = function() {
 
 						pg.paste();
 					},
-					paste: function() {
+					paste: function () {
 						// insert pagination based on placement position, top|bottom
 						$.each($.unique(Plugin.getOption('toolbar.placement')),
-							function(i, position) {
+							function (i, position) {
 								if (position === 'bottom') {
 									$(pg.pager).clone(true).insertAfter(datatable.table);
 								}
@@ -2329,7 +2333,8 @@ var mUtil = function() {
 								}
 							});
 					},
-					gotoMorePage: function(e) {
+					gotoMorePage: function (e) {
+						console.log('Line 1453');
 						e.preventDefault();
 						// $(this) is a link of .m-datatable__pager-link
 
@@ -2345,14 +2350,16 @@ var mUtil = function() {
 						pg.openPage(parseInt(page));
 						return false;
 					},
-					gotoPage: function(e) {
+					gotoPage: function (e) {
 						e.preventDefault();
+						console.log('Line 1471');
+
 						// prevent from click same page number
 						if ($(this).hasClass('m-datatable__pager-link--active')) return;
 
 						pg.openPage(parseInt($(this).data('page')));
 					},
-					openPage: function(page) {
+					openPage: function (page) {
 						// currentPage is 1-based index
 						pg.meta.page = parseInt(page);
 
@@ -2362,11 +2369,11 @@ var mUtil = function() {
 						// update page callback function
 						$(pg.pager).trigger('m-datatable--on-goto-page', pg.meta);
 					},
-					updatePerpage: function(e) {
+					updatePerpage: function (e) {
 						e.preventDefault();
 						if (Plugin.getOption('layout.height') === null) {
 							// fix white space, when perpage is set from many records to less records
-							$('html, body').animate({scrollTop: $(datatable).position().top});
+							$('html, body').animate({ scrollTop: $(datatable).position().top });
 						}
 
 						pg.pager = $(datatable.table).
@@ -2399,11 +2406,11 @@ var mUtil = function() {
 						// update pagination info
 						pg.updateInfo.call();
 					},
-					addPaginateEvent: function(e) {
+					addPaginateEvent: function (e) {
 						// pagination event
 						$(datatable).
 							off(pg.paginateEvent).
-							on(pg.paginateEvent, function(e, meta) {
+							on(pg.paginateEvent, function (e, meta) {
 								Plugin.spinnerCallback(true);
 
 								pg.pager = $(datatable.table).siblings('.m-datatable__pager');
@@ -2426,7 +2433,7 @@ var mUtil = function() {
 									attr('data-page', Math.min(meta.page + 1, meta.pages));
 
 								// current page input value sync
-								$(pg.pager).each(function() {
+								$(pg.pager).each(function () {
 									$(this).
 										find('.m-pager-input[type="text"]').
 										prop('value', meta.page);
@@ -2464,7 +2471,7 @@ var mUtil = function() {
 								// Plugin.resetScroll();
 							});
 					},
-					updateInfo: function() {
+					updateInfo: function () {
 						var start = Math.max(pg.meta.perpage * (pg.meta.page - 1) + 1, 1);
 						var end = Math.min(start + pg.meta.perpage - 1, pg.meta.total);
 						// page info update
@@ -2476,7 +2483,7 @@ var mUtil = function() {
 									start: start,
 									end: pg.meta.perpage === -1 ? pg.meta.total : end,
 									pageSize: pg.meta.perpage === -1 ||
-									pg.meta.perpage >= pg.meta.total
+										pg.meta.perpage >= pg.meta.total
 										? pg.meta.total
 										: pg.meta.perpage,
 									total: pg.meta.total,
@@ -2486,7 +2493,7 @@ var mUtil = function() {
 					/**
 					 * Update pagination layout breakpoint
 					 */
-					pagingBreakpoint: function() {
+					pagingBreakpoint: function () {
 						// keep page links reference
 						var pagerNumber = $(datatable.table).
 							siblings('.m-datatable__pager').
@@ -2503,7 +2510,7 @@ var mUtil = function() {
 
 						// pagination update
 						$.each(Plugin.getOption('toolbar.items.pagination.pages'),
-							function(mode, option) {
+							function (mode, option) {
 								if (mUtil.isInResponsiveRange(mode)) {
 									switch (mode) {
 										case 'desktop':
@@ -2541,10 +2548,10 @@ var mUtil = function() {
 					/**
 					 * Update pagination number and button display
 					 */
-					paginationUpdate: function() {
+					paginationUpdate: function () {
 						var pager = $(datatable.table).
-								siblings('.m-datatable__pager').
-								find('.m-datatable__pager-nav'),
+							siblings('.m-datatable__pager').
+							find('.m-datatable__pager-nav'),
 							pagerMorePrev = $(pager).
 								find('.m-datatable__pager-link--more-prev'),
 							pagerMoreNext = $(pager).
@@ -2559,7 +2566,7 @@ var mUtil = function() {
 						// get page before of first visible
 						var morePrevPage = Math.max($(pagerNumber).first().data('page') - 1,
 							1);
-						$(pagerMorePrev).each(function(i, prev) {
+						$(pagerMorePrev).each(function (i, prev) {
 							$(prev).attr('data-page', morePrevPage);
 						});
 						// show/hide <li>
@@ -2572,7 +2579,7 @@ var mUtil = function() {
 						// get page after of last visible
 						var moreNextPage = Math.min($(pagerNumber).last().data('page') + 1,
 							pg.meta.pages);
-						$(pagerMoreNext).each(function(i, prev) {
+						$(pagerMoreNext).each(function (i, prev) {
 							$(pagerMoreNext).attr('data-page', moreNextPage).show();
 						});
 
@@ -2632,13 +2639,13 @@ var mUtil = function() {
 			/**
 			 * Hide/show table cell defined by options[columns][i][responsive][visible/hidden]
 			 */
-			columnHide: function() {
+			columnHide: function () {
 				var screen = mUtil.getViewPort().width;
 				// foreach columns setting
-				$.each(options.columns, function(i, column) {
+				$.each(options.columns, function (i, column) {
 					if (typeof column.responsive !== 'undefined') {
 						var field = column.field;
-						var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function(n, i) {
+						var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function (n, i) {
 							return field === $(n).data('field');
 						});
 						if (mUtil.getBreakpoint(column.responsive.hidden) >= screen) {
@@ -2658,7 +2665,7 @@ var mUtil = function() {
 			/**
 			 * Setup sub datatable
 			 */
-			setupSubDatatable: function() {
+			setupSubDatatable: function () {
 				var subTableCallback = Plugin.getOption('detail.content');
 				if (typeof subTableCallback !== 'function') return;
 
@@ -2670,7 +2677,9 @@ var mUtil = function() {
 				options.columns[0]['subtable'] = true;
 
 				// toggle on open sub table
-				var toggleSubTable = function(e) {
+				var toggleSubTable = function (e) {
+					console.log('Line 1797');
+
 					e.preventDefault();
 					// get parent row of this subtable
 					var parentRow = $(this).closest('.m-datatable__row');
@@ -2723,7 +2732,7 @@ var mUtil = function() {
 					// prevent duplicate datatable init
 					if ($(subTable).find('.m-datatable').length === 0) {
 						// get data by primary id
-						$.map(datatable.dataSet, function(n, i) {
+						$.map(datatable.dataSet, function (n, i) {
 							if (primaryKey === n[options.columns[0].field]) {
 								e.data = n;
 								return true;
@@ -2740,7 +2749,7 @@ var mUtil = function() {
 						// run callback with event
 						subTableCallback(e);
 
-						$(subTable).children('.m-datatable').on('m-datatable--on-init', function(e) {
+						$(subTable).children('.m-datatable').on('m-datatable--on-init', function (e) {
 							$(subTableRow).removeClass('m-datatable__row-loading');
 						});
 						if (Plugin.getOption('data.type') === 'local') {
@@ -2752,10 +2761,10 @@ var mUtil = function() {
 				var columns = options.columns;
 				$(datatable.tableBody).
 					find('.m-datatable__row').
-					each(function(tri, tr) {
-						$(tr).find('.m-datatable__cell').each(function(tdi, td) {
+					each(function (tri, tr) {
+						$(tr).find('.m-datatable__cell').each(function (tdi, td) {
 							// get column settings by field
-							var column = $.grep(columns, function(n, i) {
+							var column = $.grep(columns, function (n, i) {
 								return $(td).data('field') === n.field;
 							})[0];
 							if (typeof column !== 'undefined') {
@@ -2785,7 +2794,7 @@ var mUtil = function() {
 			/**
 			 * Datasource mapping callback
 			 */
-			dataMapCallback: function(raw) {
+			dataMapCallback: function (raw) {
 				// static dataset array
 				var dataSet = raw;
 				// dataset mapping callback
@@ -2805,7 +2814,7 @@ var mUtil = function() {
 			 * BlockUI spinner callback
 			 * @param block
 			 */
-			spinnerCallback: function(block) {
+			spinnerCallback: function (block) {
 				if (block) {
 					if (!Plugin.isSpinning) {
 						// get spinner options
@@ -2816,13 +2825,13 @@ var mUtil = function() {
 						}
 						Plugin.isSpinning = true;
 						if (typeof mApp !== 'undefined') {
-						//	mApp.block(datatable, spinnerOptions);
+							//	mApp.block(datatable, spinnerOptions);
 						}
 					}
 				} else {
 					Plugin.isSpinning = false;
 					if (typeof mApp !== 'undefined') {
-					//	mApp.unblock(datatable);
+						//	mApp.unblock(datatable);
 					}
 				}
 			},
@@ -2834,7 +2843,7 @@ var mUtil = function() {
 			 * @param column
 			 * @returns {*|Array.<T>|{sort, field}|{asc, desc}}
 			 */
-			sortCallback: function(data, sort, column) {
+			sortCallback: function (data, sort, column) {
 				var type = column['type'] || 'string';
 				var format = column['format'] || '';
 				var field = column['field'];
@@ -2843,7 +2852,7 @@ var mUtil = function() {
 					throw new Error('Moment.js is required.');
 				}
 
-				return $(data).sort(function(a, b) {
+				return $(data).sort(function (a, b) {
 					var aField = a[field];
 					var bField = b[field];
 
@@ -2890,7 +2899,7 @@ var mUtil = function() {
 			 * @param text
 			 * @param obj
 			 */
-			log: function(text, obj) {
+			log: function (text, obj) {
 				if (typeof obj === 'undefined') obj = '';
 				if (datatable.debug) {
 					console.log(text, obj);
@@ -2900,11 +2909,11 @@ var mUtil = function() {
 			/**
 			 * Auto hide columnds overflow in row
 			 */
-			autoHide: function() {
+			autoHide: function () {
 				$(datatable.table).find('.m-datatable__cell').show();
-				$(datatable.tableBody).each(function() {
+				$(datatable.tableBody).each(function () {
 					while ($(this)[0].offsetWidth < $(this)[0].scrollWidth) {
-						$(this).find('.m-datatable__row').each(function(i) {
+						$(this).find('.m-datatable__row').each(function (i) {
 							var cell = $(this).find('.m-datatable__cell').not(':hidden').last();
 							$(cell).hide();
 							if (i === 0) {
@@ -2915,8 +2924,9 @@ var mUtil = function() {
 					}
 				});
 
-				var toggleHiddenColumns = function(e) {
+				var toggleHiddenColumns = function (e) {
 					e.preventDefault();
+					console.log('Line 2045');
 
 					var row = $(this).closest('.m-datatable__row');
 					var detailRow = $(row).next();
@@ -2934,7 +2944,7 @@ var mUtil = function() {
 							attr('colspan', Plugin.getTotalColumns()).appendTo(detailRow);
 
 						var detailSubTable = $('<table/>');
-						$(hidden).each(function() {
+						$(hidden).each(function () {
 							$(detailSubTable).
 								append($('<tr class="m-datatable__row"></tr>').
 									append($('<td class="m-datatable__cell"></td>').
@@ -2954,7 +2964,7 @@ var mUtil = function() {
 				};
 
 				// toggle show hidden columns
-				$(datatable.tableBody).find('.m-datatable__row').each(function() {
+				$(datatable.tableBody).find('.m-datatable__row').each(function () {
 					$(this).prepend($('<td/>').addClass('m-datatable__cell m-datatable__toggle--detail').
 						append($('<a/>').
 							addClass('m-datatable__toggle-detail').
@@ -2983,8 +2993,8 @@ var mUtil = function() {
 			/**
 			 * todo; implement hover column
 			 */
-			hoverColumn: function() {
-				$(datatable.tableBody).on('mouseenter', '.m-datatable__cell', function() {
+			hoverColumn: function () {
+				$(datatable.tableBody).on('mouseenter', '.m-datatable__cell', function () {
 					var colIdx = $(Plugin.cell(this).nodes()).index();
 					$(Plugin.cells().nodes()).removeClass('m-datatable__cell--hover');
 					$(Plugin.column(colIdx).nodes()).addClass('m-datatable__cell--hover');
@@ -2998,7 +3008,7 @@ var mUtil = function() {
 			/**
 			 * Check if table is a locked colums table
 			 */
-			isLocked: function() {
+			isLocked: function () {
 				return $(datatable.wrap).hasClass('m-datatable--lock') || false;
 			},
 
@@ -3007,7 +3017,7 @@ var mUtil = function() {
 			 * @param html
 			 * @param tablePart
 			 */
-			replaceTableContent: function(html, tablePart) {
+			replaceTableContent: function (html, tablePart) {
 				if (typeof tablePart === 'undefined') tablePart = datatable.tableBody;
 				if ($(tablePart).hasClass('mCustomScrollbar')) {
 					$(tablePart).find('.mCSB_container').html(html);
@@ -3021,7 +3031,7 @@ var mUtil = function() {
 			 * @param element
 			 * @returns {number}
 			 */
-			getExtraSpace: function(element) {
+			getExtraSpace: function (element) {
 				var padding = parseInt($(element).css('paddingRight')) +
 					parseInt($(element).css('paddingLeft'));
 				var margin = parseInt($(element).css('marginRight')) +
@@ -3037,9 +3047,9 @@ var mUtil = function() {
 			 * @param data
 			 * @returns {*}
 			 */
-			dataPlaceholder: function(template, data) {
+			dataPlaceholder: function (template, data) {
 				var result = template;
-				$.each(data, function(key, val) {
+				$.each(data, function (key, val) {
 					result = result.replace('{{' + key + '}}', val);
 				});
 				return result;
@@ -3051,7 +3061,7 @@ var mUtil = function() {
 			 * @param suffix
 			 * @returns {*}
 			 */
-			getTableId: function(suffix) {
+			getTableId: function (suffix) {
 				if (typeof suffix === 'undefined') suffix = '';
 				var id = $(datatable).attr('id');
 				if (typeof id === 'undefined') {
@@ -3063,7 +3073,7 @@ var mUtil = function() {
 			/**
 			 * Get table prefix with depth number
 			 */
-			getTablePrefix: function(suffix) {
+			getTablePrefix: function (suffix) {
 				if (typeof suffix !== 'undefined') suffix = '-' + suffix;
 				return Plugin.getTableId() + '-' + Plugin.getDepth() + suffix;
 			},
@@ -3072,7 +3082,7 @@ var mUtil = function() {
 			 * Get current table depth of sub table
 			 * @returns {number}
 			 */
-			getDepth: function() {
+			getDepth: function () {
 				var depth = 0;
 				var table = datatable.table;
 				do {
@@ -3087,7 +3097,7 @@ var mUtil = function() {
 			 * @param key
 			 * @param value
 			 */
-			stateKeep: function(key, value) {
+			stateKeep: function (key, value) {
 				key = Plugin.getTablePrefix(key);
 				if (Plugin.getOption('data.saveState') === false) return;
 				if (Plugin.getOption('data.saveState.webstorage') && localStorage) {
@@ -3103,7 +3113,7 @@ var mUtil = function() {
 			 * @param key
 			 * @param defValue
 			 */
-			stateGet: function(key, defValue) {
+			stateGet: function (key, defValue) {
 				key = Plugin.getTablePrefix(key);
 				if (Plugin.getOption('data.saveState') === false) return;
 				var value = null;
@@ -3122,7 +3132,7 @@ var mUtil = function() {
 			 * @param key
 			 * @param value
 			 */
-			stateUpdate: function(key, value) {
+			stateUpdate: function (key, value) {
 				var ori = Plugin.stateGet(key);
 				if (typeof ori === 'undefined' || ori === null) ori = {};
 				Plugin.stateKeep(key, $.extend({}, ori, value));
@@ -3132,7 +3142,7 @@ var mUtil = function() {
 			 * Remove state item
 			 * @param key
 			 */
-			stateRemove: function(key) {
+			stateRemove: function (key) {
 				key = Plugin.getTablePrefix(key);
 				if (localStorage) {
 					localStorage.removeItem(key);
@@ -3143,7 +3153,7 @@ var mUtil = function() {
 			/**
 			 * Get total columns.
 			 */
-			getTotalColumns: function(tablePart) {
+			getTotalColumns: function (tablePart) {
 				if (typeof tablePart === 'undefined') tablePart = datatable.tableBody;
 				return $(tablePart).
 					find('.m-datatable__row').
@@ -3160,7 +3170,7 @@ var mUtil = function() {
 			 * @param tdOnly Optional. Default true
 			 * @returns {*}
 			 */
-			getOneRow: function(tablePart, row, tdOnly) {
+			getOneRow: function (tablePart, row, tdOnly) {
 				if (typeof tdOnly === 'undefined') tdOnly = true;
 				// get list of <tr>
 				var result = $(tablePart).find('.m-datatable__row:not(.m-datatable__row-detail):nth-child(' + row + ')');
@@ -3176,12 +3186,12 @@ var mUtil = function() {
 			 * @param element
 			 * @returns {boolean}
 			 */
-			hasOverflowY: function(element) {
+			hasOverflowY: function (element) {
 				var children = $(element).find('.m-datatable__row');
 				var maxHeight = 0;
 
 				if (children.length > 0) {
-					$(children).each(function(tdi, td) {
+					$(children).each(function (tdi, td) {
 						maxHeight += Math.floor($(td).innerHeight());
 					});
 
@@ -3198,7 +3208,7 @@ var mUtil = function() {
 			 * @param sort asc|desc. Optional. Default asc
 			 * @param int Boolean. Optional. Comparison value parse to integer. Default false
 			 */
-			sortColumn: function(header, sort, int) {
+			sortColumn: function (header, sort, int) {
 				if (typeof sort === 'undefined') sort = 'asc'; // desc
 				if (typeof int === 'undefined') int = false;
 
@@ -3212,7 +3222,7 @@ var mUtil = function() {
 				}
 
 				var container = $(rows).parent();
-				$(rows).sort(function(a, b) {
+				$(rows).sort(function (a, b) {
 					var tda = $(a).find('td:nth-child(' + column + ')').text();
 					var tdb = $(b).find('td:nth-child(' + column + ')').text();
 
@@ -3233,9 +3243,9 @@ var mUtil = function() {
 			/**
 			 * Perform sort remote and local
 			 */
-			sorting: function() {
+			sorting: function () {
 				var sortObj = {
-					init: function() {
+					init: function () {
 						if (options.sortable) {
 							$(datatable.tableHead).
 								find('.m-datatable__cell:not(.m-datatable__cell--check)').
@@ -3246,7 +3256,7 @@ var mUtil = function() {
 							sortObj.setIcon();
 						}
 					},
-					setIcon: function() {
+					setIcon: function () {
 						var meta = Plugin.getDataSourceParam('sort');
 						// sort icon beside column header
 						var td = $(datatable.tableHead).
@@ -3263,7 +3273,9 @@ var mUtil = function() {
 							$(sorting).append($('<i/>').addClass(icons[meta.sort]));
 						}
 					},
-					sortClick: function(e) {
+					sortClick: function (e) {
+						console.log('Line 2393');
+
 						var meta = Plugin.getDataSourceParam('sort');
 						var field = $(this).data('field');
 						var column = Plugin.getColumnByField(field);
@@ -3289,12 +3301,12 @@ var mUtil = function() {
 								: 'desc';
 
 							// update field and sort params
-							meta = {field: field, sort: sort};
+							meta = { field: field, sort: sort };
 							Plugin.setDataSourceParam('sort', meta);
 
 							sortObj.setIcon();
 
-							setTimeout(function() {
+							setTimeout(function () {
 								Plugin.dataRender('sort');
 								$(datatable).trigger('m-datatable--on-sort', meta);
 							}, 300);
@@ -3309,7 +3321,7 @@ var mUtil = function() {
 			 * Call this method, before using dataSet variable.
 			 * @returns {*|null}
 			 */
-			localDataUpdate: function() {
+			localDataUpdate: function () {
 				var params = Plugin.getDataSourceParam();
 				if (typeof datatable.originalDataSet === 'undefined') {
 					datatable.originalDataSet = datatable.dataSet;
@@ -3334,7 +3346,7 @@ var mUtil = function() {
 					var search = $(Plugin.getOption('search.input')).val();
 					if (typeof search !== 'undefined' && search !== '') {
 						search = search.toLowerCase();
-						datatable.dataSet = $.grep(datatable.dataSet, function(obj) {
+						datatable.dataSet = $.grep(datatable.dataSet, function (obj) {
 							for (var field in obj) {
 								if (!obj.hasOwnProperty(field)) continue;
 								if (typeof obj[field] === 'string') {
@@ -3350,7 +3362,7 @@ var mUtil = function() {
 					}
 
 					// remove empty element from array
-					$.each(params.query, function(k, v) {
+					$.each(params.query, function (k, v) {
 						if (v === '') {
 							delete params.query[k];
 						}
@@ -3360,7 +3372,7 @@ var mUtil = function() {
 					datatable.dataSet = Plugin.filterArray(datatable.dataSet, params.query);
 
 					// reset array index
-					datatable.dataSet = datatable.dataSet.filter(function() {
+					datatable.dataSet = datatable.dataSet.filter(function () {
 						return true;
 					});
 				}
@@ -3375,7 +3387,7 @@ var mUtil = function() {
 			 * @param operator
 			 * @returns {*}
 			 */
-			filterArray: function(list, args, operator) {
+			filterArray: function (list, args, operator) {
 				if (typeof list !== 'object') {
 					return [];
 				}
@@ -3395,11 +3407,11 @@ var mUtil = function() {
 				var count = Object.keys(args).length;
 				var filtered = [];
 
-				$.each(list, function(key, obj) {
+				$.each(list, function (key, obj) {
 					var to_match = obj;
 
 					var matched = 0;
-					$.each(args, function(m_key, m_value) {
+					$.each(args, function (m_key, m_value) {
 						if (to_match.hasOwnProperty(m_key) && m_value == to_match[m_key]) {
 							matched++;
 						}
@@ -3420,7 +3432,7 @@ var mUtil = function() {
 			/**
 			 * Reset lock column scroll to 0 when resize
 			 */
-			resetScroll: function() {
+			resetScroll: function () {
 				if (typeof options.detail === 'undefined' && Plugin.getDepth() === 1) {
 					$(datatable.table).find('.m-datatable__row').css('left', 0);
 					$(datatable.table).find('.m-datatable__lock').css('top', 0);
@@ -3433,9 +3445,9 @@ var mUtil = function() {
 			 * @param field
 			 * @returns {boolean}
 			 */
-			getColumnByField: function(field) {
+			getColumnByField: function (field) {
 				var result;
-				$.each(options.columns, function(i, column) {
+				$.each(options.columns, function (i, column) {
 					if (field === column.field) {
 						result = column;
 						return false;
@@ -3447,12 +3459,12 @@ var mUtil = function() {
 			/**
 			 * Get default sort column
 			 */
-			getDefaultSortColumn: function() {
-				var result = {sort: '', field: ''};
-				$.each(options.columns, function(i, column) {
+			getDefaultSortColumn: function () {
+				var result = { sort: '', field: '' };
+				$.each(options.columns, function (i, column) {
 					if (typeof column.sortable !== 'undefined'
 						&& $.inArray(column.sortable, ['asc', 'desc']) !== -1) {
-						result = {sort: column.sortable, field: column.field};
+						result = { sort: column.sortable, field: column.field };
 						return false;
 					}
 				});
@@ -3465,12 +3477,12 @@ var mUtil = function() {
 			 * @param includeMargin
 			 * @returns {{width: number, height: number, innerWidth: number, innerHeight: number, outerWidth: number, outerHeight: number}}
 			 */
-			getHiddenDimensions: function(element, includeMargin) {
+			getHiddenDimensions: function (element, includeMargin) {
 				var props = {
-						position: 'absolute',
-						visibility: 'hidden',
-						display: 'block',
-					},
+					position: 'absolute',
+					visibility: 'hidden',
+					display: 'block',
+				},
 					dim = {
 						width: 0,
 						height: 0,
@@ -3485,7 +3497,7 @@ var mUtil = function() {
 					: false;
 
 				var oldProps = [];
-				hiddenParents.each(function() {
+				hiddenParents.each(function () {
 					var old = {};
 
 					for (var name in props) {
@@ -3503,7 +3515,7 @@ var mUtil = function() {
 				dim.innerHeight = $(element).innerHeight();
 				dim.outerHeight = $(element).outerHeight(includeMargin);
 
-				hiddenParents.each(function(i) {
+				hiddenParents.each(function (i) {
 					var old = oldProps[i];
 					for (var name in props) {
 						this.style[name] = old[name];
@@ -3513,7 +3525,7 @@ var mUtil = function() {
 				return dim;
 			},
 
-			getGeneralSearchKey: function() {
+			getGeneralSearchKey: function () {
 				var searchInput = $(Plugin.getOption('search.input'));
 				return $(searchInput).prop('name') || $(searchInput).prop('id');
 			},
@@ -3524,8 +3536,8 @@ var mUtil = function() {
 			 * @param object Object to iterate
 			 * @returns {*}
 			 */
-			getObject: function(path, object) {
-				return path.split('.').reduce(function(obj, i) {
+			getObject: function (path, object) {
+				return path.split('.').reduce(function (obj, i) {
 					return obj !== null && typeof obj[i] !== 'undefined' ? obj[i] : null;
 				}, object);
 			},
@@ -3537,7 +3549,7 @@ var mUtil = function() {
 			 * @param value
 			 * @returns {*}
 			 */
-			extendObj: function(obj, path, value) {
+			extendObj: function (obj, path, value) {
 				var levels = path.split('.'),
 					i = 0;
 
@@ -3573,7 +3585,7 @@ var mUtil = function() {
 			 * Redraw datatable by recalculating its DOM elements, etc.
 			 * @returns {jQuery}
 			 */
-			redraw: function() {
+			redraw: function () {
 				Plugin.adjustCellsWidth.call();
 				Plugin.adjustCellsHeight.call();
 				Plugin.adjustLockContainer.call();
@@ -3585,7 +3597,7 @@ var mUtil = function() {
 			 * Shortcode to reload
 			 * @returns {jQuery}
 			 */
-			load: function() {
+			load: function () {
 				Plugin.reload();
 				return datatable;
 			},
@@ -3594,14 +3606,14 @@ var mUtil = function() {
 			 * Datasource reload
 			 * @returns {jQuery}
 			 */
-			reload: function() {
-				var delay = (function() {
-					return function(callback, ms) {
+			reload: function () {
+				var delay = (function () {
+					return function (callback, ms) {
 						clearTimeout(Plugin.timer);
 						Plugin.timer = setTimeout(callback, ms);
 					};
 				})();
-				delay(function() {
+				delay(function () {
 					// local only. remote pagination will skip this block
 					if (options.data.serverFiltering === false) {
 						Plugin.localDataUpdate();
@@ -3617,9 +3629,9 @@ var mUtil = function() {
 			 * @param id
 			 * @returns {jQuery}
 			 */
-			getRecord: function(id) {
+			getRecord: function (id) {
 				if (typeof datatable.tableBody === 'undefined') datatable.tableBody = $(datatable.table).children('tbody');
-				$(datatable.tableBody).find('.m-datatable__cell:first-child').each(function(i, cell) {
+				$(datatable.tableBody).find('.m-datatable__cell:first-child').each(function (i, cell) {
 					if (id == $(cell).text()) {
 						var rowNumber = $(cell).closest('.m-datatable__row').index() + 1;
 						datatable.API.record = datatable.API.value = Plugin.getOneRow(datatable.tableBody, rowNumber);
@@ -3635,7 +3647,7 @@ var mUtil = function() {
 			 * @param columnName
 			 * @returns {jQuery}
 			 */
-			getColumn: function(columnName) {
+			getColumn: function (columnName) {
 				Plugin.setSelectedRecords();
 				datatable.API.value = $(datatable.API.record).find('[data-field="' + columnName + '"]');
 				return datatable;
@@ -3645,7 +3657,7 @@ var mUtil = function() {
 			 * Destroy datatable to original DOM state before datatable was initialized
 			 * @returns {jQuery}
 			 */
-			destroy: function() {
+			destroy: function () {
 				$(datatable).parent().find('.m-datatable__pager').remove();
 				var initialDatatable = $(datatable.initialDatatable).addClass('m-datatable--destroyed').show();
 				$(datatable).replaceWith(initialDatatable);
@@ -3661,7 +3673,7 @@ var mUtil = function() {
 			 * @param field
 			 * @param sort
 			 */
-			sort: function(field, sort) {
+			sort: function (field, sort) {
 				if (typeof sort === 'undefined') sort = 'asc';
 				$(datatable.tableHead).
 					find('.m-datatable__cell[data-field="' + field + '"]').
@@ -3674,7 +3686,7 @@ var mUtil = function() {
 			 * Get current selected column value
 			 * @returns {jQuery}
 			 */
-			getValue: function() {
+			getValue: function () {
 				return $(datatable.API.value).text();
 			},
 
@@ -3682,7 +3694,7 @@ var mUtil = function() {
 			 * Set checkbox active
 			 * @param cell JQuery selector or checkbox ID
 			 */
-			setActive: function(cell) {
+			setActive: function (cell) {
 				if (typeof cell === 'string') {
 					// set by checkbox id
 					cell = $(datatable.tableBody).
@@ -3705,7 +3717,7 @@ var mUtil = function() {
 					addClass('m-datatable__row--active');
 
 				var ids = [];
-				$(row).each(function(i, td) {
+				$(row).each(function (i, td) {
 					var id = $(td).find('.m-checkbox--single:not(.m-checkbox--all) > [type="checkbox"]').val();
 					if (typeof id !== 'undefined') {
 						ids.push(id);
@@ -3719,7 +3731,7 @@ var mUtil = function() {
 			 * Set checkbox inactive
 			 * @param cell JQuery selector or checkbox ID
 			 */
-			setInactive: function(cell) {
+			setInactive: function (cell) {
 				if (typeof cell === 'string') {
 					// set by checkbox id
 					cell = $(datatable.tableBody).
@@ -3742,7 +3754,7 @@ var mUtil = function() {
 					removeClass('m-datatable__row--active');
 
 				var ids = [];
-				$(row).each(function(i, td) {
+				$(row).each(function (i, td) {
 					var id = $(td).find('.m-checkbox--single:not(.m-checkbox--all) > [type="checkbox"]').val();
 					if (typeof id !== 'undefined') {
 						ids.push(id);
@@ -3756,7 +3768,7 @@ var mUtil = function() {
 			 * Set all checkboxes active or inactive
 			 * @param active
 			 */
-			setActiveAll: function(active) {
+			setActiveAll: function (active) {
 				// todo; check if child table also will set active?
 				var checkboxes = $(datatable.table).find('.m-datatable__body .m-datatable__row').
 					find('.m-datatable__cell .m-checkbox [type="checkbox"]');
@@ -3772,7 +3784,7 @@ var mUtil = function() {
 			 * Get selected rows which are active
 			 * @returns {jQuery}
 			 */
-			setSelectedRecords: function() {
+			setSelectedRecords: function () {
 				datatable.API.record = $(datatable.tableBody).find('.m-datatable__row--active');
 				return datatable;
 			},
@@ -3781,7 +3793,7 @@ var mUtil = function() {
 			 * Get selected records
 			 * @returns {null}
 			 */
-			getSelectedRecords: function() {
+			getSelectedRecords: function () {
 				// support old method
 				Plugin.setSelectedRecords();
 				datatable.API.record = datatable.rows('.m-datatable__row--active').nodes();
@@ -3793,7 +3805,7 @@ var mUtil = function() {
 			 * @param path String Dot notation path in string
 			 * @returns {*}
 			 */
-			getOption: function(path) {
+			getOption: function (path) {
 				return Plugin.getObject(path, options);
 			},
 
@@ -3802,7 +3814,7 @@ var mUtil = function() {
 			 * @param path
 			 * @param object
 			 */
-			setOption: function(path, object) {
+			setOption: function (path, object) {
 				options = Plugin.extendObj(options, path, object);
 			},
 
@@ -3811,16 +3823,16 @@ var mUtil = function() {
 			 * @param value
 			 * @param columns. Optional list of columns to be filtered.
 			 */
-			search: function(value, columns) {
+			search: function (value, columns) {
 				if (typeof columns !== 'undefined') columns = $.makeArray(columns);
-				var delay = (function() {
-					return function(callback, ms) {
+				var delay = (function () {
+					return function (callback, ms) {
 						clearTimeout(Plugin.timer);
 						Plugin.timer = setTimeout(callback, ms);
 					};
 				})();
 
-				delay(function() {
+				delay(function () {
 					// get query parameters
 					var query = Plugin.getDataSourceQuery();
 
@@ -3832,11 +3844,11 @@ var mUtil = function() {
 
 					// search by columns, support multiple columns
 					if (typeof columns === 'object') {
-						$.each(columns, function(k, column) {
+						$.each(columns, function (k, column) {
 							query[column] = value;
 						});
 						// remove empty element from arrays
-						$.each(query, function(k, v) {
+						$.each(query, function (k, v) {
 							if (v === '') {
 								delete query[k];
 							}
@@ -3858,11 +3870,11 @@ var mUtil = function() {
 			 * @param param
 			 * @param value
 			 */
-			setDataSourceParam: function(param, value) {
+			setDataSourceParam: function (param, value) {
 				var defaultSort = Plugin.getDefaultSortColumn();
 				datatable.API.params = $.extend({}, {
-					pagination: {page: 1, perpage: Plugin.getOption('data.pageSize')},
-					sort: {sort: defaultSort.sort, field: defaultSort.field},
+					pagination: { page: 1, perpage: Plugin.getOption('data.pageSize') },
+					sort: { sort: defaultSort.sort, field: defaultSort.field },
 					query: {},
 				}, datatable.API.params, Plugin.stateGet(Plugin.stateId));
 
@@ -3875,11 +3887,11 @@ var mUtil = function() {
 			 * Get datasource params
 			 * @param param
 			 */
-			getDataSourceParam: function(param) {
+			getDataSourceParam: function (param) {
 				var defaultSort = Plugin.getDefaultSortColumn();
 				datatable.API.params = $.extend({}, {
-					pagination: {page: 1, perpage: Plugin.getOption('data.pageSize')},
-					sort: {sort: defaultSort.sort, field: defaultSort.field},
+					pagination: { page: 1, perpage: Plugin.getOption('data.pageSize') },
+					sort: { sort: defaultSort.sort, field: defaultSort.field },
 					query: {},
 				}, datatable.API.params, Plugin.stateGet(Plugin.stateId));
 
@@ -3894,7 +3906,7 @@ var mUtil = function() {
 			 * Shortcode to datatable.getDataSourceParam('query');
 			 * @returns {*}
 			 */
-			getDataSourceQuery: function() {
+			getDataSourceQuery: function () {
 				return Plugin.getDataSourceParam('query') || {};
 			},
 
@@ -3902,7 +3914,7 @@ var mUtil = function() {
 			 * Shortcode to datatable.setDataSourceParam('query', query);
 			 * @param query
 			 */
-			setDataSourceQuery: function(query) {
+			setDataSourceQuery: function (query) {
 				Plugin.setDataSourceParam('query', query);
 			},
 
@@ -3910,7 +3922,7 @@ var mUtil = function() {
 			 * Get current page number
 			 * @returns {number}
 			 */
-			getCurrentPage: function() {
+			getCurrentPage: function () {
 				return $(datatable.table).
 					siblings('.m-datatable__pager').
 					last().
@@ -3923,7 +3935,7 @@ var mUtil = function() {
 			 * Get selected dropdown page size
 			 * @returns {*|number}
 			 */
-			getPageSize: function() {
+			getPageSize: function () {
 				return $(datatable.table).
 					siblings('.m-datatable__pager').
 					last().
@@ -3934,7 +3946,7 @@ var mUtil = function() {
 			/**
 			 * Get total rows
 			 */
-			getTotalRows: function() {
+			getTotalRows: function () {
 				return datatable.API.params.pagination.total;
 			},
 
@@ -3942,7 +3954,7 @@ var mUtil = function() {
 			 * Get full dataset in grid
 			 * @returns {*|null|Array}
 			 */
-			getDataSet: function() {
+			getDataSet: function () {
 				return datatable.originalDataSet;
 			},
 
@@ -3951,16 +3963,16 @@ var mUtil = function() {
 			 * Hide column by column's field name
 			 * @param fieldName
 			 */
-			hideColumn: function(fieldName) {
+			hideColumn: function (fieldName) {
 				// add hide option for this column
-				$.map(options.columns, function(column) {
+				$.map(options.columns, function (column) {
 					if (fieldName === column.field) {
-						column.responsive = {hidden: 'xl'};
+						column.responsive = { hidden: 'xl' };
 					}
 					return column;
 				});
 				// hide current displayed column
-				var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function(n, i) {
+				var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function (n, i) {
 					return fieldName === $(n).data('field');
 				});
 				$(tds).hide();
@@ -3971,24 +3983,24 @@ var mUtil = function() {
 			 * Show column by column's field name
 			 * @param fieldName
 			 */
-			showColumn: function(fieldName) {
+			showColumn: function (fieldName) {
 				// add hide option for this column
-				$.map(options.columns, function(column) {
+				$.map(options.columns, function (column) {
 					if (fieldName === column.field) {
 						delete column.responsive;
 					}
 					return column;
 				});
 				// hide current displayed column
-				var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function(n, i) {
+				var tds = $.grep($(datatable.table).find('.m-datatable__cell'), function (n, i) {
 					return fieldName === $(n).data('field');
 				});
 				$(tds).show();
 			},
 
-			destroyScroller: function(element) {
+			destroyScroller: function (element) {
 				if (typeof element === 'undefined') element = datatable.tableBody;
-				$(element).each(function() {
+				$(element).each(function () {
 					if ($(this).hasClass('mCustomScrollbar')) {
 						try {
 							mApp.destroyScroller($(this));
@@ -4008,7 +4020,7 @@ var mUtil = function() {
 			nodeCols: [],
 			recentNode: [],
 
-			table: function() {
+			table: function () {
 				return datatable.table;
 			},
 
@@ -4017,7 +4029,7 @@ var mUtil = function() {
 			 * @param selector
 			 * @returns {jQuery}
 			 */
-			row: function(selector) {
+			row: function (selector) {
 				Plugin.rows(selector);
 				Plugin.nodeTr = Plugin.recentNode = $(Plugin.nodeTr).first();
 				return datatable;
@@ -4028,7 +4040,7 @@ var mUtil = function() {
 			 * @param selector
 			 * @returns {jQuery}
 			 */
-			rows: function(selector) {
+			rows: function (selector) {
 				Plugin.nodeTr = Plugin.recentNode = $(datatable.tableBody).find(selector).filter('.m-datatable__row');
 				return datatable;
 			},
@@ -4038,7 +4050,7 @@ var mUtil = function() {
 			 * @param index zero-based index
 			 * @returns {jQuery}
 			 */
-			column: function(index) {
+			column: function (index) {
 				Plugin.nodeCols = Plugin.recentNode = $(datatable.tableBody).find('.m-datatable__cell:nth-child(' + (index + 1) + ')');
 				return datatable;
 			},
@@ -4048,7 +4060,7 @@ var mUtil = function() {
 			 * @param selector
 			 * @returns {jQuery}
 			 */
-			columns: function(selector) {
+			columns: function (selector) {
 				var context = datatable.table;
 				if (Plugin.nodeTr === Plugin.recentNode) {
 					context = Plugin.nodeTr;
@@ -4062,13 +4074,13 @@ var mUtil = function() {
 				return datatable;
 			},
 
-			cell: function(selector) {
+			cell: function (selector) {
 				Plugin.cells(selector);
 				Plugin.nodeTd = Plugin.recentNode = $(Plugin.nodeTd).first();
 				return datatable;
 			},
 
-			cells: function(selector) {
+			cells: function (selector) {
 				var cells = $(datatable.tableBody).find('.m-datatable__cell');
 				if (typeof selector !== 'undefined') {
 					cells = $(cells).filter(selector);
@@ -4081,7 +4093,7 @@ var mUtil = function() {
 			 * Delete the selected row from the table
 			 * @returns {jQuery}
 			 */
-			remove: function() {
+			remove: function () {
 				if ($(Plugin.nodeTr.length) && Plugin.nodeTr === Plugin.recentNode) {
 					$(Plugin.nodeTr).remove();
 				}
@@ -4091,7 +4103,7 @@ var mUtil = function() {
 			/**
 			 * Show or hide the columns or rows
 			 */
-			visible: function(bool) {
+			visible: function (bool) {
 				if ($(Plugin.recentNode.length)) {
 					if (bool) {
 						if (Plugin.recentNode === Plugin.nodeCols) {
@@ -4100,7 +4112,7 @@ var mUtil = function() {
 						$(Plugin.recentNode).show();
 					} else {
 						if (Plugin.recentNode === Plugin.nodeCols) {
-							Plugin.setOption('columns.' + Plugin.recentNode.index() + '.responsive', {hidden: 'xl'});
+							Plugin.setOption('columns.' + Plugin.recentNode.index() + '.responsive', { hidden: 'xl' });
 						}
 						$(Plugin.recentNode).hide();
 					}
@@ -4111,7 +4123,7 @@ var mUtil = function() {
 			 * Get the the DOM element for the selected rows or columns
 			 * @returns {Array}
 			 */
-			nodes: function() {
+			nodes: function () {
 				return Plugin.recentNode;
 			},
 
@@ -4119,7 +4131,7 @@ var mUtil = function() {
 			 * will be implemented soon
 			 * @returns {jQuery}
 			 */
-			dataset: function() {
+			dataset: function () {
 				return datatable;
 			},
 
@@ -4128,7 +4140,7 @@ var mUtil = function() {
 		/**
 		 * Public API methods can be used directly by datatable
 		 */
-		$.each(Plugin, function(funcName, func) {
+		$.each(Plugin, function (funcName, func) {
 			datatable[funcName] = func;
 		});
 
@@ -4217,7 +4229,7 @@ var mUtil = function() {
 
 			// datatable UI icons
 			icons: {
-				sort: {asc: 'la la-arrow-up', desc: 'la la-arrow-down'},
+				sort: { asc: 'la la-arrow-up', desc: 'la la-arrow-down' },
 				pagination: {
 					next: 'la la-angle-right',
 					prev: 'la la-angle-left',
@@ -4225,7 +4237,7 @@ var mUtil = function() {
 					last: 'la la-angle-double-right',
 					more: 'la la-ellipsis-h',
 				},
-				rowDetail: {expand: 'fa fa-caret-down', collapse: 'fa fa-caret-right'},
+				rowDetail: { expand: 'fa fa-caret-down', collapse: 'fa fa-caret-right' },
 			},
 		},
 
@@ -4257,11 +4269,11 @@ var mUtil = function() {
 
 		rows: {
 			// deprecated
-			callback: function() {},
+			callback: function () { },
 			// call before row template
-			beforeTemplate: function() {},
+			beforeTemplate: function () { },
 			// call after row template
-			afterTemplate: function() {},
+			afterTemplate: function () { },
 			// auto hide columns, if rows overflow. work on non locked columns
 			autoHide: false,
 		},

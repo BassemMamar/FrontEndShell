@@ -1,6 +1,6 @@
 <header class="m-grid__item		m-header" data-minimize="minimize" data-minimize-offset="200" data-minimize-mobile-offset="200">
   <app-header-nav-top [current-module-name]="'Journey Definition'"></app-header-nav-top>
-  <app-header-nav-bottom></app-header-nav-bottom>
+  <app-header-nav-bottom  [nav-menu-items]="navMenuItems"></app-header-nav-bottom>
 </header>
 <!-- begin::Body -->
 
@@ -8,7 +8,7 @@
   <div class="m-grid__item m-grid__item--fluid  m-grid m-grid--ver	m-container m-container--responsive m-container--xxl m-page__container">
     <div class="m-grid__item m-grid__item--fluid m-wrapper">
       <!-- <app-breadcrumbs></app-breadcrumbs> -->
-      <div  class="m-content">
+      <div class="m-content">
         <shrd-alert [id]="'root'"></shrd-alert>
 
         <router-outlet></router-outlet>

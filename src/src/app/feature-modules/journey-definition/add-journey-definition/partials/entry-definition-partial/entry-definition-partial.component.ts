@@ -246,7 +246,6 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
     switch (entryType) {
       case EntryType.ProofOfIdentity:
         const poi = new POIEntryFormModel(entryDataModel);
-        const polهcy = poi.documentProofPolicies; // ToDO  poi.documentProofPolicies type is wrong
         const POIgroup = this.fb.group({
           order: [poi.order, Validators.required],
           entryType: [entryType, Validators.required],

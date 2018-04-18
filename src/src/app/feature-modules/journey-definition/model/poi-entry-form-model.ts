@@ -15,7 +15,6 @@ export class POIEntryFormModel {
     isUpToMonthes: boolean;
     acceptExpiredUpToMonthes: number;
     canContinueOnFailure: boolean;
-    documentProofPolicies: string[];
 
     constructor(entryDataModel: JourneyEntryDefinitionInfo = null) {
 

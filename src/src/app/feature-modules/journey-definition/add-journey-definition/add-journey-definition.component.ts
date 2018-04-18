@@ -10,6 +10,8 @@ import { EditJourneyEntryDefinition } from '../model/edit-journey-entry-definiti
 import { FieldValidatorService } from '../../../shared/components/field-state-display/field-validator.service';
 import { EntryType } from '../model/entry-type';
 import { AlertService } from '../../../shared/components/alert/alert.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { BlockUITemplateComponent } from '../../../shared/components/block-ui/block-ui-template.component';
 
 @Component({
   selector: 'app-add-journey-definition',
@@ -35,6 +37,11 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   get entryDefinitionsValidationStatus() {
     return !this.entryDefinitionGroup.valid;
   }
+
+  // Create an instance from our block ui template
+  blockTemplate = BlockUITemplateComponent;
+
+  @BlockUI('block-edit-journey-definition') blockEditJourneyDefinition: NgBlockUI;
 
   constructor(
     private fb: FormBuilder,
@@ -66,14 +73,19 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
   }
 
   getJourneyDefinition(id: string) {
+    this.blockEditJourneyDefinition.start();
     this.journeyDefinitionService
       .getJourneyDefinition(id)
       .subscribe((journeyDefinition: JourneyDefinitionInfo) => {
         this.journeyDefinitionData = journeyDefinition;
         // this.createMainFormGroup();
         this.setBasicInfoGroupValues();
+        this.blockEditJourneyDefinition.stop();
       },
-        error => this.toastrService.error(error, 'getJourneyDefinition error')
+        error => {
+          this.toastrService.error(error, 'getJourneyDefinition error');
+          this.blockEditJourneyDefinition.stop();
+        }
       );
   }
 
