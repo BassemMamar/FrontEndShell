@@ -180,13 +180,16 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
     // ToDo: Maybe here do some custom validation dono
     if (datamodel.journeyEntryDefinitions == null || datamodel.journeyEntryDefinitions.length === 0) {
       this.toastrService.warning('Can not have a journey definition without any entry definition', 'Data Not Valid!');
+      return;
     }
     if (datamodel.journeyEntryDefinitions.length === 1 && datamodel.journeyEntryDefinitions[0].entryType === EntryType.Selfie) {
       this.toastrService.warning('Can not have a journey definition with one Selfie entry definition', 'Data Not Valid!');
+      return;
     }
 
 
     if (this.journeyDefinitionId != null && this.journeyDefinitionId !== '') {
+      this.alertService.clear();
       this.journeyDefinitionService
         .updateJourneyDefinition(datamodel).subscribe(
           data => {
@@ -207,6 +210,8 @@ export class AddJourneyDefinitionComponent implements OnInit, AfterViewInit {
           });
 
     } else {
+      this.alertService.clear();
+
       this.journeyDefinitionService
         .addJourneyDefinition(datamodel).subscribe(
           data => {

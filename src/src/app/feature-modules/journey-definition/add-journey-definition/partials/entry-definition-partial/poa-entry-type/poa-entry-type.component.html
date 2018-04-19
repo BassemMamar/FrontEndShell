@@ -15,29 +15,37 @@
           <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" [ngClass]="displayFieldCss('maxAttempts')">
           <label>
             Max Attempt:
           </label>
           <input type="number" min="1" max="3" class="form-control m-input--air" formControlName="maxAttempts" />
           <span class="m-form__help">
           </span>
+          <div *ngIf="isFieldValid('maxAttempts')">
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.required" [displayMessage]="isFieldValid('maxAttempts')"
+              [message]="'Max Attempts Field is Required!'"></app-field-state-display>
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.min" [displayMessage]="isFieldValid('maxAttempts')"
+              [message]="'Minimum Max Attempts is 1'"></app-field-state-display>
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.max" [displayMessage]="isFieldValid('maxAttempts')"
+              [message]="'Maximum Max Attempts is 3'"></app-field-state-display>
+          </div>
         </div>
 
         <div class="col-lg-4">
           <label for=""> </label>
           <div class="m-checkbox-list">
 
-              <label class="m-checkbox">
-                <input #isOptionalInput type="checkbox" formControlName="isOptional"> Optional entry (can be skipped)
-                <span></span>
-              </label>
-              <label *ngIf="!isOptionalInput.checked" class="m-checkbox">
-                <input type="checkbox" formControlName="canContinueOnFailure"> Continue On Failure
-                <span></span>
-              </label>
-  
-            </div>
+            <label class="m-checkbox">
+              <input #isOptionalInput type="checkbox" formControlName="isOptional"> Optional entry (can be skipped)
+              <span></span>
+            </label>
+            <label *ngIf="!isOptionalInput.checked" class="m-checkbox">
+              <input type="checkbox" formControlName="canContinueOnFailure"> Continue On Failure
+              <span></span>
+            </label>
+
+          </div>
         </div>
 
       </div>
@@ -74,7 +82,7 @@
       </div>
 
       <app-entry-policy [parentType]="entryType.ProofOfAddress" [parentGroup]="currentEntryGroup" [arrayName]="documentProofPoliciesArrayName"
-        [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories"  [currentPolicyData]="currentEntryData.documentProofPolicies"></app-entry-policy>
+        [worldRegionInfo]="worldRegionInfo" [documentCategories]="documentCategories" [currentPolicyData]="currentEntryData.documentProofPolicies"></app-entry-policy>
 
     </div>
   </div>

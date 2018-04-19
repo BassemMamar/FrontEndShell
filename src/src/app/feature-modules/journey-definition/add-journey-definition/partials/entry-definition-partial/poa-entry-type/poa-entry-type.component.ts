@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ElementRef, AfterViewInit, SimpleChanges, OnChanges } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { CommonService } from '../../../../../../core/base/utils/common.service';
 import { CaptureMediaChannels } from '../../../../model/capture-media-channels';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
@@ -44,6 +44,10 @@ export class POAEntryTypeComponent implements OnInit, AfterViewInit, OnChanges {
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
+  }
+  
+  getFieldByName(fieldName: string): FormControl {
+    return this.currentEntryGroup.get(fieldName) as FormControl;
   }
 
   // this need to be passed to the <app-entry-policy> instance

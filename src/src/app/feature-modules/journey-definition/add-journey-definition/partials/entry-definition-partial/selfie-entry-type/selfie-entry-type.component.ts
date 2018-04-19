@@ -37,6 +37,10 @@ export class SelfieEntryTypeComponent implements OnInit, AfterViewInit {
     return entriesArray.at(this.groupName) as FormGroup;
   }
 
+  getFieldByName(fieldName: string): FormControl {
+    return this.currentEntryGroup.get(fieldName) as FormControl;
+  }
+
   constructor(private fieldValidatorService: FieldValidatorService, private formBuilder: FormBuilder) {
   }
 

@@ -251,7 +251,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           entryType: [entryType, Validators.required],
           isOptional: [poi.isOptional],
           supportedChannelTypes: [poi.supportedChannelTypes, Validators.required],
-          maxAttempts: [poi.maxAttempts, Validators.required],
+          maxAttempts: [poi.maxAttempts, [Validators.required, Validators.min(1), Validators.max(3)]],
           askForAdditionalSteps: [poi.askForAdditionalSteps, Validators.required],
           acceptExpiredDocuments: [poi.acceptExpiredDocuments],
           isUpToMonthes: [poi.isUpToMonthes],
@@ -268,7 +268,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           entryType: [entryType, Validators.required],
           isOptional: [poa.isOptional],
           supportedChannelTypes: [poa.supportedChannelTypes, Validators.required],
-          maxAttempts: [poa.maxAttempts, Validators.required],
+          maxAttempts: [poa.maxAttempts, [Validators.required, Validators.min(1), Validators.max(3)]],
           acceptExpiredDocuments: [poa.acceptExpiredDocuments],
           isUpToMonthes: [poa.isUpToMonthes],
           acceptExpiredUpToMonthes: [{ value: poa.acceptExpiredUpToMonthes, disabled: !poa.isUpToMonthes }],
@@ -284,7 +284,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           entryType: [entryType, Validators.required],
           isOptional: [ad.isOptional],
           supportedChannelTypes: [ad.supportedChannelTypes, Validators.required],
-        //  maxAttempts: [ad.maxAttempts, Validators.required],
+          //  maxAttempts: [ad.maxAttempts, [Validators.required, Validators.minLength(1), Validators.maxLength(3)]],
           canContinueOnFailure: [ad.canContinueOnFailure],
           title: [ad.title, Validators.required]
         });
@@ -296,7 +296,7 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
           order: [selfie.order, Validators.required],
           entryType: [entryType, Validators.required],
           isOptional: [selfie.isOptional],
-          maxAttempts: [selfie.maxAttempts, Validators.required],
+          maxAttempts: [selfie.maxAttempts, [Validators.required, Validators.min(1), Validators.max(3)]],
           canContinueOnFailure: [selfie.canContinueOnFailure],
           supportedChannelTypes: [selfie.supportedChannelTypes, Validators.required],
         });
