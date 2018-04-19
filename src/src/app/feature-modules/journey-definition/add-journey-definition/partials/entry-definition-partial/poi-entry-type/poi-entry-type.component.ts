@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { FormGroup, FormArray } from '@angular/forms';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
 import { LoggerService } from '../../../../../../core/base/logger/logger.service';
 import { WorldRegionInfo } from '../../../../model/world-region-info';
@@ -46,6 +46,10 @@ export class POIEntryTypeComponent implements OnInit, AfterViewInit, OnChanges {
   get currentEntryGroup(): FormGroup {
     const entriesArray = this.parentGroup.get(this.arrayName) as FormArray;
     return entriesArray.at(this.groupName) as FormGroup;
+  }
+
+  getFieldByName(fieldName: string): FormControl {
+    return this.currentEntryGroup.get(fieldName) as FormControl;
   }
 
   // this need to be passed to the <app-entry-policy> instance

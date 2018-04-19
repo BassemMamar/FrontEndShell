@@ -87,7 +87,8 @@
               <div>
                 <span class="m-badge m-badge--dot" [ngClass]="{'m-badge--success': journeyDefinition.isActive, 'm-badge--danger': !journeyDefinition.isActive }"></span>
 
-                <span class="m--font-bold " [ngClass]="{'m--font-success': journeyDefinition.isActive, 'm--font-danger': !journeyDefinition.isActive }">{{ journeyDefinition.isActive?'Active':'In Active' }}</span>
+                <span class="m--font-bold " [ngClass]="{'m--font-success': journeyDefinition.isActive, 'm--font-danger': !journeyDefinition.isActive }">
+                  {{ journeyDefinition.isActive?'Active':'Inactive' }}</span>
 
               </div>
             </td>

@@ -1,4 +1,4 @@
-
+ Value: {{ currentEntryGroup.valid }}
 <div [formGroup]="parentGroup">
   <div formArrayName="{{arrayName}}">
     <div [formGroupName]="groupName">
@@ -15,13 +15,18 @@
           <app-field-state-display [displayMessage]="isFieldValid('supportedChannelTypes')" [message]="'Media Channel Field is Required!'"></app-field-state-display>
 
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" [ngClass]="displayFieldCss('maxAttempts')">
           <label>
             Max Attempt:
           </label>
           <input type="number" min="1" max="3" class="form-control m-input--air" formControlName="maxAttempts" />
           <span class="m-form__help">
           </span>
+          <div *ngIf="isFieldValid('maxAttempts')">
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.required" [displayMessage]="isFieldValid('maxAttempts')" [message]="'Max Attempts Field is Required!'"></app-field-state-display>
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.min" [displayMessage]="isFieldValid('maxAttempts')" [message]="'Minimum Max Attempts is 1'"></app-field-state-display>
+            <app-field-state-display *ngIf="getFieldByName('maxAttempts').errors.max" [displayMessage]="isFieldValid('maxAttempts')" [message]="'Maximum Max Attempts is 3'"></app-field-state-display>
+          </div>
         </div>
 
         <div class="col-lg-4">
