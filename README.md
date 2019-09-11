@@ -1,4 +1,4 @@
-# Frontend Shell v2
+# Frontend Shell
 
 This project is an [Angular](https://angular.io/) `5.0.0` project, and was generated with [Angular CLI](https://github.com/angular/angular-cli) version `1.5.5`.
 
