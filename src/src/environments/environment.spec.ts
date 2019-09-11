@@ -3,12 +3,12 @@ export const environment = {
   environmentName: 'Spec',
   isDebugMode: true,
 
-  authority: 'http://onboarding-app1:8088/AuthenticationServer',
+  authority: '',
   api: {
-    url: '//localhost:3000',
+    url: '',
     bases: {
-      onBoarding: '/OnBoarding/',
-      businessAccountManagement: '/BusinessAccountManagement/'
+      onBoarding: '',
+      businessAccountManagement: ''
     }
   },
   visionCortexBasePath: ''

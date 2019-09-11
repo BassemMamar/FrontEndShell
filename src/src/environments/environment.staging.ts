@@ -3,13 +3,13 @@ export const environment = {
   environmentName: 'Staging',
   isDebugMode: true,
 
-  authority: 'https://onboardingsuite.com:8088/AuthenticationServer',
+  authority: '',
   api: {
-    url: '//OnboardingSuite.com',
+    url: '',
     bases: {
-      onBoarding: ':8082/',
-      businessAccountManagement: ':8088/BAM/'
+      onBoarding: '',
+      businessAccountManagement: ''
     }
   },
-  visionCortexBasePath: '//OnboardingSuite.com:8088'
+  visionCortexBasePath: ''
 };

@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operator/map';
 import { of } from 'rxjs/observable/of';
 
 import { LoggerService } from '../../core/base/logger/logger.service';
@@ -63,7 +62,7 @@ export class JourneyDefinitionService {
   }
 
   getDocumentCategories(type: EntryType): Observable<DocumentCategoryInfo[]> {
-    return this.http.get<DocumentCategoryInfo[]>(this.apiUrl + `api/JourneyDefinitions/DocumentCategories/${type}`) // DocumentCategories/
+    return this.http.get<DocumentCategoryInfo[]>(this.apiUrl + `api/JourneyDefinitions/${type}`) // DocumentCategories/
       .map((respons: any) => respons.result)
       .pipe(
         catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
@@ -79,11 +78,12 @@ export class JourneyDefinitionService {
   }
 
   addJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionInfo[]> {
-    return this.http.post<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
-      .map((respons: any) => respons.result)
-      .pipe(
-        catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
-      );
+    return of([]);
+    // return this.http.post<EditJourneyDefinition[]>(this.apiUrl + 'api/JourneyDefinitions', editJourneyDefinition)
+    //   .map((respons: any) => respons.result)
+    //   .pipe(
+    //     catchError(error => this.httpErrorHandlingService.handleAsObservable(error))
+    //   );
   }
 
   updateJourneyDefinition(editJourneyDefinition: EditJourneyDefinition): Observable<JourneyDefinitionInfo[]> {
@@ -95,7 +95,7 @@ export class JourneyDefinitionService {
   }
 
   getJourneyDefinitions(): Observable<JourneyDefinitionSummary[]> {
-    return this.http.get<JourneyDefinitionSummary[]>(this.apiUrl + `api/JourneyDefinitions`)
+    return this.http.get<JourneyDefinitionSummary[]>(this.apiUrl + `api/JourneyDefinitions/List`)
       .map((respons: any) => respons.result)
       .pipe(
         catchError(error => this.httpErrorHandlingService.handleAsObservable(error))

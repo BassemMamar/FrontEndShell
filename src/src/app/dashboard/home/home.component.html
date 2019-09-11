@@ -1,76 +1,17 @@
-<div style="text-align:center">
-    <img src="https://www.aaravinfotech.com//wp-content/uploads/2016/03/web-Redesign-380x380.png" alt="Home page under construction">
-</div>
-
-<div class="col-md-10 col-md-offset-1 text-center ">
-    <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestInterseptor()">
-        Api Call
-    </button>
-
-    <button type="button" class="btn btn-warning m-btn m-btn--custom" id="m_sweetalert_demo_3_1" (click)="TestToastr()">
-        Toastr
-    </button>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Modal (html)
-    </button>
-    <button type="button" class="btn btn-primary" (click)="showModal()">
-        Modal (code)
-    </button>
-</div>
-
-<hr>
-
-<shrd-alert></shrd-alert>
-
-<div *blockUI="'alerts-root'; template:blockTemplate; message:'Proccessing .... '" class="col-md-10 col-md-offset-1 text-center alert-custom">
-    <h1>Alerts for Root</h1>
-    <button class="btn btn-success" (click)="success('Success Root!!', 'root')">Success</button>
-    <button class="btn btn-danger" (click)="error('Error :(')">Error</button>
-    <button class="btn btn-info" (click)="info('Some info....')">Info</button>
-    <button class="btn btn-warning" (click)="warn('Warning: ...')">Warn</button>
-    <button class="btn btn-default" (click)="clear()">Clear</button>
-    <button class="btn btn-default" (click)="blockRoot()">Block Root</button>
-</div>
-
-<hr>
-
-<div *blockUI="'alerts-child';template:blockTemplate;" class="col-md-10 col-md-offset-1 text-center alert-custom">
-    <h1>Alerts for Child</h1>
-    <button class="btn btn-success" (click)="success('Success!!')">Success</button>
-    <button class="btn btn-danger" (click)="error('Error :(')">Error</button>
-    <button class="btn btn-info" (click)="info('Some info....')">Info</button>
-    <button class="btn btn-warning" (click)="warn('Warning: ...')">Warn</button>
-    <button class="btn btn-default" (click)="clear()">Clear</button>
-    <button class="btn btn-default" (click)="blockChild()">Block Child</button>
-</div>
-
-
-<shrd-modal [id]="'exampleModal'" [title]="'Modal title'" (onSaved)="save($event)">
-    <shrd-alert [id]="'modal-alert'"></shrd-alert>
-
-    <div class="m-scrollable" data-scrollbar-shown="true" data-scrollable="true" data-max-height="200">
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-            book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-            book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-            text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen
-            book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially
-            unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="kt-portlet kt-portlet--mobile">
+			<div class="kt-portlet__head">
+				<div class="kt-portlet__head-label">
+					<h3 class="kt-portlet__head-title">
+						Home page <small>portlet sub title</small>
+					</h3>
+				</div>
+			</div>
+			<div class="kt-portlet__body">
+				Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.
+			</div>
+		</div>
     </div>
-</shrd-modal>
+   
+</div>

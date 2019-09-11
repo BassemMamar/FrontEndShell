@@ -4,12 +4,7 @@ import { EntryType } from '../../../feature-modules/journey-definition/model/ent
 // https://github.com/angular/in-memory-web-api
 export class InMemService implements InMemoryDbService {
   createDb() {
-    const heroes = [
-      { id: 1, name: 'Windstorm' },
-      { id: 2, name: 'Bombasto' },
-      { id: 3, name: 'Magneta' },
-      { id: 4, name: 'Tornado' }
-    ];
+
     const entryDefinitionOptions = {
       result: [
         { name: 'Proof Of Identity', value: EntryType.ProofOfIdentity },
@@ -80,132 +75,133 @@ export class InMemService implements InMemoryDbService {
       result: [
         {
           id: '23',
-          friendlyName: 'Bank Document',
-          subCategories: [
+          categoryName: 'Bank Document',
+          documentTypes: [
             {
               id: '24',
-              friendlyName: 'Bank Account Details',
-              subCategories: null
+              categoryName: 'Bank Account Details',
+              documentTypes: null
             },
             {
               id: '25',
-              friendlyName: 'Bank Letter',
-              subCategories: null
+              categoryName: 'Bank Letter',
+              documentTypes: null
             },
             {
               id: '26',
-              friendlyName: 'Bank Statement',
-              subCategories: null
+              categoryName: 'Bank Statement',
+              documentTypes: null
             },
             {
               id: '27',
-              friendlyName: 'Card Statement',
-              subCategories: null
+              categoryName: 'Card Statement',
+              documentTypes: null
             },
             {
               id: '28',
-              friendlyName: 'Mortgage Statement',
-              subCategories: null
+              categoryName: 'Mortgage Statement',
+              documentTypes: null
             }
           ]
         },
         {
           id: '29',
-          friendlyName: 'Bank Letter',
-          subCategories: [
+          categoryName: 'Bank Letter',
+          documentTypes: [
             {
               id: '30',
-              friendlyName: 'Card Statement',
-              subCategories: null
+              categoryName: 'Card Statement',
+              documentTypes: null
             },
             {
               id: '31',
-              friendlyName: 'Bank Statement',
-              subCategories: null
+              categoryName: 'Bank Statement',
+              documentTypes: null
             },
             {
               id: '32',
-              friendlyName: 'Mortgage Statement',
-              subCategories: null
+              categoryName: 'Mortgage Statement',
+              documentTypes: null
             }
           ]
         }
       ],
       responseMetaData: null
     };
+
 
     const ProofOfIdentity = {
       result: [
         {
           id: '23',
-          friendlyName: 'Passport',
-          subCategories: [
+          categoryName: 'Passport',
+          documentTypes: [
             {
               id: '24',
-              friendlyName: 'E-Passport',
-              subCategories: null
+              categoryName: 'E-Passport',
+              documentTypes: null
             },
             {
               id: '25',
-              friendlyName: 'National Passport',
-              subCategories: null
+              categoryName: 'National Passport',
+              documentTypes: null
             },
             {
               id: '26',
-              friendlyName: 'Passport',
-              subCategories: null
+              categoryName: 'Passport',
+              documentTypes: null
             },
             {
               id: '27',
-              friendlyName: 'Travel Document',
-              subCategories: null
+              categoryName: 'Travel Document',
+              documentTypes: null
             }
           ]
         },
         {
           id: '29',
-          friendlyName: 'Driving License',
-          subCategories: [
+          categoryName: 'Driving License',
+          documentTypes: [
             {
               id: '30',
-              friendlyName: 'Driving License',
-              subCategories: null
+              categoryName: 'Driving License',
+              documentTypes: null
             },
             {
               id: '31',
-              friendlyName: 'Provisional Driving License',
-              subCategories: null
+              categoryName: 'Provisional Driving License',
+              documentTypes: null
             }
           ]
         },
         {
           id: '32',
-          friendlyName: 'National Identification Card',
-          subCategories: [
+          categoryName: 'National Identification Card',
+          documentTypes: [
             {
               id: '33',
-              friendlyName: 'Proof of Age Card',
-              subCategories: null
+              categoryName: 'Proof of Age Card',
+              documentTypes: null
             },
             {
               id: '34',
-              friendlyName: 'Agents License',
-              subCategories: null
+              categoryName: 'Agents License',
+              documentTypes: null
             },
             {
               id: '35',
-              friendlyName: 'Job License',
-              subCategories: null
+              categoryName: 'Job License',
+              documentTypes: null
             },
             {
               id: '36',
-              friendlyName: 'Membership Identification Card',
-              subCategories: null
+              categoryName: 'Membership Identification Card',
+              documentTypes: null
             },
             {
               id: '37',
-              friendlyName: 'Health Card',
-              subCategories: null
+              categoryName: 'Health Card',
+              documentTypes: null
             }
           ]
         }
@@ -213,9 +209,27 @@ export class InMemService implements InMemoryDbService {
       responseMetaData: null
     };
 
-
+    const List = {
+      result: [
+        {
+          journeyDefinitionGroupId: '1',
+          lastUpdateDate: new Date(),
+          code: 'QWDF44GF',
+          name: 'Bank1',
+          isActive: true
+        },
+        {
+          journeyDefinitionGroupId: '2',
+          lastUpdateDate: new Date(),
+          code: 'WLKK34DC',
+          name: 'Bank2',
+          isActive: false
+        }
+      ],
+      responseMetaData: null
+    }
     return {
-      heroes, entryDefinitionOptions, CaptureMediaChannels, Regions, ProofOfAddress, ProofOfIdentity
+      List, entryDefinitionOptions, CaptureMediaChannels, Regions, ProofOfAddress, ProofOfIdentity
     };
   }
 }

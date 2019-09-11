@@ -7,11 +7,11 @@ import { environment } from '../../../environments/environment';
 
 const options: InMemoryBackendConfigArgs = {
   apiBase: 'api/JourneyDefinitions/',
-  rootPath: '//ta.localhost:8084/'
+  rootPath: '//localhost:8084/'
 };
 @NgModule({
   imports: [
-   // !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemService, options) : [],
+    !environment.production ? HttpClientInMemoryWebApiModule.forRoot(InMemService, options) : [],
 
   ],
   exports: [

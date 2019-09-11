@@ -8,24 +8,12 @@ export const environment = {
   environmentName: 'Development',
   isDebugMode: true,
 
-  authority:  'http://localhost:4000', // 'https://onboardingsuite.com:8088/AuthenticationServer', // 'http://localhost:4000',
+  authority:  'http://localhost:4000', 
   api: {
-    url: '//localhost:8084', // '//localhost',
+    url: '//localhost:8084', 
     bases: {
       onBoarding: '/',
       businessAccountManagement: '/BusinessAccountManagement/'
     }
-  },
-  visionCortexBasePath: '//localhost/VisionCortex/'
+  }
 };
-
-/*
- * Notes:
- *  apiUrl: should be without slash and without port.
- *  visionCortexBasePath: used just for journeyCaptureJs configurations.
- *  showInternalServerErrors: show response error when server response status is 500.
- *  showAppErrors: show exceptions fired by angular core framework.
- *  bases.onBoarding: It could be ':8088/IEOS/' OR '/IEOS/' .
- *  bases.businessAccountManagement: It could be ':8088/BAM/' OR '/BAM/' .
- *  api.url: Don't put http or https.
- */

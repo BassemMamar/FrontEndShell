@@ -28,10 +28,9 @@ This project is an [Angular](https://angular.io/) `5.0.0` project, and was gener
 **Make sure you have Node version >= 6.x and NPM >= 5.x**
 ```bash
 # clone our repo
-git clone https://gbg-idscan.visualstudio.com/_git/SaaS-FrontEndShell
 
 # change directory to our repo
-cd FrontendShell-v2/src
+cd FrontendShell/src
 
 # WINDOWS only. In terminal as administrator
 npm install -g node-pre-gyp typescript @angular/cli gulp-cli @compodoc/compodoc 
@@ -49,7 +48,7 @@ npm run build
 npm run doc
 
 ```
-The app will be automatically launched in [http://localhost:3000/home](http://localhost:3000/home).
+The app will be automatically launched in [http://localhost:300/home](http://localhost:3000/home).
 
 ---
 

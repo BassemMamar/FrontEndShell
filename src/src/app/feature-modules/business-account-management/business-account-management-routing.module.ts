@@ -23,8 +23,8 @@ const routes: Routes = [
   {
     path: '',
     component: BusinessAccountManagementComponent,
-    canActivate: [AuthenticatedGuard],
-    canActivateChild: [AuthenticatedGuard, AuthorizedGuard],
+   // canActivate: [AuthenticatedGuard],
+   // canActivateChild: [AuthenticatedGuard, AuthorizedGuard],
     data: {
       authClient: AuthClients.BAM,
       moduleName: FrontendShell.BusinessAccountManagement.Name

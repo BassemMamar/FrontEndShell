@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: '',
     component: InvestigationComponent,
-    canActivate: [AuthenticatedGuard],
+   // canActivate: [AuthenticatedGuard],
     data: {
       authClient: AuthClients.FES,
       moduleName: FrontendShell.InvestigationStudio.Name
@@ -29,7 +29,7 @@ const routes: Routes = [
       {
         matcher: RecentJourneysMatch,
         component: RecentJourneysComponent,
-        canActivate: [AuthorizedGuard],
+       // canActivate: [AuthorizedGuard],
         data: {
           moduleName: FrontendShell.InvestigationStudio.Name,
           pageName: FrontendShell.InvestigationStudio.Pages.RecentJourneys

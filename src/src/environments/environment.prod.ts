@@ -3,32 +3,13 @@ export const environment = {
   environmentName: 'Production',
   isDebugMode: true,
 
-  authority: 'https://onboardingsuite.com:8088/AuthenticationServer',
+  authority: '',
   api: {
-    url: '//OnboardingSuite.com',
+    url: '',
     bases: {
-      onBoarding: ':8084/',
-      businessAccountManagement: ':8088/BAM/'
+      onBoarding: '',
+      businessAccountManagement: ''
     }
   },
-  visionCortexBasePath: '//OnboardingSuite.com:8088'
+  visionCortexBasePath: ''
 };
-
-
-
-// this is for me (bassem) when try to test production build
-// export const environment = {
-//   production: true,
-//   environmentName: 'Production',
-//   isDebugMode: true,
-
-//   authority: 'http://localhost:4000',
-//   api: {
-//     url: '//localhost',
-//     bases: {
-//       onBoarding: '/OnBoarding/',
-//       businessAccountManagement: '/BusinessAccountManagement/'
-//     }
-//   },
-//   visionCortexBasePath: '//localhost/VisionCortex/'
-// };

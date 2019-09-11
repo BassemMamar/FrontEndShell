@@ -11,7 +11,6 @@ export class CommunicationService {
     private _authority: string;
     private _businessCode: string;
     private _api: any;
-    private _visionCortexBasePath: string;
 
     constructor(private subDomainService: SubDomainService) {
         //  this.subject = new BehaviorSubject(environment);
@@ -30,16 +29,11 @@ export class CommunicationService {
         return this._api;
     }
 
-    public get visionCortexBasePath(): string {
-        return this._visionCortexBasePath;
-    }
-
     //////////////////////
 
     private init(): any {
         this._businessCode = this.subDomainService.subDomain;
         this._authority = environment.authority; // this.injectBusinessCode(environment.authority);
-        this._visionCortexBasePath = this.injectBusinessCode(environment.visionCortexBasePath);
 
         this._api = environment.api;
         this._api.url = this.injectBusinessCode(this._api.url);

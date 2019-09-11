@@ -329,7 +329,7 @@ export class EntryPolicyComponent implements OnInit, AfterViewInit, OnChanges, O
       checked: false,
       disabled: false,
       children: category.documentTypes.map(type => new TreeviewItem({
-        text: type.typeName,
+        text: type.categoryName,
         value: type,
         checked: false,
         disabled: false

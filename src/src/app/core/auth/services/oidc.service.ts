@@ -102,7 +102,7 @@ export class OidcService {
         const redirect_uri = protocol + '//' + hostname + port + baseHref + '/callback';
         const post_logout_redirect_uri = protocol + '//' + hostname + port + baseHref + '/home';
         const extraQueryParams = {
-            BusinessCode: this.communicationService.businessCode
+            data: ''
         };
 
         const identityResources = ' openid profile ';
@@ -113,7 +113,7 @@ export class OidcService {
             post_logout_redirect_uri: post_logout_redirect_uri,
             // silent_redirect_uri: '',
             response_type: 'id_token token',
-            scope: 'BusinessAccountManagementApi' + identityResources,
+            scope: '' + identityResources,
             filterProtocolClaims: true,
             loadUserInfo: false,
             extraQueryParams: extraQueryParams
@@ -126,7 +126,7 @@ export class OidcService {
             post_logout_redirect_uri: post_logout_redirect_uri,
             // silent_redirect_uri: '',
             response_type: 'id_token token',
-            scope: 'JourneyDefinitionAPI CaptureStudioAPI InvestigationStudioAPI VisionCortexAPI' + identityResources,
+            scope: '' + identityResources,
             filterProtocolClaims: true,
             loadUserInfo: false,
             extraQueryParams: extraQueryParams

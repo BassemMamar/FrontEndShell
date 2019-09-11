@@ -125,7 +125,7 @@
 														chris
 													</span>
 													<a href="" class="m-card-user__email m--font-weight-300 m-link">
-														chris@gbg.com
+														chris@hotmail.com
 													</a>
 												</div>
 											</div>
@@ -156,38 +156,14 @@
 														</a>
 													</li>
 													<li class="m-nav__item">
-														<a routerLink="/profile" class="m-nav__link">
+														<a routerLink="/Activity" class="m-nav__link">
 															<i class="m-nav__link-icon flaticon-share"></i>
 															<span class="m-nav__link-text">
 																Activity
 															</span>
 														</a>
 													</li>
-													<li class="m-nav__item">
-														<a routerLink="/profile" class="m-nav__link">
-															<i class="m-nav__link-icon flaticon-chat-1"></i>
-															<span class="m-nav__link-text">
-																Messages
-															</span>
-														</a>
-													</li>
-													<li class="m-nav__separator m-nav__separator--fit"></li>
-													<li class="m-nav__item">
-														<a routerLink="/profile" class="m-nav__link">
-															<i class="m-nav__link-icon flaticon-info"></i>
-															<span class="m-nav__link-text">
-																FAQ
-															</span>
-														</a>
-													</li>
-													<li class="m-nav__item">
-														<a routerLink="/profile" class="m-nav__link">
-															<i class="m-nav__link-icon flaticon-lifebuoy"></i>
-															<span class="m-nav__link-text">
-																Support
-															</span>
-														</a>
-													</li>
+												 
 													<li class="m-nav__separator m-nav__separator--fit"></li>
 													<li class="m-nav__item" >
 														<div *ngIf="authService.loggedIn$ | async; then logoutTemplate else loginTemplate"></div>

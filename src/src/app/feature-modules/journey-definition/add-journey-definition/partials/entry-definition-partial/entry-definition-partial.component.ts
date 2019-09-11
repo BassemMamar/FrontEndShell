@@ -128,7 +128,9 @@ export class EntryDefinitionPartialComponent implements OnInit, AfterViewInit, D
   getPOIDocumentCategories() {
     this.journeyDefinitionService
       .getDocumentCategories(EntryType.ProofOfIdentity)
-      .subscribe(data => this.poiDocumentCategories = data);
+      .subscribe(data => 
+        this.poiDocumentCategories = data
+        );
   }
 
   getPOADocumentCategories() {
