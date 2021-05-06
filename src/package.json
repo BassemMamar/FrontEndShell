@@ -52,7 +52,7 @@
     "socicon": "^3.0.5",
     "sweetalert2": "^7.12.2",
     "toastr": "^2.1.2",
-    "underscore": "^1.8.3",
+    "underscore": "^1.12.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
